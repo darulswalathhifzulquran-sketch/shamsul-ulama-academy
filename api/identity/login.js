@@ -8,7 +8,7 @@ export default async function(req,res){
  if(!validUsername(username)||typeof password!=='string'||password.length>256)return res.status(401).json({error:'Incorrect username or password.'});
  const throttle=await db.query("SELECT attempts,blocked_until FROM academy_login_throttle_v2 WHERE username=$1 LIMIT 1",[username]);
  if(throttle.rows[0]?.blocked_until&&new Date(throttle.rows[0].blocked_until)>new Date())return res.status(429).json({error:'Too many attempts. Try again later.'});
- const query=await db.query("SELECT id,username,display_name,role,password_salt,password_hash,password_iterations,active FROM academy_accounts_v2 WHERE username=$1 LIMIT 1",[username]);
+ const query=await db.query("SELECT id,username,display_name,role,password_salt,password_hash,password_iterations,active,must_change_password FROM academy_accounts_v2 WHERE username=$1 LIMIT 1",[username]);
  const row=query.rows[0];
  // Run a comparable PBKDF2 even for an unknown user to reduce timing-based discovery.
  const fake={password_salt:'6bf1a6974dd2844c3d3a8fb7b6aba5fa',password_hash:'b9'.repeat(32),password_iterations:310000};
@@ -19,5 +19,5 @@ export default async function(req,res){
  }
  await db.query("DELETE FROM academy_login_throttle_v2 WHERE username=$1",[username]);
  const created=await startSession(res,row.id);
- res.json({ok:true,username:row.username,display_name:row.display_name,role:row.role,csrf:created.csrf});
+ res.json({ok:true,username:row.username,display_name:row.display_name,role:row.role,must_change_password:!!row.must_change_password,csrf:created.csrf});
 }

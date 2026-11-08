@@ -59,8 +59,8 @@ function installDateFields(){
  try{await api('/api/academy/target','POST',{student_id:Number(selected.id),target_date:date.toISOString().slice(0,10),study_days:[...days].sort()});$('targetStatus').textContent='Your personal Hifz target was saved to the academy database.';msg('Target updated.');}catch(e){$('targetStatus').textContent=e.message;}
  });
 }
-async function loadStudent(id){
- msg('Loading verified student progress…');$('privateArea').hidden=true;
+async function loadStudent(id,quiet=false){
+ if(!quiet){msg('Loading verified student progress…');$('privateArea').hidden=true;}
  const data=await api('/api/academy/overview?student_id='+encodeURIComponent(id));
  if(!data.selected)throw Error('No linked student record.');
  selected=data.selected;records=data.juz||[];reports=data.reports||[];$('privateArea').hidden=false;
@@ -77,11 +77,20 @@ async function loadStudent(id){
  renderMonthly();renderBadges();setTargetDisplay();
  const latest=completed().filter(j=>j.dua_message).sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)))[0];
  if(latest){const key='academy-last-dua-'+selected.id,version=latest.juz_number+':'+latest.published_at;try{if(sessionStorage.getItem(key)!==version){sessionStorage.setItem(key,version);blessing(latest);}}catch{}}
- msg('Private, verified academy records loaded.');
+ $('lastSynced').textContent='Checked '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+ msg(quiet?'Updated published Hifz progress checked.':'Private, verified academy records loaded.');
+}
+async function refreshPublishedProgress(){
+ if(!selected||document.hidden||document.querySelector('#duaDialog')?.open)return;
+ if(document.activeElement?.closest('#privateArea')&&!document.activeElement?.closest('#refreshProgress'))return;
+ try{await loadStudent(Number(selected.id),true);}catch(e){msg('Could not refresh progress: '+(e.message||'Network unavailable'));}
 }
 (async()=>{
  $('logout').addEventListener('click',async()=>{try{await api('/api/identity/logout','POST',{});}finally{location.replace('/login');}});
  $('closeDua').addEventListener('click',()=>$('duaDialog').close());installDateFields();
+ $('refreshProgress').addEventListener('click',async()=>{const b=$('refreshProgress');b.disabled=true;try{if(selected)await loadStudent(Number(selected.id),true);}catch(e){msg('Refresh failed: '+(e.message||'Network error'));}finally{b.disabled=false;}});
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshPublishedProgress();});
+ setInterval(()=>{if(!document.hidden)refreshPublishedProgress();},90000);
  try{
  const me=await api('/api/identity/me');account=me.account;csrf=me.csrf;
  if(account.must_change_password){location.replace('/change-password');return;}

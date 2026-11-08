@@ -21,6 +21,9 @@ The quickest and safest option for a domain without a backend migration is to ke
 ## Authentication
 The current backend uses `api/identity/*` plus `lib/academy-auth.js` for server-side credential handling, hashed sessions, CSRF and role-scoped access. **There is no hardcoded administrator password.** The actual project owner must initialize and verify their Usthad/Administrator account in that project's own database. Each Hatchable project has its own independent database, which means credentials do not transfer just by copying the source.
 
+## Login and synchronized Hifz dashboard checks
+See [docs/AUTH_AND_SYNC_VERIFICATION.md](docs/AUTH_AND_SYNC_VERIFICATION.md) for verified security checks and the necessary real-project acceptance tests.
+
 ## Checks before launch
 See [docs/LAUNCH_CHECKLIST.md](docs/LAUNCH_CHECKLIST.md). Verify official gallery/photos, page navigation, student and guardian privacy, admission form persistence, receipt/print view, role-restricted admin saves, tablet/mobile layout and the live custom domain. Do not commit real students' data, tokens, or passwords.
 
