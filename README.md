@@ -1,26 +1,35 @@
 # SHAMSUL ULAMA ISLAMIC ACADEMY
 
-This branch is the independent source snapshot of **Hatchable production Version 12**, developed on November 8, 2026, for the Shamsul Ulama Islamic Academy. This is NOT the previous Lovable code and does not depend on the old main branch source.
+Official website source code, maintained in this repository. This is the **source for the connected Hatchable project** `shamsul-ulama` and is not automatically the code running at `shamsul-ulama-w2kv.hatchable.site` (a separately owned project that must be connected before deployment).
 
-## Project
-- Website: https://shamsul-ulama.hatchable.site
-- Hatchable project ID: `proj_nA81ZaknH1Km`
-- Project Console: https://hatchable.com/console/projects/shamsul-ulama
-- Original owner account needs access to manage project visibility.
+## Current website source
+- Connected Hatchable source project: `proj_nA81ZaknH1Km`
+- Connected project URL: https://shamsul-ulama.hatchable.site
+- Desired separate production project (deployment pending connection): https://shamsul-ulama-w2kv.hatchable.site
+- Public pages: Home, About, Gallery, Admission, Contact; biography: `/shamsul-ulama-legacy`
+- Staff, student and parent dashboard, Hifz Journey, monthly growth reports, academy settings and official admissions
 
-## First-time activation (requires project owner)
-1. In Hatchable Console > Settings, change visibility from **Personal** to **Public** so visitors can see public website pages.
-2. Sign in using the owner Hatchable account, open `/setup`, and create the initial Academy Administrator username/password. No hardcoded/default credentials were inserted.
-3. Sign in via `/login`. Administrator creates Usthad accounts; Usthad admits Students with unique admission number and assigned username/password; parents get linked, read-only accounts.
-4. Fill in official academy gallery, achievements, admission records and publish verified monthly passport and Juz badges.
+## Download the whole source as one ZIP
+Open the green **Code** button in this GitHub repository and choose **Download ZIP**. You can also use the `main.zip` archive:
+https://github.com/darulswalathhifzulquran-sketch/shamsul-ulama-academy/archive/refs/heads/main.zip
 
-## Features
-Public: Home/About/Contact/Admission/Gallery, verified achievements only, office hours, official location map, affiliation, enquiry form, white and Islamic green theme.
-Private: Usthad Control Centre; username/password accounts; Student/Parent animated Hifz Journey; study-date calculator and daily goal; verified monthly reports, 30-Juz badges with Usthad blessing; Gallery upload, site settings and admission management.
+The ZIP includes application code, publicly committed site assets, migrations and guides. **It does not include private PostgreSQL data, personal user records, live authentication sessions, secrets, nor Hatchable's managed hosting runtime.** A ZIP is a backup/export of code, not a complete independent web server.
 
-## Backend and safety
-Hatchable isolates and PostgreSQL. `api/identity/*` and `lib/academy-auth.js` implement salted PBKDF2 SHA-256 password verification, opaque hashed-session tokens and Secure HttpOnly SameSite=Strict cookies, per-request CSRF checks, login throttling and role-scoped data access.
+## Running on the custom domain
+The quickest and safest option for a domain without a backend migration is to keep the app deployed on the correct Hatchable project and add a custom domain in the Hatchable project Settings. See [docs/CUSTOM_DOMAIN_AND_MIGRATION.md](docs/CUSTOM_DOMAIN_AND_MIGRATION.md) for owner-only steps, DNS requirements, and what must change if leaving Hatchable.
 
-There are no default passwords, API secrets or real students in the source. **A real credential sign-in and teacher-to-parent end-to-end acceptance test remains outstanding until a valid owner creates the first administrator account.** This code is not a completed independent penetration test or an automatic deployment pipeline.
+## Authentication
+The current backend uses `api/identity/*` plus `lib/academy-auth.js` for server-side credential handling, hashed sessions, CSRF and role-scoped access. **There is no hardcoded administrator password.** The actual project owner must initialize and verify their Usthad/Administrator account in that project's own database. Each Hatchable project has its own independent database, which means credentials do not transfer just by copying the source.
 
-Do not commit credentials or genuine student data. Maintain the academy's privacy and permissions in future changes.
+## Checks before launch
+See [docs/LAUNCH_CHECKLIST.md](docs/LAUNCH_CHECKLIST.md). Verify official gallery/photos, page navigation, student and guardian privacy, admission form persistence, receipt/print view, role-restricted admin saves, tablet/mobile layout and the live custom domain. Do not commit real students' data, tokens, or passwords.
+
+## File layout
+- `public/`: frontend and images
+- `api/`: server-side endpoints
+- `pages/`: dashboard pages
+- `lib/`: shared server-side modules
+- `migrations/`: PostgreSQL migrations
+- `hatchable.toml`: Hatchable project settings
+
+All portraits of Shamsul Ulama in `public/assets/` were derived from the user-supplied photographs; no facial features were AI-reconstructed.
