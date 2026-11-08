@@ -60,10 +60,22 @@ async function gallery(){
  }catch(e){notice.textContent='Unable to load the official gallery right now.';}
 }
 function admission(){
- const form=$('admissionEnquiry');if(!form)return;
- form.addEventListener('submit',async e=>{e.preventDefault();const button=form.querySelector('button[type="submit"]'),status=$('enquiryMessage');button.disabled=true;status.textContent='Sending enquiry…';
- const data=Object.fromEntries(new FormData(form).entries());data.consent=form.elements.consent.checked;
- try{const r=await fetch('/api/academy/enquiries',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const ans=await r.json();if(!r.ok)throw Error(ans.error||'Unable to submit enquiry.');status.textContent=ans.message||'Your request has been received.';form.reset();}catch(err){status.textContent=err.message;}finally{button.disabled=false;}
+ const form=$('admissionEnquiry');if(!form||form.dataset.bound)return;form.dataset.bound='true';
+ form.addEventListener('submit',async e=>{
+  e.preventDefault();const button=form.querySelector('button[type="submit"]'),message=$('enquiryMessage'),receipt=$('applicationReceipt');
+  if(!form.reportValidity())return;
+  button.disabled=true;message.textContent='Saving your application…';receipt.hidden=true;
+  const data=Object.fromEntries(new FormData(form).entries());data.consent=form.querySelector('input[name="consent"]').checked;
+  try{
+   const r=await fetch('/api/academy/applications',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+   const json=await r.json();if(!r.ok)throw Error(json.error||'Unable to save your application.');
+   if(!json.application_number)throw Error('Application was not confirmed by the database.');
+   message.textContent='Application saved successfully.';
+   receipt.replaceChildren();
+   const heading=document.createElement('strong');heading.textContent='Application Saved · '+json.application_number;
+   const help=document.createElement('p');help.textContent='Keep this reference number. The Usthad will review your application. You can contact the Academy with this number.';
+   receipt.append(heading,help);receipt.hidden=false;form.reset();
+  }catch(error){message.textContent=error.message||'Application was not saved; please try again.';}finally{button.disabled=false;}
  });
 }
 async function render(){

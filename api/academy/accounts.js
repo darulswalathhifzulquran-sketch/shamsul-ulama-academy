@@ -1,9 +1,9 @@
 import {db,guard,audit,makePassword,normalizeUsername,validUsername,validPassword} from 'lib/academy-auth.js';
-export const access='public';export const methods=['GET','POST','PATCH'];
+export const access='public';export const methods=['GET','POST','PUT'];
 export default async function(req,res){
  const a=await guard(req,res,['admin','usthad'],req.method!=='GET');if(!a)return;
  if(req.method==='GET'){const r=await db.query("SELECT a.id,a.username,a.display_name,a.role,a.active,a.must_change_password,COALESCE((SELECT array_agg(s.admission_number) FROM academy_links_v2 l JOIN academy_students s ON s.id=l.student_id WHERE l.account_id=a.id),ARRAY[]::text[]) AS admissions FROM academy_accounts_v2 a ORDER BY a.id DESC LIMIT 500");return res.json({accounts:r.rows});}
- if(req.method==='PATCH'){
+ if(req.method==='PUT'){
  const uid=Number(req.body?.account_id),active=req.body?.active,newPassword=req.body?.new_password;
  if(!Number.isSafeInteger(uid)||(!validPassword(newPassword)&&typeof active!=='boolean'))return res.status(400).json({error:'Invalid account update.'});
  const t=await db.query('SELECT role FROM academy_accounts_v2 WHERE id=$1',[uid]);if(!t.rows.length)return res.status(404).json({error:'Account not found.'});

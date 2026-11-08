@@ -1,5 +1,5 @@
 import {db,guard,originAllowed,audit,preventCache} from 'lib/academy-auth.js';
-export const access='public';export const methods=['GET','POST','PATCH'];
+export const access='public';export const methods=['GET','POST','PUT'];
 export default async function(req,res){
  if(req.method==='POST'){
    preventCache(res);
@@ -11,7 +11,7 @@ export default async function(req,res){
    await db.query('INSERT INTO academy_admission_enquiries(guardian_name,phone,student_name,notes,consent) VALUES($1,$2,$3,$4,true)',[guardian,phone,student||null,notes||null]);
    return res.status(201).json({ok:true,message:'Your admission enquiry has been received.'});
  }
- const a=await guard(req,res,['admin','usthad'],req.method==='PATCH');if(!a)return;
+ const a=await guard(req,res,['admin','usthad'],req.method==='PUT');if(!a)return;
  if(req.method==='GET'){const r=await db.query('SELECT id,guardian_name,phone,student_name,notes,status,created_at FROM academy_admission_enquiries ORDER BY created_at DESC LIMIT 250');return res.json({enquiries:r.rows});}
  const n=Number(req.body?.id),status=String(req.body?.status||'');
  if(!Number.isSafeInteger(n)||!['new','contacted','closed'].includes(status))return res.status(400).json({error:'Invalid update.'});

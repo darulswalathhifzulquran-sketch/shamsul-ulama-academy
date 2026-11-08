@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-let csrf='',role='',students=[],accounts=[],settings={},gallery=[],enquiries=[];
+let csrf='',role='',students=[],accounts=[],settings={},gallery=[],enquiries=[],applications=[],currentApplication=null;
 const JUZ=[1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582,605];
 const $form=(id)=>Object.fromEntries(new FormData($(id)).entries());
 function status(msg,error=false){$('status').textContent=msg;$('status').className=error?'error':'success';}
@@ -19,23 +19,111 @@ function options(sel,arr,key='id',label='full_name'){sel.replaceChildren();for(c
 function studentDropdowns(){document.querySelectorAll('.studentOptions').forEach(sel=>options(sel,students));options($('previewStudent'),students);options($('parentStudents'),students);}
 async function refreshStudents(){const r=await api('/api/academy/students');students=r.students||[];studentDropdowns();$('statStudents').textContent=students.length;const el=$('studentsList');el.replaceChildren();if(!students.length)empty(el,'No students admitted yet.');for(const s of students)entry(el,s.full_name,s.admission_number+' · '+(s.batch_name||'No batch'));await refreshMonthly().catch(()=>{});await refreshJuz().catch(()=>{});}
 async function refreshAccounts(){const r=await api('/api/academy/accounts');accounts=r.accounts||[];$('statAccounts').textContent=accounts.length;const el=$('accountsList');el.replaceChildren();$('resetAccount').replaceChildren();
- for(const a of accounts){if(a.role!=='admin')$('resetAccount').append(new Option(a.display_name+' · '+a.username,String(a.id)));const actions=a.role==='admin'?[]:[[(a.active?'Deactivate':'Activate'),async()=>{if(!confirm('Change access for '+a.username+'?'))return;try{await api('/api/academy/accounts','PATCH',{account_id:Number(a.id),active:!a.active});status('Account status updated.');await refreshAccounts();}catch(e){status(e.message,true);}},a.active?'danger':'outline']];entry(el,a.display_name+' · '+a.username,a.role.toUpperCase()+' · '+(a.active?'Active':'Disabled')+' · '+(a.admissions||[]).join(', '),actions);}
+ for(const a of accounts){if(a.role!=='admin')$('resetAccount').append(new Option(a.display_name+' · '+a.username,String(a.id)));const actions=a.role==='admin'?[]:[[(a.active?'Deactivate':'Activate'),async()=>{if(!confirm('Change access for '+a.username+'?'))return;try{await api('/api/academy/accounts','PUT',{account_id:Number(a.id),active:!a.active});status('Account status updated.');await refreshAccounts();}catch(e){status(e.message,true);}},a.active?'danger':'outline']];entry(el,a.display_name+' · '+a.username,a.role.toUpperCase()+' · '+(a.active?'Active':'Disabled')+' · '+(a.admissions||[]).join(', '),actions);}
+ renderUsthads();
+}
+function renderUsthads(){
+ const root=$('usthadsList');if(!root)return;root.replaceChildren();
+ const list=accounts.filter(a=>a.role==='admin'||a.role==='usthad');
+ if(!list.length)return empty(root,'No Usthad accounts yet.');
+ for(const a of list)entry(root,a.display_name+' · '+a.username,a.role.toUpperCase()+' · '+(a.active?'Active':'Disabled'));
 }
 async function refreshEnquiries(){const r=await api('/api/academy/enquiries');enquiries=r.enquiries||[];$('statEnquiries').textContent=enquiries.filter(e=>e.status==='new').length;const el=$('enquiriesList');el.replaceChildren();if(!enquiries.length)empty(el,'No enquiries received.');for(const e of enquiries){const actions=e.status==='closed'?[]:[['Mark Contacted',()=>changeEnquiry(e.id,'contacted')],['Close',()=>changeEnquiry(e.id,'closed')]];entry(el,e.guardian_name+' · '+e.phone,(e.student_name||'')+' · '+(e.notes||'')+' · '+e.status,actions);}}
-async function changeEnquiry(id,state){try{await api('/api/academy/enquiries','PATCH',{id,status:state});status('Enquiry marked '+state);await refreshEnquiries();}catch(e){status(e.message,true);}}
+async function changeEnquiry(id,state){try{await api('/api/academy/enquiries','PUT',{id,status:state});status('Enquiry marked '+state);await refreshEnquiries();}catch(e){status(e.message,true);}}
 async function refreshSettings(){const r=await api('/api/academy/settings');settings=r.settings||{};const f=$('settingsForm');for(const el of f.elements){if(!el.name)continue;el.value=settings[el.name]??'';}}
 async function refreshGallery(){const r=await api('/api/academy/gallery?manage=1');gallery=r.gallery||[];const root=$('galleryList');root.replaceChildren();if(!gallery.length)empty(root,'No academy photographs uploaded yet.');for(const item of gallery){const fig=document.createElement('figure'),img=document.createElement('img');img.src=item.image_url;img.alt=item.alt_text||item.caption||'Academy photograph';img.loading='lazy';const cap=text('figcaption',(item.caption||'Academy Photograph')+(item.is_published?' · Published':' · Draft'));const b=text('button','Remove','danger');b.type='button';b.addEventListener('click',async()=>{if(!confirm('Delete photograph?'))return;try{await api('/api/academy/gallery','DELETE',{id:Number(item.id)});status('Photo deleted');await refreshGallery();}catch(e){status(e.message,true);}});fig.append(img,cap,b);root.append(fig);}}
 async function refreshMonthly(){const student_id=Number(document.querySelector('#monthlyForm select[name="student_id"]').value);const root=$('monthlyList');if(!student_id){empty(root,'Select a student.');return;}const r=await api('/api/academy/monthly?student_id='+student_id);root.replaceChildren();if(!r.reports?.length)empty(root,'No reports recorded for this student yet.');for(const m of r.reports||[])entry(root,String(m.report_month).slice(0,7)+' · '+m.status,'New: '+m.new_pages+' · Revision: '+m.revision_pages+' · Verified total: '+(m.verified_total_pages??'not set')+' · Accuracy: '+(m.accuracy_percent??'not set'));}
 async function refreshJuz(){const sid=Number(document.querySelector('#juzForm select[name="student_id"]').value);const el=$('juzList');if(!sid){empty(el,'Select a student.');return;}const r=await api('/api/academy/juz?student_id='+sid);el.replaceChildren();if(!r.juz?.length)empty(el,'No verified Juz progress yet.');for(const j of r.juz||[])entry(el,'Juz '+j.juz_number+' · '+(j.completion_verified?'Completed':'In Progress'),j.memorised_pages+' pages memorised'+(j.accuracy_verified?' · Accuracy verified':'')+' · '+(j.dua_message||''));}
-function show(tab){document.querySelectorAll('.panel').forEach(s=>s.hidden=s.id!=='tab-'+tab);document.querySelectorAll('[data-tab]').forEach(b=>{b.classList.toggle('active',b.dataset.tab===tab);b.setAttribute('aria-current',String(b.dataset.tab===tab));});if(tab==='monthly')refreshMonthly().catch(e=>status(e.message,true));if(tab==='juz')refreshJuz().catch(e=>status(e.message,true));window.scrollTo(0,0);}
+
+async function refreshApplications(){
+ const response=await api('/api/academy/applications');applications=response.applications||[];
+ const root=$('applicationsList');root.replaceChildren();
+ if(!applications.length){empty(root,'No official admission applications received yet.');return;}
+ for(const app of applications){
+  const view=()=>openApplication(app.id);
+  const actions=[['View',view],
+   ['Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';$('applicationStatus').focus();}],
+   ['Approve',async()=>{await openApplication(app.id);$('applicationStatus').value='approved';$('saveApplicationDecision').focus();}],
+   ['Reject',async()=>{await openApplication(app.id);$('applicationStatus').value='rejected';$('applicationReason').focus();}],
+   ['PDF',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]];
+  entry(root,app.student_name+' · '+app.application_number,
+   'Guardian: '+app.guardian_name+' · '+app.guardian_phone+' · '+String(app.status).replaceAll('_',' ').toUpperCase()+
+   ' · Applied: '+String(app.created_at).slice(0,10),actions);
+ }
+}
+async function openApplication(id){
+ const response=await api('/api/academy/applications?id='+encodeURIComponent(id));
+ currentApplication=response.application;
+ const x=currentApplication;
+ const root=$('applicationDetails');root.replaceChildren();
+ const values=[
+  ['Application',x.application_number],['Student Name',x.student_name],
+  ['Date of Birth',x.date_of_birth?String(x.date_of_birth).slice(0,10):'—'],
+  ['Class',x.current_class],['School / Madrasa',x.school_or_madrasa],
+  ['Previous Hifz Learning',x.prior_hifz],
+  ['Guardian',x.guardian_name],['Relationship',x.guardian_relationship],
+  ['Phone',x.guardian_phone],['Additional Phone',x.alternative_phone],
+  ['Email',x.email],['Full Address',x.address],
+  ['Locality',x.locality],['District',x.district],['PIN',x.postal_code],['Notes',x.notes]
+ ];
+ for(const [label,value]of values){
+  const field=document.createElement('div');field.className='application-detail';
+  field.append(text('small',label),text('strong',value||'—'));root.append(field);
+ }
+ $('applicationHeading').textContent='Admission Form · '+x.application_number;
+ $('applicationStatus').value=x.status;
+ $('applicationReason').value=x.decision_reason||'';
+ $('applicationStaffNote').value=x.staff_note||'';
+ $('applicationInterviewDate').value=x.interview_at?new Date(x.interview_at).toISOString().slice(0,16):'';
+ $('printApplication').href='/api/academy/application-print?id='+encodeURIComponent(id);
+ $('applicationFeedback').textContent='Saved application · '+String(x.status).replaceAll('_',' ')+'.';
+ $('applicationViewer').hidden=false;
+ const enroll=$('enrollApproved');if(enroll)enroll.hidden=x.status!=='approved';
+ $('applicationViewer').scrollIntoView({behavior:'smooth',block:'start'});
+}
+async function saveApplicationDecision(){
+ if(!currentApplication)return;
+ const button=$('saveApplicationDecision');button.disabled=true;
+ const payload={id:Number(currentApplication.id),status:$('applicationStatus').value,
+ reason:$('applicationReason').value.trim(),staff_note:$('applicationStaffNote').value.trim(),
+ interview_at:$('applicationStatus').value==='interview'&&$('applicationInterviewDate').value?
+    new Date($('applicationInterviewDate').value).toISOString():null};
+ try{
+  const out=await api('/api/academy/applications','PUT',payload);
+  $('applicationFeedback').textContent=out.message||'Decision saved.';
+  status('Application '+currentApplication.application_number+' updated successfully.');
+  await Promise.all([refreshApplications(),openApplication(currentApplication.id)]);
+ }catch(e){$('applicationFeedback').textContent='Not saved: '+e.message;status(e.message,true);}
+ finally{button.disabled=false;}
+}
+
+function show(tab){document.querySelectorAll('.panel').forEach(s=>s.hidden=s.id!=='tab-'+tab);document.querySelectorAll('[data-tab]').forEach(b=>{b.classList.toggle('active',b.dataset.tab===tab);b.setAttribute('aria-current',String(b.dataset.tab===tab));});if(tab==='monthly')refreshMonthly().catch(e=>status(e.message,true));if(tab==='juz')refreshJuz().catch(e=>status(e.message,true));if(tab==='applications')refreshApplications().catch(e=>status(e.message,true));window.scrollTo(0,0);}
 function hook(form,handler){$(form).addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('[type="submit"]');button.disabled=true;try{await handler();}catch(err){status(err.message||'Unable to save.',true);}finally{button.disabled=false;}});}
 function connect(){
  $('tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)show(b.dataset.tab);});
  $('signout').addEventListener('click',async()=>{try{await api('/api/identity/logout','POST',{});}finally{location.replace('/login');}});
  $('openJourney').addEventListener('click',()=>{const id=$('previewStudent').value;if(id)location.href='/dashboard?student_id='+encodeURIComponent(id);});
+ $('saveApplicationDecision').addEventListener('click',saveApplicationDecision);
+ $('closeApplication').addEventListener('click',()=>{$('applicationViewer').hidden=true;currentApplication=null;});
+ $('enrollApproved').addEventListener('click',()=>{
+   if(!currentApplication||currentApplication.status!=='approved')return;
+   const form=$('studentForm');
+   form.elements.full_name.value=currentApplication.student_name||'';
+   const sequence=String(currentApplication.id).padStart(3,'0');
+   form.elements.admission_number.value='HIFZ-'+new Date().getFullYear()+'-'+sequence;
+   form.elements.username.focus();show('students');
+   status('Approved applicant loaded. Choose Student Username and temporary Password to complete enrolment.');
+ });
+ hook('usthadForm',async()=>{
+   if(role!=='admin')throw Error('Only the Main Administrator can add an Usthad.');
+   const data=$form('usthadForm');data.role='usthad';data.student_ids=[];
+   await api('/api/academy/accounts','POST',data);
+   $('usthadForm').reset();status('New Usthad account saved successfully.');
+   await refreshAccounts();
+ });
  hook('studentForm',async()=>{const data=$form('studentForm');await api('/api/academy/students','POST',data);$('studentForm').reset();status('Student admitted and username/password created.');await Promise.all([refreshStudents(),refreshAccounts()]);});
  hook('accountForm',async()=>{const data=$form('accountForm');data.student_ids=[...$('parentStudents').selectedOptions].map(o=>Number(o.value));await api('/api/academy/accounts','POST',data);$('accountForm').reset();status('Account created. Share the temporary password privately.');await refreshAccounts();});
- $('resetSubmit').addEventListener('click',async()=>{const account_id=Number($('resetAccount').value),new_password=$('resetPassword').value;try{await api('/api/academy/accounts','PATCH',{account_id,new_password});$('resetPassword').value='';status('Password reset. Old sessions revoked; user must change the temporary password.');}catch(e){status(e.message,true);}});
+ $('resetSubmit').addEventListener('click',async()=>{const account_id=Number($('resetAccount').value),new_password=$('resetPassword').value;try{await api('/api/academy/accounts','PUT',{account_id,new_password});$('resetPassword').value='';status('Password reset. Old sessions revoked; user must change the temporary password.');}catch(e){status(e.message,true);}});
  $('monthlyForm').querySelector('select[name="student_id"]').addEventListener('change',()=>refreshMonthly().catch(e=>status(e.message,true)));
  hook('monthlyForm',async()=>{const x=$form('monthlyForm');x.student_id=Number(x.student_id);for(const field of ['new_pages','revision_pages','verified_total_pages','accuracy_percent','target_pages'])x[field]=x[field]===''?null:Number(x[field]);await api('/api/academy/monthly','POST',x);status('Monthly Hifz Passport '+x.status+'.');await refreshMonthly();});
  $('juzForm').querySelector('select[name="student_id"]').addEventListener('change',()=>refreshJuz().catch(e=>status(e.message,true)));
@@ -51,10 +139,11 @@ function connect(){
  if(!['admin','usthad'].includes(role)){location.replace('/dashboard');return;}
  if(r.account.must_change_password){location.replace('/change-password');return;}
  $('staffName').textContent=r.account.display_name+' · '+(role==='admin'?'Administrator':'Usthad');
- if(role!=='admin')$('accountRole').querySelector('option[value="usthad"]').remove();
+ if(role!=='admin'){$('accountRole').querySelector('option[value="usthad"]').remove();$('usthadTab').hidden=true;}
  connect();
- const all=await Promise.allSettled([refreshStudents(),refreshAccounts(),refreshEnquiries(),refreshSettings(),refreshGallery()]);
- for(const a of all)if(a.status==='rejected')throw a.reason;
- show('overview');status('Secure management tools ready.');
+ const all=await Promise.allSettled([refreshStudents(),refreshAccounts(),refreshApplications(),refreshEnquiries(),refreshSettings(),refreshGallery()]);
+ show('overview');
+ const errors=all.filter(x=>x.status==='rejected').map(x=>x.reason?.message||'Unknown API error');
+ status(errors.length?'Some data could not load: '+errors.join(' · '):'Secure management tools ready.',errors.length>0);
 }catch(e){status(e.message||'Sign in required.',true);if(/Sign in|authoris/i.test(e.message||''))location.replace('/login');}})();
 })();
