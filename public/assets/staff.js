@@ -98,7 +98,23 @@ async function saveApplicationDecision(){
 }
 
 function show(tab){document.querySelectorAll('.panel').forEach(s=>s.hidden=s.id!=='tab-'+tab);document.querySelectorAll('[data-tab]').forEach(b=>{b.classList.toggle('active',b.dataset.tab===tab);b.setAttribute('aria-current',String(b.dataset.tab===tab));});if(tab==='monthly')refreshMonthly().catch(e=>status(e.message,true));if(tab==='juz')refreshJuz().catch(e=>status(e.message,true));if(tab==='applications')refreshApplications().catch(e=>status(e.message,true));window.scrollTo(0,0);}
-function hook(form,handler){$(form).addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('[type="submit"]');button.disabled=true;try{await handler();}catch(err){status(err.message||'Unable to save.',true);}finally{button.disabled=false;}});}
+function hook(form,handler){
+ const el=$(form);if(!el)throw Error('Missing form: '+form);
+ const feedback=document.createElement('p');feedback.className='form-feedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');el.append(feedback);
+ el.addEventListener('submit',async e=>{
+   e.preventDefault();if(!el.reportValidity())return;
+   const button=el.querySelector('[type="submit"]');button.disabled=true;
+   feedback.className='form-feedback';feedback.textContent='Saving to the Academy database…';
+   try{
+     await handler();
+     feedback.className='form-feedback success';feedback.textContent='Saved successfully.';
+   }catch(error){
+     const message=error.message||'Unable to save.';
+     feedback.className='form-feedback error';feedback.textContent='Not saved: '+message;
+     status('Not saved: '+message,true);
+   }finally{button.disabled=false;}
+ });
+}
 function connect(){
  $('tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)show(b.dataset.tab);});
  $('signout').addEventListener('click',async()=>{try{await api('/api/identity/logout','POST',{});}finally{location.replace('/login');}});
@@ -117,20 +133,49 @@ function connect(){
  hook('usthadForm',async()=>{
    if(role!=='admin')throw Error('Only the Main Administrator can add an Usthad.');
    const data=$form('usthadForm');data.role='usthad';data.student_ids=[];
-   await api('/api/academy/accounts','POST',data);
-   $('usthadForm').reset();status('New Usthad account saved successfully.');
-   await refreshAccounts();
+   const response=await api('/api/academy/accounts','POST',data);
+   if(!response.ok||!response.username)throw Error('Usthad account was not confirmed.');
+   $('usthadForm').reset();status('Usthad account '+response.username+' saved successfully.');
+   await refreshAccounts().catch(()=>status('Usthad saved; list refresh failed. Reload to view it.'));
  });
- hook('studentForm',async()=>{const data=$form('studentForm');await api('/api/academy/students','POST',data);$('studentForm').reset();status('Student admitted and username/password created.');await Promise.all([refreshStudents(),refreshAccounts()]);});
- hook('accountForm',async()=>{const data=$form('accountForm');data.student_ids=[...$('parentStudents').selectedOptions].map(o=>Number(o.value));await api('/api/academy/accounts','POST',data);$('accountForm').reset();status('Account created. Share the temporary password privately.');await refreshAccounts();});
+ hook('studentForm',async()=>{
+ const data=$form('studentForm');const response=await api('/api/academy/students','POST',data);
+ if(!response.ok||!response.admission_number)throw Error('Database did not confirm the student was saved.');
+ $('studentForm').reset();status('Student '+response.admission_number+' saved. Login account created successfully.');
+ const updates=await Promise.allSettled([refreshStudents(),refreshAccounts()]);
+ if(updates.some(x=>x.status==='rejected'))status('Student saved; the list did not refresh automatically. Refresh this page to see the record.');
+});
+ hook('accountForm',async()=>{
+ const data=$form('accountForm');data.student_ids=[...$('parentStudents').selectedOptions].map(o=>Number(o.value));
+ const response=await api('/api/academy/accounts','POST',data);
+ if(!response.ok||!response.username)throw Error('Account was not confirmed.');
+ $('accountForm').reset();status('Account '+response.username+' saved. Share the temporary password privately.');
+ await refreshAccounts().catch(()=>status('Account saved; list refresh failed. Reload to view it.'));
+});
  $('resetSubmit').addEventListener('click',async()=>{const account_id=Number($('resetAccount').value),new_password=$('resetPassword').value;try{await api('/api/academy/accounts','PUT',{account_id,new_password});$('resetPassword').value='';status('Password reset. Old sessions revoked; user must change the temporary password.');}catch(e){status(e.message,true);}});
  $('monthlyForm').querySelector('select[name="student_id"]').addEventListener('change',()=>refreshMonthly().catch(e=>status(e.message,true)));
- hook('monthlyForm',async()=>{const x=$form('monthlyForm');x.student_id=Number(x.student_id);for(const field of ['new_pages','revision_pages','verified_total_pages','accuracy_percent','target_pages'])x[field]=x[field]===''?null:Number(x[field]);await api('/api/academy/monthly','POST',x);status('Monthly Hifz Passport '+x.status+'.');await refreshMonthly();});
+ hook('monthlyForm',async()=>{
+ const x=$form('monthlyForm');x.student_id=Number(x.student_id);
+ for(const field of ['new_pages','revision_pages','verified_total_pages','accuracy_percent','target_pages'])x[field]=x[field]===''?null:Number(x[field]);
+ const response=await api('/api/academy/monthly','POST',x);
+ if(!response.ok)throw Error('Monthly Passport was not confirmed.');
+ status('Monthly Hifz Passport '+x.status+' saved successfully.');
+ await refreshMonthly().catch(()=>status('Monthly report saved; list refresh failed. Reload to view it.'));
+});
  $('juzForm').querySelector('select[name="student_id"]').addEventListener('change',()=>refreshJuz().catch(e=>status(e.message,true)));
  for(let i=1;i<=30;i++)$('juzNumber').append(new Option('Juz '+i+' · '+(JUZ[i]-JUZ[i-1])+' pages',String(i)));
  const updateMax=()=>{$('juzPages').max=String(JUZ[Number($('juzNumber').value)]-JUZ[Number($('juzNumber').value)-1]);};
  $('juzNumber').addEventListener('change',updateMax);updateMax();$('juzCompleted').addEventListener('change',()=>{if($('juzCompleted').checked)$('juzPages').value=$('juzPages').max;});
- hook('juzForm',async()=>{const x=$form('juzForm');x.student_id=Number(x.student_id);x.juz_number=Number(x.juz_number);x.memorised_pages=Number(x.memorised_pages);x.accuracy_percent=x.accuracy_percent===''?null:Number(x.accuracy_percent);x.completion_verified=$('juzCompleted').checked;x.accuracy_verified=$('juzForm').querySelector('input[name="accuracy_verified"]').checked;await api('/api/academy/juz','POST',x);status('Juz milestone verified, badge and dua published.');await refreshJuz();});
+ hook('juzForm',async()=>{
+ const x=$form('juzForm');x.student_id=Number(x.student_id);x.juz_number=Number(x.juz_number);
+ x.memorised_pages=Number(x.memorised_pages);x.accuracy_percent=x.accuracy_percent===''?null:Number(x.accuracy_percent);
+ x.completion_verified=$('juzCompleted').checked;
+ x.accuracy_verified=$('juzForm').querySelector('input[name="accuracy_verified"]').checked;
+ const response=await api('/api/academy/juz','POST',x);
+ if(!response.ok||!response.verified)throw Error('Verified Juz record was not confirmed by the server.');
+ status('Juz '+x.juz_number+' progress and blessing saved successfully.');
+ await refreshJuz().catch(()=>status('Juz saved; list refresh failed. Reload to see it.'));
+});
  hook('galleryForm',async()=>{const f=$('galleryForm');const fd=new FormData(f);if(!f.elements.rights_confirmed.checked)throw Error('Confirm rights and watermark-free image.');fd.set('is_published',f.elements.is_published.checked?'true':'false');await api('/api/academy/gallery','POST',fd,true);f.reset();status('Photo uploaded successfully.');await refreshGallery();});
  hook('settingsForm',async()=>{const x=$form('settingsForm');for(const name of ['huffaz_count','students_count','batches_count','service_years'])x[name]=Number(x[name]||0);await api('/api/academy/settings','POST',x);status('Website settings saved. Public pages will now display your updated information.');await refreshSettings();});
 }

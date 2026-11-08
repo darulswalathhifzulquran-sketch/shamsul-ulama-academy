@@ -10,3 +10,7 @@
 .button-link{border:1px solid var(--g);border-radius:9px;padding:11px 15px;color:var(--g);font-size:12px;font-weight:800;text-decoration:none;background:#fff}
 #applicationFeedback{margin-top:12px}
 @media(max-width:620px){.application-detail-grid{grid-template-columns:1fr}}
+/* form-feedback save status */
+.form-feedback{min-height:24px;font-size:12px;font-weight:700;margin-top:12px;color:var(--g);line-height:1.6}
+.form-feedback.success{color:#075333}
+.form-feedback.error{color:#ad3535}
