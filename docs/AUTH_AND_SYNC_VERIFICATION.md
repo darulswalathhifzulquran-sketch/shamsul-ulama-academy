@@ -6,10 +6,17 @@ Verification date: 8 November 2026.
 - Production project: `shamsul-ulama-w2kv.hatchable.site` (`proj_28yiZzMLRLsx`). Connected and deployed as Version 2 on 8 November 2026.
 - The older `shamsul-ulama.hatchable.site` project is retained only as the earlier staging/reference deployment.
 - Production database migrations 0001–0009 are present; core Academy tables were directly verified after deployment.
-- Production administrator record exists and is active. Credentials are intentionally not stored in GitHub.
-- Public Admission was tested with a temporary application: HTTP 201, database persistence confirmed, then the test record was deleted.
+- Production administrator `administration` and Usthad `usthad` accounts exist and are active. Credentials are intentionally not stored in GitHub; Usthad has a pending first-password-change flag.
+- Public Admission was tested with a temporary application: HTTP 201 and application reference returned; the test record was then deleted without touching the existing admission enquiry.
 - Anonymous access to Student, Monthly Passport, Juz and admission-register endpoints was verified blocked with HTTP 401. Public Gallery remains readable.
 - Home, About, Admission, Contact, Legacy, Login and Setup were checked at 390px and 1280px with no horizontal overflow; official logo and both scholar portraits loaded successfully.
+
+## Additional production verification
+- Live public route smoke tests passed for Home, About, biography, Admission, Contact, Login and Setup at mobile/desktop sizes.
+- Production protected anonymous routes returned HTTP 401. Empty admission application validation returned HTTP 400.
+- Public Admission POST with temporary QA names returned HTTP 201 and a reference. The exact QA record was removed and existing admission enquiry retained.
+- Sixteen critical runtime frontend/backend files matched the GitHub source exactly on inspection.
+- Full password-based Admin/Usthad/Student/Parent session and publish-to-family acceptance testing is **not yet complete**; do not imply it is.
 
 ## Read-only checks actually completed
 - Connected staging database has zero accounts, students, student links, monthly reports, Juz verifications and admission applications.
@@ -23,7 +30,7 @@ Verification date: 8 November 2026.
 **Still requires a human credential pass:** a real Admin/Usthad/Student/Parent sign-in sequence using private passwords. Passwords are never stored in source or GitHub, so this must be completed through the live sign-in UI.
 
 ## Administrator account
-The production database has one active administrator account. Keep its password private and out of GitHub/chat logs. If it is unknown, reset it through an owner-authorized flow before launch.
+The production database has an active administrator `administration` and an active Usthad `usthad`. Keep passwords private and out of GitHub/chat logs. If it is unknown, reset it through an owner-authorized flow before launch.
 
 ## Mandatory credential acceptance tests
 - [ ] Create a new Usthad as Admin; Usthad login works; non-admin is rejected from Add Usthad.
