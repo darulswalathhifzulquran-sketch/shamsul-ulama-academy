@@ -167,3 +167,6 @@ h2{font-size:clamp(1.8rem,3.1vw,3rem);line-height:1.25}
 .feature-academy-mark img{height:32px;width:32px;object-fit:contain}
 @media(max-width:760px){.header .head{min-height:78px}.header .brand-logo-wrap{height:55px;width:53px;flex-basis:53px}.header .brand b{font-size:13px}.header .brand small{font-size:8.5px}.masthead-crest{width:86px!important;height:90px!important;margin-top:10px!important}}
 @media(max-width:420px){.header .brand-logo-wrap{height:48px;width:46px;flex-basis:46px}.header .brand{gap:8px}.header .brand b{font-size:12px}.header .brand small{font-size:8px;letter-spacing:.10em}.footer .brand-logo-wrap{width:64px;height:67px;flex-basis:64px}}
+
+/* Academy community uses the same approved identity */
+.section-mark-logo{width:35px;height:36px;display:block;object-fit:contain}
