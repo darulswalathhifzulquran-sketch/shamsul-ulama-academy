@@ -1,0 +1,15 @@
+name = "Shamsul Ulama Islamic Academy"
+# Username and password authentication is enforced in api/identity/*.
+# Login sessions use server-side PBKDF2 hashes and Secure HttpOnly cookies.
+
+[db.tables.academy_access_requests]
+read = "own"
+write = "own"
+
+[db.tables.academy_student_access]
+read = "own"
+write = "member"
+
+[db.tables.academy_usthad_access]
+read = "own"
+write = "member"

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380" role="img" aria-labelledby="t d">
+<title id="t">Animated Hifz learner</title><desc id="d">An original illustrated smiling learner in a prayer cap gently raises his arms and nods confidently.</desc>
+<style>
+.l-arm{transform-box:fill-box;transform-origin:90% 10%;animation:la 3.8s ease-in-out infinite}
+.r-arm{transform-box:fill-box;transform-origin:10% 10%;animation:ra 3.8s ease-in-out infinite}
+.head{transform-box:fill-box;transform-origin:center bottom;animation:head 3.8s ease-in-out infinite}
+.smile{transform-box:fill-box;transform-origin:center center;animation:smile 3.8s ease-in-out infinite}
+.lid{animation:blink 4.7s linear infinite}
+@keyframes la{0%,15%,100%{transform:rotate(18deg)}35%,65%{transform:rotate(-26deg)}85%{transform:rotate(13deg)}}
+@keyframes ra{0%,15%,100%{transform:rotate(-18deg)}35%,65%{transform:rotate(26deg)}85%{transform:rotate(-13deg)}}
+@keyframes head{0%,100%{transform:rotate(-3deg) translateY(0)}40%{transform:rotate(4deg) translateY(-4px)}65%{transform:rotate(-2deg)}}
+@keyframes smile{0%,100%{transform:scaleY(.77)}40%,65%{transform:scaleY(1.3)}}
+@keyframes blink{0%,43%,45%,100%{opacity:0}44%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.l-arm,.r-arm,.head,.smile,.lid{animation:none!important}}
+</style>
+<ellipse cx="150" cy="355" rx="90" ry="12" fill="#c9dacc" opacity=".6"/>
+<g stroke="#3f6552" stroke-width="3" stroke-linejoin="round">
+<path d="M113 283 Q110 327 120 347 L147 347 150 280Z" fill="#fcfdf8"/>
+<path d="M153 283 Q153 332 159 347 L188 347 183 278Z" fill="#fcfdf8"/>
+<path d="M116 343 Q99 345 96 353 Q94 360 107 361 L145 361 146 346Z" fill="#395647"/>
+<path d="M158 346 L189 343 Q211 348 207 357 Q204 361 181 361 L157 361Z" fill="#395647"/>
+</g>
+<g class="l-arm">
+<path d="M112 179 Q80 173 61 204 L38 231 Q35 240 43 246 Q54 254 64 239 L103 209Z" fill="#f9fbf6" stroke="#356748" stroke-width="4"/>
+<circle cx="44" cy="240" r="13" fill="#d99f7d" stroke="#bd7b5d" stroke-width="2"/>
+</g>
+<g class="r-arm">
+<path d="M188 179 Q220 173 238 204 L263 230 Q266 241 257 247 Q247 254 236 238 L198 209Z" fill="#f9fbf6" stroke="#356748" stroke-width="4"/>
+<circle cx="258" cy="239" r="13" fill="#d99f7d" stroke="#bd7b5d" stroke-width="2"/>
+</g>
+<path d="M120 170 Q108 182 107 200 L102 291 Q150 301 198 291 L193 201 Q187 180 176 171Z" fill="#fefef9" stroke="#326146" stroke-width="4"/>
+<path d="M144 178 L144 288 M154 178 L154 287" fill="none" stroke="#c5d8c9" stroke-width="2"/>
+<circle cx="150" cy="206" r="3.1" fill="#377654"/><circle cx="150" cy="232" r="3.1" fill="#377654"/><circle cx="150" cy="257" r="3.1" fill="#377654"/>
+<path d="M132 174 L150 189 168 174" fill="none" stroke="#36734f" stroke-width="3"/>
+<g class="head">
+<ellipse cx="150" cy="105" rx="72" ry="78" fill="#e9af8e" stroke="#bb765b" stroke-width="3"/>
+<ellipse cx="81" cy="117" rx="12" ry="21" fill="#dfa182" stroke="#bd755b" stroke-width="3"/>
+<ellipse cx="219" cy="117" rx="12" ry="21" fill="#dfa182" stroke="#bd755b" stroke-width="3"/>
+<path d="M82 90 Q82 25 147 18 Q219 20 220 89 L215 73 Q198 58 175 59 Q140 77 97 66Z" fill="#293a31"/>
+<path d="M83 69 Q80 14 149 10 Q220 12 218 70 Q195 59 151 63 Q103 59 83 69Z" fill="#f8faf5" stroke="#49725a" stroke-width="3"/>
+<path d="M95 54 Q149 39 204 54" fill="none" stroke="#b9d2bf" stroke-width="4"/>
+<path d="M105 100 Q116 91 130 97 M169 97 Q186 91 196 100" fill="none" stroke="#58392e" stroke-width="5" stroke-linecap="round"/>
+<ellipse cx="121" cy="115" rx="10" ry="13" fill="#fdfdf8" stroke="#583f32" stroke-width="2"/>
+<ellipse cx="180" cy="115" rx="10" ry="13" fill="#fdfdf8" stroke="#583f32" stroke-width="2"/>
+<circle cx="122" cy="117" r="5" fill="#332b29"/><circle cx="179" cy="117" r="5" fill="#332b29"/>
+<circle cx="124" cy="114" r="2" fill="#fff"/><circle cx="181" cy="114" r="2" fill="#fff"/>
+<path class="lid" d="M111 114 Q121 107 131 114 M169 114 Q180 107 190 114" fill="none" stroke="#67493b" stroke-width="5" stroke-linecap="round" opacity="0"/>
+<path d="M149 121 Q142 133 152 134" fill="none" stroke="#ac7459" stroke-width="2.4"/>
+<ellipse cx="100" cy="138" rx="15" ry="7" fill="#dc9b8f" opacity=".55"/><ellipse cx="201" cy="138" rx="15" ry="7" fill="#dc9b8f" opacity=".55"/>
+<path class="smile" d="M121 144 Q150 166 180 144" fill="none" stroke="#8a4d42" stroke-width="4.5" stroke-linecap="round"/>
+</g>
+</svg>
