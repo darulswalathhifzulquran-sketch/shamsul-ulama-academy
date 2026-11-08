@@ -214,3 +214,14 @@ h2{font-size:clamp(1.8rem,3.1vw,3rem);line-height:1.25}
 @media(max-width:780px){.scholar-spotlight{grid-template-columns:1fr}.scholar-visual{height:340px;min-height:340px}.scholar-copy{padding:32px 29px 38px}.scholar-story-grid{grid-template-columns:1fr}.scholar-story-portrait{position:static;max-width:390px;margin:auto}.scholar-story-prose{font-size:14px}.scholar-section{padding:27px 0}}
 @media(max-width:470px){.scholar-spotlight{border-radius:16px}.scholar-visual{height:310px;min-height:310px}.scholar-photo-label{left:20px;bottom:19px}.scholar-copy{padding:27px 22px 31px}.scholar-copy h2{font-size:26px}.scholar-article-intro{padding:46px 0 55px}.scholar-story{padding:38px 0}}
 @media(prefers-reduced-motion:reduce){.scholar-spotlight,.scholar-visual img,.scholar-discover span{transition:none!important}}
+/* Hifz learner visual: warm, nature-inspired green with original SVG animation. */
+.learning-home{background:#edf3eb;border-top:1px solid #d9e5d7;border-bottom:1px solid #d9e5d7;padding:clamp(36px,5vw,75px) 0}
+.learning-home-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(225px,.7fr);align-items:center;gap:clamp(20px,5vw,85px)}
+.learning-home-copy h2{font-family:'Libre Baskerville',Georgia,serif;color:#234934;font-size:clamp(27px,3.7vw,43px);line-height:1.25;margin:16px 0 20px}
+.learning-home-copy p{font-size:15px;color:#415b49;line-height:1.9;max-width:570px;margin:0 0 22px}
+.learning-home-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.learning-home-copy .learning-home-note{margin:18px 0 0;font-size:12px;color:#54715a;line-height:1.6}
+.learning-home-art{display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0;border-radius:22px;background:linear-gradient(135deg,#e3efdf,#f5f7e9);min-height:290px;padding:12px 18px 20px}
+.learning-home-art img{width:min(210px,100%);height:auto;display:block}
+.learning-home-art figcaption{font-family:Georgia,serif;font-style:italic;color:#43654b;font-size:14px;text-align:center}
+@media(max-width:750px){.learning-home-grid{grid-template-columns:1fr}.learning-home-art{max-width:400px;width:100%;margin:0 auto}.learning-home-copy p{font-size:14px}}
