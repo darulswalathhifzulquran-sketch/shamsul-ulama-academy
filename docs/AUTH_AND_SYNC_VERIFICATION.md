@@ -2,10 +2,14 @@
 
 Verification date: 8 November 2026.
 
-## Important deployment boundary
-- Connected source/staging project: `shamsul-ulama.hatchable.site` (`proj_nA81ZaknH1Km`).
-- Intended live project: `shamsul-ulama-w2kv.hatchable.site`. **Not found in the currently connected Hatchable project list.** No changes or successful authenticated tests are claimed for this separate site.
-- Do not overwrite the new project's database or use old-project accounts as production credentials.
+## Production deployment status
+- Production project: `shamsul-ulama-w2kv.hatchable.site` (`proj_28yiZzMLRLsx`). Connected and deployed as Version 2 on 8 November 2026.
+- The older `shamsul-ulama.hatchable.site` project is retained only as the earlier staging/reference deployment.
+- Production database migrations 0001–0009 are present; core Academy tables were directly verified after deployment.
+- Production administrator record exists and is active. Credentials are intentionally not stored in GitHub.
+- Public Admission was tested with a temporary application: HTTP 201, database persistence confirmed, then the test record was deleted.
+- Anonymous access to Student, Monthly Passport, Juz and admission-register endpoints was verified blocked with HTTP 401. Public Gallery remains readable.
+- Home, About, Admission, Contact, Legacy, Login and Setup were checked at 390px and 1280px with no horizontal overflow; official logo and both scholar portraits loaded successfully.
 
 ## Read-only checks actually completed
 - Connected staging database has zero accounts, students, student links, monthly reports, Juz verifications and admission applications.
@@ -16,16 +20,12 @@ Verification date: 8 November 2026.
 - Fixed the login JSON response to include must_change_password, so temporary-password logins can redirect to Change Password directly.
 - Added a Refresh Progress button and an approximately 90-second visibility-aware refresh for published student/parent results.
 
-**Not verified yet:** authenticated create/login/save/parent-view/delete flows on the new production project. Do not call this a complete end-to-end login pass.
+**Still requires a human credential pass:** a real Admin/Usthad/Student/Parent sign-in sequence using private passwords. Passwords are never stored in source or GitHub, so this must be completed through the live sign-in UI.
 
-## Initial administrator: owner-only
-1. Connect ChatGPT's Hatchable plugin with the account owning `shamsul-ulama-w2kv` and confirm its project ID.
-2. Back up all existing source, database and media first.
-3. Sign in to that project's Hatchable owner session and open `/setup`. Username `usthad` is suggested in the form but not automatically provisioned.
-4. Choose a NEW, strong private administrator password. Do not reuse one posted in chat or check secrets into GitHub.
-5. After setup, use `/login`. Admin/Usthad should reach `/staff`. Student/Parent should reach `/dashboard`; temporary-password users should change passwords.
+## Administrator account
+The production database has one active administrator account. Keep its password private and out of GitHub/chat logs. If it is unknown, reset it through an owner-authorized flow before launch.
 
-## Mandatory real-project acceptance tests
+## Mandatory credential acceptance tests
 - [ ] Create a new Usthad as Admin; Usthad login works; non-admin is rejected from Add Usthad.
 - [ ] Add two independent students, each with unique HIFZ admission ID and strong temporary password.
 - [ ] Both student logins require password change before private dashboard access.
