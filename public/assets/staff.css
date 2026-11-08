@@ -14,3 +14,8 @@
 .form-feedback{min-height:24px;font-size:12px;font-weight:700;margin-top:12px;color:var(--g);line-height:1.6}
 .form-feedback.success{color:#075333}
 .form-feedback.error{color:#ad3535}
+/* Official Shamsul Ulama logo in Usthad control centre */
+header .brand{display:inline-flex;align-items:center;gap:12px;min-width:0}
+.staff-brand-logo{width:52px;height:55px;object-fit:contain;flex:none}
+header .brand span{max-width:230px;line-height:1.4}
+@media(max-width:500px){.staff-brand-logo{width:44px;height:47px}}
