@@ -43,12 +43,12 @@ function applySettings(s){
  const mapFrame=$('academyMap');
  if(mapFrame){
   mapFrame.replaceChildren();
-  const url=String(s.maps_url||'');let lat=10.0051171,lng=76.4025429;
-  const at=url.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/),bang=url.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
-  const pair=bang||at;if(pair){lat=Number(pair[1]);lng=Number(pair[2]);}
-  if(Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=-90&&lat<=90&&lng>=-180&&lng<=180){
-   const frame=document.createElement('iframe');frame.src='https://maps.google.com/maps?q='+encodeURIComponent(lat+','+lng)+'&z=17&output=embed';
-   frame.title='Shamsul Ulama Islamic Academy location map';frame.loading='lazy';frame.referrerPolicy='no-referrer-when-downgrade';frame.style.width='100%';frame.style.height='280px';frame.style.border='0';frame.style.borderRadius='11px';mapFrame.append(frame);
+  const address=String(s.address||'Perighala, Ernakulam, Kerala, India').trim();
+  if(address){
+   const frame=document.createElement('iframe');
+   frame.src='https://maps.google.com/maps?q='+encodeURIComponent(address)+'&output=embed';
+   frame.title='Map search for Shamsul Ulama Islamic Academy location';
+   frame.loading='lazy';frame.referrerPolicy='no-referrer-when-downgrade';frame.style.width='100%';frame.style.height='280px';frame.style.border='0';frame.style.borderRadius='11px';mapFrame.append(frame);
   }
  }
 }
