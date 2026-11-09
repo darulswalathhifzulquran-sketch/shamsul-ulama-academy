@@ -1,0 +1,2 @@
+ALTER TABLE academy_public_settings ADD COLUMN theme_style TEXT NOT NULL DEFAULT 'classic' CHECK(theme_style IN('classic','heritage','minimal'));
+ALTER TABLE academy_gallery ADD COLUMN storage_key TEXT;
