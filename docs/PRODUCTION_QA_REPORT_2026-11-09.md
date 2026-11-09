@@ -53,3 +53,13 @@ Official documentation:
 
 ## Reporting rules
 **PASS** means a particular listed behavior was directly observed. **FAIL** means the stated requirement remains unmet. **NOT VERIFIED** is not equivalent to FAIL or PASS. A staging DB test does not prove a full authenticated production browser journey works.
+
+## Additional Staging Checks — authenticated-flow preparation (9 November 2026)
+
+- **PASS (database relation test only):** Two disposable Students were approved in staging, generating two linked Student Accounts. `academy_links_v2` showed own-account/own-student links present, but cross-account links absent. This supports the scoping SQL in `api/academy/overview.js`, `api/academy/monthly.js`, and `api/academy/juz.js`; it does **not** replace a real authenticated Parent/Student browser authorization test.
+- **PASS (published report filter, SQL):** Created one draft and one published Hifz Monthly Report for one staging student. Staff query returned both; Student/Parent published-only query returned only the published report, and a separate student saw no published report. Neither staging student had access linked to the other's record.
+- **PASS (staging cleanup):** Used the verified, administrator-only database function on the two disposable staging students; both student records/logins and Hifz records were removed. Staging Admin remained intact. No production database changes were made by these tests.
+- **BLOCKED, not FAIL:** Automated login to the QA Admin through the browser/API was refused by the assistant tool's security checks. This is **not evidence of a failing application login**, but it prevents claiming complete UI-to-database authentication PASS.
+- **NOT VERIFIED:** Real Admin Add Usthad and Parent Account UI, Login/Password Reset, authenticated Approve/Reject buttons, and multipart Gallery upload/delete. These must still be tested with a legitimate signed-in browser session. Never ask anyone to share their real password in a chat.
+
+**Deployment/source status:** No source-code changes or live deployments were needed for these additional checks. Existing Hatchable v15 source and complete ZIP remain the latest version. The ZIP is a code backup, not a backup of live private data, sessions, or uploaded private media.
