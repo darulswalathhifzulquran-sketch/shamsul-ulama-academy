@@ -83,7 +83,11 @@ function makeResponse() {
 }
 
 function headersObject(request) {
-  return Object.fromEntries(request.headers.entries());
+  const headers = Object.fromEntries(request.headers.entries());
+  // The Fetch Request API omits Host in some runtimes (including local tests).
+  // Use the validated request URL's authority for the original same-origin guard.
+  if (!headers.host) headers.host = new URL(request.url).host;
+  return headers;
 }
 async function makeRequest(request, url) {
   const req = {
