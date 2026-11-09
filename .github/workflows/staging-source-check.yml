@@ -1,0 +1,30 @@
+name: Staging source integrity (NOT backend acceptance)
+on:
+  push:
+    branches:
+      - staging/academy-free-hosting-v16
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-install-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout staging branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned staging packages
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Parse all JavaScript modules
+        run: |
+          set -e
+          find api lib pages netlify/functions public/assets scripts -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -n 1 node --check
+      - name: Verify that 19 routes, all source assets and 14 migrations remain
+        run: npm run test:staging:static
