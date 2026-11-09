@@ -14,7 +14,8 @@
   },
   "scripts": {
     "test:staging:static": "node scripts/staging_static_check.mjs",
-    "test:staging:database": "node scripts/staging_database_check.mjs"
+    "test:staging:database": "node scripts/staging_database_check.mjs",
+    "test:staging:api": "node scripts/staging_api_check.mjs"
   },
   "devDependencies": {
     "@netlify/database-dev": "1.0.1"
