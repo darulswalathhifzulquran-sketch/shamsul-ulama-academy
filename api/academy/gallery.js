@@ -39,8 +39,8 @@ export default async function(req,res){
   const manage=req.query?.manage==='1';
   if(manage){const a=await guard(req,res,['admin','usthad']);if(!a)return;}
   const r=await db.query(manage?
-   "SELECT id,image_url,storage_key,media_type,caption,alt_text,display_order,is_published,created_at FROM academy_gallery ORDER BY display_order,id LIMIT 240":
-   "SELECT id,image_url,storage_key,media_type,caption,alt_text,display_order FROM academy_gallery WHERE is_published=true ORDER BY display_order,id LIMIT 240");
+   "SELECT id,image_url,storage_key,media_type,caption,alt_text,display_order,is_published,created_at FROM academy_gallery ORDER BY display_order,id":
+   "SELECT id,image_url,storage_key,media_type,caption,alt_text,display_order FROM academy_gallery WHERE is_published=true ORDER BY display_order,id");
   const gallery=await Promise.all(r.rows.map(async row=>{
    let url=row.image_url;
    if(row.storage_key){try{url=await storage.url(row.storage_key);}catch(e){console.warn('Gallery signed URL unavailable',row.id);}}
@@ -60,8 +60,8 @@ export default async function(req,res){
   return res.json({ok:true,id,is_published:published});
  }
  if(req.method==='DELETE'){
-  if(req.body?.confirmed!==true||req.body?.confirmation_text!=='DELETE')
-   return res.status(400).json({error:'Two separate deletion confirmations are required.'});
+  if(req.body?.permanently_delete!==true)
+   return res.status(400).json({error:'Explicit permanent deletion action is required.'});
   const id=validId(req.body?.id);if(!id)return res.status(400).json({error:'Invalid gallery item.'});
   const found=await db.query('SELECT id,storage_key FROM academy_gallery WHERE id=$1 LIMIT 1',[id]);
   if(!found.rows.length)return res.status(404).json({error:'Gallery item no longer exists.'});

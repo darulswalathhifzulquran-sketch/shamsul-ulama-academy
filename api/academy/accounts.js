@@ -2,7 +2,7 @@ import {db,guard,audit,makePassword,normalizeUsername,validUsername,validPasswor
 export const access='public';export const methods=['GET','POST','PUT','DELETE'];
 export default async function(req,res){
  const a=await guard(req,res,['admin','usthad'],req.method!=='GET');if(!a)return;
- if(req.method==='GET'){const r=await db.query("SELECT a.id,a.username,a.display_name,a.role,a.active,a.must_change_password,a.contact_phone,a.email,a.notes,a.created_at,COALESCE((SELECT array_agg(s.admission_number ORDER BY s.admission_number) FROM academy_links_v2 l JOIN academy_students s ON s.id=l.student_id WHERE l.account_id=a.id),ARRAY[]::text[]) AS admissions,COALESCE((SELECT array_agg(l.student_id ORDER BY l.student_id) FROM academy_links_v2 l WHERE l.account_id=a.id AND l.relationship='parent'),ARRAY[]::bigint[]) AS student_ids FROM academy_accounts_v2 a ORDER BY a.id DESC LIMIT 500");return res.json({accounts:r.rows});}
+ if(req.method==='GET'){const r=await db.query("SELECT a.id,a.username,a.display_name,a.role,a.active,a.must_change_password,a.contact_phone,a.email,a.notes,a.created_at,COALESCE((SELECT array_agg(s.admission_number ORDER BY s.admission_number) FROM academy_links_v2 l JOIN academy_students s ON s.id=l.student_id WHERE l.account_id=a.id),ARRAY[]::text[]) AS admissions,COALESCE((SELECT array_agg(l.student_id ORDER BY l.student_id) FROM academy_links_v2 l WHERE l.account_id=a.id AND l.relationship='parent'),ARRAY[]::bigint[]) AS student_ids FROM academy_accounts_v2 a ORDER BY a.id DESC");return res.json({accounts:r.rows});}
  if(req.method==='DELETE'){
   if(req.body?.confirmed!==true||req.body?.confirmation_text!=='DELETE')return res.status(400).json({error:'Two-step deletion confirmation required.'});
   const uid=Number(req.body?.account_id);
@@ -80,16 +80,61 @@ export default async function(req,res){
   await audit(a.user.id,'account.update','account',uid);
   return res.json({ok:true,updated:true,password_reset:reset});
  }
- const name=String(req.body?.display_name||'').trim(),username=normalizeUsername(req.body?.username),password=req.body?.password,role=String(req.body?.role||'');
- const ids=Array.isArray(req.body?.student_ids)?[...new Set(req.body.student_ids.map(Number))]:[];
- if(!validUsername(username)||!validPassword(password)||name.length<2||name.length>140||!['parent','usthad'].includes(role))return res.status(400).json({error:'Invalid name, role, username or password.'});
- if(role==='usthad'&&a.user.role!=='admin')return res.status(403).json({error:'Only administrator can add Usthad.'});
- if(role==='parent'&&(!ids.length||ids.length>10||ids.some(v=>!Number.isSafeInteger(v)||v<1)))return res.status(400).json({error:'Choose the parent’s linked student.'});
+ // Create Usthads without asking the administrator to invent a secure password
+ // or guess an unused username. Passwords are never stored or logged in plaintext.
+ const name=String(req.body?.display_name||'').trim(),role=String(req.body?.role||'');
+ let username=normalizeUsername(req.body?.username);
+ let password=req.body?.password;
+ const ids=role==='parent'&&Array.isArray(req.body?.student_ids)?[...new Set(req.body.student_ids.map(Number))]:[];
+ if(!['parent','usthad'].includes(role)||name.length<2||name.length>140)
+  return res.status(400).json({error:'Enter the Usthad/Parent full name (at least 2 characters).'});
+ if(role==='usthad'&&a.user.role!=='admin')
+  return res.status(403).json({error:'Only the Main Administrator can add an Usthad.'});
+ if(role==='parent'&&(!validUsername(username)||!validPassword(password)))
+  return res.status(400).json({error:'Parent login requires a unique username and a strong password (12+ characters with letters and numbers).'});
+ if(role==='parent'&&(!ids.length||ids.length>10||ids.some(v=>!Number.isSafeInteger(v)||v<1)))
+  return res.status(400).json({error:'Choose the parent’s linked student.'});
  if(ids.length){const valid=await db.query("SELECT id FROM academy_students WHERE id=ANY($1::bigint[]) AND status='active'",[ids]);if(valid.rows.length!==ids.length)return res.status(400).json({error:'Invalid student link.'});}
  const phone=String(req.body?.contact_phone??'').trim(),email=String(req.body?.email??'').trim(),notes=String(req.body?.notes??'').trim();
  if(phone.length>35||email.length>160||notes.length>1200||(email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)))return res.status(400).json({error:'Check optional contact details.'});
+ let reservedId=null,oneTimePassword=null;
+ if(role==='usthad'){
+  const reservation=await db.query("SELECT nextval('academy_accounts_v2_id_seq') AS id");
+  reservedId=Number(reservation.rows?.[0]?.id);
+  if(!Number.isSafeInteger(reservedId)||reservedId<1)return res.status(503).json({error:'Could not reserve an Usthad account ID. Please try again.'});
+  let base=validUsername(username)?username:normalizeUsername(name)
+    .replace(/[^a-z0-9._-]+/g,'.').replace(/^[^a-z]+/,'').replace(/[._-]+$/,'').slice(0,28);
+  if(!validUsername(base))base='usthad';
+  const existing=await db.query("SELECT id FROM academy_accounts_v2 WHERE username=$1 LIMIT 1",[base]);
+  // Reserve a distinct ID in advance: reused names become usthad.3, usthad.4, etc.
+  // The username constraint remains unique, so two teachers never share a login.
+  username=existing.rows.length?base.slice(0,Math.max(4,31-String(reservedId).length))+'.'+reservedId:base;
+  const words=['Amber','Apple','Bamboo','Beacon','Berry','Bloom','Blue','Breeze','Brook','Cedar','Cherry','Cloud','Coral','Crown','Dawn','Dove','Dream','Eagle','Elm','Field','Flame','Forest','Garden','Ginger','Golden','Grace','Green','Harbor','Hazel','Hill','Honey','Hope','Jade','Lake','Leaf','Lemon','Light','Lily','Linen','Lotus','Mango','Maple','Meadow','Melody','Misty','Moon','Morning','Olive','Orange','Palm','Pearl','Pine','Rain','River','Rose','Sage','Silver','Sky','Snow','Spring','Star','Sun','Valley'];
+  const entropy=new Uint32Array(4);crypto.getRandomValues(entropy);
+  oneTimePassword='Usthad-'+[words[entropy[0]%words.length],words[entropy[1]%words.length],words[entropy[2]%words.length]].join('-')+'-'+String(entropy[3]%1000000).padStart(6,'0');
+  password=oneTimePassword;
+ }
  const h=await makePassword(password);
- const statements=[{sql:"INSERT INTO academy_accounts_v2(username,display_name,role,password_salt,password_hash,password_iterations,created_by,contact_phone,email,notes) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",params:[username,name,role,h.salt,h.hash,h.iterations,a.user.id,phone||null,email||null,notes||null]}];
+ const statements=[{sql:reservedId===null?
+  "INSERT INTO academy_accounts_v2(username,display_name,role,password_salt,password_hash,password_iterations,created_by,contact_phone,email,notes) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)":
+  "INSERT INTO academy_accounts_v2(username,display_name,role,password_salt,password_hash,password_iterations,created_by,contact_phone,email,notes,id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+  params:reservedId===null?
+   [username,name,role,h.salt,h.hash,h.iterations,a.user.id,phone||null,email||null,notes||null]:
+   [username,name,role,h.salt,h.hash,h.iterations,a.user.id,phone||null,email||null,notes||null,reservedId]}];
  for(const sid of ids)statements.push({sql:"INSERT INTO academy_links_v2(account_id,student_id,relationship) SELECT id,$2,'parent' FROM academy_accounts_v2 WHERE username=$1",params:[username,sid]});
- try{await db.transaction(statements);await audit(a.user.id,'account.create','account',username);return res.status(201).json({ok:true,username,role});}catch(e){if(e.code==='23505')return res.status(409).json({error:'Username already exists.'});throw e;}
+ try{
+  await db.transaction(statements);
+  const verified=await db.query('SELECT id,username,role,active FROM academy_accounts_v2 WHERE username=$1 AND role=$2 LIMIT 1',[username,role]);
+  if(!verified.rows.length)return res.status(503).json({error:'Account could not be verified after saving. Please check the list before retrying.'});
+  try{await audit(a.user.id,'account.create','account',username);}catch(e){console.warn('Account creation audit failed',e?.message||e);}
+  res.setHeader('Cache-Control','no-store');
+  return res.status(201).json({ok:true,saved:true,username,role,account_id:verified.rows[0].id,
+    temporary_password:role==='usthad'?oneTimePassword:undefined,
+    must_change_password:true,
+    message:'Account created, verified and saved. Copy the temporary password now; it is shown only once.'});
+ }catch(e){
+  if(e.code==='23505')return res.status(409).json({error:'This username is already taken. Leave Username empty to generate a unique one.'});
+  console.error('Account creation failed',e?.code||'unknown',e?.message||'');
+  return res.status(500).json({error:'Account could not be saved. Please try again or contact the Academy Administrator.'});
+ }
 }

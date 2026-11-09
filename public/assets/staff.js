@@ -128,16 +128,25 @@ async function refreshGallery(){
     await refreshGallery();
    }catch(e){status('Could not change publication: '+e.message,true);publish.disabled=false;}
   });
-  const remove=text('button','Remove permanently','danger');remove.type='button';
+  const remove=text('button','Delete Permanently','danger');remove.type='button';
+  remove.title='Delete this gallery media permanently now. No typing required.';
   remove.addEventListener('click',async()=>{
-   if(!confirmPermanentDelete('gallery item',item.caption||'Media','The saved media will be permanently deleted.'))return;
+   if(remove.disabled)return;
+   const itemId=Number(item.id);
+   remove.disabled=true;publish.disabled=true;
+   remove.textContent='Deleting...';
    try{
-    const result=await api('/api/academy/gallery','DELETE',{id:Number(item.id),confirmed:true,confirmation_text:'DELETE'});
-    if(!result.ok||!result.verified||!result.permanently_deleted)throw Error('Server did not confirm permanent deletion.');
-    await refreshGallery();
-    if(gallery.some(x=>Number(x.id)===Number(item.id)))throw Error('Item still appears in Gallery. Refresh and contact Administrator.');
-    status('PERMANENTLY DELETED: storage and database confirmed. Item no longer appears on the public website.');
-   }catch(e){status('Deletion not confirmed: '+e.message,true);}
+    const result=await api('/api/academy/gallery','DELETE',{id:itemId,permanently_delete:true});
+    if(!result.ok||!result.verified||!result.permanently_deleted)throw Error('Server could not verify that the item was deleted.');
+    // Remove from the visible list immediately; follow up with a server refresh.
+    fig.remove();
+    gallery=gallery.filter(g=>Number(g.id)!==itemId);
+    status('DELETED PERMANENTLY. File storage (if managed here) and Gallery database were checked. No typing required.');
+    try{await refreshGallery();}catch(e){console.warn('Gallery reload after verified delete failed',e);}
+   }catch(e){
+    status('Unable to complete permanent deletion: '+e.message,true);
+    remove.disabled=false;publish.disabled=false;remove.textContent='Delete Permanently';
+   }
   });
   actions.append(publish,remove);fig.append(visual,cap,actions);root.append(fig);
  }
@@ -194,18 +203,26 @@ async function openApplication(id){
  $('applicationStatus').value=x.status;
  $('applicationReason').value=x.decision_reason||'';
  $('applicationStaffNote').value=x.staff_note||'';
+ $('admissionInitialPassword').value='';
+ syncAdmissionInitialPassword();
  $('applicationInterviewDate').value=x.interview_at?new Date(x.interview_at).toISOString().slice(0,16):'';
  $('printApplication').href='/api/academy/application-print?id='+encodeURIComponent(id);
  $('applicationFeedback').textContent='Saved application · '+String(x.status).replaceAll('_',' ')+'.';
  $('applicationViewer').hidden=false;
- const enroll=$('enrollApproved');if(enroll)enroll.hidden=x.status!=='approved';
+ const enroll=$('enrollApproved');if(enroll)enroll.hidden=true; // Auto-created on approval: no second enrollment.
  $('applicationViewer').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function syncAdmissionInitialPassword(){
+ const approved=$('applicationStatus').value==='approved';
+ $('admissionInitialPasswordWrap').hidden=!approved;
+ if(!approved)$('admissionInitialPassword').value='';
 }
 async function saveApplicationDecision(){
  if(!currentApplication)return;
  const button=$('saveApplicationDecision');button.disabled=true;
  const payload={id:Number(currentApplication.id),status:$('applicationStatus').value,
   reason:$('applicationReason').value.trim(),staff_note:$('applicationStaffNote').value.trim(),
+  initial_password:$('applicationStatus').value==='approved'?$('admissionInitialPassword').value:'',
   interview_at:$('applicationStatus').value==='interview'&&$('applicationInterviewDate').value?
    new Date($('applicationInterviewDate').value).toISOString():null};
  let out;
@@ -230,7 +247,7 @@ async function saveApplicationDecision(){
   $('applicationFeedback').append(details,copy,warning);
   await Promise.allSettled([refreshStudents(),refreshAccounts()]);
  }
- status(out.account_created?'Student '+out.admission_number+' and Login '+out.username+' CREATED and SAVED. Copy the one-time password.':out.status==='rejected'?'Application REJECTED and SAVED in Database.':'Application decision SAVED in Database.');
+ status(out.account_created?'Student '+out.admission_number+' and Login '+out.username+' CREATED and SAVED. Copy the one-time password.':out.already_approved?'Student already approved. To change the login password, open Accounts & Parents and Reset Account Password.':out.status==='rejected'?'Application REJECTED and SAVED in Database.':'Application decision SAVED in Database.');
  button.disabled=false;
 }
 
@@ -288,19 +305,27 @@ function attachEditDialogs(){
  });
 }
 async function optimizeGalleryPhoto(file){
- if(!file||!file.type.startsWith('image/')||file.size<=6*1024*1024)return file;
+ if(!file||!file.type.startsWith('image/')||file.size<=5*1024*1024)return file;
  try{
   const bitmap=await createImageBitmap(file);
-  const scale=Math.min(1,2800/Math.max(bitmap.width,bitmap.height));
-  const canvas=document.createElement('canvas');
-  canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
-  const ctx=canvas.getContext('2d');if(!ctx)throw Error('Image processing unavailable.');
-  ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();
-  const encode=q=>new Promise(resolve=>canvas.toBlob(resolve,'image/webp',q));
-  let blob=await encode(.87);
-  if(blob&&blob.size>9*1024*1024)blob=await encode(.73);
-  if(blob&&blob.size<file.size)return new File([blob],file.name.replace(/\.[^.]+$/,'')+'-optimized.webp',{type:'image/webp'});
- }catch(e){console.warn('Photo optimization unavailable',e);}
+  let candidate=null;
+  // Retry smaller and lower-quality encodes instead of rejecting large phone photos.
+  for(const [edge,quality] of [[2800,.87],[2400,.80],[2000,.73],[1600,.67],[1200,.63]]){
+   const scale=Math.min(1,edge/Math.max(bitmap.width,bitmap.height));
+   const canvas=document.createElement('canvas');
+   canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+   canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+   const context=canvas.getContext('2d',{alpha:false});
+   if(!context)break;
+   context.drawImage(bitmap,0,0,canvas.width,canvas.height);
+   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',quality));
+   if(blob&&(!candidate||blob.size<candidate.size))candidate=blob;
+   if(blob&&blob.size<8*1024*1024)break;
+  }
+  bitmap.close();
+  if(candidate&&candidate.size<file.size)
+   return new File([candidate],file.name.replace(/\.[^.]+$/,'')+'-optimized.webp',{type:'image/webp'});
+ }catch(e){console.warn('Image could not be optimized in browser',e);}
  return file;
 }
 function connect(){
@@ -309,23 +334,37 @@ function connect(){
  $('signout').addEventListener('click',async()=>{try{await api('/api/identity/logout','POST',{});}finally{location.replace('/login');}});
  $('openJourney').addEventListener('click',()=>{const id=$('previewStudent').value;if(id)location.href='/dashboard?student_id='+encodeURIComponent(id);});
  $('saveApplicationDecision').addEventListener('click',saveApplicationDecision);
+ $('applicationStatus').addEventListener('change',syncAdmissionInitialPassword);
+ $('showAdmissionInitialPassword').addEventListener('change',e=>{$('admissionInitialPassword').type=e.target.checked?'text':'password';});
  $('closeApplication').addEventListener('click',()=>{$('applicationViewer').hidden=true;currentApplication=null;});
- $('enrollApproved').addEventListener('click',()=>{
-   if(!currentApplication||currentApplication.status!=='approved')return;
-   const form=$('studentForm');
-   form.elements.full_name.value=currentApplication.student_name||'';
-   const sequence=String(currentApplication.id).padStart(3,'0');
-   form.elements.admission_number.value='HIFZ-'+new Date().getFullYear()+'-'+sequence;
-   form.elements.username.focus();show('students');
-   status('Approved applicant loaded. Choose Student Username and temporary Password to complete enrolment.');
+ // Student record and login are now created atomically when an application is approved.
+ $('copyUsthadDetails').addEventListener('click',async()=>{
+  const details=$('usthadOneTimeDetails').textContent;
+  if(!details)return;
+  try{
+   await navigator.clipboard.writeText(details);
+   $('copyUsthadDetails').textContent='Copied! Share privately';
+  }catch(e){window.prompt('Copy these private login details:',details);}
  });
  hook('usthadForm',async()=>{
-   if(role!=='admin')throw Error('Only the Main Administrator can add an Usthad.');
-   const data=$form('usthadForm');data.role='usthad';data.student_ids=[];
-   const response=await api('/api/academy/accounts','POST',data);
-   if(!response.ok||!response.username)throw Error('Usthad account was not confirmed.');
-   $('usthadForm').reset();status('Usthad account '+response.username+' saved successfully.');
-   await refreshAccounts().catch(()=>status('Usthad saved; list refresh failed. Reload to view it.'));
+  if(role!=='admin')throw Error('Only the Main Administrator can add an Usthad.');
+  const data=$form('usthadForm');
+  data.role='usthad';
+  data.student_ids=[];
+  delete data.password; // Always ask the server to generate a secure one-time password.
+  const response=await api('/api/academy/accounts','POST',data);
+  if(!response.ok||!response.saved||!response.username||!response.temporary_password)
+   throw Error('Server did not confirm account creation and temporary credentials.');
+  const details='Usthad Name: '+data.display_name+'\nUsername: '+response.username+
+   '\nTemporary Password: '+response.temporary_password+
+   '\nChange this password after first login.';
+  $('usthadOneTimeDetails').textContent=details;
+  $('usthadCredentials').hidden=false;
+  $('copyUsthadDetails').textContent='Copy Login Details';
+  $('usthadForm').reset();
+  status('Usthad '+response.username+' CREATED AND SAVED. Copy the one-time password displayed below.');
+  await refreshAccounts().catch(e=>status('Account was saved, but the list could not refresh. Please reload later.',true));
+  $('usthadCredentials').scrollIntoView({behavior:'smooth',block:'center'});
  });
  $('cancelStudentEdit').addEventListener('click',()=>{resetStudentForm();status('Student edit cancelled.');});
  hook('studentForm',async()=>{
@@ -344,13 +383,44 @@ function connect(){
   const updates=await Promise.allSettled([refreshStudents(),refreshAccounts()]);
   if(updates.some(x=>x.status==='rejected'))status('Student saved; the list did not refresh automatically. Refresh this page to see the record.');
  });
+ const accountForm=$('accountForm');
+ const syncAccountRole=()=>{
+  const teacher=$('accountRole').value==='usthad';
+  accountForm.elements.username.required=!teacher;
+  accountForm.elements.username.minLength=teacher?0:4;
+  accountForm.elements.username.placeholder=teacher?'Auto-generated if left blank':'Username';
+  accountForm.elements.password.required=!teacher;
+  accountForm.elements.password.minLength=teacher?0:12;
+  accountForm.elements.password.disabled=teacher;
+  accountForm.elements.password.placeholder=teacher?'Password generated securely on save':'12+ characters, letters and numbers';
+  $('parentStudents').disabled=teacher;
+ };
+ $('accountRole').addEventListener('change',syncAccountRole);
+ syncAccountRole();
  hook('accountForm',async()=>{
- const data=$form('accountForm');data.student_ids=[...$('parentStudents').selectedOptions].map(o=>Number(o.value));
- const response=await api('/api/academy/accounts','POST',data);
- if(!response.ok||!response.username)throw Error('Account was not confirmed.');
- $('accountForm').reset();status('Account '+response.username+' saved. Share the temporary password privately.');
- await refreshAccounts().catch(()=>status('Account saved; list refresh failed. Reload to view it.'));
-});
+  const data=$form('accountForm');
+  const isUsthad=data.role==='usthad';
+  data.student_ids=isUsthad?[]:[...$('parentStudents').selectedOptions].map(o=>Number(o.value));
+  if(isUsthad)delete data.password;
+  const response=await api('/api/academy/accounts','POST',data);
+  if(!response.ok||!response.saved||!response.username)throw Error('Account was not confirmed by the database.');
+  accountForm.reset();syncAccountRole();
+  if(isUsthad){
+   if(!response.temporary_password)throw Error('Usthad was saved, but temporary credentials were unavailable. Contact Administrator.');
+   const details='Usthad Name: '+data.display_name+'\nUsername: '+response.username+
+     '\nTemporary Password: '+response.temporary_password+'\nChange this password after first login.';
+   $('usthadOneTimeDetails').textContent=details;
+   $('usthadCredentials').hidden=false;
+   $('copyUsthadDetails').textContent='Copy Login Details';
+   status('Usthad '+response.username+' CREATED and SAVED. Copy the temporary password now.');
+   await refreshAccounts().catch(()=>{});
+   show('usthads');
+   $('usthadCredentials').scrollIntoView({behavior:'smooth',block:'center'});
+  }else{
+   status('Parent account '+response.username+' saved. Share the password privately.');
+   await refreshAccounts().catch(()=>status('Parent account saved; refresh list later.'));
+  }
+ });
  $('resetSubmit').addEventListener('click',async()=>{const account_id=Number($('resetAccount').value),new_password=$('resetPassword').value;try{await api('/api/academy/accounts','PUT',{account_id,new_password});$('resetPassword').value='';status('Password reset. Old sessions revoked; user must change the temporary password.');}catch(e){status(e.message,true);}});
  $('monthlyForm').querySelector('select[name="student_id"]').addEventListener('change',()=>refreshMonthly().catch(e=>status(e.message,true)));
  hook('monthlyForm',async()=>{
@@ -376,21 +446,39 @@ function connect(){
  await refreshJuz().catch(()=>status('Juz saved; list refresh failed. Reload to see it.'));
 });
  hook('galleryForm',async()=>{
- const f=$('galleryForm');const selected=f.elements.file.files[0];
+ const f=$('galleryForm');
+ const files=Array.from(f.elements.file.files||[]);
  const link=String(f.elements.video_url.value||'').trim();
- if(Boolean(selected)===Boolean(link))throw Error('Select EITHER a photo/video file OR a direct media/YouTube/Vimeo link.');
+ if((files.length>0)===Boolean(link))throw Error('Select one or more photos/videos OR paste a media link.');
  if(!f.elements.rights_confirmed.checked)throw Error('Confirm that you have permission to publish this media.');
- const fd=new FormData(f);
- if(selected){
-  const file=await optimizeGalleryPhoto(selected);
-  if(file.size>16*1024*1024)throw Error('This file is too large for direct upload. Photos can be optimized first; for large videos use a YouTube/Vimeo link.');
-  fd.set('file',file,file.name);fd.delete('video_url');
- }else{fd.delete('file');}
- fd.set('is_published',f.elements.is_published.checked?'true':'false');
- const saved=await api('/api/academy/gallery','POST',fd,true);
- f.reset();
- status(saved.is_published?'Media uploaded and PUBLISHED in the Public Gallery.':'Media uploaded as Draft. Click Publish below to show it on the website.');
+ const wasPublished=f.elements.is_published.checked;
+ let succeeded=0,failed=0;
+ const errors=[];
+ const submissions=files.length?files:[null];
+ for(const selected of submissions){
+  const fd=new FormData(f);
+  if(selected){
+   const file=await optimizeGalleryPhoto(selected);
+   if(file.size>16*1024*1024){
+    failed++;errors.push(selected.name+': exceeds the current hosting direct-upload size; use a direct HTTPS file link or video host URL.');
+    continue;
+   }
+   fd.set('file',file,file.name);fd.delete('video_url');
+  }else{fd.delete('file');}
+  fd.set('is_published',wasPublished?'true':'false');
+  try{
+   const saved=await api('/api/academy/gallery','POST',fd,true);
+   if(!saved.ok)throw Error('Database did not confirm saved media.');
+   succeeded++;status('Saved '+succeeded+' of '+submissions.length+' Gallery items');
+  }catch(e){failed++;errors.push((selected?.name||'Media link')+': '+e.message);}
+ }
+ if(succeeded>0)f.reset();
  await refreshGallery();
+ if(failed>0){
+  status(succeeded+' media saved, '+failed+' failed. '+errors.slice(0,2).join(' | '),true);
+  return;
+ }
+ status('All '+succeeded+' media item(s) SAVED'+(wasPublished?' and published.':'.')+' Delete Permanently removes an item with one click.');
 });
  hook('settingsForm',async()=>{const x=$form('settingsForm');for(const name of ['huffaz_count','students_count','batches_count','service_years'])x[name]=Number(x[name]||0);await api('/api/academy/settings','POST',x);status('Website settings saved. Public pages will now display your updated information.');await refreshSettings();});
 }
