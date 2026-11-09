@@ -1,4 +1,4 @@
-import {db,guard,audit,makePassword,validPassword,validUsername,normalizeUsername} from 'lib/academy-auth.js';
+import {db,guard,audit,makePassword,validPassword,validUsername,normalizeUsername} from '../../lib/academy-auth.js';
 const optional=(v,max)=>{const s=String(v??'').trim();if(s.length>max)throw Error('Optional field exceeds '+max+' characters.');return s||null;};
 function details(body){
  const d={};

@@ -1,4 +1,4 @@
-import {db,makePassword,normalizeUsername,validUsername,validPassword,audit} from 'lib/academy-auth.js';
+import {db,makePassword,normalizeUsername,validUsername,validPassword,audit} from '../../lib/academy-auth.js';
 export const access='admin';
 export const methods=['GET','POST'];
 export default async function(req,res){

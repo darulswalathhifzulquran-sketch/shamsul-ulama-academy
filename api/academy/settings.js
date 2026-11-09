@@ -1,4 +1,4 @@
-import {db,guard,getAccount,audit} from 'lib/academy-auth.js';
+import {db,guard,getAccount,audit} from '../../lib/academy-auth.js';
 export const access='public';export const methods=['GET','POST'];
 const keys=['academy_name','subtitle','address','affiliation','affiliation_place','affiliation_url','phone1','phone2','office_hours','email','maps_url','about','vision','huffaz_count','students_count','batches_count','service_years','theme_style'];
 export default async function(req,res){

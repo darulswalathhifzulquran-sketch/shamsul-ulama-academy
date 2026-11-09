@@ -1,4 +1,4 @@
-import {db,guard,verifyPassword,makePassword,validPassword,audit} from 'lib/academy-auth.js';
+import {db,guard,verifyPassword,makePassword,validPassword,audit} from '../../lib/academy-auth.js';
 export const access='public';
 export const methods=['POST'];
 export default async function(req,res){

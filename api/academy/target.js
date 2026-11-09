@@ -1,4 +1,4 @@
-import {db,guard,audit} from 'lib/academy-auth.js';
+import {db,guard,audit} from '../../lib/academy-auth.js';
 export const access='public';export const methods=['GET','POST'];
 export default async function(req,res){
  const a=await guard(req,res,[],req.method==='POST');if(!a)return;
