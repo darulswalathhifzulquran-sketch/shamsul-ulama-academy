@@ -98,4 +98,4 @@ try{
   gallery_binary_upload:'NOT TESTED',hosted_staging:'NOT DEPLOYED',
   production_database_access:false
  },null,2));
-}finally{await local.stop();console.log('Disposable staging database destroyed.');}
+}finally{await (await import('../lib/academy-runtime.js')).db.close();await local.stop();console.log('Disposable staging database destroyed.');}
