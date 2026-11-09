@@ -13,3 +13,17 @@ This branch is a NON-PRODUCTION working port of the complete Shamsul Ulama Islam
 - This staging branch must not be used for student records, live admissions, or marketing until tests pass.
 
 Next step: provision a genuinely isolated free PostgreSQL instance (not existing projects) and run the staging migrations with ONLY generated test data, then deploy the staged code under a free host URL. Do not make any claim of 100% functionality until all critical flows are verified.
+
+
+## Staging database connected (cloud schema only)
+The user has connected the dedicated Neon Free project **shamsul-ulama-staging**.
+- Project ID: plain-bird-06747223 (safe identifier, NOT a secret)
+- Dedicated QA branch: academy-v16-qa / br-little-queen-az3xh2j8
+- Postgres 18, aws-ap-southeast-1 (Singapore).
+- All 14 source SQL migrations ran successfully **on the QA branch ONLY**. Cloud check: 17 tables, 2 database functions; 0 students, 0 accounts, 0 gallery items.
+- The Neon parent/default branch was checked and remains empty.
+- Production Hatchable was not accessed for data transfer.
+- Staging server will require ACADEMY_STAGING_DATABASE_URL set in Netlify's SECRET environment variables to the Neon QA branch's pooled PostgreSQL URL. This must not be included in GitHub.
+- Netlify's automatic database integration is NOT used. The runtime does NOT fall back to any other database. It rejects hosts other than Neon and localhost.
+- GitHub Actions uses the localhost allowance for synthetic ephemeral tests.
+- Cloud API login tests not yet run, because no Netlify deployment or secret config exists.

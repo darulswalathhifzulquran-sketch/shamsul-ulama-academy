@@ -146,7 +146,7 @@ export default async function academyGateway(request) {
   if (!allowedMethods[route]?.includes(request.method.toUpperCase()))
     return Response.json({ error: 'Method not allowed.' }, { status: 405, headers: { 'Allow': (allowedMethods[route] || []).join(', ') } });
   const headers = { 'Cache-Control': 'no-store' };
-  if (!(process.env.NETLIFY_DB_URL)) {
+  if (!(process.env.ACADEMY_STAGING_DATABASE_URL)) {
     return Response.json({ error: 'Isolated staging database has not yet been provisioned. No backend test has passed.' }, { status: 503, headers });
   }
   try {

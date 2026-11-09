@@ -39,6 +39,8 @@ const config = read('netlify.toml');
 assert(config.includes('from = "/api/*"') && config.includes('to = "/.netlify/functions/academy?__route=api/:splat"'), 'API routing missing');
 assert(config.includes('from = "/staff"') && config.includes('from = "/dashboard"'), 'Dashboard routes missing');
 assert(gateway.includes("x-academy-setup-token"), 'Owner-only bootstrap safeguard missing');
+const runtime = read('lib/academy-runtime.js');
+assert(runtime.includes('ACADEMY_STAGING_DATABASE_URL') && runtime.includes("host.endsWith('.neon.tech')"), 'Neon staging-only connection guard missing');
 const auth = read('lib/academy-auth.js');
 assert(auth.includes('SameSite=Strict') && auth.includes('checkCsrf') && auth.includes('guard('), 'Auth/CSRF protections missing');
 const source = walk('public');

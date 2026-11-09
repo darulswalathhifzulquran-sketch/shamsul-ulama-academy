@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { NetlifyDB } from '@netlify/database-dev';
 const local=new NetlifyDB();
 const connection=await local.start();
-process.env.NETLIFY_DB_URL=connection;
+process.env.ACADEMY_STAGING_DATABASE_URL=connection;
 process.env.ACADEMY_STAGING_SETUP_TOKEN='QA_ISOLATED_SETUP_ONLY_NOT_A_PRODUCTION_SECRET';
 const origin='https://academy-staging.invalid';
 const expect=(x,n,label)=>assert.equal(x.status,n,label+' wanted '+n+' got '+x.status+' '+JSON.stringify(x.data));

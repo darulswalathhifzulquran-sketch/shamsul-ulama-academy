@@ -8,10 +8,10 @@ Do not deploy this project's old GitHub main branch (it is an unrelated/outdated
 2. Choose **Add new project / Import from Git** and connect your GitHub account.
 3. Select the existing repository **darulswalathhifzulquran-sketch/shamsul-ulama-academy**. The source is already public, but it contains no private student data.
 4. Set **Branch to deploy: staging/academy-free-hosting-v16** (not main; not complete/... and not any release branch).
-5. Publish directory: public. Build settings are supplied in netlify.toml. Functions: netlify/functions. Netlify Database: automatic via @netlify/database and all 14 SQL migrations in netlify/database/migrations.
+5. Publish directory: public. Build settings are supplied in netlify.toml. Functions: netlify/functions. Database: existing separate Neon Free staging project, QA branch academy-v16-qa. It already contains all 14 original migrations. No additional Netlify database service is required.
 6. Create a unique dedicated staging site on the FREE tier. Suggested free URL shape: shamsul-ulama-academy-qa.netlify.app (subject to availability). Never use this preview as the final official Academy URL.
 7. In Project configuration → Environment variables, create **ACADEMY_STAGING_SETUP_TOKEN**, a random high-entropy value stored ONLY in Netlify's secret configuration. Never paste the value in chat, screenshots, GitHub or public HTML. Production Hatchable credentials must NOT be copied.
-8. Once the staging deployment reports success AND Netlify Database is provisioned, open /setup on the NEW Netlify URL, use the owner key privately to create a BRAND NEW disposable QA Admin. No production usernames or existing passwords are necessary.
+8. In Netlify secret environment variables, add ACADEMY_STAGING_DATABASE_URL using the Neon project QA branch pooled connection URL copied directly in the Neon dashboard. NEVER paste this URL in chat or GitHub. Once Netlify deployment reports success AND the Neon QA database connection verifies, open /setup on the NEW Netlify URL, use the owner key privately to create a BRAND NEW disposable QA Admin. No production usernames or existing passwords are necessary.
 9. Use new fictitious QA-only Student, Parent and Usthad accounts for all tests.
 
 This guide is a plan. A working Netlify URL, database and authentication have NOT yet been observed. Do not tell real students or parents to use the staging URL.
@@ -44,4 +44,5 @@ Source branch: staging/academy-free-hosting-v16
 Full original core files retained. All 14 migrations copied unchanged.
 GitHub Actions runs automated source checks (NO database end-to-end test).
 Live Netlify staging site: NOT CREATED / NOT VERIFIED from this chat.
+Neon project and QA database: CREATED/SCHEMA VERIFIED. Accounts/students/gallery are empty.
 Production migration: NOT STARTED.

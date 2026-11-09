@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@netlify/blobs": "11.1.8",
-    "@netlify/database": "2.0.1",
     "pg": "8.23.1"
   },
   "scripts": {
