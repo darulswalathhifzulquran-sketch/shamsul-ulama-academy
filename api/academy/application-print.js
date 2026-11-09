@@ -1,4 +1,4 @@
-import {db,guard} from 'lib/academy-auth.js';
+import {db,guard} from '../../lib/academy-auth.js';
 export const access='public';export const methods=['GET'];
 const escapeHtml=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const date=v=>v?new Date(v).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Kolkata'}):'—';

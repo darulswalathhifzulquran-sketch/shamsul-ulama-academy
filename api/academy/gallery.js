@@ -1,5 +1,5 @@
-import {guard,audit} from 'lib/academy-auth.js';
-import {storage,db} from 'hatchable';
+import {guard,audit} from '../../lib/academy-auth.js';
+import {storage,db} from '../../lib/academy-runtime.js';
 export const access='public';
 export const methods=['GET','POST','PUT','DELETE'];
 

@@ -1,4 +1,4 @@
-import {db,guard,originAllowed,preventCache,audit,makePassword,validPassword} from 'lib/academy-auth.js';
+import {db,guard,originAllowed,preventCache,audit,makePassword,validPassword} from '../../lib/academy-auth.js';
 export const access='public';
 export const methods=['GET','POST','PUT'];
 const statuses=new Set(['submitted','under_review','interview','approved','rejected']);
