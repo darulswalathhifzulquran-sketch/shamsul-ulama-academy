@@ -1,0 +1,13 @@
+/* Complete account and student editors — responsive, keyboard accessible */
+.edit-dialog{width:min(850px,calc(100vw - 24px));max-height:min(88vh,940px);overflow:auto;border:1px solid var(--line);border-radius:17px;background:#fff;color:var(--ink);padding:25px 28px;box-shadow:0 28px 90px #092b203b}
+.edit-dialog::backdrop{background:#091e17a3;backdrop-filter:blur(2px)}
+.edit-dialog .edit-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:19px}
+.edit-dialog .edit-head h2{font:700 clamp(21px,3vw,28px)/1.2 Georgia,serif;color:var(--g)}
+.edit-dialog .edit-head p{margin:5px 0 0;line-height:1.6}
+.edit-dialog .dialog-close{flex:none;padding:8px 12px}
+.edit-dialog .edit-footer{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:11px;margin-top:14px;padding-top:18px;border-top:1px solid var(--line)}
+.edit-dialog .edit-footer button{min-width:115px}
+.edit-dialog input[readonly]{background:#f7f9f7;color:#45594b;border-color:#dce5dd}
+.edit-dialog .check{font-weight:700}
+.edit-dialog .check input{flex:none}
+@media(max-width:630px){.edit-dialog{width:calc(100vw - 15px);padding:18px 15px;max-height:93vh}.edit-dialog .two{grid-template-columns:1fr}.edit-dialog .edit-head{gap:7px}}

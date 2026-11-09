@@ -13,7 +13,11 @@ const dateFmt=d=>d.toLocaleDateString('en-GB',{timeZone:'UTC',day:'numeric',mont
 function studyDays(a,b){let total=0;const delta=countDays(a,b);for(let i=1;i<=delta;i++)if(days.has(plus(a,i).getUTCDay()))total++;return total;}
 function validTarget(){const start=today();if($('goalType').value==='custom')return utc(Number($('goalYear').value),Number($('goalMonth').value),Number($('goalDay').value));const n=Math.round(Number($('goalType').value)*12),m=start.getUTCMonth()+n,y=start.getUTCFullYear()+Math.floor(m/12),month=m%12+1;const last=new Date(Date.UTC(y,month,0)).getUTCDate();return utc(y,month,Math.min(start.getUTCDate(),last));}
 function completed(){return records.filter(j=>j.completion_verified===true&&Number(j.memorised_pages)===START[Number(j.juz_number)]-START[Number(j.juz_number)-1]);}
-function verifiedPages(){return records.reduce((sum,j)=>{const n=Number(j.juz_number),p=Number(j.memorised_pages);return sum+(Number.isInteger(n)&&n>=1&&n<=30&&Number.isInteger(p)&&p>=0?Math.min(p,START[n]-START[n-1]):0);},0);}
+function verifiedPages(){
+ const fromJuz=records.reduce((sum,j)=>{const n=Number(j.juz_number),p=Number(j.memorised_pages);return sum+(Number.isInteger(n)&&n>=1&&n<=30&&Number.isInteger(p)&&p>=0?Math.min(p,START[n]-START[n-1]):0);},0);
+ const latest=reports.find(r=>r.status==='published'&&r.verified_total_pages!==null&&r.verified_total_pages!==undefined&&Number.isFinite(Number(r.verified_total_pages)));
+ return Math.min(604,Math.max(fromJuz,latest?Number(latest.verified_total_pages):0));
+}
 function projectDate(remaining,monthly){if(remaining<=0)return 'Completed';if(!Number.isFinite(monthly)||monthly<=0)return 'Waiting for progress';const n=Math.ceil(remaining*30.44/monthly);return n>36525?'Beyond forecast limit':dateFmt(plus(today(),n));}
 function setTargetDisplay(){const remaining=604-verifiedPages(),end=validTarget(),start=today(),calendar=end?countDays(start,end):0,selectedStudy=end&&calendar>0?studyDays(start,end):0;
  if(!selectedStudy){$('dailyGoal').textContent='—';$('dateStats').textContent='Choose a future target date and at least one study day.';$('monthGoal').textContent='';$('childMessage').textContent='നിന്റെ ലക്ഷ്യദിവസവും പഠനദിവസങ്ങളും തിരഞ്ഞെടുക്കൂ.';return;}
@@ -44,6 +48,16 @@ function renderMonthly(){
  const all=published.length?published.reduce((n,r)=>n+Number(r.new_pages),0)/published.length:0,latest=published.length?Number(published[0].new_pages):0,left=604-verifiedPages();
  $('allDate').textContent=projectDate(left,all);$('allRate').textContent=all?fmt(all)+' new pages per recorded published month ('+published.length+' months).':'No published monthly history yet.';
  $('latestDate').textContent=projectDate(left,latest);$('latestRate').textContent=published.length?'Latest month ('+String(published[0].report_month).slice(0,7)+'): '+fmt(latest)+' new pages.':'No latest published month yet.';
+ const root=$('passportRecords');if(!root)return;root.replaceChildren();
+ if(!published.length){root.append(elem('p','No monthly passport has been published by your Usthad yet.','muted'));return;}
+ for(const report of published.slice(0,12)){
+  const article=elem('article',null,'passport-record');
+  article.append(elem('strong',String(report.report_month).slice(0,7)+' · Published Monthly Passport'));
+  const details=['New Hifz: '+report.new_pages+' pages','Revision: '+report.revision_pages+' pages','Verified total: '+(report.verified_total_pages??'—')+' / 604 pages','Recitation accuracy: '+(report.accuracy_percent==null?'Not recorded':report.accuracy_percent+'%'),'Next target: '+(report.target_pages??'Not set')+' pages'];
+  article.append(elem('p',details.join(' · '),'muted'));
+  if(report.comment)article.append(elem('p','Usthad comment: '+report.comment,'muted'));
+  root.append(article);
+ }
 }
 function installDateFields(){
  const d=today(),yr=d.getUTCFullYear();for(let i=1;i<=31;i++)$('goalDay').append(new Option(String(i).padStart(2,'0'),String(i)));
