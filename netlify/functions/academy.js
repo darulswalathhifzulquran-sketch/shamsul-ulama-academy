@@ -21,6 +21,7 @@ import staffPage from '../../pages/staff.js';
 import dashboardPage from '../../pages/dashboard.js';
 import { db, storage } from '../../lib/academy-runtime.js';
 import { getAccount } from '../../lib/academy-auth.js';
+import { handleChunkUpload } from '../../lib/academy-chunk-upload.js';
 
 const handlers = {
   'api/identity/bootstrap': bootstrap,
@@ -62,6 +63,7 @@ const allowedMethods = {
   'api/academy/students-bulk-delete': ['DELETE'],
   'api/academy/target': ['GET','POST'],
   'api/academy/media': ['GET'],
+  'api/academy/gallery-chunks': ['POST', 'PUT'],
   staff: ['GET'], dashboard: ['GET']
 };
 function makeResponse() {
@@ -135,7 +137,7 @@ export default async function academyGateway(request) {
   const url = new URL(request.url);
   const route = String(url.searchParams.get('__route') || '').replace(/^\/+|\/+$/g, '');
   const handler = handlers[route];
-  if (route !== 'api/academy/media' && !handler)
+  if (route !== 'api/academy/media' && route !== 'api/academy/gallery-chunks' && !handler)
     return Response.json({ error: 'Not found.' }, { status: 404 });
   if (!allowedMethods[route]?.includes(request.method.toUpperCase()))
     return Response.json({ error: 'Method not allowed.' }, { status: 405, headers: { 'Allow': (allowedMethods[route] || []).join(', ') } });
@@ -146,6 +148,7 @@ export default async function academyGateway(request) {
   try {
     const req = await makeRequest(request, url);
     if (route === 'api/academy/media') return await serveGalleryMedia(request, req, url);
+    if (route === 'api/academy/gallery-chunks') return await handleChunkUpload(request, req, url, makeResponse);
     // Hatchable's original bootstrap declared access="admin" at the platform level.
     // Without Hatchable's gate, require an owner-only setup secret until the Admin exists.
     if (route === 'api/identity/bootstrap' && req.method === 'POST') {

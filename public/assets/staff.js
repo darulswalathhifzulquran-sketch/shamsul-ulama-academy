@@ -497,6 +497,38 @@ function connect(){
  status('Juz '+x.juz_number+' progress and blessing saved successfully.');
  await refreshJuz().catch(()=>status('Juz saved; list refresh failed. Reload to see it.'));
 });
+
+async function uploadGalleryChunked(file, form, wasPublished){
+ const data=new FormData(form);
+ const started=await api('/api/academy/gallery-chunks','POST',{
+  action:'start',filename:file.name,mime:file.type,size:file.size,
+  caption:String(data.get('caption')||''),
+  alt_text:String(data.get('alt_text')||''),
+  display_order:String(data.get('display_order')||'0'),
+  is_published:wasPublished?'true':'false',
+  rights_confirmed:form.elements.rights_confirmed.checked
+ });
+ if(!started.ok||!started.upload_id||!started.chunk_size)throw Error('Could not start secure gallery upload.');
+ const id=started.upload_id;
+ try{
+  for(let index=0;index<started.chunks;index++){
+   const begin=index*started.chunk_size,end=Math.min(file.size,begin+started.chunk_size);
+   const response=await fetch('/api/academy/gallery-chunks?upload_id='+encodeURIComponent(id)+'&index='+index,{
+    method:'PUT',credentials:'include',
+    headers:{'X-Academy-CSRF':csrf,'Content-Type':'application/octet-stream'},
+    body:file.slice(begin,end)
+   });
+   const result=await response.json();
+   if(!response.ok||!result.ok)throw Error(result.error||'Gallery upload chunk failed.');
+   status('Uploading '+file.name+': '+Math.round(100*end/file.size)+'%');
+  }
+  return await api('/api/academy/gallery-chunks','POST',{action:'finish',upload_id:id});
+ }catch(e){
+  await api('/api/academy/gallery-chunks','POST',{action:'cancel',upload_id:id}).catch(()=>{});
+  throw e;
+ }
+}
+
  hook('galleryForm',async()=>{
  const f=$('galleryForm');
  const files=Array.from(f.elements.file.files||[]);
@@ -509,8 +541,10 @@ function connect(){
  const submissions=files.length?files:[null];
  for(const selected of submissions){
   const fd=new FormData(f);
+  let processedFile=null;
   if(selected){
-   const file=await optimizeGalleryPhoto(selected);
+   processedFile=await optimizeGalleryPhoto(selected);
+   const file=processedFile;
    if(file.size>16*1024*1024){
     failed++;errors.push(selected.name+': exceeds the current hosting direct-upload size; use a direct HTTPS file link or video host URL.');
     continue;
@@ -519,7 +553,9 @@ function connect(){
   }else{fd.delete('file');}
   fd.set('is_published',wasPublished?'true':'false');
   try{
-   const saved=await api('/api/academy/gallery','POST',fd,true);
+   const saved=processedFile&&processedFile.size>3*1024*1024?
+    await uploadGalleryChunked(processedFile,f,wasPublished):
+    await api('/api/academy/gallery','POST',fd,true);
    if(!saved.ok)throw Error('Database did not confirm saved media.');
    succeeded++;status('Saved '+succeeded+' of '+submissions.length+' Gallery items');
   }catch(e){failed++;errors.push((selected?.name||'Media link')+': '+e.message);}
