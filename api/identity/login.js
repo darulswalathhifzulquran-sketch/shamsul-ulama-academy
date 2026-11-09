@@ -1,4 +1,4 @@
-import {db,verifyPassword,normalizeUsername,validUsername,shaHex,startSession,preventCache,originAllowed} from 'lib/academy-auth.js';
+import {db,verifyPassword,normalizeUsername,validUsername,shaHex,startSession,preventCache,originAllowed} from '../../lib/academy-auth.js';
 export const access='public';
 export const methods=['POST'];
 export default async function(req,res){
