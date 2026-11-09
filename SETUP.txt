@@ -1,0 +1,10 @@
+SHAMSUL ULAMA ISLAMIC ACADEMY — COMPLETE SOURCE v15
+
+1. Read README.md and docs/COMPLETE_SETUP.md first.
+2. Existing live website: https://shamsul-ulama-w2kv.hatchable.site
+3. Full source files, public assets, 14 migrations and Hatchable config are included.
+4. DO NOT re-run migrations on the current live database; DO NOT delete student records to test bulk delete.
+5. No live private database records, media storage, secrets, or credentials are in this archive.
+6. Full backend depends on Hatchable; Netlify pure static is insufficient.
+7. Verify with: python scripts/verify_source.py
+8. Make your own ZIP with: python scripts/make_complete_zip.py

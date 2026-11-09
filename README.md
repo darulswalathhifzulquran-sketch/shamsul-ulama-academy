@@ -1,45 +1,43 @@
-# SHAMSUL ULAMA ISLAMIC ACADEMY
+# SHAMSUL ULAMA ISLAMIC ACADEMY — COMPLETE SOURCE v15
 
-Official source code for Shamsul Ulama Islamic Academy. The intended production Hatchable project `shamsul-ulama-w2kv` is now connected and has received the updated website source. Production data, passwords, and sessions are not included in GitHub.
+Official **complete CODE backup** for the deployed Academy website.
 
-## Current website source
-- Production Hatchable project: `proj_28yiZzMLRLsx` · https://shamsul-ulama-w2kv.hatchable.site
-- Older reference project: `proj_nA81ZaknH1Km` · https://shamsul-ulama.hatchable.site
-- Original new-project Version 1 remains in Hatchable deployment history. Additional versions have been deployed; check console before further updates.
-- Public pages: Home, About, Gallery, Admission, Contact; biography: `/shamsul-ulama-legacy`
-- Staff, student and parent dashboard, Hifz Journey, monthly growth reports, academy settings and official admissions
+**Live website:** https://shamsul-ulama-w2kv.hatchable.site  
+**Source revision:** Hatchable Version 15, 9 November 2026  
+**Hosting target:** Hatchable (managed PostgreSQL + server APIs + storage)
 
-## Update — production project connected (8 Nov 2026)
-- New account linked and project confirmed; current deployment history includes versions 1–3.
-- Public Home/About, Shamsul Ulama heritage biography, both supplied portraits, and sign-in page were verified on the intended domain.
-- Database tables for Academy accounts, students, monthly reports, Juz, applications and sessions answer queries; one Admin account exists, while no Student or Parent accounts have been created yet.
-- Anonymous role-protected endpoints return 401; family scoping and published-only SQL queries pass database EXPLAIN checks.
-- **Pending:** authenticated Admin/Usthad/Student/Parent browser workflows with real owner-held credentials, test students, published updates, and custom .com DNS/HTTPS. Do not mark all login flows as verified until these pass.
+## What is in this one archive?
 
-## Download the whole source as one ZIP
-Open the green **Code** button in this GitHub repository and choose **Download ZIP**. You can also use the `main.zip` archive:
-https://github.com/darulswalathhifzulquran-sketch/shamsul-ulama-academy/archive/refs/heads/main.zip
+- `public/` — full frontend, home, gallery, admission, log-in pages, CSS/JS and original public image assets
+- `api/` — identity, accounts, gallery, admissions, student records, Hifz and administrative APIs
+- `lib/` — shared authentication and generated dashboards
+- `pages/` — protected dashboard routes
+- `migrations/` — all 14 PostgreSQL migrations, in order
+- `hatchable.toml` — Hatchable configuration
+- `docs/` — full setup, restore, data safety, testing, and domain guides
+- `scripts/` — optional local verification and ZIP build utilities
+- `.github/workflows/` — source-package workflow
 
-The ZIP includes application code, publicly committed site assets, migrations and guides. **It does not include private PostgreSQL data, personal user records, live authentication sessions, secrets, nor Hatchable's managed hosting runtime.** A ZIP is a backup/export of code, not a complete independent web server.
+No source code file in the live deployed project was omitted from this release. See `COMPLETE_FILE_MANIFEST.json`.
 
-## Running on the custom domain
-The quickest and safest option for a domain without a backend migration is to keep the app deployed on the correct Hatchable project and add a custom domain in the Hatchable project Settings. See [docs/CUSTOM_DOMAIN_AND_MIGRATION.md](docs/CUSTOM_DOMAIN_AND_MIGRATION.md) for owner-only steps, DNS requirements, and what must change if leaving Hatchable.
+## How to set up
 
-## Authentication
-The current backend uses `api/identity/*` plus `lib/academy-auth.js` for server-side credential handling, hashed sessions, CSRF and role-scoped access. **There is no hardcoded administrator password.** The production database currently has one existing admin account (`administration`); its password must be set/verified privately by the owner, and no login credentials are committed. Each Hatchable project has its own independent database, which means credentials do not transfer just by copying the source.
+**Read `docs/COMPLETE_SETUP.md` first.** The existing Hatchable live website is already deployed: do NOT delete or re-create its database merely to use this ZIP.
 
-## Login and synchronized Hifz dashboard checks
-See [docs/AUTH_AND_SYNC_VERIFICATION.md](docs/AUTH_AND_SYNC_VERIFICATION.md) for verified security checks and the necessary real-project acceptance tests.
+To download one ZIP: switch to branch `complete/shamsul-ulama-academy` and choose **Code → Download ZIP**. Or run `python scripts/make_complete_zip.py` after extracting this archive to rebuild your own source ZIP.
 
-## Checks before launch
-See [docs/LAUNCH_CHECKLIST.md](docs/LAUNCH_CHECKLIST.md). Verify official gallery/photos, page navigation, student and guardian privacy, admission form persistence, receipt/print view, role-restricted admin saves, tablet/mobile layout and the live custom domain. Do not commit real students' data, tokens, or passwords.
+## IMPORTANT — Code ZIP is not the live database
 
-## File layout
-- `public/`: frontend and images
-- `api/`: server-side endpoints
-- `pages/`: dashboard pages
-- `lib/`: shared server-side modules
-- `migrations/`: PostgreSQL migrations
-- `hatchable.toml`: Hatchable project settings
+No student personal records, passwords, password hashes, login sessions, privately uploaded media, production secrets, or PostgreSQL backup files are packaged. These must be handled separately, securely, and only by the data owner.
 
-All portraits of Shamsul Ulama in `public/assets/` were derived from the user-supplied photographs; no facial features were AI-reconstructed.
+Hatchable supplies the cloud runtime, database, object storage and server-side SDK. Outside Hatchable, this code **requires backend adaptation**; it cannot be made fully functional by simply dropping the ZIP into Netlify static hosting. There is no hard-coded Administrator login.
+
+## Current features
+
+Username/password login with scoped role checks, Usthad and student accounts, academy public content, gallery media (managed upload or secure hosted links), applications with review and approval, private Hifz monthly/juz data, student dashboards and centered delete-confirmation controls.
+
+Version 15 adds administrator-only **Delete All Students** with an explicit confirmation and atomic database function. This is destructive and should only be used after a privately stored, verified production backup.
+
+## Release status
+
+Live V15 deploy succeeded, schema and API smoke checks passed. The full **authenticated** workflows (especially mass deletion, photo/video uploads and account creation) were not destructively tested on real student data. See `docs/ACCEPTANCE_TESTS.md` for safe tests with disposable test records.
