@@ -4,15 +4,63 @@ let csrf='',role='',students=[],accounts=[],settings={},gallery=[],enquiries=[],
 const JUZ=[1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582,605];
 const $form=(id)=>Object.fromEntries(new FormData($(id)).entries());
 function status(msg,error=false){$('status').textContent=msg;$('status').className=error?'error':'success';}
-// Every irreversible deletion requires TWO separate warnings; the second requires typing DELETE.
-function confirmPermanentDelete(kind,name,detail){
- if(!window.confirm('WARNING 1 OF 2 — Delete '+kind+' "'+name+'"?\\n'+detail+'\\nThis cannot be undone.'))return false;
- return window.prompt('FINAL WARNING 2 OF 2 — Permanently delete '+kind+' "'+name+'".\\n'+detail+'\\nType DELETE exactly to confirm:')==='DELETE';
+// Centered Academy confirmation modal (one deliberate confirm click; never prompt for a word).
+function confirmAction(title,description,confirmLabel='Delete Permanently'){
+ const dialog=$('confirmActionDialog');
+ if(!dialog||dialog.open){status('A confirmation is already open.',true);return Promise.resolve(false);}
+ $('confirmActionHeading').textContent=title;
+ $('confirmActionDescription').textContent=description;
+ const yes=$('confirmActionYes'),no=$('confirmActionCancel');
+ yes.textContent=confirmLabel;
+ yes.disabled=false;
+ return new Promise(resolve=>{
+  const previousFocus=document.activeElement;
+  let finished=false;
+  const finish=result=>{
+   if(finished)return;
+   finished=true;
+   dialog.removeEventListener('cancel',onCancel);
+   yes.onclick=null;no.onclick=null;
+   if(dialog.open)dialog.close(result?'confirmed':'cancelled');
+   resolve(result);
+   try{previousFocus?.focus?.();}catch(e){}
+  };
+  const onCancel=event=>{event.preventDefault();finish(false);};
+  dialog.addEventListener('cancel',onCancel);
+  yes.onclick=()=>finish(true);
+  no.onclick=()=>finish(false);
+  dialog.showModal();
+  no.focus();
+ });
 }
+const confirmPermanentDelete=(kind,name,detail)=>confirmAction(
+ 'Permanently Delete '+kind,
+ name+'\n'+detail+'\n\nThis cannot be undone.',
+ 'Yes, Delete Permanently'
+);
 async function deleteStudent(student){
- if(!confirmPermanentDelete('student',student.full_name,'The student login, private journey, monthly reports, Juz verifications and linked access will be removed.'))return;
+ if(!await confirmPermanentDelete('student',student.full_name,'The student login, private journey, monthly reports, Juz verifications and linked access will be removed.'))return;
  try{await api('/api/academy/students','DELETE',{student_id:Number(student.id),confirmed:true,confirmation_text:'DELETE'});status('Student deleted from the database.');await Promise.all([refreshStudents(),refreshAccounts()]);}
  catch(e){status('Not deleted: '+e.message,true);}
+}
+async function deleteAllStudents(){
+ if(role!=='admin'){status('Only Main Administrator can delete all students.',true);return;}
+ const button=$('deleteAllStudents');button.disabled=true;
+ try{
+  const current=await api('/api/academy/students');
+  const count=Number(current.total_all);
+  if(!Number.isSafeInteger(count)||count<1){status('No students to delete.',true);return;}
+  const approved=await confirmAction('Delete ALL '+count+' Students?',
+   'This permanently deletes ALL '+count+' students, their login accounts, private journeys, monthly Hifz reports, Juz verification records, and student access links. Parent and Usthad accounts remain. Admission application history remains.\\n\\nCancel keeps everything unchanged.',
+   'Yes — Delete All '+count+' Students');
+  if(!approved){status('Cancelled — all student data is unchanged.');return;}
+  button.textContent='Deleting & verifying...';
+  const result=await api('/api/academy/students-bulk-delete','DELETE',{scope:'ALL_STUDENTS',confirmed:true,expected_count:count});
+  if(!result.ok||result.verified!==true||Number(result.removed_students)!==count||Number(result.remaining_students)!==0)throw Error('Server did not verify that every student was removed.');
+  await Promise.allSettled([refreshStudents(),refreshAccounts()]);
+  status('VERIFIED: All '+count+' student records and linked student logins removed from Academy database.');
+ }catch(e){status('Bulk delete NOT confirmed: '+e.message,true);}
+ finally{button.textContent='Delete All Students';button.disabled=(role!=='admin'||students.length===0);}
 }
 function resetStudentForm(){
  const f=$('studentForm');f.reset();delete f.dataset.editId;
@@ -37,7 +85,7 @@ function editStudent(student){
 }
 async function deleteAccount(account){
  if(account.role==='student'){status('Use Student Admission to delete the student and account together.',true);return;}
- if(!confirmPermanentDelete(account.role,account.display_name+' ('+account.username+')','The login will be permanently revoked, including all active sessions.'))return;
+ if(!await confirmPermanentDelete(account.role,account.display_name+' ('+account.username+')','The login will be permanently revoked, including all active sessions.'))return;
  try{await api('/api/academy/accounts','DELETE',{account_id:Number(account.id),confirmed:true,confirmation_text:'DELETE'});status('Account permanently deleted.');await refreshAccounts();}
  catch(e){status('Not deleted: '+e.message,true);}
 }
@@ -74,14 +122,14 @@ function text(tag,value,cls=''){const el=document.createElement(tag);el.textCont
 function entry(root,title,meta,actions=[]){const row=text('div','','entry');const info=document.createElement('div');info.append(text('strong',title),text('div',meta,'hint'));row.append(info);if(actions.length){const right=text('div','','actions');for(const [caption,handler,cls='outline'] of actions){const b=text('button',caption,cls);b.type='button';b.addEventListener('click',handler);right.append(b);}row.append(right);}root.append(row);}
 function options(sel,arr,key='id',label='full_name'){sel.replaceChildren();for(const x of arr)sel.append(new Option(x[label]+' · '+(x.admission_number||''),String(x[key])));}
 function studentDropdowns(){document.querySelectorAll('.studentOptions').forEach(sel=>options(sel,students));options($('previewStudent'),students);options($('parentStudents'),students);}
-async function refreshStudents(){const r=await api('/api/academy/students');students=r.students||[];studentDropdowns();$('statStudents').textContent=students.length;const el=$('studentsList');el.replaceChildren();if(!students.length)empty(el,'No students admitted yet.');for(const s of students)entry(el,s.full_name,s.admission_number+' · '+(s.batch_name||'No batch'),[['Edit',()=>editStudent(s)],['Delete',()=>deleteStudent(s),'danger']]);await refreshMonthly().catch(()=>{});await refreshJuz().catch(()=>{});}
+async function refreshStudents(){const r=await api('/api/academy/students');students=r.students||[];studentDropdowns();$('statStudents').textContent=students.length;const all=Number(r.total_all??students.length);$('studentBulkCount').textContent=all+' student(s) would be deleted, along with their logins and Hifz reports.';$('deleteAllStudents').disabled=(role!=='admin'||all===0);const el=$('studentsList');el.replaceChildren();if(!students.length)empty(el,'No students admitted yet.');for(const s of students)entry(el,s.full_name,s.admission_number+' · '+(s.batch_name||'No batch'),[['Edit',()=>editStudent(s)],['Delete',()=>deleteStudent(s),'danger']]);await refreshMonthly().catch(()=>{});await refreshJuz().catch(()=>{});}
 async function refreshAccounts(){const r=await api('/api/academy/accounts');accounts=r.accounts||[];$('statAccounts').textContent=accounts.length;const el=$('accountsList');el.replaceChildren();$('resetAccount').replaceChildren();
  for(const a of accounts){
   if(a.role!=='admin')$('resetAccount').append(new Option(a.display_name+' · '+a.username,String(a.id)));
   const mayManage=a.role!=='admin'&&(a.role!=='usthad'||role==='admin');
   const actions=mayManage?[
     ['Edit',()=>editAccount(a)],
-    [(a.active?'Deactivate':'Activate'),async()=>{if(!window.confirm('Change access for '+a.username+'?'))return;try{await api('/api/academy/accounts','PUT',{account_id:Number(a.id),active:!a.active});status('Account status updated.');await refreshAccounts();}catch(e){status(e.message,true);}},a.active?'danger':'outline']
+    [(a.active?'Deactivate':'Activate'),async()=>{if(!await confirmAction('Change Account Access?', 'Change active login access for '+a.username+'? The user might be signed out.','Confirm Access Change'))return;try{await api('/api/academy/accounts','PUT',{account_id:Number(a.id),active:!a.active});status('Account status updated.');await refreshAccounts();}catch(e){status(e.message,true);}},a.active?'danger':'outline']
   ]:[];
   if(mayManage)actions.push(['Delete',()=>{if(a.role==='student'){const s=students.find(st=>(a.admissions||[]).includes(st.admission_number)||st.username===a.username);if(s)deleteStudent(s);else status('Linked student not found.',true);}else deleteAccount(a);},'danger']);
   entry(el,a.display_name+' · '+a.username,a.role.toUpperCase()+' · '+(a.active?'Active':'Disabled')+' · '+(a.admissions||[]).join(', '),actions);
@@ -120,7 +168,7 @@ async function refreshGallery(){
   publish.type='button';
   publish.addEventListener('click',async()=>{
    const newState=!item.is_published;
-   if(newState&&!window.confirm('Publish this '+(item.media_type==='video'?'video':'photograph')+' on the public Academy Gallery? Make sure it is academy-related and you have permission.'))return;
+   if(newState&&!await confirmAction('Publish Gallery Media?', 'This '+(item.media_type==='video'?'video':'photo')+' will appear on the public Academy website. Publish only if you own it or have permission.','Yes — Publish'))return;
    publish.disabled=true;
    try{
     await api('/api/academy/gallery','PUT',{id:Number(item.id),is_published:newState});
@@ -132,6 +180,8 @@ async function refreshGallery(){
   remove.title='Delete this gallery media permanently now. No typing required.';
   remove.addEventListener('click',async()=>{
    if(remove.disabled)return;
+   const confirmed=await confirmAction('Delete Gallery Media?',(item.caption||'This gallery item')+'\nThe media will be permanently removed from our Gallery and managed storage. External media hosts must be managed separately.','Yes — Delete Media');
+   if(!confirmed)return;
    const itemId=Number(item.id);
    remove.disabled=true;publish.disabled=true;
    remove.textContent='Deleting...';
@@ -164,13 +214,13 @@ async function refreshApplications(){
    ['Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';$('applicationStatus').focus();}],
    ['Approve & Create Account',async()=>{
      try{await openApplication(app.id);$('applicationStatus').value='approved';
-       if(!window.confirm('Approve this application and AUTOMATICALLY create the student record and private login?'))return;
+       if(!await confirmAction('Approve Student Admission?', 'This creates the Student Record and a secure login account automatically.','Yes — Approve & Create'))return;
        await saveApplicationDecision();
      }catch(e){status('Approval not saved: '+e.message,true);}
    }],
    ['Reject & Save',async()=>{
      try{await openApplication(app.id);$('applicationStatus').value='rejected';
-       if(!window.confirm('Reject this application and save the decision?'))return;
+       if(!await confirmAction('Reject Admission?', 'This saves a Rejected decision to the database. No Student Login will be created.','Yes — Reject & Save'))return;
        await saveApplicationDecision();
      }catch(e){status('Rejection not saved: '+e.message,true);}
    }],
@@ -332,6 +382,8 @@ function connect(){
  attachEditDialogs();
  $('tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)show(b.dataset.tab);});
  $('signout').addEventListener('click',async()=>{try{await api('/api/identity/logout','POST',{});}finally{location.replace('/login');}});
+ $('bulkStudentsZone').hidden=(role!=='admin');
+ $('deleteAllStudents').addEventListener('click',deleteAllStudents);
  $('openJourney').addEventListener('click',()=>{const id=$('previewStudent').value;if(id)location.href='/dashboard?student_id='+encodeURIComponent(id);});
  $('saveApplicationDecision').addEventListener('click',saveApplicationDecision);
  $('applicationStatus').addEventListener('change',syncAdmissionInitialPassword);

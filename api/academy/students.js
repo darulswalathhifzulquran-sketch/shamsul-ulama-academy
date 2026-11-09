@@ -16,8 +16,9 @@ export const access='public';export const methods=['GET','POST','PUT','DELETE'];
 export default async function(req,res){
  const a=await guard(req,res,['admin','usthad'],req.method!=='GET');if(!a)return;
  if(req.method==='GET'){
-  const r=await db.query("SELECT s.id,s.admission_number,s.full_name,s.batch_name,s.contact_phone,s.guardian_name,s.guardian_phone,s.date_of_birth,s.postal_address,s.notes,s.status,(SELECT a.username FROM academy_accounts_v2 a JOIN academy_links_v2 l ON l.account_id=a.id WHERE l.student_id=s.id AND l.relationship='student' AND a.role='student' LIMIT 1) AS username,(SELECT a.active FROM academy_accounts_v2 a JOIN academy_links_v2 l ON l.account_id=a.id WHERE l.student_id=s.id AND l.relationship='student' AND a.role='student' LIMIT 1) AS login_active FROM academy_students s WHERE s.status='active' ORDER BY s.id DESC LIMIT 500");
-  return res.json({students:r.rows});
+  const r=await db.query("SELECT s.id,s.admission_number,s.full_name,s.batch_name,s.contact_phone,s.guardian_name,s.guardian_phone,s.date_of_birth,s.postal_address,s.notes,s.status,(SELECT a.username FROM academy_accounts_v2 a JOIN academy_links_v2 l ON l.account_id=a.id WHERE l.student_id=s.id AND l.relationship='student' AND a.role='student' LIMIT 1) AS username,(SELECT a.active FROM academy_accounts_v2 a JOIN academy_links_v2 l ON l.account_id=a.id WHERE l.student_id=s.id AND l.relationship='student' AND a.role='student' LIMIT 1) AS login_active FROM academy_students s WHERE s.status='active' ORDER BY s.id DESC");
+  const count=await db.query('SELECT count(*)::integer AS total_all FROM academy_students');
+  return res.json({students:r.rows,total_all:Number(count.rows[0]?.total_all||0)});
  }
  if(req.method==='DELETE'){
   if(req.body?.confirmed!==true||req.body?.confirmation_text!=='DELETE')return res.status(400).json({error:'Two-step deletion confirmation required.'});

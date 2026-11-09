@@ -11,3 +11,23 @@
 .edit-dialog .check{font-weight:700}
 .edit-dialog .check input{flex:none}
 @media(max-width:630px){.edit-dialog{width:calc(100vw - 15px);padding:18px 15px;max-height:93vh}.edit-dialog .two{grid-template-columns:1fr}.edit-dialog .edit-head{gap:7px}}
+
+/* Premium, accessible, centered confirmation dialog. Never use browser prompt(). */
+.confirm-dialog{position:fixed;inset:0;margin:auto;width:min(535px,calc(100vw - 30px));max-height:min(88vh,780px);overflow:auto;background:#fff;color:var(--ink);border:1px solid #d7e3d8;border-radius:20px;padding:0;box-shadow:0 30px 100px #071b144a}
+.confirm-dialog::backdrop{background:rgba(6,25,17,.75);backdrop-filter:blur(5px)}
+.confirm-dialog-inner{padding:clamp(22px,4vw,35px)}
+.confirm-dialog .eyebrow{color:#8a513e;margin:8px 0 9px}
+.confirm-dialog h2{font:700 clamp(22px,3vw,28px)/1.2 Georgia,serif;color:#243a2b;margin:12px 0}
+.confirm-dialog #confirmActionDescription{white-space:pre-line;font-size:14px;line-height:1.75;color:#34453b;overflow-wrap:anywhere}
+.confirm-dialog-icon{display:grid;place-items:center;border:2px solid #ca6c64;color:#a3362c;background:#fff2f0;border-radius:50%;width:49px;height:49px;font-size:25px;font-weight:900}
+.confirm-dialog-notice{background:#fff4ef;border-left:3px solid #c56d53;padding:11px 13px;border-radius:6px;color:#874331;font-weight:650;font-size:12px}
+.confirm-dialog-buttons{display:flex;gap:10px;justify-content:flex-end;align-items:center;flex-wrap:wrap;margin-top:25px}
+.confirm-dialog-buttons button{padding:13px 18px;min-height:45px}
+.confirm-dialog-buttons .danger{background:#b23c37;color:white;border-color:#b23c37}
+.confirm-dialog-buttons .outline{background:white}
+.bulk-students-zone{border:1.5px solid #daaaa0;border-radius:13px;background:#fffaf8;padding:19px 20px;margin-top:26px}
+.bulk-students-zone .bulk-warning{color:#a13028;font-weight:850;margin:0 0 5px}
+.bulk-students-zone button.danger{color:#a13028;font-weight:800}
+.bulk-students-zone button.danger:not(:disabled):hover{background:#a13028;color:#fff}
+#studentBulkCount{font-weight:700;color:#9e3530}
+@media(max-width:540px){.confirm-dialog-buttons{flex-direction:column-reverse}.confirm-dialog-buttons button{width:100%}}
