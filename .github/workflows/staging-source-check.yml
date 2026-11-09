@@ -36,3 +36,5 @@ jobs:
           "
       - name: Verify that 19 routes, all source assets and 14 migrations remain
         run: npm run test:staging:static
+      - name: Apply all 14 original SQL migrations and exercise disposable account/admission/deletion
+        run: npm run test:staging:database
