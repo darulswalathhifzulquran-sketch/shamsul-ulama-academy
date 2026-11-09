@@ -1,0 +1,15 @@
+{
+  "name": "shamsul-ulama-academy-free-hosting-staging",
+  "version": "16.0.0-staging.1",
+  "private": true,
+  "type": "module",
+  "description": "Isolated Netlify staging port of the complete Academy v16 application; no production data.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.8",
+    "@netlify/database": "0.0.0",
+    "pg": "8.23.1"
+  }
+}

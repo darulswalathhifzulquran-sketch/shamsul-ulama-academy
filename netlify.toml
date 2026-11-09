@@ -1,0 +1,39 @@
+# Dedicated FREE staging only. NEVER connect this project to the Hatchable database.
+[build]
+  publish = "public"
+  command = "echo 'Staging source files retained; backend deployment requires isolated Netlify Database and acceptance tests.'"
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/academy?__route=api/:splat"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/staff"
+  to = "/.netlify/functions/academy?__route=staff"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/dashboard"
+  to = "/.netlify/functions/academy?__route=dashboard"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
+[[redirects]]
+  from = "/change-password"
+  to = "/change-password.html"
+  status = 200
+[[redirects]]
+  from = "/setup"
+  to = "/setup.html"
+  status = 200
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
