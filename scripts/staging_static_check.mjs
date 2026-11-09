@@ -27,7 +27,7 @@ const routes = [
  'api/academy/target', 'staff', 'dashboard'
 ];
 for (const route of routes)
-  assert(gateway.includes("'" + route + "'"), 'Missing staging handler: ' + route);
+  assert(gateway.includes(route === 'staff' || route === 'dashboard' ? route + ':' : "'" + route + "'"), 'Missing staging handler: ' + route);
 const names = readdirSync('migrations').filter(p => p.endsWith('.sql')).sort();
 assert.equal(names.length, 14, 'The app must preserve all 14 SQL migrations');
 for (const name of names) {

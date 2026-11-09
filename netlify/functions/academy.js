@@ -43,6 +43,27 @@ const handlers = {
   staff: staffPage,
   dashboard: dashboardPage
 };
+const allowedMethods = {
+  'api/identity/bootstrap': ['GET','POST'],
+  'api/identity/login': ['POST'],
+  'api/identity/logout': ['POST'],
+  'api/identity/me': ['GET'],
+  'api/identity/change-password': ['POST'],
+  'api/academy/accounts': ['GET','POST','PUT','DELETE'],
+  'api/academy/applications': ['GET','POST','PUT'],
+  'api/academy/application-print': ['GET'],
+  'api/academy/enquiries': ['GET','POST','PUT'],
+  'api/academy/gallery': ['GET','POST','PUT','DELETE'],
+  'api/academy/juz': ['GET','POST'],
+  'api/academy/monthly': ['GET','POST'],
+  'api/academy/overview': ['GET'],
+  'api/academy/settings': ['GET','POST'],
+  'api/academy/students': ['GET','POST','PUT','DELETE'],
+  'api/academy/students-bulk-delete': ['DELETE'],
+  'api/academy/target': ['GET','POST'],
+  'api/academy/media': ['GET'],
+  staff: ['GET'], dashboard: ['GET']
+};
 function makeResponse() {
   let code = 200, body = '', headers = new Headers();
   return {
@@ -116,6 +137,8 @@ export default async function academyGateway(request) {
   const handler = handlers[route];
   if (route !== 'api/academy/media' && !handler)
     return Response.json({ error: 'Not found.' }, { status: 404 });
+  if (!allowedMethods[route]?.includes(request.method.toUpperCase()))
+    return Response.json({ error: 'Method not allowed.' }, { status: 405, headers: { 'Allow': (allowedMethods[route] || []).join(', ') } });
   const headers = { 'Cache-Control': 'no-store' };
   if (!(process.env.NETLIFY_DB_URL)) {
     return Response.json({ error: 'Isolated staging database has not yet been provisioned. No backend test has passed.' }, { status: 503, headers });
