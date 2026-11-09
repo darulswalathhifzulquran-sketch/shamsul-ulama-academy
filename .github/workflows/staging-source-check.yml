@@ -26,5 +26,13 @@ jobs:
         run: |
           set -e
           find api lib pages netlify/functions public/assets scripts -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -n 1 node --check
+      - name: Import real staging gateway and check unconfigured DB rejects requests
+        run: |
+          node --input-type=module -e "
+          const mod = await import('./netlify/functions/academy.js');
+          const res = await mod.default(new Request('https://staging.invalid/.netlify/functions/academy?__route=api/identity/me'));
+          if (res.status !== 503) throw Error('Unconfigured staging must deny all database actions, got ' + res.status);
+          console.log('STAGING_GATEWAY_IMPORT_PASS; DATABASE_UNCONFIGURED_BLOCK_PASS');
+          "
       - name: Verify that 19 routes, all source assets and 14 migrations remain
         run: npm run test:staging:static
