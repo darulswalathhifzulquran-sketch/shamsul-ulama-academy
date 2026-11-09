@@ -211,15 +211,15 @@ async function refreshApplications(){
  for(const app of applications){
   const view=()=>openApplication(app.id);
   const actions=[['View',view],
-   ['Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';$('applicationStatus').focus();}],
+   ['Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';syncAdmissionInitialPassword();$('applicationStatus').focus();}],
    ['Approve & Create Account',async()=>{
-     try{await openApplication(app.id);$('applicationStatus').value='approved';
+     try{await openApplication(app.id);$('applicationStatus').value='approved';syncAdmissionInitialPassword();
        if(!await confirmAction('Approve Student Admission?', 'This creates the Student Record and a secure login account automatically.','Yes — Approve & Create'))return;
        await saveApplicationDecision();
      }catch(e){status('Approval not saved: '+e.message,true);}
    }],
    ['Reject & Save',async()=>{
-     try{await openApplication(app.id);$('applicationStatus').value='rejected';
+     try{await openApplication(app.id);$('applicationStatus').value='rejected';syncAdmissionInitialPassword();
        if(!await confirmAction('Reject Admission?', 'This saves a Rejected decision to the database. No Student Login will be created.','Yes — Reject & Save'))return;
        await saveApplicationDecision();
      }catch(e){status('Rejection not saved: '+e.message,true);}

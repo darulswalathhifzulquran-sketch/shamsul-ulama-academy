@@ -1,6 +1,6 @@
 # COMPLETE SETUP — Shamsul Ulama Islamic Academy
 
-This is a complete source-code and setup archive of Hatchable production version 15. It is not a database or secret backup.
+This is a complete source-code and setup archive of Hatchable production version 16. It is not a database or secret backup.
 
 ## 1 — Safest and easiest: keep the existing full website
 
@@ -65,7 +65,7 @@ Only the Python standard library is required for the scripts. The first validate
 
 ## 8 — Current acceptance-test status
 
-Verified: v15 Live deployment, protected API endpoints reject anonymous calls, bulk-deletion stored function exists, all live project source paths match this GitHub archive.
+Verified: v16 Live deployment, protected API endpoints reject anonymous calls, bulk-deletion stored function exists, all live project source paths match this GitHub archive.
 Still requires your own authenticated in-browser tests: Usthad creation, app approval/rejection end-to-end, file upload/delete, password reset, and bulk delete **on staging-only disposable data**.
 
 This release intentionally includes source/setup, not production credentials or private database data.

@@ -1,9 +1,9 @@
-# SHAMSUL ULAMA ISLAMIC ACADEMY — COMPLETE SOURCE v15
+# SHAMSUL ULAMA ISLAMIC ACADEMY — COMPLETE SOURCE v16
 
 Official **complete CODE backup** for the deployed Academy website.
 
 **Live website:** https://shamsul-ulama-w2kv.hatchable.site  
-**Source revision:** Hatchable Version 15, 9 November 2026  
+**Source revision:** Hatchable Version 16, 9 November 2026  
 **Hosting target:** Hatchable (managed PostgreSQL + server APIs + storage)
 
 ## What is in this one archive?
@@ -36,8 +36,8 @@ Hatchable supplies the cloud runtime, database, object storage and server-side S
 
 Username/password login with scoped role checks, Usthad and student accounts, academy public content, gallery media (managed upload or secure hosted links), applications with review and approval, private Hifz monthly/juz data, student dashboards and centered delete-confirmation controls.
 
-Version 15 adds administrator-only **Delete All Students** with an explicit confirmation and atomic database function. This is destructive and should only be used after a privately stored, verified production backup.
+Version 16 adds administrator-only **Delete All Students** with an explicit confirmation and atomic database function. This is destructive and should only be used after a privately stored, verified production backup.
 
 ## Release status
 
-Live V15 deploy succeeded, schema and API smoke checks passed. The full **authenticated** workflows (especially mass deletion, photo/video uploads and account creation) were not destructively tested on real student data. See `docs/ACCEPTANCE_TESTS.md` for safe tests with disposable test records.
+Live V16 deploy succeeded, schema and API smoke checks passed. The full **authenticated** workflows (especially mass deletion, photo/video uploads and account creation) were not destructively tested on real student data. See `docs/ACCEPTANCE_TESTS.md` for safe tests with disposable test records.
