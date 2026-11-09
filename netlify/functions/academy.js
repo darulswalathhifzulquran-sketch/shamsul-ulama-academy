@@ -125,7 +125,7 @@ export default async function academyGateway(request) {
     if (route === 'api/academy/media') return await serveGalleryMedia(request, req, url);
     // Hatchable's original bootstrap declared access="admin" at the platform level.
     // Without Hatchable's gate, require an owner-only setup secret until the Admin exists.
-    if (route === 'api/identity/bootstrap') {
+    if (route === 'api/identity/bootstrap' && req.method === 'POST') {
       const token = process.env.ACADEMY_STAGING_SETUP_TOKEN;
       if (!token || request.headers.get('x-academy-setup-token') !== token)
         return Response.json({ error: 'Owner-only staging setup.' }, { status: 403, headers });
