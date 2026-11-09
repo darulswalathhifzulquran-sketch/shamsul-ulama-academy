@@ -1,4 +1,4 @@
-import {db,guard,originAllowed,preventCache,audit} from 'lib/academy-auth.js';
+import {db,guard,originAllowed,preventCache,audit,makePassword} from 'lib/academy-auth.js';
 export const access='public';
 export const methods=['GET','POST','PUT'];
 const statuses=new Set(['submitted','under_review','interview','approved','rejected']);
@@ -58,28 +58,35 @@ export default async function(req,res){
  }
  const id=Number(req.body?.id),next=trim(req.body?.status,40),reason=trim(req.body?.reason,1000)||null,staffNote=trim(req.body?.staff_note,1200)||null;
  if(!Number.isSafeInteger(id)||id<1||!statuses.has(next)||String(req.body?.reason||'').length>1000||String(req.body?.staff_note||'').length>1200)
-  return res.status(400).json({error:'Invalid action or comment.'});
+  return res.status(400).json({error:'Invalid application, status or note.'});
  const date=trim(req.body?.interview_at,40)||null;
  if(date!==null&&(next!=='interview'||Number.isNaN(new Date(date).getTime())))
   return res.status(400).json({error:'Choose a valid interview date/time.'});
- const prior=await db.query('SELECT status FROM academy_admission_applications WHERE id=$1',[id]);
- if(!prior.rows.length)return res.status(404).json({error:'Application not found.'});
- const before=prior.rows[0].status;
- if(next===before&&!staffNote&&!reason&&!date)return res.status(400).json({error:'No change to save.'});
- const allowed={
-  submitted:['under_review','interview','approved','rejected'],
-  under_review:['interview','approved','rejected'],
-  interview:['under_review','approved','rejected'],
-  approved:['under_review'],
-  rejected:['under_review']
- };
- if(next!==before&&!allowed[before]?.includes(next))return res.status(409).json({error:'This status transition is not permitted.'});
- const note=next==='rejected'?reason:(staffNote||reason||null);
- const updated=await db.transaction([
-  {sql:"UPDATE academy_admission_applications SET status=$1,interview_at=CASE WHEN $1='interview' THEN $2::timestamptz ELSE interview_at END,decision_reason=CASE WHEN $1='rejected' THEN $3 ELSE NULL END,staff_note=COALESCE($4,staff_note),reviewed_by=$5,reviewed_at=now(),updated_at=now() WHERE id=$6 AND status=$7 RETURNING id",params:[next,date,note,staffNote,s.user.id,id,before]},
-  {sql:"INSERT INTO academy_application_events(application_id,from_status,to_status,note,actor_account_id) SELECT $1,$2,$3,$4,$5 WHERE EXISTS(SELECT 1 FROM academy_admission_applications WHERE id=$1 AND status=$3)",params:[id,before,next,note,s.user.id]}
- ]);
- if(!updated.results?.[0]?.rowCount)return res.status(409).json({error:'Application was changed by another Usthad. Refresh and retry.'});
- await audit(s.user.id,'admission.'+next,'application',id);
- return res.json({ok:true,id,status:next,message:'Application status saved successfully.'});
+ // A password is generated server-side and returned exactly once on successful
+ // account creation; only PBKDF2 salt/hash are stored in PostgreSQL.
+ let oneTimePassword=null,h=null;
+ if(next==='approved'){
+  const bytes=new Uint8Array(18);crypto.getRandomValues(bytes);
+  oneTimePassword='Hifz-'+Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+  h=await makePassword(oneTimePassword);
+ }
+ try{
+  const result=await db.query(
+   'SELECT academy_decide_admission($1::bigint,$2::text,$3::text,$4::text,$5::timestamptz,$6::bigint,$7::text,$8::text,$9::integer) AS decision',
+   [id,next,reason,staffNote,date,s.user.id,h?.salt||null,h?.hash||null,h?.iterations||null]
+  );
+  const raw=result.rows?.[0]?.decision;
+  const decision=typeof raw==='string'?JSON.parse(raw):raw;
+  if(!decision||Number(decision.id)!==id)return res.status(500).json({error:'Database did not confirm the admission decision.'});
+  await audit(s.user.id,'admission.'+decision.status,'application',id);
+  return res.json({ok:true,...decision,
+   temporary_password:decision.account_created===true?oneTimePassword:undefined,
+   message:decision.account_created===true?'Application APPROVED. Student saved and secure login created. Copy the one-time password now.':decision.status==='rejected'?'Application REJECTED and saved in the database.':'Application '+decision.status+' saved in the database.'});
+ }catch(e){
+  if(e.code==='23505')return res.status(409).json({error:'Admission number or login already exists. No duplicate student was created. Contact Administrator.'});
+  if(e.code==='P0002')return res.status(404).json({error:'Application not found. Refresh the list.'});
+  if(e.code==='P0001')return res.status(409).json({error:'Application could not be changed. Check the current status and refresh.'});
+  console.error('Admission decision failed',e?.code||'unknown',e?.message||'');
+  return res.status(500).json({error:'Admission was NOT saved. Please refresh and retry; no partial account should have been created.'});
+ }
 }
