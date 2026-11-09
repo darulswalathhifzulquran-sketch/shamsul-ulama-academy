@@ -37,3 +37,9 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# This isolated staging URL must never appear in public Google search results.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
