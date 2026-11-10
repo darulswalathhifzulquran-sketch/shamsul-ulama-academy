@@ -43,6 +43,7 @@ const runtime = read('lib/academy-runtime.js');
 assert(runtime.includes('ACADEMY_STAGING_DATABASE_URL') && runtime.includes("host.endsWith('.neon.tech')"), 'Neon staging-only connection guard missing');
 assert(read('api/academy/applications.js').includes("'cancelled'"),'Cancelled application status missing');
 assert(read('lib/academy-staff-document.js').includes('Decision History'),'Admission history UI missing');
+assert(read('public/assets/staff.js').includes("'Move to Interview',()=>decideApplication"),'Interview list action must save to the database');
 assert(read('server.mjs').includes('createAcademyServer'),'Railway Node staging server missing');
 assert(read('lib/academy-chunk-upload.js').includes('academy_media_upload_sessions'),'Postgres chunk persistence missing');
 const auth = read('lib/academy-auth.js');

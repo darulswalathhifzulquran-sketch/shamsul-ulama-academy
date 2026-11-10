@@ -214,10 +214,10 @@ async function refreshApplications(){
   const actions=[['View',view]];
   if(!locked){
    if(app.status==='rejected'||app.status==='cancelled')actions.push(['Reopen for Review',()=>decideApplication(app,'under_review','Reopen Admission?','Reopen this saved application for Usthad review?')]);
-   actions.push(['Move to Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';syncAdmissionInitialPassword();$('applicationStatus').focus();}]);
+   if(app.status!=='interview')actions.push(['Move to Interview',()=>decideApplication(app,'interview','Move Admission to Interview?','This saves Interview status in the academy database. Schedule a date later from View if needed.')]);
    actions.push(['Approve & Create Account',()=>decideApplication(app,'approved','Approve Student Admission?','Approval will save the Student Record and create exactly one secure login.')]);
-   actions.push(['Reject & Save',()=>decideApplication(app,'rejected','Reject Admission?','The rejection will be saved with its history. No Student Login will be created.')]);
-   actions.push(['Cancel Application',()=>decideApplication(app,'cancelled','Cancel Admission Application?','This cancels the application without deleting any student, account or application history.')]);
+   if(app.status!=='rejected')actions.push(['Reject & Save',()=>decideApplication(app,'rejected','Reject Admission?','The rejection will be saved with its history. No Student Login will be created.')]);
+   if(app.status!=='cancelled')actions.push(['Cancel Application',()=>decideApplication(app,'cancelled','Cancel Admission Application?','This cancels the application without deleting any student, account or application history.')]);
   }
   actions.push(['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]);
   entry(root,app.student_name+' · '+app.application_number,
