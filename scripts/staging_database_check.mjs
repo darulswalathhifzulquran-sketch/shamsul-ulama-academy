@@ -11,13 +11,13 @@ try {
   started = true;
   console.log('Ephemeral local staging database created (not production).');
   await db.applyMigrations('./netlify/database/migrations');
-  console.log('All 14 original Academy migrations applied successfully.');
+  console.log('All 17 original+staging Academy migrations applied successfully.');
   client = new Client({ connectionString: url });
   await client.connect();
   const { rows: tables } = await client.query(
     "SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_name LIKE 'academy_%' ORDER BY table_name"
   );
-  assert.equal(tables.length, 17, 'Expected 17 Academy tables');
+  assert.equal(tables.length, 21, 'Expected 17 original plus 4 new staging tables');
   const functions = await client.query(
     "SELECT proname FROM pg_proc WHERE proname IN ('academy_decide_admission','academy_admin_delete_all_students')"
   );

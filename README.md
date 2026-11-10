@@ -1,43 +1,63 @@
-# SHAMSUL ULAMA ISLAMIC ACADEMY — COMPLETE SOURCE v16
+# Shamsul Ulama Islamic Academy — Full-stack QA/Staging Source
 
-Official **complete CODE backup** for the deployed Academy website.
+**Important: STAGING ONLY. This is not a completed or approved production migration.**
 
-**Live website:** https://shamsul-ulama-w2kv.hatchable.site  
-**Source revision:** Hatchable Version 16, 9 November 2026  
-**Hosting target:** Hatchable (managed PostgreSQL + server APIs + storage)
+This branch is a maintained, fully source-included port of the original Hatchable Version 16 Academy website. It preserves all original public pages, pictures, CSS, forms, role-based pages, login/authentication, 17 original HTTP API routes, the Usthad/Admin management dashboard, Hifz dashboards, and the original 14 database migrations. The QA branch adds a Node.js HTTP server for Railway, Netlify gateway compatibility, three additive migrations, admission review recovery, Neon-backed gallery storage, and an optional private Student Revision Notes feature.
 
-## What is in this one archive?
+**Live original (DO NOT MODIFY):** https://shamsul-ulama-w2kv.hatchable.site
 
-- `public/` — full frontend, home, gallery, admission, log-in pages, CSS/JS and original public image assets
-- `api/` — identity, accounts, gallery, admissions, student records, Hifz and administrative APIs
-- `lib/` — shared authentication and generated dashboards
-- `pages/` — protected dashboard routes
-- `migrations/` — all 14 PostgreSQL migrations, in order
-- `hatchable.toml` — Hatchable configuration
-- `docs/` — full setup, restore, data safety, testing, and domain guides
-- `scripts/` — optional local verification and ZIP build utilities
-- `.github/workflows/` — source-package workflow
+## Project files
 
-No source code file in the live deployed project was omitted from this release. See `COMPLETE_FILE_MANIFEST.json`.
+- `public/`: all frontend pages, image files and JS/CSS; no redesign.
+- `api/`: all original APIs plus `api/academy/revision.js` for the optional Student daily notes.
+- `pages/` and `lib/`: original HTML dashboards and secure application logic; staged hosting/runtime adapters.
+- `server.mjs`: Node.js 22 native HTTP server for Railway with static frontend and backend routes using the same API handler.
+- `netlify/functions/academy.js` and `netlify.toml`: Netlify Functions and existing URL rewrites.
+- `migrations/0001–0014`: **unchanged original** Hatchable/PostgreSQL migrations.
+- `migrations/0015–0017`: additive-only QA migrations for admission status recovery, image/video storage and Student Revision Notes.
+- `netlify/database/migrations/`: same 17 SQL migration files, in order. No auto-connection to Netlify Database.
+- `railway.json`: minimal Node service start command and healthcheck.
+- `.github/workflows/staging-source-check.yml`: QA-only automated tests with **ephemeral local DB**, no live student data.
+- `docs/STAGING_OWNER_SETUP_AND_ACCEPTANCE.md`, `docs/STAGING_RAILWAY_QA.md`: setup and acceptance requirements.
 
-## How to set up
+## Runtime
 
-**Read `docs/COMPLETE_SETUP.md` first.** The existing Hatchable live website is already deployed: do NOT delete or re-create its database merely to use this ZIP.
+Two private environment settings are required on staging hosting (NEVER commit values):
 
-To download one ZIP: switch to branch `complete/shamsul-ulama-academy` and choose **Code → Download ZIP**. Or run `python scripts/make_complete_zip.py` after extracting this archive to rebuild your own source ZIP.
+- `ACADEMY_STAGING_DATABASE_URL`: **Neon `academy-v16-qa` branch** pooled PostgreSQL connection string. The hostname must be under `.neon.tech`. Never use a Hatchable production DSN. For local CI only, localhost is accepted.
+- `ACADEMY_STAGING_SETUP_TOKEN`: random, owner-only, high-entropy setup key stored in the **host's environment/secret manager**, not in GitHub, the browser source, or this ZIP.
 
-## IMPORTANT — Code ZIP is not the live database
+Railway deployment starts with `npm start` (Node 22), using the Railway-provided `PORT`. The web root and backend share one origin so the original SameSite/CSRF session rules continue to apply. Netlify uses `[build] publish = "public"`, functions from `netlify/functions`; see `netlify.toml` as the source of truth.
 
-No student personal records, passwords, password hashes, login sessions, privately uploaded media, production secrets, or PostgreSQL backup files are packaged. These must be handled separately, securely, and only by the data owner.
+Media and chunked 16MiB uploads now store into *the isolated Neon QA PostgreSQL database* via dedicated media tables rather than using host filesystem storage. This supports Railway's stateless container but **consumes Neon database capacity and must be tested on the actual free tier**. Object storage is a future optimization, not automatically configured.
 
-Hatchable supplies the cloud runtime, database, object storage and server-side SDK. Outside Hatchable, this code **requires backend adaptation**; it cannot be made fully functional by simply dropping the ZIP into Netlify static hosting. There is no hard-coded Administrator login.
+## Data protection
 
-## Current features
+This is **code only**; it contains no actual Student/Parent accounts, password hashes, passwords, API keys, connection strings, sessions, privately uploaded gallery files, database backups or production information. It does not connect to Hatchable production. GitHub repository may be public. Never publish a backup there.
 
-Username/password login with scoped role checks, Usthad and student accounts, academy public content, gallery media (managed upload or secure hosted links), applications with review and approval, private Hifz monthly/juz data, student dashboards and centered delete-confirmation controls.
+## Features repaired in staging
 
-Version 16 adds administrator-only **Delete All Students** with an explicit confirmation and atomic database function. This is destructive and should only be used after a privately stored, verified production backup.
+- Admission review states: Submitted → Under Review → Interview → Approved/Rejected/Cancelled.
+- Previously rejected or cancelled applications may be reopened, sent to interview, or approved with the original atomic Student + Account creation; duplicate approvals do not create duplicate students.
+- A previously approved Student Account cannot be cancelled by changing the admission application — preventing silent student data loss.
+- Decision history and clearer error feedback on failed saves. Approval credentials are shown only once.
+- PDF-ready admission print page remains private to Admin/Usthad. `Print / Save as PDF` uses the browser print dialog, not a generated downloadable PDF binary.
+- Parent and Usthad accounts, secure sessions and roles, Hifz reports and Gallery remain in place.
+- Student “My Daily Revision Notes” adds student-authored notes, parent read-only access, and does NOT modify teacher-verified progress.
 
-## Release status
+## Validation status
 
-Live V16 deploy succeeded, schema and API smoke checks passed. The full **authenticated** workflows (especially mass deletion, photo/video uploads and account creation) were not destructively tested on real student data. See `docs/ACCEPTANCE_TESTS.md` for safe tests with disposable test records.
+Automated CI runs JavaScript parsing and source integrity checks, applies all 17 migrations to a local disposable PostgreSQL-compatible database, and exercises actual login and admission/backend APIs with **fake test accounts only**. A passing CI is **not** proof of successful production migration or hosted-browser operation. The real hosting URL, Neon QA connectivity from that host, large media uploads, custom domain and monthly free-tier limits all require verification before approval. Never claim “no errors” without all acceptance tests.
+
+For status and one-time setup, read `docs/STAGING_OWNER_SETUP_AND_ACCEPTANCE.md` and `docs/STAGING_RAILWAY_QA.md`.
+
+```bash
+python scripts/verify_source.py
+npm install
+npm run test:staging:static
+npm run test:staging:database
+npm run test:staging:api
+npm run test:staging:acceptance
+```
+
+**Do NOT execute database migrations on any production database from this ZIP.** Keep the original Hatchable website active, and await separate permission before any production data export, import or cutover.

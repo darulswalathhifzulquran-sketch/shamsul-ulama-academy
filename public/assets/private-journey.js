@@ -59,6 +59,21 @@ function renderMonthly(){
   root.append(article);
  }
 }
+async function loadRevisionNotes(){
+ if(!selected)return;
+ const r=await api('/api/academy/revision?student_id='+encodeURIComponent(selected.id));
+ const form=$('revisionEdit'),button=$('revisionSave'),status=$('revisionStatus'),history=$('revisionHistory');
+ const canEdit=r.can_edit===true;
+ form.hidden=!canEdit;button.hidden=!canEdit;status.textContent=canEdit?'Only you may edit your personal revision notes.':'Read-only personal revision notes.';
+ history.replaceChildren();
+ if(!r.notes?.length){history.append(elem('p','No personal revision notes yet.','muted'));return;}
+ for(const n of r.notes){
+  const row=elem('article',null,'passport-record');
+  row.append(elem('strong',String(n.note_date).slice(0,10)+' · Personal Revision'),elem('p','New pages: '+n.new_pages+' · Revision pages: '+n.revision_pages,'muted'));
+  if(n.note)row.append(elem('p',n.note,'muted'));
+  history.append(row);
+ }
+}
 function installDateFields(){
  const d=today(),yr=d.getUTCFullYear();for(let i=1;i<=31;i++)$('goalDay').append(new Option(String(i).padStart(2,'0'),String(i)));
  months.forEach((name,i)=>$('goalMonth').append(new Option(name,String(i+1))));
@@ -88,7 +103,7 @@ async function loadStudent(id,quiet=false){
  else{$('goalType').value='2';$('customDate').hidden=true;}
  if(Array.isArray(goal?.study_days)){days=new Set(goal.study_days.map(Number));document.querySelectorAll('#studyDays input').forEach(c=>c.checked=days.has(Number(c.value)));}
  else{days=new Set([0,1,2,3,4,5,6]);document.querySelectorAll('#studyDays input').forEach(c=>c.checked=true);}
- renderMonthly();renderBadges();setTargetDisplay();
+ renderMonthly();renderBadges();setTargetDisplay();await loadRevisionNotes();
  const latest=completed().filter(j=>j.dua_message).sort((a,b)=>String(b.published_at).localeCompare(String(a.published_at)))[0];
  if(latest){const key='academy-last-dua-'+selected.id,version=latest.juz_number+':'+latest.published_at;try{if(sessionStorage.getItem(key)!==version){sessionStorage.setItem(key,version);blessing(latest);}}catch{}}
  $('lastSynced').textContent='Checked '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
@@ -102,6 +117,16 @@ async function refreshPublishedProgress(){
 (async()=>{
  $('logout').addEventListener('click',async()=>{try{await api('/api/identity/logout','POST',{});}finally{location.replace('/login');}});
  $('closeDua').addEventListener('click',()=>$('duaDialog').close());installDateFields();
+ $('revisionDate').value=today().toISOString().slice(0,10);
+ $('revisionSave').addEventListener('click',async()=>{
+  if(!selected||selected.relationship!=='student'||account?.role!=='student')return;
+  const btn=$('revisionSave');btn.disabled=true;$('revisionStatus').textContent='Saving…';
+  try{
+   const r=await api('/api/academy/revision','POST',{student_id:Number(selected.id),note_date:$('revisionDate').value,new_pages:Number($('revisionNew').value),revision_pages:Number($('revisionPages').value),note:$('revisionText').value});
+   if(!r.saved)throw Error('Database did not confirm the save.');
+   await loadRevisionNotes();$('revisionStatus').textContent='Saved successfully in your private study diary.';
+  }catch(e){$('revisionStatus').textContent='NOT SAVED: '+e.message;}finally{btn.disabled=false;}
+ });
  $('refreshProgress').addEventListener('click',async()=>{const b=$('refreshProgress');b.disabled=true;try{if(selected)await loadStudent(Number(selected.id),true);}catch(e){msg('Refresh failed: '+(e.message||'Network error'));}finally{b.disabled=false;}});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshPublishedProgress();});
  setInterval(()=>{if(!document.hidden)refreshPublishedProgress();},90000);

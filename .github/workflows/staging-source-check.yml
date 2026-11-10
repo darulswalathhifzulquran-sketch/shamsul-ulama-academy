@@ -25,7 +25,7 @@ jobs:
       - name: Parse all JavaScript modules
         run: |
           set -e
-          find api lib pages netlify/functions public/assets scripts -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -n 1 node --check
+          find api lib pages netlify/functions public/assets scripts server.mjs -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -n 1 node --check
       - name: Import real staging gateway and check unconfigured DB rejects requests
         run: |
           node --input-type=module -e "
@@ -34,9 +34,11 @@ jobs:
           if (res.status !== 503) throw Error('Unconfigured staging must deny all database actions, got ' + res.status);
           console.log('STAGING_GATEWAY_IMPORT_PASS; DATABASE_UNCONFIGURED_BLOCK_PASS');
           "
-      - name: Verify that 19 routes, all source assets and 14 migrations remain
+      - name: Verify that 19 routes, all source assets and 17 migrations remain
         run: npm run test:staging:static
-      - name: Apply all 14 original SQL migrations and exercise disposable account/admission/deletion
+      - name: Apply all 17 source SQL migrations and exercise disposable account/admission/deletion
         run: npm run test:staging:database
       - name: Test real Academy API login, accounts, gallery and Hifz against ephemeral DB
         run: npm run test:staging:api
+      - name: Exercise admission review, account recovery, PDF, student notes and media against disposable database
+        run: npm run test:staging:acceptance

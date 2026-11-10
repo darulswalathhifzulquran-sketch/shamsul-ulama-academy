@@ -3,18 +3,19 @@
   "version": "16.0.0-staging.1",
   "private": true,
   "type": "module",
-  "description": "Isolated Netlify staging port of the complete Academy v16 application; no production data.",
+  "description": "Isolated Academy v16 staging, full Node server and Netlify functions, no production data.",
   "engines": {
     "node": ">=22"
   },
   "dependencies": {
-    "@netlify/blobs": "11.1.8",
     "pg": "8.23.1"
   },
   "scripts": {
     "test:staging:static": "node scripts/staging_static_check.mjs",
     "test:staging:database": "node scripts/staging_database_check.mjs",
-    "test:staging:api": "node scripts/staging_api_check.mjs"
+    "test:staging:api": "node scripts/staging_api_check.mjs",
+    "start": "node server.mjs --serve",
+    "test:staging:acceptance": "node scripts/staging_acceptance_check.mjs"
   },
   "devDependencies": {
     "@netlify/database-dev": "1.0.1"

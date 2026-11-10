@@ -210,29 +210,36 @@ async function refreshApplications(){
  if(!applications.length){empty(root,'No official admission applications received yet.');return;}
  for(const app of applications){
   const view=()=>openApplication(app.id);
-  const actions=[['View',view],
-   ['Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';syncAdmissionInitialPassword();$('applicationStatus').focus();}],
-   ['Approve & Create Account',async()=>{
-     try{await openApplication(app.id);$('applicationStatus').value='approved';syncAdmissionInitialPassword();
-       if(!await confirmAction('Approve Student Admission?', 'This creates the Student Record and a secure login account automatically.','Yes — Approve & Create'))return;
-       await saveApplicationDecision();
-     }catch(e){status('Approval not saved: '+e.message,true);}
-   }],
-   ['Reject & Save',async()=>{
-     try{await openApplication(app.id);$('applicationStatus').value='rejected';syncAdmissionInitialPassword();
-       if(!await confirmAction('Reject Admission?', 'This saves a Rejected decision to the database. No Student Login will be created.','Yes — Reject & Save'))return;
-       await saveApplicationDecision();
-     }catch(e){status('Rejection not saved: '+e.message,true);}
-   }],
-   ['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]];
+  const locked=app.status==='approved'; // Never change an approved student's account through admission review.
+  const actions=[['View',view]];
+  if(!locked){
+   if(app.status==='rejected'||app.status==='cancelled')actions.push(['Reopen for Review',()=>decideApplication(app,'under_review','Reopen Admission?','Reopen this saved application for Usthad review?')]);
+   actions.push(['Move to Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';syncAdmissionInitialPassword();$('applicationStatus').focus();}]);
+   actions.push(['Approve & Create Account',()=>decideApplication(app,'approved','Approve Student Admission?','Approval will save the Student Record and create exactly one secure login.')]);
+   actions.push(['Reject & Save',()=>decideApplication(app,'rejected','Reject Admission?','The rejection will be saved with its history. No Student Login will be created.')]);
+   actions.push(['Cancel Application',()=>decideApplication(app,'cancelled','Cancel Admission Application?','This cancels the application without deleting any student, account or application history.')]);
+  }
+  actions.push(['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]);
   entry(root,app.student_name+' · '+app.application_number,
    'Guardian: '+app.guardian_name+' · '+app.guardian_phone+' · '+String(app.status).replaceAll('_',' ').toUpperCase()+
    ' · Applied: '+String(app.created_at).slice(0,10),actions);
  }
 }
+async function decideApplication(app,next,heading,prompt){
+ try{
+  await openApplication(app.id);
+  if(app.status==='approved')throw Error('An approved Student Account cannot be cancelled or deleted by changing Admission status.');
+  $('applicationStatus').value=next;syncAdmissionInitialPassword();
+  if(!await confirmAction(heading,prompt,'Confirm & Save'))return;
+  await saveApplicationDecision();
+ }catch(e){status('Admission NOT saved: '+e.message,true);}
+}
 async function openApplication(id){
  const response=await api('/api/academy/applications?id='+encodeURIComponent(id));
- currentApplication=response.application;
+  currentApplication=response.application;
+ const history=$('applicationHistory');history.replaceChildren();
+ for(const event of response.history||[]){const row=text('p',(event.from_status||'new')+' → '+event.to_status+' · '+new Date(event.created_at).toLocaleString('en-IN')+(event.note?' · '+event.note:''),'hint');history.append(row);}
+ if(!history.childNodes.length)history.append(text('p','No previous decisions recorded.','hint'));
  const x=currentApplication;
  const root=$('applicationDetails');root.replaceChildren();
  const values=[
@@ -250,7 +257,9 @@ async function openApplication(id){
   field.append(text('small',label),text('strong',value||'—'));root.append(field);
  }
  $('applicationHeading').textContent='Admission Form · '+x.application_number;
+ $('saveApplicationDecision').hidden=x.status==='approved';
  $('applicationStatus').value=x.status;
+ $('applicationStatus').disabled=x.status==='approved';
  $('applicationReason').value=x.decision_reason||'';
  $('applicationStaffNote').value=x.staff_note||'';
  $('admissionInitialPassword').value='';
@@ -280,7 +289,7 @@ async function saveApplicationDecision(){
   out=await api('/api/academy/applications','PUT',payload);
  }catch(e){
   $('applicationFeedback').textContent='NOT SAVED: '+e.message;status('Admission NOT saved: '+e.message,true);
-  button.disabled=false;return;
+  button.disabled=false;throw e;
  }
  try{await refreshApplications();}catch(e){console.warn('Application list refresh failed',e);}
  try{await openApplication(payload.id);}catch(e){console.warn('Application detail refresh failed',e);}
@@ -297,7 +306,7 @@ async function saveApplicationDecision(){
   $('applicationFeedback').append(details,copy,warning);
   await Promise.allSettled([refreshStudents(),refreshAccounts()]);
  }
- status(out.account_created?'Student '+out.admission_number+' and Login '+out.username+' CREATED and SAVED. Copy the one-time password.':out.already_approved?'Student already approved. To change the login password, open Accounts & Parents and Reset Account Password.':out.status==='rejected'?'Application REJECTED and SAVED in Database.':'Application decision SAVED in Database.');
+ status(out.account_created?'Student '+out.admission_number+' and Login '+out.username+' CREATED and SAVED. Copy the one-time password.':out.already_approved?'Student already approved. To change the login password, open Accounts & Parents and Reset Account Password.':out.status==='rejected'?'Application REJECTED and SAVED in Database.':out.status==='cancelled'?'Application CANCELLED and SAVED; no student data deleted.':'Application decision SAVED in Database.');
  button.disabled=false;
 }
 
@@ -385,7 +394,7 @@ function connect(){
  $('bulkStudentsZone').hidden=(role!=='admin');
  $('deleteAllStudents').addEventListener('click',deleteAllStudents);
  $('openJourney').addEventListener('click',()=>{const id=$('previewStudent').value;if(id)location.href='/dashboard?student_id='+encodeURIComponent(id);});
- $('saveApplicationDecision').addEventListener('click',saveApplicationDecision);
+ $('saveApplicationDecision').addEventListener('click',()=>saveApplicationDecision().catch(e=>status('Admission NOT saved: '+e.message,true)));
  $('applicationStatus').addEventListener('change',syncAdmissionInitialPassword);
  $('showAdmissionInitialPassword').addEventListener('change',e=>{$('admissionInitialPassword').type=e.target.checked?'text':'password';});
  $('closeApplication').addEventListener('click',()=>{$('applicationViewer').hidden=true;currentApplication=null;});

@@ -19,11 +19,11 @@ required = [
 ]
 missing = [path for path in required if not (root/path).is_file()]
 migrations = sorted((root/"migrations").glob("*.sql"))
-expected = [f"{i:04d}" for i in range(1,15)]
+expected = [f"{i:04d}" for i in range(1,18)]
 present = [p.stem.split("_",1)[0] for p in migrations]
-print("Shamsul Ulama — Complete v15 source validation")
+print("Shamsul Ulama — Complete v16 staging source validation")
 print(f"Required files: {len(required)-len(missing)}/{len(required)}")
-print(f"SQL migrations: {len(migrations)} (expected 14)")
+print(f"SQL migrations: {len(migrations)} (expected 17)")
 if missing: print("Missing: " + ", ".join(missing))
 if present != expected: print("Migration numbers unexpected: " + ", ".join(present))
 else: print("Migration ordering: OK")

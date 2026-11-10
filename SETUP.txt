@@ -1,10 +1,12 @@
-SHAMSUL ULAMA ISLAMIC ACADEMY — COMPLETE SOURCE v16
+SHAMSUL ULAMA ISLAMIC ACADEMY — COMPLETE STAGING SOURCE (NOT PRODUCTION)
 
-1. Read README.md and docs/COMPLETE_SETUP.md first.
-2. Existing live website: https://shamsul-ulama-w2kv.hatchable.site
-3. Full source files, public assets, 14 migrations and Hatchable config are included.
-4. DO NOT re-run migrations on the current live database; DO NOT delete student records to test bulk delete.
-5. No live private database records, media storage, secrets, or credentials are in this archive.
-6. Full backend depends on Hatchable; Netlify pure static is insufficient.
-7. Verify with: python scripts/verify_source.py
-8. Make your own ZIP with: python scripts/make_complete_zip.py
+1. README.md — correct information about this source ZIP.
+2. docs/STAGING_OWNER_SETUP_AND_ACCEPTANCE.md — Netlify staging instructions.
+3. docs/STAGING_RAILWAY_QA.md — optional Railway staging instructions.
+4. ALL frontend, backend, routes, database SQL and static assets are included.
+5. 14 preserved original schema migrations + 3 additive STAGING-ONLY migrations.
+6. Railway: Node 22, npm start, configure two private env vars on Railway.
+7. Netlify: use staging/academy-free-hosting-v16 only and the repo's actual netlify.toml.
+8. Database: exclusively the Neon academy-v16-qa staging branch (NOT production).
+9. Never put student information, passwords, credential hashes, uploads, or tokens in GitHub or ChatGPT.
+10. Do not publish to production before end-to-end real browser and role tests pass.

@@ -17,6 +17,7 @@ import settings from '../../api/academy/settings.js';
 import students from '../../api/academy/students.js';
 import bulkDelete from '../../api/academy/students-bulk-delete.js';
 import target from '../../api/academy/target.js';
+import revision from '../../api/academy/revision.js';
 import staffPage from '../../pages/staff.js';
 import dashboardPage from '../../pages/dashboard.js';
 import { db, storage } from '../../lib/academy-runtime.js';
@@ -41,6 +42,7 @@ const handlers = {
   'api/academy/students': students,
   'api/academy/students-bulk-delete': bulkDelete,
   'api/academy/target': target,
+  'api/academy/revision': revision,
   staff: staffPage,
   dashboard: dashboardPage
 };
@@ -62,6 +64,7 @@ const allowedMethods = {
   'api/academy/students': ['GET','POST','PUT','DELETE'],
   'api/academy/students-bulk-delete': ['DELETE'],
   'api/academy/target': ['GET','POST'],
+  'api/academy/revision': ['GET','POST'],
   'api/academy/media': ['GET'],
   'api/academy/gallery-chunks': ['POST', 'PUT'],
   staff: ['GET'], dashboard: ['GET']
@@ -129,13 +132,19 @@ async function serveGalleryMedia(request, req, url) {
   }
   const media = await storage.getStream(key);
   if (!media) return new Response('Not found', { status: 404 });
-  return new Response(media.stream, {
-    headers: {
-      'Content-Type': media.contentType,
-      'Cache-Control': 'private, no-store',
-      'X-Content-Type-Options': 'nosniff'
-    }
-  });
+  const headers={'Content-Type':media.contentType,'Cache-Control':'private, no-store',
+    'Accept-Ranges':'bytes','X-Content-Type-Options':'nosniff'};
+  const range=request.headers.get('range');
+  if(range&&media.bytes){
+    const m=/^bytes=(\d*)-(\d*)$/.exec(range);
+    if(!m)return new Response(null,{status:416,headers:{...headers,'Content-Range':'bytes */'+media.length}});
+    let start=m[1]?Number(m[1]):Math.max(0,media.length-Number(m[2])),end=m[2]&&m[1]?Number(m[2]):media.length-1;
+    if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start>end||start>=media.length||end<0)
+      return new Response(null,{status:416,headers:{...headers,'Content-Range':'bytes */'+media.length}});
+    end=Math.min(end,media.length-1);
+    return new Response(media.bytes.slice(start,end+1),{status:206,headers:{...headers,'Content-Range':`bytes ${start}-${end}/${media.length}`,'Content-Length':String(end-start+1)}});
+  }
+  return new Response(media.stream,{headers:{...headers,'Content-Length':String(media.length||0)}});
 }
 export default async function academyGateway(request) {
   const url = new URL(request.url);

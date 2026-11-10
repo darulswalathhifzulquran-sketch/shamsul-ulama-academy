@@ -8,7 +8,7 @@ Do not deploy this project's old GitHub main branch (it is an unrelated/outdated
 2. Choose **Add new project / Import from Git** and connect your GitHub account.
 3. Select the existing repository **darulswalathhifzulquran-sketch/shamsul-ulama-academy**. The source is already public, but it contains no private student data.
 4. Set **Branch to deploy: staging/academy-free-hosting-v16** (not main; not complete/... and not any release branch).
-5. Publish directory: public. Build settings are supplied in netlify.toml. Functions: netlify/functions. Database: existing separate Neon Free staging project, QA branch academy-v16-qa. It already contains all 14 original migrations. No additional Netlify database service is required.
+5. Publish directory: public. Build settings are supplied in netlify.toml. Functions: netlify/functions. Database: existing separate Neon Free staging project, QA branch academy-v16-qa. It already contains the first 14 original migrations, with 3 new additive QA migrations in this branch requiring separate QA-only application. No additional Netlify database service is required.
 6. Create a unique dedicated staging site on the FREE tier. Suggested free URL shape: shamsul-ulama-academy-qa.netlify.app (subject to availability). Never use this preview as the final official Academy URL.
 7. In Project configuration → Environment variables, create **ACADEMY_STAGING_SETUP_TOKEN**, a random high-entropy value stored ONLY in Netlify's secret configuration. Never paste the value in chat, screenshots, GitHub or public HTML. Production Hatchable credentials must NOT be copied.
 8. In Netlify secret environment variables, add ACADEMY_STAGING_DATABASE_URL using the Neon project QA branch pooled connection URL copied directly in the Neon dashboard. NEVER paste this URL in chat or GitHub. Once Netlify deployment reports success AND the Neon QA database connection verifies, open /setup on the NEW Netlify URL, use the owner key privately to create a BRAND NEW disposable QA Admin. No production usernames or existing passwords are necessary.
@@ -24,7 +24,7 @@ This guide is a plan. A working Netlify URL, database and authentication have NO
 - Parent linking, login, view-only permission and cross-student data isolation
 - Admission submit → approve, reject, duplicate approval blocked, print
 - Monthly Hifz draft/published filtering; Juz; targets; journey calculations
-- Gallery photo / video upload tests at 1, 5, 10, 16 MiB; publish, unpublish, delete and storage confirmation
+- Gallery photo / video upload tests at 1, 5, 10, 16 MiB; publish, unpublish, delete, byte-range streaming and Neon QA storage confirmation
 - Site settings, enquiry forms, audit logs, rate limits
 - Unauthorized/missing-CSRF protections; no accidental public account access
 - Independent database backup, restore into a separate temporary database, and record-count comparison
@@ -41,8 +41,12 @@ The original Hatchable app must remain operational, without any test data being 
 
 ## Progress
 Source branch: staging/academy-free-hosting-v16
-Full original core files retained. All 14 migrations copied unchanged.
-GitHub Actions runs automated source checks (NO database end-to-end test).
+Full original core files retained. All 14 original migrations preserved unchanged; 0015–0017 are new QA-only additions.
+GitHub Actions runs synthetic database/API/hosting acceptance tests using an ephemeral local QA database. Hosted-browser acceptance is still NOT TESTED.
 Live Netlify staging site: NOT CREATED / NOT VERIFIED from this chat.
 Neon project and QA database: CREATED/SCHEMA VERIFIED. Accounts/students/gallery are empty.
 Production migration: NOT STARTED.
+
+## Railway alternative and updated media backend
+
+The identical staging branch also contains `server.mjs`, `npm start`, and `railway.json`. See `docs/STAGING_RAILWAY_QA.md`. The currently selected runtime DB in `lib/academy-runtime.js` is Neon QA via `ACADEMY_STAGING_DATABASE_URL`, **not Netlify Database**. New media storage is Neon QA PostgreSQL, NOT Netlify Blobs; this consumes the limited free database allowance. Do not activate a paid Railway plan or change production services. The staging URL must remain non-public to students until all tests pass.
