@@ -67,7 +67,7 @@ try{
  check(await decide(admin,app.id,'approved'),200,'Idempotent re-approval');
  r=await call('api/academy/students','GET',null,admin);assert.equal(r.data.students.length,1);steps++;
  let pdf=await withId('api/academy/application-print',app.id,admin);
- assert.equal(pdf.status,200);assert.match(pdf.headers.get('content-type')||'','text/html');
+ assert.equal(pdf.status,200);assert.match(pdf.headers.get('content-type')||'',/text\/html/);
  const html=await pdf.text();assert(html.includes('SHAMSUL ULAMA')&&html.includes('Print / Save as PDF')&&html.includes('QA Student Rejected Then Approved'));steps++;
  // Approved admissions must NEVER silently delete the student account.
  check(await decide(admin,app.id,'cancelled'),409,'Prevent cancellation of approved account');
