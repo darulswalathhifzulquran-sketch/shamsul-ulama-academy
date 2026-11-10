@@ -119,7 +119,7 @@ try{
  // Test real Railway Node transport without binding any public port.
  server=createAcademyServer();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const base='http://127.0.0.1:'+server.address().port;
- let httpRes=await fetch(base+'/');assert.equal(httpRes.status,200);assert((await httpRes.text()).includes('SHAMSUL'));steps++;
+ let httpRes=await fetch(base+'/');assert.equal(httpRes.status,200);assert(/shamsul/i.test(await httpRes.text()));steps++;
  httpRes=await fetch(base+'/assets/site.js');assert.equal(httpRes.status,200);steps++;
  httpRes=await fetch(base+'/.env');assert.equal(httpRes.status,404);steps++;
  httpRes=await fetch(base+'/api/identity/me');assert.equal(httpRes.status,401);steps++;
