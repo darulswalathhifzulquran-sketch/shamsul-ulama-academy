@@ -1,4 +1,4 @@
-import {db,guard} from '../../lib/academy-auth.js';
+import {db,guard} from 'lib/academy-auth.js';
 export const access='public';
 export const methods=['DELETE'];
 

@@ -1,4 +1,4 @@
-import {db,makePassword,validPassword,shaHex,originAllowed,preventCache} from '../../lib/academy-auth.js';
+import {db,makePassword,validPassword,shaHex,originAllowed,preventCache} from 'lib/academy-auth.js';
 export const access='public';
 export const methods=['POST'];
 
