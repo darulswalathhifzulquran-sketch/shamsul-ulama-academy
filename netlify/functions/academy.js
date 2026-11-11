@@ -12,6 +12,7 @@ import applicationPrint from '../../api/academy/application-print.js';
 import enquiries from '../../api/academy/enquiries.js';
 import gallery from '../../api/academy/gallery.js';
 import juz from '../../api/academy/juz.js';
+import juzBulk from '../../api/academy/juz-bulk.js';
 import monthly from '../../api/academy/monthly.js';
 import overview from '../../api/academy/overview.js';
 import settings from '../../api/academy/settings.js';
@@ -39,6 +40,7 @@ const handlers = {
   'api/academy/enquiries': enquiries,
   'api/academy/gallery': gallery,
   'api/academy/juz': juz,
+  'api/academy/juz-bulk': juzBulk,
   'api/academy/monthly': monthly,
   'api/academy/overview': overview,
   'api/academy/settings': settings,
@@ -63,6 +65,7 @@ const allowedMethods = {
   'api/academy/enquiries': ['GET','POST','PUT'],
   'api/academy/gallery': ['GET','POST','PUT','DELETE'],
   'api/academy/juz': ['GET','POST'],
+  'api/academy/juz-bulk': ['POST'],
   'api/academy/monthly': ['GET','POST'],
   'api/academy/overview': ['GET'],
   'api/academy/settings': ['GET','POST'],
