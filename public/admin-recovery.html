@@ -30,13 +30,13 @@ const fragment=new URLSearchParams(location.hash.slice(1));let token=fragment.ge
 history.replaceState(null,'',location.pathname+location.search);
 const form=document.getElementById('recovery'),notice=document.getElementById('notice'),button=document.getElementById('save');
 if(!/^[a-f0-9]{64}$/.test(token)){notice.textContent='Open the secure recovery link supplied to the Academy owner. A normal login link cannot reset a password.';return;}
-form.hidden=false;notice.textContent='Recovery link verified for format. It can only be used once before it expires.';
+form.hidden=false;notice.textContent='Recovery link format verified. This request uses your signed-in QA project session and can only be used once before it expires.';
 form.addEventListener('submit',async event=>{
  event.preventDefault();const password=document.getElementById('newPassword').value,confirmation=document.getElementById('confirmPassword').value;
  if(password!==confirmation){notice.textContent='The two passwords do not match.';return;}
  if(password.length<12||password.length>128||!/[a-z]/i.test(password)||!/[0-9]/.test(password)){notice.textContent='Use 12–128 characters with both letters and numbers.';return;}
  button.disabled=true;notice.textContent='Validating secure recovery link…';
- try{const response=await fetch('/api/identity/recover-admin',{method:'POST',credentials:'omit',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({token,new_password:password})});
+ try{const response=await fetch('/api/identity/recover-admin',{method:'POST',credentials:'include',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({token,new_password:password})});
  const data=await response.json();if(!response.ok)throw Error(data.error||'Recovery failed.');
  token='';document.getElementById('newPassword').value='';document.getElementById('confirmPassword').value='';
  form.hidden=true;notice.textContent='';document.getElementById('success').textContent='Password changed. Sign in with username: '+data.username;
