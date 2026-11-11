@@ -140,11 +140,43 @@ async function loadRevisionNotes(){
    if(note.note)article.append(elem('p',note.note,'muted'));list.append(article);
  }
 }
+function installUsthadJourneyTools(){
+ const panel=$('usthadPanel');panel.hidden=false;
+ const student=$('usthadStudent'),juz=$('usthadJuz');
+ student.replaceChildren();for(const row of links)student.append(new Option(row.full_name+' · '+row.admission_number,String(row.id)));
+ juz.replaceChildren();for(let i=1;i<=30;i++)juz.append(new Option('Juz '+i+' · '+(START[i]-START[i-1])+' pages',String(i)));
+ const maxPages=()=>{
+  const j=Number(juz.value),max=START[j]-START[j-1];
+  $('usthadPages').max=String(max);
+  if($('verifiedCompletion').checked)$('usthadPages').value=String(max);
+  else if(Number($('usthadPages').value)>max)$('usthadPages').value=String(max);
+ };
+ student.addEventListener('change',()=>{});
+ juz.addEventListener('change',maxPages);
+ $('verifiedCompletion').addEventListener('change',maxPages);
+ maxPages();
+ $('publishJuz').addEventListener('click',async()=>{
+  const btn=$('publishJuz'),feedback=$('usthadFeedback');
+  const sid=Number(student.value),number=Number(juz.value),pages=Number($('usthadPages').value);
+  const max=START[number]-START[number-1],complete=$('verifiedCompletion').checked,accuracyVerified=$('verifiedAccuracy').checked;
+  const raw=$('usthadAccuracy').value,accuracy=raw===''?null:Number(raw);
+  if(!Number.isInteger(pages)||pages<0||pages>max||complete&&pages!==max){feedback.textContent='Enter 0–'+max+' pages for Juz '+number+'. A full completed Juz must have all '+max+' pages.';return;}
+  if(accuracyVerified&&(accuracy===null||!Number.isFinite(accuracy)||accuracy<0||accuracy>100)){feedback.textContent='Enter a recitation accuracy from 0–100% when verifying accuracy.';return;}
+  btn.disabled=true;feedback.textContent='Publishing verified Juz…';
+  try{
+   const result=await api('/api/academy/juz','POST',{student_id:sid,juz_number:number,memorised_pages:pages,completion_verified:complete,accuracy_verified:accuracyVerified,accuracy_percent:accuracy,dua_message:$('usthadDua').value});
+   if(!result.ok||!result.verified)throw Error('Server did not confirm verification.');
+   feedback.textContent='✓ Juz '+number+' record saved. This is '+pages+' page(s) within the selected Juz, NOT '+pages+' completed Juz.';
+   if(selected&&Number(selected.id)===sid)await loadStudent(sid,true);
+  }catch(error){feedback.textContent='Could not save: '+error.message;}finally{btn.disabled=false;}
+ });
+}
 async function loadStudent(id,quiet=false){
  if(!quiet){msg('Loading verified student progress…');$('privateArea').hidden=true;}
  const data=await api('/api/academy/overview?student_id='+encodeURIComponent(id));
  if(!data.selected)throw Error('No linked student record.');
  selected=data.selected;records=data.juz||[];reports=data.reports||[];$('privateArea').hidden=false;
+ if(account&&['admin','usthad'].includes(account.role)&&$('usthadStudent')&&document.activeElement?.closest('#usthadPanel')===null)$('usthadStudent').value=String(selected.id);
  $('studentTitle').textContent=selected.full_name;$('admissionInfo').textContent=selected.admission_number+' · '+(selected.batch_name||'Hifz')+' · '+selected.relationship+' view';
  const total=verifiedPages(),left=604-total;
  $('verifiedTotal').textContent=fmt(total)+' / 604';$('pagesLeft').textContent=fmt(left);$('progressPercent').textContent=fmt(total/604*100)+'%';
@@ -199,6 +231,7 @@ async function refreshPublishedProgress(){
  const staff=['admin','usthad'].includes(account.role);
  if(staff){const link=elem('a','← Usthad Control Centre','btn outline');link.href='/staff';document.querySelector('header').prepend(link);}
  const all=await api('/api/academy/overview');links=all.students||[];
+ if(staff)installUsthadJourneyTools();
  if(!links.length){msg('No student record has been linked to this account. Contact the academy Usthad.');$('pending').hidden=false;document.querySelector('#pending').querySelectorAll('button').forEach(b=>b.hidden=true);return;}
  const sel=$('studentSelect');sel.replaceChildren();for(const s of links)sel.append(new Option(s.full_name+' · '+s.admission_number,String(s.id)));
  $('chooseStudent').hidden=links.length===1;sel.addEventListener('change',()=>loadStudent(Number(sel.value)).catch(e=>msg(e.message)));
