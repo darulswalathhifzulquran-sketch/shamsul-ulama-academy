@@ -210,36 +210,29 @@ async function refreshApplications(){
  if(!applications.length){empty(root,'No official admission applications received yet.');return;}
  for(const app of applications){
   const view=()=>openApplication(app.id);
-  const locked=app.status==='approved'; // Never change an approved student's account through admission review.
-  const actions=[['View',view]];
-  if(!locked){
-   if(app.status==='rejected'||app.status==='cancelled')actions.push(['Reopen for Review',()=>decideApplication(app,'under_review','Reopen Admission?','Reopen this saved application for Usthad review?')]);
-   if(app.status!=='interview')actions.push(['Move to Interview',()=>decideApplication(app,'interview','Move Admission to Interview?','This saves Interview status in the academy database. Schedule a date later from View if needed.')]);
-   actions.push(['Approve & Create Account',()=>decideApplication(app,'approved','Approve Student Admission?','Approval will save the Student Record and create exactly one secure login.')]);
-   if(app.status!=='rejected')actions.push(['Reject & Save',()=>decideApplication(app,'rejected','Reject Admission?','The rejection will be saved with its history. No Student Login will be created.')]);
-   if(app.status!=='cancelled')actions.push(['Cancel Application',()=>decideApplication(app,'cancelled','Cancel Admission Application?','This cancels the application without deleting any student, account or application history.')]);
-  }
-  actions.push(['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]);
+  const actions=[['View',view],
+   ['Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';syncAdmissionInitialPassword();$('applicationStatus').focus();}],
+   ['Approve & Create Account',async()=>{
+     try{await openApplication(app.id);$('applicationStatus').value='approved';syncAdmissionInitialPassword();
+       if(!await confirmAction('Approve Student Admission?', 'This creates the Student Record and a secure login account automatically.','Yes — Approve & Create'))return;
+       await saveApplicationDecision();
+     }catch(e){status('Approval not saved: '+e.message,true);}
+   }],
+   ['Reject & Save',async()=>{
+     try{await openApplication(app.id);$('applicationStatus').value='rejected';syncAdmissionInitialPassword();
+       if(!await confirmAction('Reject Admission?', 'This saves a Rejected decision to the database. No Student Login will be created.','Yes — Reject & Save'))return;
+       await saveApplicationDecision();
+     }catch(e){status('Rejection not saved: '+e.message,true);}
+   }],
+   ['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]];
   entry(root,app.student_name+' · '+app.application_number,
    'Guardian: '+app.guardian_name+' · '+app.guardian_phone+' · '+String(app.status).replaceAll('_',' ').toUpperCase()+
    ' · Applied: '+String(app.created_at).slice(0,10),actions);
  }
 }
-async function decideApplication(app,next,heading,prompt){
- try{
-  await openApplication(app.id);
-  if(app.status==='approved')throw Error('An approved Student Account cannot be cancelled or deleted by changing Admission status.');
-  $('applicationStatus').value=next;syncAdmissionInitialPassword();
-  if(!await confirmAction(heading,prompt,'Confirm & Save'))return;
-  await saveApplicationDecision();
- }catch(e){status('Admission NOT saved: '+e.message,true);}
-}
 async function openApplication(id){
  const response=await api('/api/academy/applications?id='+encodeURIComponent(id));
-  currentApplication=response.application;
- const history=$('applicationHistory');history.replaceChildren();
- for(const event of response.history||[]){const row=text('p',(event.from_status||'new')+' → '+event.to_status+' · '+new Date(event.created_at).toLocaleString('en-IN')+(event.note?' · '+event.note:''),'hint');history.append(row);}
- if(!history.childNodes.length)history.append(text('p','No previous decisions recorded.','hint'));
+ currentApplication=response.application;
  const x=currentApplication;
  const root=$('applicationDetails');root.replaceChildren();
  const values=[
@@ -257,9 +250,7 @@ async function openApplication(id){
   field.append(text('small',label),text('strong',value||'—'));root.append(field);
  }
  $('applicationHeading').textContent='Admission Form · '+x.application_number;
- $('saveApplicationDecision').hidden=x.status==='approved';
  $('applicationStatus').value=x.status;
- $('applicationStatus').disabled=x.status==='approved';
  $('applicationReason').value=x.decision_reason||'';
  $('applicationStaffNote').value=x.staff_note||'';
  $('admissionInitialPassword').value='';
@@ -289,7 +280,7 @@ async function saveApplicationDecision(){
   out=await api('/api/academy/applications','PUT',payload);
  }catch(e){
   $('applicationFeedback').textContent='NOT SAVED: '+e.message;status('Admission NOT saved: '+e.message,true);
-  button.disabled=false;throw e;
+  button.disabled=false;return;
  }
  try{await refreshApplications();}catch(e){console.warn('Application list refresh failed',e);}
  try{await openApplication(payload.id);}catch(e){console.warn('Application detail refresh failed',e);}
@@ -306,7 +297,7 @@ async function saveApplicationDecision(){
   $('applicationFeedback').append(details,copy,warning);
   await Promise.allSettled([refreshStudents(),refreshAccounts()]);
  }
- status(out.account_created?'Student '+out.admission_number+' and Login '+out.username+' CREATED and SAVED. Copy the one-time password.':out.already_approved?'Student already approved. To change the login password, open Accounts & Parents and Reset Account Password.':out.status==='rejected'?'Application REJECTED and SAVED in Database.':out.status==='cancelled'?'Application CANCELLED and SAVED; no student data deleted.':'Application decision SAVED in Database.');
+ status(out.account_created?'Student '+out.admission_number+' and Login '+out.username+' CREATED and SAVED. Copy the one-time password.':out.already_approved?'Student already approved. To change the login password, open Accounts & Parents and Reset Account Password.':out.status==='rejected'?'Application REJECTED and SAVED in Database.':'Application decision SAVED in Database.');
  button.disabled=false;
 }
 
@@ -393,8 +384,8 @@ function connect(){
  $('signout').addEventListener('click',async()=>{try{await api('/api/identity/logout','POST',{});}finally{location.replace('/login');}});
  $('bulkStudentsZone').hidden=(role!=='admin');
  $('deleteAllStudents').addEventListener('click',deleteAllStudents);
- $('openJourney').addEventListener('click',()=>{const id=$('previewStudent').value;if(id)location.href='/dashboard?student_id='+encodeURIComponent(id);});
- $('saveApplicationDecision').addEventListener('click',()=>saveApplicationDecision().catch(e=>status('Admission NOT saved: '+e.message,true)));
+ $('openJourney').addEventListener('click',()=>{const id=$('previewStudent').value;if(id)location.href='/journey?student_id='+encodeURIComponent(id);});
+ $('saveApplicationDecision').addEventListener('click',saveApplicationDecision);
  $('applicationStatus').addEventListener('change',syncAdmissionInitialPassword);
  $('showAdmissionInitialPassword').addEventListener('change',e=>{$('admissionInitialPassword').type=e.target.checked?'text':'password';});
  $('closeApplication').addEventListener('click',()=>{$('applicationViewer').hidden=true;currentApplication=null;});
@@ -494,7 +485,7 @@ function connect(){
 });
  $('juzForm').querySelector('select[name="student_id"]').addEventListener('change',()=>refreshJuz().catch(e=>status(e.message,true)));
  for(let i=1;i<=30;i++)$('juzNumber').append(new Option('Juz '+i+' · '+(JUZ[i]-JUZ[i-1])+' pages',String(i)));
- const updateMax=()=>{$('juzPages').max=String(JUZ[Number($('juzNumber').value)]-JUZ[Number($('juzNumber').value)-1]);};
+ const updateMax=()=>{const max=JUZ[Number($('juzNumber').value)]-JUZ[Number($('juzNumber').value)-1];$('juzPages').max=String(max);if($('juzCompleted').checked)$('juzPages').value=String(max);else if(Number($('juzPages').value)>max)$('juzPages').value=String(max);};
  $('juzNumber').addEventListener('change',updateMax);updateMax();$('juzCompleted').addEventListener('change',()=>{if($('juzCompleted').checked)$('juzPages').value=$('juzPages').max;});
  hook('juzForm',async()=>{
  const x=$form('juzForm');x.student_id=Number(x.student_id);x.juz_number=Number(x.juz_number);
@@ -506,38 +497,26 @@ function connect(){
  status('Juz '+x.juz_number+' progress and blessing saved successfully.');
  await refreshJuz().catch(()=>status('Juz saved; list refresh failed. Reload to see it.'));
 });
-
-async function uploadGalleryChunked(file, form, wasPublished){
- const data=new FormData(form);
- const started=await api('/api/academy/gallery-chunks','POST',{
-  action:'start',filename:file.name,mime:file.type,size:file.size,
-  caption:String(data.get('caption')||''),
-  alt_text:String(data.get('alt_text')||''),
-  display_order:String(data.get('display_order')||'0'),
-  is_published:wasPublished?'true':'false',
-  rights_confirmed:form.elements.rights_confirmed.checked
+ for(let i=1;i<=30;i++)$('bulkJuzCount').append(new Option(i+' completed Juz',String(i)));
+ const bulkPages=()=>{const n=Number($('bulkJuzCount').value),direction=$('bulkJuzDirection').value;
+  let pages=0;
+  for(let i=0;i<n;i++){const j=direction==='ascending'?i+1:30-i;pages+=JUZ[j]-JUZ[j-1];}
+  $('bulkJuzPreview').textContent=n+' FULL Juz = '+pages+' pages (out of 604) in the Academy 604-page Mushaf map. This is NOT '+n+' pages. Teacher verification updates only these Juz.';
+ };
+ $('bulkJuzCount').value='19';bulkPages();
+ $('bulkJuzCount').addEventListener('change',bulkPages);
+ $('bulkJuzDirection').addEventListener('change',bulkPages);
+ hook('juzBulkForm',async()=>{
+  const x=$form('juzBulkForm');
+  const student_id=Number(x.student_id),completed_juz=Number(x.completed_juz),direction=x.direction;
+  if(!$('bulkJuzConfirm').checked)throw Error('Teacher confirmation checkbox required.');
+  const response=await api('/api/academy/juz-bulk','POST',{student_id,completed_juz,direction,confirmed:true});
+  if(!response.ok||response.saved!==completed_juz)throw Error('The full verified Juz batch was not confirmed by the server.');
+  $('bulkJuzStatus').textContent='Successfully verified '+completed_juz+' Juz = '+response.pages_in_selected_juz+' full pages.';
+  $('bulkJuzConfirm').checked=false;
+  const mainSelect=document.querySelector('#juzForm select[name="student_id"]');mainSelect.value=String(student_id);
+  await refreshJuz();status('Teacher-verified '+completed_juz+' complete Juz = '+response.pages_in_selected_juz+' pages. Other records preserved.');
  });
- if(!started.ok||!started.upload_id||!started.chunk_size)throw Error('Could not start secure gallery upload.');
- const id=started.upload_id;
- try{
-  for(let index=0;index<started.chunks;index++){
-   const begin=index*started.chunk_size,end=Math.min(file.size,begin+started.chunk_size);
-   const response=await fetch('/api/academy/gallery-chunks?upload_id='+encodeURIComponent(id)+'&index='+index,{
-    method:'PUT',credentials:'include',
-    headers:{'X-Academy-CSRF':csrf,'Content-Type':'application/octet-stream'},
-    body:file.slice(begin,end)
-   });
-   const result=await response.json();
-   if(!response.ok||!result.ok)throw Error(result.error||'Gallery upload chunk failed.');
-   status('Uploading '+file.name+': '+Math.round(100*end/file.size)+'%');
-  }
-  return await api('/api/academy/gallery-chunks','POST',{action:'finish',upload_id:id});
- }catch(e){
-  await api('/api/academy/gallery-chunks','POST',{action:'cancel',upload_id:id}).catch(()=>{});
-  throw e;
- }
-}
-
  hook('galleryForm',async()=>{
  const f=$('galleryForm');
  const files=Array.from(f.elements.file.files||[]);
@@ -550,10 +529,8 @@ async function uploadGalleryChunked(file, form, wasPublished){
  const submissions=files.length?files:[null];
  for(const selected of submissions){
   const fd=new FormData(f);
-  let processedFile=null;
   if(selected){
-   processedFile=await optimizeGalleryPhoto(selected);
-   const file=processedFile;
+   const file=await optimizeGalleryPhoto(selected);
    if(file.size>16*1024*1024){
     failed++;errors.push(selected.name+': exceeds the current hosting direct-upload size; use a direct HTTPS file link or video host URL.');
     continue;
@@ -562,9 +539,7 @@ async function uploadGalleryChunked(file, form, wasPublished){
   }else{fd.delete('file');}
   fd.set('is_published',wasPublished?'true':'false');
   try{
-   const saved=processedFile&&processedFile.size>3*1024*1024?
-    await uploadGalleryChunked(processedFile,f,wasPublished):
-    await api('/api/academy/gallery','POST',fd,true);
+   const saved=await api('/api/academy/gallery','POST',fd,true);
    if(!saved.ok)throw Error('Database did not confirm saved media.');
    succeeded++;status('Saved '+succeeded+' of '+submissions.length+' Gallery items');
   }catch(e){failed++;errors.push((selected?.name||'Media link')+': '+e.message);}
