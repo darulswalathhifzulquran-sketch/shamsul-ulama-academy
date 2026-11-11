@@ -1,4 +1,4 @@
-import {db,guard,audit,makePassword,normalizeUsername,validUsername,validPassword} from '../../lib/academy-auth.js';
+import {db,guard,audit,makePassword,normalizeUsername,validUsername,validPassword} from 'lib/academy-auth.js';
 export const access='public';export const methods=['GET','POST','PUT','DELETE'];
 export default async function(req,res){
  const a=await guard(req,res,['admin','usthad'],req.method!=='GET');if(!a)return;

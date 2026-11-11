@@ -1,5 +1,5 @@
 // Explicit staff-only, additive, atomic completion of a consecutive series of Juz.
-import {db,guard,audit} from '../../lib/academy-auth.js';
+import {db,guard,audit} from 'lib/academy-auth.js';
 export const access='public',methods=['POST'];
 const START=[1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582,605];
 export default async function(req,res){

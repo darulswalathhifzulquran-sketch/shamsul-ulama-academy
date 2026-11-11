@@ -1,7 +1,7 @@
-import {db,guard,originAllowed,preventCache,audit,makePassword,validPassword} from '../../lib/academy-auth.js';
+import {db,guard,originAllowed,preventCache,audit,makePassword,validPassword} from 'lib/academy-auth.js';
 export const access='public';
 export const methods=['GET','POST','PUT'];
-const statuses=new Set(['submitted','under_review','interview','approved','rejected','cancelled']);
+const statuses=new Set(['submitted','under_review','interview','approved','rejected']);
 const trim=(v,n=255)=>String(v??'').trim().slice(0,n+1);
 const dateOk=s=>!s||(/^\d{4}-\d{2}-\d{2}$/.test(s)&&!Number.isNaN(Date.parse(s+'T00:00:00Z'))&&new Date(s+'T00:00:00Z').toISOString().slice(0,10)===s&&s<=(new Date()).toISOString().slice(0,10)&&s>='1990-01-01');
 const phoneOk=s=>/^\+?[\d\s()-]{9,25}$/.test(s)&&s.replace(/\D/g,'').length>=9;
@@ -53,7 +53,7 @@ export default async function(req,res){
     const history=await db.query('SELECT from_status,to_status,note,actor_account_id,created_at FROM academy_application_events WHERE application_id=$1 ORDER BY created_at DESC',[id]);
     return res.json({application:{...r.rows[0],application_number:number(r.rows[0])},history:history.rows});
    }
-   const r=await db.query('SELECT id,application_year,student_name,guardian_name,guardian_phone,current_class,status,interview_at,decision_reason,created_at FROM academy_admission_applications ORDER BY created_at DESC LIMIT 250');
+   const r=await db.query('SELECT id,application_year,student_name,guardian_name,guardian_phone,current_class,status,student_id,interview_at,decision_reason,created_at FROM academy_admission_applications ORDER BY created_at DESC LIMIT 250');
    return res.json({applications:r.rows.map(x=>({...x,application_number:number(x)}))});
  }
  const id=Number(req.body?.id),next=trim(req.body?.status,40),reason=trim(req.body?.reason,1000)||null,staffNote=trim(req.body?.staff_note,1200)||null;
@@ -91,11 +91,11 @@ export default async function(req,res){
   await audit(s.user.id,'admission.'+decision.status,'application',id);
   return res.json({ok:true,...decision,
    temporary_password:decision.account_created===true?oneTimePassword:undefined,
-   message:decision.account_created===true?'Application APPROVED. Student saved and secure login created. Copy the one-time password now.':decision.status==='rejected'?'Application REJECTED and saved in the database.':decision.status==='cancelled'?'Application CANCELLED safely; no student account was deleted.':'Application '+decision.status+' saved in the database.'});
+   message:decision.account_created===true?'Application APPROVED. Student saved and secure login created. Copy the one-time password now.':decision.status==='rejected'?'Application REJECTED and saved in the database.':'Application '+decision.status+' saved in the database.'});
  }catch(e){
   if(e.code==='23505')return res.status(409).json({error:'Admission number or login already exists. No duplicate student was created. Contact Administrator.'});
   if(e.code==='P0002')return res.status(404).json({error:'Application not found. Refresh the list.'});
-  if(e.code==='P0001')return res.status(409).json({error:'Status cannot be changed in this state. An approved student account is kept safe; refresh and check the application history.'});
+  if(e.code==='P0001')return res.status(409).json({error:'Application could not be changed. Check the current status and refresh.'});
   console.error('Admission decision failed',e?.code||'unknown',e?.message||'');
   return res.status(500).json({error:'Admission was NOT saved. Please refresh and retry; no partial account should have been created.'});
  }

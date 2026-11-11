@@ -1,5 +1,5 @@
 // Daily revision diary, explicitly separate from verified Usthad records.
-import {db,guard,audit} from '../../lib/academy-auth.js';
+import {db,guard,audit} from 'lib/academy-auth.js';
 export const access='public',methods=['GET','POST'];
 function indiaToday(){
  const p=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
