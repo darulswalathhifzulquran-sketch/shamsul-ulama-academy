@@ -53,7 +53,7 @@ export default async function(req,res){
     const history=await db.query('SELECT from_status,to_status,note,actor_account_id,created_at FROM academy_application_events WHERE application_id=$1 ORDER BY created_at DESC',[id]);
     return res.json({application:{...r.rows[0],application_number:number(r.rows[0])},history:history.rows});
    }
-   const r=await db.query('SELECT id,application_year,student_name,guardian_name,guardian_phone,current_class,status,student_id,interview_at,decision_reason,created_at FROM academy_admission_applications ORDER BY created_at DESC LIMIT 250');
+   const r=await db.query('SELECT id,application_year,student_name,guardian_name,guardian_phone,current_class,status,interview_at,decision_reason,created_at FROM academy_admission_applications ORDER BY created_at DESC LIMIT 250');
    return res.json({applications:r.rows.map(x=>({...x,application_number:number(x)}))});
  }
  const id=Number(req.body?.id),next=trim(req.body?.status,40),reason=trim(req.body?.reason,1000)||null,staffNote=trim(req.body?.staff_note,1200)||null;

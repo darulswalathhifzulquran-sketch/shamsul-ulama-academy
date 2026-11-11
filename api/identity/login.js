@@ -7,7 +7,7 @@ export default async function(req,res){
  const username=normalizeUsername(req.body?.username),password=req.body?.password;
  if(!validUsername(username)||typeof password!=='string'||password.length>256)return res.status(401).json({error:'Incorrect username or password.'});
  const throttle=await db.query("SELECT attempts,blocked_until FROM academy_login_throttle_v2 WHERE username=$1 LIMIT 1",[username]);
- if(throttle.rows[0]?.blocked_until&&new Date(throttle.rows[0].blocked_until)>new Date()) { res.setHeader('Retry-After',String(Math.ceil((new Date(throttle.rows[0].blocked_until).getTime()-Date.now())/1000))); return res.status(429).json({error:'Too many attempts. Try again after the security lock expires.'}); }
+ if(throttle.rows[0]?.blocked_until&&new Date(throttle.rows[0].blocked_until)>new Date())return res.status(429).json({error:'Too many attempts. Try again later.'});
  const query=await db.query("SELECT id,username,display_name,role,password_salt,password_hash,password_iterations,active,must_change_password FROM academy_accounts_v2 WHERE username=$1 LIMIT 1",[username]);
  const row=query.rows[0];
  // Run a comparable PBKDF2 even for an unknown user to reduce timing-based discovery.
