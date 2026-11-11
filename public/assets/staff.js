@@ -212,22 +212,22 @@ async function refreshApplications(){
   const view=()=>openApplication(app.id);
   const actions=[['View',view],
    ['Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';syncAdmissionInitialPassword();$('applicationStatus').focus();}],
-   [app.status==='approved'&&!app.student_id?'Repair Approval & Create Login':'Approve & Create Account',async()=>{
+   ['Approve & Create Account',async()=>{
      try{await openApplication(app.id);$('applicationStatus').value='approved';syncAdmissionInitialPassword();
        if(!await confirmAction('Approve Student Admission?', 'This creates the Student Record and a secure login account automatically.','Yes — Approve & Create'))return;
        await saveApplicationDecision();
      }catch(e){status('Approval not saved: '+e.message,true);}
    }],
-   [app.status==='rejected'?'Rejected — Saved':'Reject & Save',async()=>{
+   ['Reject & Save',async()=>{
      try{await openApplication(app.id);$('applicationStatus').value='rejected';syncAdmissionInitialPassword();
        if(!await confirmAction('Reject Admission?', 'This saves a Rejected decision to the database. No Student Login will be created.','Yes — Reject & Save'))return;
        await saveApplicationDecision();
      }catch(e){status('Rejection not saved: '+e.message,true);}
    }],
-   ['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]].filter(([label])=>!(app.status==='approved'&&app.student_id&&label==='Reject & Save'));
+   ['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]];
   entry(root,app.student_name+' · '+app.application_number,
    'Guardian: '+app.guardian_name+' · '+app.guardian_phone+' · '+String(app.status).replaceAll('_',' ').toUpperCase()+
-   (app.status==='approved'&&!app.student_id?' · ACTION REQUIRED: LOGIN NOT CREATED':'')+' · Applied: '+String(app.created_at).slice(0,10),actions);
+   ' · Applied: '+String(app.created_at).slice(0,10),actions);
  }
 }
 async function openApplication(id){
@@ -384,7 +384,7 @@ function connect(){
  $('signout').addEventListener('click',async()=>{try{await api('/api/identity/logout','POST',{});}finally{location.replace('/login');}});
  $('bulkStudentsZone').hidden=(role!=='admin');
  $('deleteAllStudents').addEventListener('click',deleteAllStudents);
- $('openJourney').addEventListener('click',()=>{const id=$('previewStudent').value;if(id)location.href='/journey?student_id='+encodeURIComponent(id);});
+ $('openJourney').addEventListener('click',()=>{const id=$('previewStudent').value;if(id)location.href='/dashboard?student_id='+encodeURIComponent(id);});
  $('saveApplicationDecision').addEventListener('click',saveApplicationDecision);
  $('applicationStatus').addEventListener('change',syncAdmissionInitialPassword);
  $('showAdmissionInitialPassword').addEventListener('change',e=>{$('admissionInitialPassword').type=e.target.checked?'text':'password';});
@@ -485,7 +485,7 @@ function connect(){
 });
  $('juzForm').querySelector('select[name="student_id"]').addEventListener('change',()=>refreshJuz().catch(e=>status(e.message,true)));
  for(let i=1;i<=30;i++)$('juzNumber').append(new Option('Juz '+i+' · '+(JUZ[i]-JUZ[i-1])+' pages',String(i)));
- const updateMax=()=>{const max=JUZ[Number($('juzNumber').value)]-JUZ[Number($('juzNumber').value)-1];$('juzPages').max=String(max);if($('juzCompleted').checked)$('juzPages').value=String(max);else if(Number($('juzPages').value)>max)$('juzPages').value=String(max);};
+ const updateMax=()=>{$('juzPages').max=String(JUZ[Number($('juzNumber').value)]-JUZ[Number($('juzNumber').value)-1]);};
  $('juzNumber').addEventListener('change',updateMax);updateMax();$('juzCompleted').addEventListener('change',()=>{if($('juzCompleted').checked)$('juzPages').value=$('juzPages').max;});
  hook('juzForm',async()=>{
  const x=$form('juzForm');x.student_id=Number(x.student_id);x.juz_number=Number(x.juz_number);
@@ -497,26 +497,6 @@ function connect(){
  status('Juz '+x.juz_number+' progress and blessing saved successfully.');
  await refreshJuz().catch(()=>status('Juz saved; list refresh failed. Reload to see it.'));
 });
- for(let i=1;i<=30;i++)$('bulkJuzCount').append(new Option(i+' completed Juz',String(i)));
- const bulkPages=()=>{const n=Number($('bulkJuzCount').value),direction=$('bulkJuzDirection').value;
-  let pages=0;
-  for(let i=0;i<n;i++){const j=direction==='ascending'?i+1:30-i;pages+=JUZ[j]-JUZ[j-1];}
-  $('bulkJuzPreview').textContent=n+' FULL Juz = '+pages+' pages (out of 604) in the Academy 604-page Mushaf map. This is NOT '+n+' pages. Teacher verification updates only these Juz.';
- };
- $('bulkJuzCount').value='19';bulkPages();
- $('bulkJuzCount').addEventListener('change',bulkPages);
- $('bulkJuzDirection').addEventListener('change',bulkPages);
- hook('juzBulkForm',async()=>{
-  const x=$form('juzBulkForm');
-  const student_id=Number(x.student_id),completed_juz=Number(x.completed_juz),direction=x.direction;
-  if(!$('bulkJuzConfirm').checked)throw Error('Teacher confirmation checkbox required.');
-  const response=await api('/api/academy/juz-bulk','POST',{student_id,completed_juz,direction,confirmed:true});
-  if(!response.ok||response.saved!==completed_juz)throw Error('The full verified Juz batch was not confirmed by the server.');
-  $('bulkJuzStatus').textContent='Successfully verified '+completed_juz+' Juz = '+response.pages_in_selected_juz+' full pages.';
-  $('bulkJuzConfirm').checked=false;
-  const mainSelect=document.querySelector('#juzForm select[name="student_id"]');mainSelect.value=String(student_id);
-  await refreshJuz();status('Teacher-verified '+completed_juz+' complete Juz = '+response.pages_in_selected_juz+' pages. Other records preserved.');
- });
  hook('galleryForm',async()=>{
  const f=$('galleryForm');
  const files=Array.from(f.elements.file.files||[]);
