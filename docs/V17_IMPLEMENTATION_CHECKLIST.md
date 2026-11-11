@@ -1,7 +1,7 @@
 # V17 Implementation / test tracking
 
 ## Code / structure
-- [ ] Maintain `academy-official-logo.svg` exact original in all layout headers, sidebar, favicons and auth pages
+- [ ] Maintain `academy-owner-official-logo.png` exact original in all layout headers, sidebar, favicons and auth pages
 - [ ] Brand design white/green and responsive on 375 / 768 / 1440px
 - [ ] Public Home: authentic academy photo or an honest empty-state, exact Al-Hijr 15:9 and Explore Journey CTA
 - [ ] Separate private Home and Journey routes with login `next` handling

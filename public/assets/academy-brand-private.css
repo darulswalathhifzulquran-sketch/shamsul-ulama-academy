@@ -7,6 +7,6 @@ a:not(.btn):hover{color:#075333}
 .btn:not(.danger),nav button.active,.main-cta{background-color:#075333;border-color:#075333}
 .btn.outline{background-color:#FFFFFF;color:#075333}
 .stat strong,.eyebrow,h1 em,h2 em{color:#075333}
-img[src*="academy-official-logo.svg"]{object-fit:contain}
+img[src*="academy-owner-official-logo.png"]{object-fit:contain}
 :focus-visible{outline-color:#075333}
 @media(max-width:640px){header{flex-wrap:wrap}main{min-width:0}img{max-width:100%}}
