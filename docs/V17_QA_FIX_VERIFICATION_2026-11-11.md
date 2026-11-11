@@ -1,5 +1,5 @@
 # V17 QA fix verification — 2026-11-11
-Target: separate QA preview `https://xehb0f.hatchable.site`. Latest deployed version: **v10**.
+Target: separate QA preview `https://xehb0f.hatchable.site`. Latest deployed version: **v11**.
 Source branch: `development/academy-v17-premium-hifz`.
 GitHub `main`, old Hatchable production and real production databases remain unchanged.
 
@@ -15,7 +15,8 @@ GitHub `main`, old Hatchable production and real production databases remain unc
 - Exact page boundaries: 19 complete Juz ascending **381** pages, descending **383** pages, all 30 = **604**.
 - 30-month calendar target from 2026-11-11 = **2029-05-11**; monthly planned pages sum exactly to remaining pages.
 - Day-of-week schedules and fractional 0.5 pages supported; leap-year January 31 + month → February 29.
-- QA deploy v10 preflight: **0 errors, 0 warnings**; deployment LIVE on the isolated QA project.
+- QA deploy v11 preflight: **0 errors, 0 warnings**; deployment LIVE on the isolated QA project.
+- Browser cache-busting applied to the latest Student Journey and Usthad scripts (`private-journey.js?v=11`, `staff.js?v=11`).
 - QA schema contains `academy_student_revision_notes` with numeric half-page field and the newly saved plan fields.
 - Authenticated synthetic QA student: revision POST **200**, saved note GET **200** with 1.5 new pages and 94 revision pages.
 - Linked synthetic QA parent: revision GET **200** read-only; POST **403**.
@@ -25,7 +26,7 @@ GitHub `main`, old Hatchable production and real production databases remain unc
 - Synthetic parent plan edit POST **403**, read-only overview GET **200**.
 - Unlinked student ID overview GET **404**.
 - Synthetic fixture cleanup confirmed: **3 test accounts and 1 test student deleted**, without editing existing records.
-- Static UI control/reference audit: no missing element IDs for the current Journey and Staff scripts. Previously inactive visible save and navigation handlers are now connected.
+- Static UI control/reference audit: no missing element IDs for the current Journey and Staff scripts. Every currently visible named button has a corresponding listener or form handler; the previously hidden Usthad milestone action is now wired and available to authorized staff.
 
 ## Scope / not yet established
 - Staff-positive bulk-verification was not end-to-end exercised with real data; the authorization rejection path and teacher UI code were checked.
