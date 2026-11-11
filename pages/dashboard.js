@@ -1,5 +1,5 @@
-import {getAccount} from '../lib/academy-auth.js';
-import {documentHtml} from '../lib/academy-home-document.js';
+import {getAccount} from 'lib/academy-auth.js';
+import {documentHtml} from 'lib/academy-home-document.js';
 export const access='public';export const methods=['GET'];
 export default async function(req,res){
  const session=await getAccount(req);
