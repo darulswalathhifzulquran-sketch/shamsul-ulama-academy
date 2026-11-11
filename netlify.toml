@@ -17,6 +17,11 @@
   status = 200
   force = true
 [[redirects]]
+  from = "/journey"
+  to = "/.netlify/functions/academy?__route=journey"
+  status = 200
+  force = true
+[[redirects]]
   from = "/dashboard"
   to = "/.netlify/functions/academy?__route=dashboard"
   status = 200

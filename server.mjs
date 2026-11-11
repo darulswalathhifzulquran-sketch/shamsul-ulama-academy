@@ -20,7 +20,7 @@ export function createAcademyServer(){return http.createServer(async(req,res)=>{
  try{
   const host=req.headers.host||'localhost',protocol=(req.headers['x-forwarded-proto']==='https'?'https':'http');
   const url=new URL(req.url||'/',protocol+'://'+host),path=url.pathname;
-  if(path.startsWith('/api/')||path==='/staff'||path==='/dashboard'){
+  if(path.startsWith('/api/')||path==='/staff'||path==='/dashboard'||path==='/journey'){
    if(!['GET','POST','PUT','DELETE','HEAD'].includes(req.method||'')){res.writeHead(405);res.end();return;}
    let total=0;const chunks=[];
    if(req.method!=='GET'&&req.method!=='HEAD'){
@@ -28,7 +28,7 @@ export function createAcademyServer(){return http.createServer(async(req,res)=>{
     for await(const chunk of req){total+=chunk.length;if(total>MAX_REQUEST){res.writeHead(413);res.end('Request too large');return;}chunks.push(chunk);}
    }
    // The Fetch Request is only a transport adapter; original app permission and CSRF checks still run.
-   const route=path==='/staff'?'staff':path==='/dashboard'?'dashboard':path.slice(1);
+   const route=path==='/staff'?'staff':path==='/dashboard'?'dashboard':path==='/journey'?'journey':path.slice(1);
    url.searchParams.set('__route',route);
    const request=new Request(url.href,{method:req.method,headers:req.headers,...(['GET','HEAD'].includes(req.method)?{}:{body:Buffer.concat(chunks)})});
    await writeResponse(res,await gateway(request));return;

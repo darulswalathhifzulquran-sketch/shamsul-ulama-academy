@@ -20,6 +20,7 @@ import target from '../../api/academy/target.js';
 import revision from '../../api/academy/revision.js';
 import staffPage from '../../pages/staff.js';
 import dashboardPage from '../../pages/dashboard.js';
+import journeyPage from '../../pages/journey.js';
 import { db, storage } from '../../lib/academy-runtime.js';
 import { getAccount } from '../../lib/academy-auth.js';
 import { handleChunkUpload } from '../../lib/academy-chunk-upload.js';
@@ -44,7 +45,8 @@ const handlers = {
   'api/academy/target': target,
   'api/academy/revision': revision,
   staff: staffPage,
-  dashboard: dashboardPage
+  dashboard: dashboardPage,
+  journey: journeyPage
 };
 const allowedMethods = {
   'api/identity/bootstrap': ['GET','POST'],
@@ -67,7 +69,7 @@ const allowedMethods = {
   'api/academy/revision': ['GET','POST'],
   'api/academy/media': ['GET'],
   'api/academy/gallery-chunks': ['POST', 'PUT'],
-  staff: ['GET'], dashboard: ['GET']
+  staff: ['GET'], dashboard: ['GET'], journey: ['GET']
 };
 function makeResponse() {
   let code = 200, body = '', headers = new Headers();
