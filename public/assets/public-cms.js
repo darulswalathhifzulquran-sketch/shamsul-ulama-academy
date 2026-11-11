@@ -11,13 +11,24 @@ function setLink(el,href,text){if(!el)return;el.href=href;if(text)el.textContent
 function applySettings(s){
  if(!s)return;
  document.documentElement.dataset.academyTheme=s.theme_style||'classic';
- if(s.theme_style==='heritage'){document.documentElement.style.setProperty('--green','#07572f');document.documentElement.style.setProperty('--forest','#063f28');}
- else if(s.theme_style==='minimal'){document.documentElement.style.setProperty('--green','#086d41');document.documentElement.style.setProperty('--forest','#084a31');}
- else{document.documentElement.style.setProperty('--green','#08743f');document.documentElement.style.setProperty('--forest','#06452f');}
+ const photo=document.getElementById('v17HeroApproved'),placeholder=document.getElementById('v17HeroPlaceholder'),caption=document.getElementById('v17HeroCaption');
+ if(photo&&placeholder){
+  const candidate=String(s.home_photo_url||'');
+  let safe=false;
+  try{const u=new URL(candidate,location.origin);safe=!!candidate&&(u.protocol==='https:'||u.origin===location.origin)&&!u.username&&!u.password;}catch{}
+  if(safe){photo.src=candidate;photo.hidden=false;placeholder.hidden=true;if(caption)caption.textContent='Official Academy photograph';}
+  else{photo.hidden=true;placeholder.hidden=false;if(caption)caption.textContent='Waiting for an approved Academy photograph';}
+ }
+
+ for(const key of ['--green','--green2','--forest'])document.documentElement.style.setProperty(key,'#075333');
  const about=$('aboutIntro');if(about)about.textContent=s.about||'Qur’an memorisation and Islamic learning.';
  const vision=$('aboutVision');if(vision)vision.textContent=s.vision||'Purposeful Qur’an learning.';
  const location=$('contactAddress');if(location)location.textContent=s.address;
  const bodyAddress=$('aboutAddress');if(bodyAddress)bodyAddress.textContent=s.address;
+ const contactInfoAddress=$('contactInfoAddress');if(contactInfoAddress)contactInfoAddress.textContent=s.address;
+ const aboutAffiliation=$('aboutAffiliation');if(aboutAffiliation)aboutAffiliation.textContent=[s.affiliation,s.affiliation_place].filter(Boolean).join(' — ');
+ const footerAffiliationPlace=$('footerAffiliationPlace');if(footerAffiliationPlace)footerAffiliationPlace.textContent=s.affiliation_place||'';
+ const topline=$('academyTopline');if(topline)topline.textContent=[s.academy_name,s.address,s.affiliation].filter(Boolean).join(' · ');
  const map=$('academyMapLink'),aboutMap=$('aboutMapLink');
  for(const el of [map,aboutMap])if(el&&s.maps_url)setLink(el,s.maps_url,'Open Academy Location on Google Maps ↗');
  const footer=document.querySelector('footer');if(footer){
@@ -54,10 +65,27 @@ function applySettings(s){
 }
 async function gallery(){
  const root=$('publicGallery'),notice=$('galleryStatus');if(!root)return;
- try{const r=await fetch('/api/academy/gallery',{credentials:'same-origin'});if(!r.ok)throw Error('Gallery unavailable.');const data=await r.json();root.replaceChildren();
- if(!data.gallery?.length){notice.textContent='Approved academy photographs will appear here when published by the Usthad.';return;}
- notice.hidden=true;for(const photo of data.gallery){const fig=document.createElement('figure');const img=document.createElement('img');img.src=photo.image_url;img.alt=photo.alt_text||photo.caption||'Academy photo';img.loading='lazy';const caption=document.createElement('figcaption');caption.textContent=photo.caption||'Shamsul Ulama Islamic Academy';fig.append(img,caption);root.append(fig);}
- }catch(e){notice.textContent='Unable to load the official gallery right now.';}
+ try{
+  const r=await fetch('/api/academy/gallery',{credentials:'same-origin',cache:'no-store'});
+  if(!r.ok)throw Error('Gallery unavailable.');
+  const data=await r.json();root.replaceChildren();
+  if(!data.gallery?.length){notice.hidden=false;notice.textContent='Approved academy photos and videos will appear here when published by the Usthad.';return;}
+  notice.hidden=true;
+  for(const media of data.gallery){
+   const fig=document.createElement('figure');let element;
+   if(media.media_type==='video'){
+    if(media.image_url.startsWith('https://www.youtube-nocookie.com/embed/')||media.image_url.startsWith('https://player.vimeo.com/video/')){
+     element=document.createElement('iframe');element.src=media.image_url;element.title=media.alt_text||media.caption||'Academy video';element.loading='lazy';element.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';element.allowFullscreen=true;element.referrerPolicy='strict-origin-when-cross-origin';
+    }else{
+     element=document.createElement('video');element.src=media.image_url;element.controls=true;element.preload='metadata';element.playsInline=true;
+    }
+   }else{
+    element=document.createElement('img');element.src=media.image_url;element.alt=media.alt_text||media.caption||'Academy photo';element.loading='lazy';
+   }
+   const caption=document.createElement('figcaption');caption.textContent=media.caption||'Shamsul Ulama Islamic Academy';
+   fig.append(element,caption);root.append(fig);
+  }
+ }catch(e){notice.hidden=false;notice.textContent='Unable to load the official gallery right now.';}
 }
 function admission(){
  const form=$('admissionEnquiry');if(!form||form.dataset.bound)return;form.dataset.bound='true';

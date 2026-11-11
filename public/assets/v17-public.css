@@ -1,0 +1,43 @@
+/* V17 owner-approved palette: #075333 extracted from the supplied solid-green reference.
+ * Explicit pure-white panels replace the previously pale-green Admission/About backgrounds.
+ * This is a CSS correction only: no API, auth, account or database changes.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
+:root{
+  --forest:#075333;--green:#075333;--green2:#075333;
+  --sage:#FFFFFF;--pale:#FFFFFF;--cream:#FFFFFF;
+  --ink:#183B2A;--muted:#68776F;--border:#E1EFE5;
+  --shadow:0 8px 26px rgba(7,83,51,.05);
+}
+body,.section.white,.section,.heading,.hero,.institutional-masthead,.topline,.header{background:#FFFFFF}
+.heading{background-color:#FFFFFF!important}
+.topline{background:#FFFFFF!important;color:#075333!important;border-bottom:1px solid #E1EFE5}
+.header{background:#FFFFFF!important;border-bottom:1px solid #E1EFE5}
+.hero{background:#FFFFFF!important}
+.hero:before{display:none}
+.institutional-masthead{background:#FFFFFF!important;color:#183B2A}
+.institutional-masthead .masthead-heading,.institutional-masthead .masthead-subtitle{color:#183B2A}
+.links a:hover,.links a.active,.eyebrow{color:#075333}
+.pill,.pill.ghost:hover,.v17-journey-cta{background:#075333!important;border-color:#075333!important;color:#FFFFFF!important}
+.pill.ghost{background:#FFFFFF!important;border-color:#075333!important;color:#075333!important}
+.pill:hover,.v17-journey-cta:hover{background:#075333!important;border-color:#075333!important;filter:brightness(1.06)}
+.v17-awaiting-photo{background:#FFFFFF!important;border:1px solid #E1EFE5}
+.v17-verse-symbol,.v17-overline{color:#075333}
+.v17-quran-feature{background:#FFFFFF!important;border-top:1px solid #E1EFE5;border-bottom:1px solid #E1EFE5}
+.v17-ayah{font-family:'Amiri Quran','Amiri','Noto Naskh Arabic',serif!important;color:#075333!important;direction:rtl;font-feature-settings:normal;line-height:2.1}
+.v17-journey-cta{box-shadow:0 10px 22px rgba(7,83,51,.1)}
+/* Restore original full-content footer design, not the previous pale/washed-out override */
+.footer{background:#075333!important;color:#FFFFFF!important;position:relative;opacity:1!important;visibility:visible!important}
+.footer .brand,.footer .brand b,.footer h3,.footer strong{color:#FFFFFF!important}
+.footer .brand small,.footer p,.footer a,.footer li,.footer span,.footer .footer-bottom,.footer .affiliation-link{color:#FFFFFF!important;opacity:1!important}
+.footer a:hover,.footer a:focus-visible{color:#FFFFFF!important;text-decoration:underline}
+.footer .brand-logo-wrap{background:#FFFFFF;border-radius:10px;overflow:hidden}
+.footer-grid{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr) minmax(0,1.25fr);gap:clamp(22px,4vw,65px);align-items:start}
+.footer-grid>*{min-width:0}
+.footer .bottom,.footer-bottom{border-color:rgba(255,255,255,.2)}
+.bottom-banner{background:#075333!important;color:#FFFFFF!important}
+.bottom-banner h3,.bottom-banner p,.bottom-banner a{color:#FFFFFF!important}
+.brand-logo,.masthead-logo,.section-mark-logo{object-fit:contain}
+@media(max-width:800px){.footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}}
+@media(max-width:580px){.footer-grid{grid-template-columns:minmax(0,1fr);gap:26px}.heading{padding:54px 0 46px}.footer{padding:43px 0 20px}}
+@media(prefers-reduced-motion:reduce){.v17-journey-cta{transition:none!important;transform:none!important}}
