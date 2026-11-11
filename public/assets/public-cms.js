@@ -20,9 +20,7 @@ function applySettings(s){
   else{photo.hidden=true;placeholder.hidden=false;if(caption)caption.textContent='Waiting for an approved Academy photograph';}
  }
 
- if(s.theme_style==='heritage'){document.documentElement.style.setProperty('--green','#07572f');document.documentElement.style.setProperty('--forest','#063f28');}
- else if(s.theme_style==='minimal'){document.documentElement.style.setProperty('--green','#086d41');document.documentElement.style.setProperty('--forest','#084a31');}
- else{document.documentElement.style.setProperty('--green','#08743f');document.documentElement.style.setProperty('--forest','#06452f');}
+ for(const key of ['--green','--green2','--forest'])document.documentElement.style.setProperty(key,'#075333');
  const about=$('aboutIntro');if(about)about.textContent=s.about||'Qur’an memorisation and Islamic learning.';
  const vision=$('aboutVision');if(vision)vision.textContent=s.vision||'Purposeful Qur’an learning.';
  const location=$('contactAddress');if(location)location.textContent=s.address;
