@@ -1,0 +1,32 @@
+// Run with: node scripts/test_v17_hifz_math.mjs
+// Uses the exact source asset served to Academy students.
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {runInNewContext} from 'node:vm';
+const context={window:{}};
+runInNewContext(readFileSync(new URL('../public/assets/hifz-math.js',import.meta.url),'utf8'),context);
+const m=context.window.AcademyHifzMath;
+assert.equal(m.sumJuz(19,'ascending'),381,'19 Juz ascending must not be 19 pages');
+assert.equal(m.sumJuz(19,'descending'),383,'reverse 19 Juz must follow the correct Mushaf boundaries');
+assert.equal(m.sumJuz(30,'ascending'),604);
+assert.equal(m.sumJuz(0,'ascending'),0);
+assert.equal(m.size(1),21);
+const start=new Date(Date.UTC(2026,10,11));
+const target=m.addMonths(start,30);
+assert.equal(target.toISOString().slice(0,10),'2029-05-11');
+const plan=m.roadmap({start,end:target,memorized:381,weekdays:new Set([0,1,2,3,4,5,6])});
+assert.equal(plan.months.length,30);
+assert.equal(plan.remaining,223);
+assert.equal(plan.months.reduce((s,x)=>s+x.new_pages,0),223);
+assert.equal(plan.months.at(-1).cumulative_new_pages,223);
+const weekdays=m.roadmap({start,end:target,memorized:19,weekdays:new Set([1,2,3,4,5])});
+assert.equal(weekdays.months.length,30);
+assert.equal(weekdays.months.reduce((s,x)=>s+x.new_pages,0),585);
+assert.ok(weekdays.study_days<plan.study_days);
+const leap=new Date(Date.UTC(2028,0,31));
+assert.equal(m.addMonths(leap,1).toISOString().slice(0,10),'2028-02-29');
+const fractional=m.roadmap({start:leap,end:m.addMonths(leap,18),memorized:100.5,weekdays:new Set([0,2,4,6])});
+assert.equal(fractional.months.reduce((s,x)=>s+x.new_pages,0),503.5);
+assert.throws(()=>m.sumJuz(31,'ascending'));
+assert.throws(()=>m.roadmap({start,end:start,memorized:19}));
+console.log('V17 Hifz math: 15 assertions passed.');
