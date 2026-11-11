@@ -24,12 +24,12 @@ const routes = [
  'api/academy/enquiries', 'api/academy/gallery', 'api/academy/juz',
  'api/academy/monthly', 'api/academy/overview', 'api/academy/settings',
  'api/academy/students', 'api/academy/students-bulk-delete',
- 'api/academy/target', 'api/academy/revision', 'staff', 'dashboard'
+ 'api/academy/target', 'api/academy/revision', 'staff', 'dashboard', 'journey'
 ];
 for (const route of routes)
   assert(gateway.includes(route === 'staff' || route === 'dashboard' ? route + ':' : "'" + route + "'"), 'Missing staging handler: ' + route);
 const names = readdirSync('migrations').filter(p => p.endsWith('.sql')).sort();
-assert.equal(names.length, 17, 'The app must preserve all 14 original migrations plus 3 additive staging migrations');
+assert.equal(names.length, 18, 'The app must preserve all 14 original migrations plus 3 additive staging migrations');
 for (const name of names) {
   const original = read('migrations/' + name);
   const target = read('netlify/database/migrations/' + name);

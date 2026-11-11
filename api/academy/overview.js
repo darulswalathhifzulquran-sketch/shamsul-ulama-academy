@@ -12,7 +12,7 @@ export default async function(req,res){
  const [juz,monthly,target]=await Promise.all([
  db.query(staff?"SELECT juz_number,memorised_pages,completion_verified,accuracy_verified,accuracy_percent,dua_message,published_at FROM academy_juz_verifications WHERE student_id=$1 ORDER BY juz_number":"SELECT juz_number,memorised_pages,completion_verified,accuracy_verified,accuracy_percent,dua_message,published_at FROM academy_juz_verifications WHERE student_id=$1 AND published_at IS NOT NULL ORDER BY juz_number",[sid]),
  db.query(staff?"SELECT report_month,new_pages,revision_pages,verified_total_pages,accuracy_percent,target_pages,comment,status,published_at FROM academy_hifz_monthly WHERE student_id=$1 ORDER BY report_month DESC LIMIT 36":"SELECT report_month,new_pages,revision_pages,verified_total_pages,accuracy_percent,target_pages,comment,status,published_at FROM academy_hifz_monthly WHERE student_id=$1 AND status='published' ORDER BY report_month DESC LIMIT 36",[sid]),
- db.query("SELECT target_date,study_days FROM academy_student_targets WHERE student_id=$1",[sid])
+ db.query("SELECT target_date,study_days,planning_completed_juz,planning_direction FROM academy_student_targets WHERE student_id=$1",[sid])
  ]);
  res.json({students:links.rows,selected:links.rows.find(r=>Number(r.id)===sid),juz:juz.rows,reports:monthly.rows,target:target.rows[0]||null});
 }
