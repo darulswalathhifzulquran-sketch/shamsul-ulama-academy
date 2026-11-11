@@ -6,7 +6,7 @@ Never modify `main`, original Hatchable production, real student records or prod
 ## Non-negotiable identity
 - Canonical official logo asset: `public/assets/academy-owner-official-logo.png`; use this exact asset for Home, About, Admissions, Login, Password reset, Staff, Student, Parent, mobile and favicon. Do NOT substitute an invented/generated Islamic logo. Keep the old official artwork unmodified.
 - Main public pages: Home, About the Academy, Gallery, Admission, Contact, Sign In. Real academy photo only after owner approval; show an explicit image-placeholder rather than mislabel illustrative courtyard as actual campus.
-- White `#FFFFFF`, vibrant green `#00B956`, light green `#E8F9EF`, soft green `#F4FCF7`, text `#183B2A`, muted `#68776F`, borders `#E1EFE5`. No dark forest-green blocks.
+- **LATEST OWNER-APPROVED OVERRIDE (2026-11-11):** Use the exact green `#075333` sampled from the owner's solid-color reference, not previous `#00B956`. All specifically marked Admission/About/Topline backgrounds must be pure white `#FFFFFF`. Restore the entire original footer layout with background `#075333` and fully visible white text. Text remains `#183B2A`, muted `#68776F`, and subtle neutral borders `#E1EFE5`. Official logo artwork remains untouched, using the owner-supplied PNG stored in `public/assets/academy-owner-official-logo.png`. This later requirement supersedes all earlier bright-green/pale-footer instructions.
 - Qur'an verse: `إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ` (Al-Hijr 15:9); text immutable and correct RTL.
 - Public Home below approved photo: verse, then Explore My Hifz Journey. Unauthenticated users go to safe login `next=/journey`. Journey navigation is an actual route, never an in-page scroll.
 
