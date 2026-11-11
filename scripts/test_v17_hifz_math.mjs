@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
-const context={window:{}};
+const context={window:{},Date};
 runInNewContext(readFileSync(new URL('../public/assets/hifz-math.js',import.meta.url),'utf8'),context);
 const m=context.window.AcademyHifzMath;
 assert.equal(m.sumJuz(19,'ascending'),381,'19 Juz ascending must not be 19 pages');
@@ -29,4 +29,4 @@ const fractional=m.roadmap({start:leap,end:m.addMonths(leap,18),memorized:100.5,
 assert.equal(fractional.months.reduce((s,x)=>s+x.new_pages,0),503.5);
 assert.throws(()=>m.sumJuz(31,'ascending'));
 assert.throws(()=>m.roadmap({start,end:start,memorized:19}));
-console.log('V17 Hifz math: 15 assertions passed.');
+console.log('V17 Hifz math: 17 assertions passed.');
