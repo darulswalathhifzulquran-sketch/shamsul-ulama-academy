@@ -5,6 +5,7 @@ import login from '../../api/identity/login.js';
 import logout from '../../api/identity/logout.js';
 import me from '../../api/identity/me.js';
 import changePassword from '../../api/identity/change-password.js';
+import recoverAdmin from '../../api/identity/recover-admin.js';
 import accounts from '../../api/academy/accounts.js';
 import applications from '../../api/academy/applications.js';
 import applicationPrint from '../../api/academy/application-print.js';
@@ -31,6 +32,7 @@ const handlers = {
   'api/identity/logout': logout,
   'api/identity/me': me,
   'api/identity/change-password': changePassword,
+  'api/identity/recover-admin': recoverAdmin,
   'api/academy/accounts': accounts,
   'api/academy/applications': applications,
   'api/academy/application-print': applicationPrint,
@@ -54,6 +56,7 @@ const allowedMethods = {
   'api/identity/logout': ['POST'],
   'api/identity/me': ['GET'],
   'api/identity/change-password': ['POST'],
+  'api/identity/recover-admin': ['POST'],
   'api/academy/accounts': ['GET','POST','PUT','DELETE'],
   'api/academy/applications': ['GET','POST','PUT'],
   'api/academy/application-print': ['GET'],

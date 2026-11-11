@@ -35,6 +35,10 @@
   to = "/change-password.html"
   status = 200
 [[redirects]]
+  from = "/admin-recovery"
+  to = "/admin-recovery.html"
+  status = 200
+[[redirects]]
   from = "/setup"
   to = "/setup.html"
   status = 200

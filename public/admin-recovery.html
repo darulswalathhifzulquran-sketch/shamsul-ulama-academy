@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#075333"><title>Recover QA Administrator Access | Shamsul Ulama Islamic Academy</title>
+<link rel="icon" type="image/png" href="/assets/academy-owner-official-logo.png">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#FFFFFF;color:#183B2A;font-family:system-ui,Arial,sans-serif;min-height:100dvh;display:grid;place-items:center}
+main{width:min(460px,calc(100% - 30px));border:1px solid #E1EFE5;border-radius:16px;padding:clamp(20px,4vw,34px);box-shadow:0 12px 44px rgba(7,83,51,.06)}
+img{display:block;width:90px;height:95px;object-fit:contain;margin:0 auto 18px}
+h1{font:700 clamp(24px,5vw,29px)/1.2 Georgia,serif;color:#075333}p{line-height:1.65;font-size:14px}
+label{display:block;margin-top:17px;font-weight:650;font-size:14px}input{display:block;width:100%;font:inherit;padding:13px;border:1px solid #a8baae;border-radius:9px;margin-top:8px}
+button{margin-top:23px;width:100%;background:#075333;color:#FFFFFF;border:0;border-radius:9px;padding:13px;font:700 14px system-ui;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}a{color:#075333;text-underline-offset:3px}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #c4a152;outline-offset:3px}
+#notice{min-height:20px;color:#9f2424}#success{color:#075333;font-weight:650}
+</style></head><body><main>
+<img src="/assets/academy-owner-official-logo.png" alt="Original Shamsul Ulama Islamic Academy logo">
+<h1>Secure Administrator Recovery</h1>
+<p>This is the <strong>separate QA staging site</strong>. Your original Academy production account is unchanged. Enter a new password once using your owner-issued, one-time recovery link.</p>
+<form id="recovery" hidden>
+<label>New administrator password<input id="newPassword" type="password" minlength="12" maxlength="128" autocomplete="new-password" required></label>
+<label>Confirm new password<input id="confirmPassword" type="password" minlength="12" maxlength="128" autocomplete="new-password" required></label>
+<button id="save" type="submit">Set New Admin Password</button>
+</form><p id="notice" role="status" aria-live="polite"></p>
+<div id="result" hidden><p id="success"></p><a id="loginLink" href="/login">Sign in as Administrator</a></div>
+<p><a href="/">Back to Academy Home</a></p></main>
+<script>
+(() => {
+'use strict';
+const fragment=new URLSearchParams(location.hash.slice(1));let token=fragment.get('token')||'';
+history.replaceState(null,'',location.pathname+location.search);
+const form=document.getElementById('recovery'),notice=document.getElementById('notice'),button=document.getElementById('save');
+if(!/^[a-f0-9]{64}$/.test(token)){notice.textContent='Open the secure recovery link supplied to the Academy owner. A normal login link cannot reset a password.';return;}
+form.hidden=false;notice.textContent='Recovery link verified for format. It can only be used once before it expires.';
+form.addEventListener('submit',async event=>{
+ event.preventDefault();const password=document.getElementById('newPassword').value,confirmation=document.getElementById('confirmPassword').value;
+ if(password!==confirmation){notice.textContent='The two passwords do not match.';return;}
+ if(password.length<12||password.length>128||!/[a-z]/i.test(password)||!/[0-9]/.test(password)){notice.textContent='Use 12–128 characters with both letters and numbers.';return;}
+ button.disabled=true;notice.textContent='Validating secure recovery link…';
+ try{const response=await fetch('/api/identity/recover-admin',{method:'POST',credentials:'omit',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({token,new_password:password})});
+ const data=await response.json();if(!response.ok)throw Error(data.error||'Recovery failed.');
+ token='';document.getElementById('newPassword').value='';document.getElementById('confirmPassword').value='';
+ form.hidden=true;notice.textContent='';document.getElementById('success').textContent='Password changed. Sign in with username: '+data.username;
+ document.getElementById('loginLink').href='/login?username='+encodeURIComponent(data.username);
+ document.getElementById('result').hidden=false;
+ }catch(e){notice.textContent=e.message;}finally{button.disabled=false;}
+});
+})();
+</script></body></html>

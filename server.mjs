@@ -6,7 +6,7 @@ import {resolve,sep,extname} from 'node:path';
 import gateway from './netlify/functions/academy.js';
 const dir=resolve('public'),MAX_REQUEST=18*1024*1024;
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon','.txt':'text/plain; charset=utf-8'};
-const indexed={'/':'index.html','/login':'login.html','/change-password':'change-password.html','/setup':'setup.html'};
+const indexed={'/':'index.html','/login':'login.html','/change-password':'change-password.html','/setup':'setup.html','/admin-recovery':'admin-recovery.html','/admin-recovery.html':'admin-recovery.html'};
 function noindex(res){res.setHeader('X-Robots-Tag','noindex, nofollow, noarchive');res.setHeader('X-Content-Type-Options','nosniff');}
 async function writeResponse(res,response){
  res.statusCode=response.status;
