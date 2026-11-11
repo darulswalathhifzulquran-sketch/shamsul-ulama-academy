@@ -1,63 +1,45 @@
-# Shamsul Ulama Islamic Academy — Full-stack QA/Staging Source
+# SHAMSUL ULAMA ISLAMIC ACADEMY
 
-**Important: STAGING ONLY. This is not a completed or approved production migration.**
+Official source code for Shamsul Ulama Islamic Academy. The intended production Hatchable project `shamsul-ulama-w2kv` is now connected and has received the updated website source. Production data, passwords, and sessions are not included in GitHub.
 
-This branch is a maintained, fully source-included port of the original Hatchable Version 16 Academy website. It preserves all original public pages, pictures, CSS, forms, role-based pages, login/authentication, 17 original HTTP API routes, the Usthad/Admin management dashboard, Hifz dashboards, and the original 14 database migrations. The QA branch adds a Node.js HTTP server for Railway, Netlify gateway compatibility, three additive migrations, admission review recovery, Neon-backed gallery storage, and an optional private Student Revision Notes feature.
+## Current website source
+- Production Hatchable project: `proj_28yiZzMLRLsx` · https://shamsul-ulama-w2kv.hatchable.site
+- Older reference project: `proj_nA81ZaknH1Km` · https://shamsul-ulama.hatchable.site
+- Original new-project Version 1 remains in Hatchable deployment history. Additional versions have been deployed; check console before further updates.
+- Public pages: Home, About, Gallery, Admission, Contact; biography: `/shamsul-ulama-legacy`
+- Staff, student and parent dashboard, Hifz Journey, monthly growth reports, academy settings and official admissions
 
-**Live original (DO NOT MODIFY):** https://shamsul-ulama-w2kv.hatchable.site
+## Update — production project connected (8 Nov 2026)
+- New account linked and project confirmed; current deployment history includes versions 1–3.
+- Public Home/About, Shamsul Ulama heritage biography, both supplied portraits, and sign-in page were verified on the intended domain.
+- Database tables for Academy accounts, students, monthly reports, Juz, applications and sessions answer queries; one Admin account exists, while no Student or Parent accounts have been created yet.
+- Anonymous role-protected endpoints return 401; family scoping and published-only SQL queries pass database EXPLAIN checks.
+- **Pending:** authenticated Admin/Usthad/Student/Parent browser workflows with real owner-held credentials, test students, published updates, and custom .com DNS/HTTPS. Do not mark all login flows as verified until these pass.
 
-## Project files
+## Download the whole source as one ZIP
+Open the green **Code** button in this GitHub repository and choose **Download ZIP**. You can also use the `main.zip` archive:
+https://github.com/darulswalathhifzulquran-sketch/shamsul-ulama-academy/archive/refs/heads/main.zip
 
-- `public/`: all frontend pages, image files and JS/CSS; no redesign.
-- `api/`: all original APIs plus `api/academy/revision.js` for the optional Student daily notes.
-- `pages/` and `lib/`: original HTML dashboards and secure application logic; staged hosting/runtime adapters.
-- `server.mjs`: Node.js 22 native HTTP server for Railway with static frontend and backend routes using the same API handler.
-- `netlify/functions/academy.js` and `netlify.toml`: Netlify Functions and existing URL rewrites.
-- `migrations/0001–0014`: **unchanged original** Hatchable/PostgreSQL migrations.
-- `migrations/0015–0017`: additive-only QA migrations for admission status recovery, image/video storage and Student Revision Notes.
-- `netlify/database/migrations/`: same 17 SQL migration files, in order. No auto-connection to Netlify Database.
-- `railway.json`: minimal Node service start command and healthcheck.
-- `.github/workflows/staging-source-check.yml`: QA-only automated tests with **ephemeral local DB**, no live student data.
-- `docs/STAGING_OWNER_SETUP_AND_ACCEPTANCE.md`, `docs/STAGING_RAILWAY_QA.md`: setup and acceptance requirements.
+The ZIP includes application code, publicly committed site assets, migrations and guides. **It does not include private PostgreSQL data, personal user records, live authentication sessions, secrets, nor Hatchable's managed hosting runtime.** A ZIP is a backup/export of code, not a complete independent web server.
 
-## Runtime
+## Running on the custom domain
+The quickest and safest option for a domain without a backend migration is to keep the app deployed on the correct Hatchable project and add a custom domain in the Hatchable project Settings. See [docs/CUSTOM_DOMAIN_AND_MIGRATION.md](docs/CUSTOM_DOMAIN_AND_MIGRATION.md) for owner-only steps, DNS requirements, and what must change if leaving Hatchable.
 
-Two private environment settings are required on staging hosting (NEVER commit values):
+## Authentication
+The current backend uses `api/identity/*` plus `lib/academy-auth.js` for server-side credential handling, hashed sessions, CSRF and role-scoped access. **There is no hardcoded administrator password.** The production database currently has one existing admin account (`administration`); its password must be set/verified privately by the owner, and no login credentials are committed. Each Hatchable project has its own independent database, which means credentials do not transfer just by copying the source.
 
-- `ACADEMY_STAGING_DATABASE_URL`: **Neon `academy-v16-qa` branch** pooled PostgreSQL connection string. The hostname must be under `.neon.tech`. Never use a Hatchable production DSN. For local CI only, localhost is accepted.
-- `ACADEMY_STAGING_SETUP_TOKEN`: random, owner-only, high-entropy setup key stored in the **host's environment/secret manager**, not in GitHub, the browser source, or this ZIP.
+## Login and synchronized Hifz dashboard checks
+See [docs/AUTH_AND_SYNC_VERIFICATION.md](docs/AUTH_AND_SYNC_VERIFICATION.md) for verified security checks and the necessary real-project acceptance tests.
 
-Railway deployment starts with `npm start` (Node 22), using the Railway-provided `PORT`. The web root and backend share one origin so the original SameSite/CSRF session rules continue to apply. Netlify uses `[build] publish = "public"`, functions from `netlify/functions`; see `netlify.toml` as the source of truth.
+## Checks before launch
+See [docs/LAUNCH_CHECKLIST.md](docs/LAUNCH_CHECKLIST.md). Verify official gallery/photos, page navigation, student and guardian privacy, admission form persistence, receipt/print view, role-restricted admin saves, tablet/mobile layout and the live custom domain. Do not commit real students' data, tokens, or passwords.
 
-Media and chunked 16MiB uploads now store into *the isolated Neon QA PostgreSQL database* via dedicated media tables rather than using host filesystem storage. This supports Railway's stateless container but **consumes Neon database capacity and must be tested on the actual free tier**. Object storage is a future optimization, not automatically configured.
+## File layout
+- `public/`: frontend and images
+- `api/`: server-side endpoints
+- `pages/`: dashboard pages
+- `lib/`: shared server-side modules
+- `migrations/`: PostgreSQL migrations
+- `hatchable.toml`: Hatchable project settings
 
-## Data protection
-
-This is **code only**; it contains no actual Student/Parent accounts, password hashes, passwords, API keys, connection strings, sessions, privately uploaded gallery files, database backups or production information. It does not connect to Hatchable production. GitHub repository may be public. Never publish a backup there.
-
-## Features repaired in staging
-
-- Admission review states: Submitted → Under Review → Interview → Approved/Rejected/Cancelled.
-- Previously rejected or cancelled applications may be reopened, sent to interview, or approved with the original atomic Student + Account creation; duplicate approvals do not create duplicate students.
-- A previously approved Student Account cannot be cancelled by changing the admission application — preventing silent student data loss.
-- Decision history and clearer error feedback on failed saves. Approval credentials are shown only once.
-- PDF-ready admission print page remains private to Admin/Usthad. `Print / Save as PDF` uses the browser print dialog, not a generated downloadable PDF binary.
-- Parent and Usthad accounts, secure sessions and roles, Hifz reports and Gallery remain in place.
-- Student “My Daily Revision Notes” adds student-authored notes, parent read-only access, and does NOT modify teacher-verified progress.
-
-## Validation status
-
-Automated CI runs JavaScript parsing and source integrity checks, applies all 17 migrations to a local disposable PostgreSQL-compatible database, and exercises actual login and admission/backend APIs with **fake test accounts only**. A passing CI is **not** proof of successful production migration or hosted-browser operation. The real hosting URL, Neon QA connectivity from that host, large media uploads, custom domain and monthly free-tier limits all require verification before approval. Never claim “no errors” without all acceptance tests.
-
-For status and one-time setup, read `docs/STAGING_OWNER_SETUP_AND_ACCEPTANCE.md` and `docs/STAGING_RAILWAY_QA.md`.
-
-```bash
-python scripts/verify_source.py
-npm install
-npm run test:staging:static
-npm run test:staging:database
-npm run test:staging:api
-npm run test:staging:acceptance
-```
-
-**Do NOT execute database migrations on any production database from this ZIP.** Keep the original Hatchable website active, and await separate permission before any production data export, import or cutover.
+All portraits of Shamsul Ulama in `public/assets/` were derived from the user-supplied photographs; no facial features were AI-reconstructed.

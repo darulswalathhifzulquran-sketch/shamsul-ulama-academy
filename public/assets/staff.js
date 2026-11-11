@@ -212,22 +212,22 @@ async function refreshApplications(){
   const view=()=>openApplication(app.id);
   const actions=[['View',view],
    ['Interview',async()=>{await openApplication(app.id);$('applicationStatus').value='interview';syncAdmissionInitialPassword();$('applicationStatus').focus();}],
-   ['Approve & Create Account',async()=>{
+   [app.status==='approved'&&!app.student_id?'Repair Approval & Create Login':'Approve & Create Account',async()=>{
      try{await openApplication(app.id);$('applicationStatus').value='approved';syncAdmissionInitialPassword();
        if(!await confirmAction('Approve Student Admission?', 'This creates the Student Record and a secure login account automatically.','Yes — Approve & Create'))return;
        await saveApplicationDecision();
      }catch(e){status('Approval not saved: '+e.message,true);}
    }],
-   ['Reject & Save',async()=>{
+   [app.status==='rejected'?'Rejected — Saved':'Reject & Save',async()=>{
      try{await openApplication(app.id);$('applicationStatus').value='rejected';syncAdmissionInitialPassword();
        if(!await confirmAction('Reject Admission?', 'This saves a Rejected decision to the database. No Student Login will be created.','Yes — Reject & Save'))return;
        await saveApplicationDecision();
      }catch(e){status('Rejection not saved: '+e.message,true);}
    }],
-   ['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]];
+   ['PDF / Print',()=>window.open('/api/academy/application-print?id='+encodeURIComponent(app.id),'_blank','noopener')]].filter(([label])=>!(app.status==='approved'&&app.student_id&&label==='Reject & Save'));
   entry(root,app.student_name+' · '+app.application_number,
    'Guardian: '+app.guardian_name+' · '+app.guardian_phone+' · '+String(app.status).replaceAll('_',' ').toUpperCase()+
-   ' · Applied: '+String(app.created_at).slice(0,10),actions);
+   (app.status==='approved'&&!app.student_id?' · ACTION REQUIRED: LOGIN NOT CREATED':'')+' · Applied: '+String(app.created_at).slice(0,10),actions);
  }
 }
 async function openApplication(id){
