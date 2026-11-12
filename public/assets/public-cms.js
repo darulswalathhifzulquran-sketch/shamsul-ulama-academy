@@ -106,28 +106,58 @@ function admission(){
   }catch(error){message.textContent=error.message||'Application was not saved; please try again.';}finally{button.disabled=false;}
  });
 }
+function setPublicPhotoVisible(img,visible){
+ if(!img.isConnected)return;
+ const slot=img.dataset.academyPhoto;
+ img.hidden=!visible;
+ if(slot==='hero'){
+  const visual=img.closest('[data-academy-hero-visual]');
+  const layout=img.closest('.academy-v23-layout');
+  if(visual)visual.hidden=!visible;
+  if(layout)layout.classList.toggle('has-real-hero-photo',visible);
+ }else{
+  const frame=img.parentElement;
+  if(frame){
+   frame.hidden=!visible;
+   frame.classList.toggle('has-real-programme-photo',visible);
+  }
+  const detail=img.closest('.academy-v21-detail');
+  if(detail)detail.classList.toggle('has-academy-detail-photo',visible);
+ }
+}
 async function applySitePhotos(){
  const images=[...document.querySelectorAll('[data-academy-photo]')];
  if(!images.length)return;
+ // Keep every empty frame hidden while the remote photo manifest is loading.
+ for(const img of images)setPublicPhotoVisible(img,false);
  try{
   const r=await fetch('/api/academy/site-photos',{credentials:'same-origin',cache:'no-store'});
-  if(!r.ok)throw Error('Academy photographs are temporarily unavailable.');
+  if(!r.ok)throw Error('Official photo list unavailable.');
   const {photos={}}=await r.json();
   for(const img of images){
    if(!img.isConnected)continue;
-   const slot=img.dataset.academyPhoto,photo=photos[slot];
-   const wrapper=img.parentElement;
-   const placeholder=wrapper?.querySelector('[data-academy-placeholder="'+slot+'"]');
-   if(!photo?.url){
-    img.hidden=true;img.removeAttribute('src');if(placeholder)placeholder.hidden=false;continue;
-   }
+   const photo=photos[img.dataset.academyPhoto];
+   if(!photo?.url){img.removeAttribute('src');continue;}
    let valid=false;
-   try{const u=new URL(photo.url,location.origin);valid=u.protocol==='https:'||(u.origin===location.origin&&u.protocol==='http:');}catch(e){}
-   if(!valid){img.hidden=true;if(placeholder)placeholder.hidden=false;continue;}
-   img.onload=()=>{if(!img.isConnected)return;img.hidden=false;if(placeholder)placeholder.hidden=true;};
-   img.onerror=()=>{if(!img.isConnected)return;img.hidden=true;if(placeholder)placeholder.hidden=false;};
-   img.alt=photo.alt_text||img.alt;
-   img.src=photo.url;
+   try{
+    const u=new URL(photo.url,location.origin);
+    valid=(u.protocol==='https:'||u.origin===location.origin&&u.protocol==='http:')&&!u.username&&!u.password;
+   }catch(e){}
+   if(!valid){img.removeAttribute('src');continue;}
+   // Load the signed image independently first. A hidden lazy <img> can otherwise
+   // remain unfetched forever, leaving a saved school photo invisible.
+   const preloader=new Image();
+   preloader.onload=()=>{
+    if(!img.isConnected)return;
+    img.loading='eager';
+    img.alt=photo.alt_text||img.alt;
+    img.onload=()=>{if(img.isConnected)setPublicPhotoVisible(img,true);};
+    img.onerror=()=>{if(img.isConnected)setPublicPhotoVisible(img,false);};
+    img.src=photo.url;
+    if(img.complete&&img.naturalWidth>0)setPublicPhotoVisible(img,true);
+   };
+   preloader.onerror=()=>{if(img.isConnected)setPublicPhotoVisible(img,false);};
+   preloader.src=photo.url;
   }
  }catch(e){console.warn('Official Academy photos could not load',e.message);}
 }

@@ -65,7 +65,8 @@ function build(){
   alt.placeholder=spec.slot==='school'?'Students attending a school class':spec.slot==='tuition'?'Students attending extra tuition':'Academy photograph';
   altLabel.append(alt);form.append(altLabel);
   const rightsLabel=el('label','site-photo-permission');const rights=el('input');rights.type='checkbox';rights.required=true;
-  rightsLabel.append(rights,document.createTextNode('I confirm permission to publish this photograph, including permission for students pictured.'));form.append(rightsLabel);
+  const rightsText=el('span','site-photo-permission-text','I have permission to publish this photograph, including consent for students pictured.');
+  rightsLabel.append(rights,rightsText);form.append(rightsLabel);
   const buttons=el('div','site-photo-controls');
   const save=el('button');save.type='submit';save.textContent='Save Photo to Website';
   const remove=el('button','outline site-photo-remove');remove.type='button';remove.textContent='Remove Published Photo';remove.hidden=true;
@@ -92,7 +93,12 @@ function build(){
     const saved=await json('/api/academy/site-photos',{method:'POST',headers:{'X-Academy-CSRF':csrf},body:fd});
     if(!saved.ok)throw Error('Website did not confirm this photo.');
     if(localObjectUrl){URL.revokeObjectURL(localObjectUrl);localObjectUrl=null;}
-    form.reset();await refresh();message.textContent='Saved. This photo is now published on the public website.';
+    form.reset();await refresh();
+    if(!photos[spec.slot]?.url){
+     message.textContent='Upload accepted, but public photo verification is pending. Please refresh before uploading again.';
+    }else{
+     message.textContent='Photo saved and confirmed in the published website photo list.';
+    }
    }catch(e){message.textContent='Not saved: '+e.message;}
    finally{save.disabled=false;remove.disabled=false;}
   });

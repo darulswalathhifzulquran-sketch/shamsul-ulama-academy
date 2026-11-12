@@ -13,3 +13,22 @@
 .site-photo-controls button{margin:0;flex:1 1 auto;font-size:12px;min-height:42px}
 .site-photo-message{font-size:12px;line-height:1.6;min-height:21px;color:#075333;margin:11px 0 0}
 .site-photo-editor [hidden]{display:none!important}
+/* v23: readable photo consent in each narrow staff-dashboard card */
+.site-photo-editor .site-photo-form .site-photo-permission{
+ display:grid!important;grid-template-columns:20px minmax(0,1fr)!important;
+ align-items:start!important;justify-content:start!important;gap:11px!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ white-space:normal!important;margin:15px 0 12px!important;
+}
+.site-photo-editor .site-photo-form .site-photo-permission input[type="checkbox"]{
+ display:block!important;width:18px!important;min-width:18px!important;
+ max-width:18px!important;height:18px!important;margin:1px 0 0!important;
+ padding:0!important;flex:0 0 18px!important;grid-column:1!important;
+ accent-color:#075333;box-sizing:border-box!important;
+}
+.site-photo-editor .site-photo-form .site-photo-permission-text{
+ display:block!important;grid-column:2!important;
+ width:auto!important;max-width:100%!important;min-width:0!important;
+ white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;
+ color:#3b5041;font:500 12px/1.6 Inter,system-ui,sans-serif!important;
+}
