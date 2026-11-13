@@ -45,7 +45,7 @@ export default async function(req,res){
    let url=row.image_url;
    if(row.storage_key){try{url=await storage.url(row.storage_key);}catch(e){console.warn('Gallery signed URL unavailable',row.id);}}
    const {storage_key,...safe}=row;
-   return {...safe,image_url:url};
+   return {...safe,image_url:url,media_url:row.storage_key?'/api/academy/media-file?id='+Number(row.id):url};
   }));
   res.setHeader('Cache-Control','no-store');
   return res.json({gallery});

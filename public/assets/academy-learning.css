@@ -1,0 +1,73 @@
+/* Academic articles — original green/white Academy design; independent of account and admission UI */
+.academy-learning-home,.academy-learning-hub,.academy-learning-essay{background:#fff;color:#193729}
+.academy-learning-home{padding:clamp(65px,7vw,105px) 0;border-top:1px solid #e4ede5}
+.academy-learning-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:29px}
+.academy-learning-eyebrow,.academy-learning-overline{display:block;color:#075333;font:800 11px/1.5 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.academy-learning-heading h2{margin:13px 0 13px!important;font:600 clamp(31px,3.5vw,49px)/1.15 'Cormorant Garamond',Georgia,serif!important;color:#153b29}
+.academy-learning-heading p{max-width:610px;color:#5c7364;font-size:15px;line-height:1.8;margin:0}
+.academy-learning-all,.academy-learning-read{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:9px;background:#075333;border:1px solid #075333;color:#fff!important;font-size:13px;font-weight:750;padding:13px 19px;white-space:nowrap}
+.academy-learning-all:hover,.academy-learning-read:hover{background:#094327}
+.academy-learning-home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.academy-learning-card{min-width:0;display:flex;flex-direction:column;border:1px solid #dce8de;border-radius:13px;overflow:hidden;background:white;box-shadow:0 8px 24px rgba(11,61,34,.04);transition:transform .18s ease,box-shadow .18s ease}
+.academy-learning-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(11,61,34,.095)}
+.academy-learning-card[hidden]{display:none!important}
+.academy-learning-visual{height:205px;min-height:205px;overflow:hidden;position:relative;background:radial-gradient(circle at 75% 30%,rgba(255,255,255,.32),transparent 27%),linear-gradient(125deg,#e8f3eb,#cfdfd5);border-bottom:1px solid #deebe0}
+.academy-learning-tuition{background:radial-gradient(circle at 22% 62%,rgba(255,255,255,.35),transparent 35%),linear-gradient(120deg,#e6eee5,#afc7b9)}
+.academy-learning-balance{background:radial-gradient(circle at 22% 25%,rgba(255,255,255,.45),transparent 38%),linear-gradient(130deg,#e6eee4,#dae9e2)}
+.academy-learning-habits{background:radial-gradient(circle at 75% 25%,rgba(255,255,255,.5),transparent 34%),linear-gradient(130deg,#dceadf,#bcd7c8)}
+.academy-learning-visual:before{content:"";position:absolute;border:1px solid rgba(7,83,51,.13);width:230px;height:230px;border-radius:46% 54% 60% 40%;right:-30px;top:-80px;transform:rotate(35deg)}
+.academy-learning-visual:after{content:"";position:absolute;inset:auto -25px -89px auto;border:1px solid rgba(7,83,51,.10);width:190px;height:190px;border-radius:50%}
+.academy-learning-visual-decoration{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;z-index:1;color:#075333}
+.academy-learning-visual-decoration span{font:400 77px/1 Georgia,serif;color:#1b6744}
+.academy-learning-visual-decoration small{font:800 10px/1.5 Inter,system-ui,sans-serif;letter-spacing:.19em;text-align:center;opacity:.73}
+.academy-learning-real-photo{position:absolute;inset:0;z-index:2;background:#edf4ee}
+.academy-learning-real-photo[hidden]{display:none!important}
+.academy-learning-real-photo img{width:100%;height:100%;display:block;object-fit:cover}
+.academy-learning-real-photo img[hidden]{display:none!important}
+.academy-learning-card-body{padding:23px 24px 24px;display:flex;flex:1;flex-direction:column}
+.academy-learning-card h3{font:600 clamp(22px,2vw,27px)/1.25 'Cormorant Garamond',Georgia,serif!important;color:#143d2a;margin:11px 0 11px}
+.academy-learning-card-body>p{color:#5e7164;font:400 13px/1.8 Inter,system-ui,sans-serif;margin:0 0 20px;flex:1}
+.academy-learning-card-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #edf2ee;padding-top:17px}
+.academy-learning-card-footer>span{font:600 11px Inter,system-ui,sans-serif;color:#75877b}
+.academy-learning-card-footer>a{display:inline-flex;align-items:center;gap:7px;background:#075333;color:white!important;padding:9px 15px;border-radius:8px;font:750 12px Inter,system-ui,sans-serif;text-decoration:none}
+.academy-learning-card-footer>a:hover{background:#094328}
+.academy-learning-hero,.academy-learning-essay-hero{background:linear-gradient(120deg,#f5f9f5,#edf5ef);padding:55px 0 57px;border-bottom:1px solid #dfece2}
+.academy-learning-back{display:inline-block;font-weight:700;font-size:12px;text-decoration:underline;text-underline-offset:4px;margin-bottom:30px;color:#075333}
+.academy-learning-hero h1,.academy-learning-essay-hero h1{max-width:960px;color:#153b29!important;font:600 clamp(40px,5vw,73px)/1.07 'Cormorant Garamond',Georgia,serif!important;letter-spacing:-.025em;margin:13px 0 19px}
+.academy-learning-hero p,.academy-learning-essay-hero p{max-width:750px;color:#60766a;font:400 15px/1.8 Inter,system-ui,sans-serif;margin:0}
+.academy-learning-directory{display:grid;grid-template-columns:220px minmax(0,1fr);gap:46px;padding-top:51px;padding-bottom:90px;align-items:start}
+.academy-learning-sidebar{border:1px solid #dfeae1;border-radius:12px;padding:23px 18px;background:#fbfdfb;position:sticky;top:108px}
+.academy-learning-sidebar h2{font:600 28px/1.2 'Cormorant Garamond',Georgia,serif!important;color:#075333;margin:0 0 16px}
+.academy-learning-categories{display:flex;flex-direction:column;gap:6px;margin-bottom:23px}
+.academy-learning-filter{border:0;border-radius:7px;background:transparent;color:#426150;padding:11px 10px;text-align:left;font:650 13px Inter,system-ui,sans-serif;width:100%}
+.academy-learning-filter:hover,.academy-learning-filter.is-current{background:#e6f1e8;color:#075333}
+.academy-learning-search-label{display:block;font-size:12px;color:#075333;font-weight:700;margin:0 0 9px}
+#academyLearningSearch{width:100%;padding:12px 10px;border-radius:7px;border:1px solid #bed4c5;background:#fff;color:#143d2a;min-width:0;font-size:13px}
+.academy-learning-sidebar-note{font-size:11px;line-height:1.75;color:#738578;margin:21px 0 0}
+.academy-learning-results-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 24px}
+.academy-learning-results-heading h2{margin:0;font:600 34px/1.2 'Cormorant Garamond',Georgia,serif!important;color:#153b29}
+#academyLearningCount{font-size:12px;color:#687c6e}
+.academy-learning-list-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:23px}
+#academyLearningEmpty{background:#f5faf6;padding:22px;border-radius:8px;color:#496250}
+.academy-learning-crumb{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:#587262;margin-bottom:37px}
+.academy-learning-crumb a{font-weight:700;color:#075333;text-decoration:underline;text-underline-offset:3px}
+.academy-learning-essay-layout{display:grid;grid-template-columns:minmax(0,1fr) 265px;gap:75px;padding-top:55px;padding-bottom:105px;align-items:start}
+.academy-learning-essay-body{max-width:735px;min-width:0}
+.academy-learning-essay-body>.academy-learning-visual{border-radius:15px;height:275px;margin-bottom:39px}
+.academy-learning-essay-section{margin-bottom:32px}
+.academy-learning-essay-section h2{font:600 clamp(27px,3vw,38px)/1.18 'Cormorant Garamond',Georgia,serif!important;color:#075333;margin-bottom:12px}
+.academy-learning-essay-section p{font:400 15px/1.95 Inter,system-ui,sans-serif;color:#455e4e}
+.academy-learning-essay-note{padding:25px;background:#eff7f0;border:1px solid #dcebdd;border-radius:12px;margin-top:40px}
+.academy-learning-essay-note strong{color:#075333;font-size:16px}
+.academy-learning-essay-note p{font:400 13px/1.75 Inter,system-ui,sans-serif;color:#4f6657;margin:12px 0 18px}
+.academy-learning-related{border-left:1px solid #dde9e0;padding-left:24px;position:sticky;top:109px}
+.academy-learning-related h2{font:600 29px/1.2 'Cormorant Garamond',Georgia,serif!important;color:#075333;margin:0 0 16px}
+.academy-learning-related>a:not(.academy-learning-related-back){display:block;border-top:1px solid #e1eae3;padding:18px 0;text-decoration:none}
+.academy-learning-related>a>small{display:block;color:#778a7b;font-size:11px}
+.academy-learning-related>a>strong{display:block;color:#244a35;font:600 19px/1.35 'Cormorant Garamond',Georgia,serif;margin:7px 0}
+.academy-learning-related>a>span{font-size:12px;font-weight:750;color:#075333}
+.academy-learning-related-back{display:inline-block;margin-top:15px;text-decoration:underline;color:#075333;font-weight:700;font-size:12px}
+.academy-learning-card:focus-within{outline:2px solid #a6ccb0;outline-offset:3px}
+@media(max-width:1020px){.academy-learning-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.academy-learning-home-grid .academy-learning-card:last-child{display:none}.academy-learning-directory{gap:28px}.academy-learning-essay-layout{gap:35px;grid-template-columns:minmax(0,1fr) 215px}}
+@media(max-width:690px){.academy-learning-home{padding:54px 0}.academy-learning-heading{align-items:start;flex-direction:column;gap:19px}.academy-learning-home-grid,.academy-learning-list-grid{grid-template-columns:1fr}.academy-learning-home-grid .academy-learning-card:last-child{display:flex}.academy-learning-directory{grid-template-columns:1fr;gap:26px;padding-top:34px}.academy-learning-sidebar{position:static}.academy-learning-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.academy-learning-essay-layout{grid-template-columns:1fr;padding-top:34px;gap:35px}.academy-learning-related{position:static;border-left:0;border-top:1px solid #dce9e0;padding:20px 0 0}.academy-learning-hero,.academy-learning-essay-hero{padding:40px 0}.academy-learning-essay-body>.academy-learning-visual{height:220px}.academy-learning-visual{height:185px;min-height:185px}.academy-learning-card-body{padding:22px}.academy-learning-crumb{margin-bottom:24px}}
+@media(prefers-reduced-motion:reduce){.academy-learning-card{transition:none!important}.academy-learning-card:hover{transform:none}}

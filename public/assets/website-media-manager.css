@@ -1,0 +1,40 @@
+/* Public Academy website media manager, scoped to Gallery only */
+#tab-gallery #mediaPlacementManager{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));align-items:start;gap:12px}
+#tab-gallery #mediaPlacementManager>.media-slot-card{margin:0!important;min-width:0;box-shadow:0 4px 16px rgba(7,83,51,.04)}
+#tab-gallery #mediaPlacementManager>.media-slot-card img,#tab-gallery #mediaPlacementManager>.media-slot-card video{width:100%!important;max-width:100%!important;height:145px!important;object-fit:contain!important}
+#tab-gallery #mediaPlacementManager button{font-size:12px;min-height:37px}
+#tab-gallery .card{min-width:0}
+#tab-gallery .card h3{color:#075333}
+#tab-gallery input[type=file],#tab-gallery select{max-width:100%;min-width:0}
+#tab-gallery label{line-height:1.6}
+#tab-gallery .hint{font-size:12px;line-height:1.7}
+.academy-home-video-controls{background:#f0f8f2;border:1px solid #bad9c3;padding:18px;border-radius:12px;margin:15px 0}
+.academy-home-video-controls h3{color:#075333}
+.academy-home-video-controls label{margin-top:12px;display:block}
+@media(max-width:750px){#tab-gallery #mediaPlacementManager{grid-template-columns:1fr}}
+/* No pastel surfaces in Usthad gallery; white and exact Academy green only. */
+#tab-gallery,#tab-gallery .card,#tab-gallery .media-slot-card,
+#tab-gallery #mediaPlacementManager,#tab-gallery .galleryActions,
+#tab-gallery select,#tab-gallery input[type=file],
+#tab-gallery input[type=url],#tab-gallery input[type=text],
+#tab-gallery .hint,#tab-gallery .galleryList,
+#tab-sitephotos .site-photo-editor,#tab-sitephotos .site-photo-frame{
+ background:#fff!important;background-image:none!important;
+}
+#tab-gallery #mediaPlacementManager .media-slot-card img,
+#tab-gallery #mediaPlacementManager .media-slot-card video{
+ background:#fff!important;background-image:none!important;
+ border:1px solid #075333!important;
+}
+#tab-gallery .media-slot-card{border:1px solid #075333!important}
+#tab-gallery button:not(.outline):not(.danger),
+#tab-gallery [type=submit]{background:#075333!important;color:#fff!important}
+#tab-gallery button.outline{background:#fff!important;color:#075333!important;border-color:#075333!important}
+#tab-gallery :is(input,select):focus-visible{outline:2px solid #075333!important}
+#tab-gallery .media-test-status{padding:10px 12px;border:1px solid #075333;border-radius:8px;
+ font-weight:700!important;font-size:12px!important;line-height:1.6!important;color:#075333!important;
+ background:#fff!important;white-space:normal;overflow-wrap:anywhere}
+#tab-gallery .media-test-status[data-state=error]{border-width:2px}
+#tab-gallery .media-test-status[data-state=ready],
+#tab-gallery .media-test-status[data-state=playing]{border-left-width:5px}
+#tab-gallery .media-slot-card video{background:#fff!important}
