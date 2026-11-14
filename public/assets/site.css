@@ -225,3 +225,5 @@ h2{font-size:clamp(1.8rem,3.1vw,3rem);line-height:1.25}
 .learning-home-art img{width:min(210px,100%);height:auto;display:block}
 .learning-home-art figcaption{font-family:Georgia,serif;font-style:italic;color:#43654b;font-size:14px;text-align:center}
 @media(max-width:750px){.learning-home-grid{grid-template-columns:1fr}.learning-home-art{max-width:400px;width:100%;margin:0 auto}.learning-home-copy p{font-size:14px}}
+/* Home About the Academy: section-only background accent */
+.section.white:has(> .container.about-grid){background:#EAF3ED}
