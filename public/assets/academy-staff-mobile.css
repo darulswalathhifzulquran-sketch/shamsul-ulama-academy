@@ -1,0 +1,42 @@
+/* Academy Usthad Mobile Experience — Green + white; retains desktop design */
+html,body{max-width:100%;overflow-x:clip}
+header,main,.content,.panel,.card{min-width:0;max-width:100%}
+input[type=file],select,textarea{max-width:100%;min-width:0}
+#tab-gallery .galleryGrid figure{min-width:0}
+#tab-gallery .galleryGrid img,#tab-gallery .galleryGrid video{object-fit:contain;background:#fff!important}
+#tab-gallery .galleryActions button{min-height:42px;flex:1 1 125px;font-size:12px}
+#tab-gallery .galleryGrid figcaption{font:600 12px/1.65 Inter,system-ui,sans-serif;overflow-wrap:anywhere;color:#075333}
+#tab-gallery .galleryGrid figure{border:1px solid #075333}
+#tab-gallery .card{background:#fff!important}
+#tab-gallery .card label[style*="background"]{background:#fff!important;border:1px solid #075333}
+#tab-gallery .galleryGrid figcaption{background:#fff!important}
+#tab-gallery .galleryActions{background:#fff!important}
+@media(max-width:900px){
+  main{display:block!important;width:min(100%,760px)!important;padding:14px 14px 28px!important}
+  aside{border:0!important;border-bottom:2px solid #075333!important;margin-bottom:15px!important;padding:0 0 10px!important}
+  #tabs{display:flex!important;flex-direction:row!important;align-items:center;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:0 0 11px!important}
+  #tabs button{scroll-snap-align:start;white-space:nowrap;min-height:44px;font-size:13px;padding:10px 14px}
+  .content{width:100%!important}
+  header{padding:10px 14px!important}
+  header .brand{font-size:11px;max-width:calc(100vw - 30px)}
+  header>div{display:flex;flex-wrap:wrap;gap:6px!important}
+  header #staffName{font-size:12px}
+  header a,header button{min-height:41px}
+  #tab-gallery #mediaPlacementManager{grid-template-columns:minmax(0,1fr)!important}
+  #tab-gallery .galleryGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card{padding:16px!important}
+  .two{grid-template-columns:minmax(0,1fr)!important}
+  .site-photo-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+@media(max-width:480px){
+  header{align-items:flex-start;gap:10px}
+  header .brand img{height:46px;width:44px}
+  header .brand span{font-size:11px}
+  #tab-gallery .galleryGrid{grid-template-columns:minmax(0,1fr)!important}
+  .stats{grid-template-columns:minmax(0,1fr)!important}
+  .galleryActions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .galleryActions button{width:100%!important;min-width:0!important;overflow-wrap:anywhere}
+  input,select,button{font-size:14px!important}
+  button{min-height:44px}
+}

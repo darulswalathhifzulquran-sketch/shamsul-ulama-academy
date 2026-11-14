@@ -1,0 +1,11 @@
+/* Announcement editor embedded in Usthad Academy Details & Theme. */
+#tab-settings .academy-topbar-editor{border:1px solid #075333!important;background:#fff!important}
+.academy-topbar-editor h3{color:#075333!important;font-size:18px;margin-bottom:8px}
+.academy-topbar-editor .hint{line-height:1.6}
+.academy-topbar-editor .check{display:flex;align-items:center;gap:10px;line-height:1.5}
+.academy-topbar-editor .check input[type=checkbox]{width:18px;height:18px;min-height:18px;flex:none;accent-color:#075333}
+#topbarPreview{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 18px;background:#075333;color:#fff;border:1px solid #075333;border-radius:7px;padding:10px 14px;min-height:44px;text-align:center;font:600 12px/1.5 Inter,system-ui,sans-serif}
+#topbarPreview[hidden]{display:none!important}
+#topbarPreviewLink{font-weight:800;text-decoration:underline;text-underline-offset:3px;color:#fff}
+#topbarPreviewLink[hidden]{display:none!important}
+@media(max-width:600px){.academy-topbar-editor{padding:15px!important}.academy-topbar-editor .two{grid-template-columns:minmax(0,1fr)!important}}

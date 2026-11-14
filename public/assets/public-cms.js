@@ -1,16 +1,118 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 let settings=null,cacheAt=0;
+window.__academyHeroRequestSequence=0;
 async function getSettings(){
- if(settings&&Date.now()-cacheAt<30000)return settings;
- const r=await fetch('/api/academy/settings',{credentials:'same-origin'});
+ if(settings&&Date.now()-cacheAt<3500)return settings;
+ const r=await fetch('/api/academy/settings',{credentials:'same-origin',cache:'no-store'});
  if(!r.ok)throw Error('Public settings could not be loaded.');
  const data=await r.json();settings=data.settings;cacheAt=Date.now();return settings;
 }
+function safeMedia(value){try{const u=new URL(value,location.origin);return (u.protocol==='https:'||u.origin===location.origin)&&!u.username&&!u.password;}catch{return false;}}
 function setLink(el,href,text){if(!el)return;el.href=href;if(text)el.textContent=text;}
 function applySettings(s){
  if(!s)return;
  document.documentElement.dataset.academyTheme=s.theme_style||'classic';
+ const heroVideo=document.getElementById('academyHomeVideo'),heroPhoto=document.getElementById('academyHomeFallback'),heroEmbed=document.getElementById('academyHomeEmbed');
+ if(heroPhoto){
+   const photo=String(s.home_photo_url||'').trim();
+   if(photo&&safeMedia(photo))heroPhoto.src=photo;
+   heroPhoto.onerror=()=>{heroPhoto.onerror=null;heroPhoto.src='/assets/courtyard-photo.jpg';};
+ }
+ if(heroVideo&&heroEmbed){
+   const requestId=++window.__academyHeroRequestSequence;
+   const isCurrent=()=>requestId===window.__academyHeroRequestSequence&&heroVideo.isConnected;
+   const playButton=$('academyHeroPlayButton');
+   const report=(state,detail='')=>{
+     window.__academyHeroState={state,detail,time:new Date().toISOString(),selectedId:Number((window.__academyHeroDevice==='mobile-9:16'?s.home_mobile_video_gallery_id:s.home_video_gallery_id)||0)};
+     const el=$('academyHomePlaybackStatus');
+     if(el){el.textContent=state==='error'?'VIDEO ERROR: '+(detail||'Video unavailable; showing Academy photo.'):state==='blocked'?'AUTOPLAY BLOCKED: click Play Academy Video.':state==='stalled'?'VIDEO STALLED: waiting for network.':state==='buffering'?'VIDEO BUFFERING: waiting for media data.':'';el.hidden=!['error','blocked','stalled','buffering'].includes(state);}
+   };
+   const hideControl=()=>{if(playButton)playButton.hidden=true;};
+   const showControl=()=>{if(playButton)playButton.hidden=false;};
+   const fallback=(reason='')=>{
+     if(!isCurrent())return;
+     heroVideo.style.opacity='0';heroVideo.hidden=true;heroEmbed.hidden=true;
+     if(heroPhoto)heroPhoto.hidden=false;
+     hideControl();
+     if(reason)report('error',reason);
+   };
+   const playing=()=>{
+     if(!isCurrent())return;
+     heroVideo.hidden=false;heroVideo.style.opacity='1';heroEmbed.hidden=true;
+     if(heroPhoto)heroPhoto.hidden=true;
+     hideControl();report('playing');
+   };
+   function play(){
+     if(!isCurrent())return;
+     heroVideo.muted=true;heroVideo.defaultMuted=true;
+     heroVideo.setAttribute('muted','');
+     try{
+       const result=heroVideo.play();
+       if(result&&typeof result.catch==='function')result.catch(err=>{
+         if(!isCurrent()||err?.name==='AbortError')return;
+         if(err?.name==='NotAllowedError'){report('blocked',err.message||'Autoplay blocked');showControl();}
+         else {report('error',err?.message||'Video playback failed');showControl();}
+       });
+     }catch(err){report('error',err?.message||'Playback unavailable');showControl();}
+   }
+   if(playButton)playButton.onclick=()=>{play();};
+   heroVideo.pause();
+   heroVideo.onplaying=playing;
+   heroVideo.onloadeddata=()=>{if(isCurrent())play();};
+   heroVideo.onerror=()=>{
+     if(!isCurrent())return;
+     const e=heroVideo.error;
+     fallback('HTML5 media error '+(e?.code||'unknown')+': '+(e?.message||'Network, format or decoding failure'));
+   };
+   heroVideo.onstalled=()=>{if(isCurrent())report('stalled','Waiting for video network data');};
+   heroVideo.onwaiting=()=>{if(isCurrent()&&heroVideo.readyState<3)report('buffering','Waiting for media data');};
+   if(heroPhoto)heroPhoto.hidden=false;
+   heroEmbed.hidden=true;heroEmbed.removeAttribute('src');
+   const mobileScreen=window.matchMedia('(max-width: 1150px), (hover: none) and (pointer: coarse)').matches;
+   const mobileSelected=Number(s.home_mobile_video_gallery_id||0);
+   const useMobile=mobileScreen&&mobileSelected>0;
+   const selected=useMobile?mobileSelected:Number(s.home_video_gallery_id||0);
+   const direct=useMobile?'':String(s.home_video_url||'').trim();
+   window.__academyHeroDevice=useMobile?'mobile-9:16':mobileScreen?'mobile-desktop-fallback':'desktop-16:9';
+   const applyDirectVideo=url=>{
+     if(!isCurrent())return;
+     if(!url||!safeMedia(url)){fallback('Approved video URL is unavailable.');return;}
+     let parsed;
+     try{parsed=new URL(url,location.origin);}catch{fallback('Invalid video address.');return;}
+     if(!/\.(mp4|webm)$/i.test(parsed.pathname)){fallback('Unsupported video file extension. Upload MP4 or WebM.');return;}
+     heroVideo.hidden=false;
+     heroVideo.style.opacity='0';
+     heroVideo.preload='auto';
+     // Native browser video succeeds with a fresh S3 signed URL. A 302 from
+     // a first-party endpoint stalls in some browsers; avoid that redirect.
+     heroVideo.src=url;
+     report('loading','Loading selected MP4 / WebM');
+     play();
+   };
+   if(selected){
+     report('checking','Checking selected Gallery video '+selected);
+     fetch('/api/academy/gallery',{cache:'no-store',credentials:'same-origin'}).then(async r=>{
+       if(!r.ok)throw Error('Gallery returned HTTP '+r.status);
+       return await r.json();
+     }).then(data=>{
+       if(!isCurrent())return;
+       const item=(data.gallery||[]).find(m=>Number(m.id)===selected&&m.media_type==='video');
+       if(!item)throw Error((useMobile?'Mobile':'Desktop')+' video #'+selected+' is unpublished or missing from Gallery.');
+       const url=item.image_url;
+       if(!url)throw Error('No playable video URL was returned from Gallery.');
+       const u=new URL(url,location.origin);
+       const yt=u.hostname==='www.youtube-nocookie.com'&&u.pathname.startsWith('/embed/');
+       const vm=u.hostname==='player.vimeo.com'&&u.pathname.startsWith('/video/');
+       if(yt||vm){
+         heroEmbed.src=yt?url+'?autoplay=1&mute=1&playsinline=1&loop=1&playlist='+u.pathname.split('/').pop():url+'?autoplay=1&muted=1&loop=1&background=1';
+         heroEmbed.onload=()=>{if(!isCurrent())return;heroEmbed.hidden=false;heroVideo.hidden=true;if(heroPhoto)heroPhoto.hidden=true;report('playing','Embedded video opened');};
+         heroEmbed.onerror=()=>fallback('Embedded video could not be loaded.');
+       }else applyDirectVideo(url);
+     }).catch(err=>{if(isCurrent())fallback('Selected video #'+selected+' could not load: '+(err?.message||String(err)));});
+   }else if(direct){applyDirectVideo(direct);}
+   else{heroVideo.pause();heroVideo.removeAttribute('src');fallback();}
+ }
  const photo=document.getElementById('v17HeroApproved'),placeholder=document.getElementById('v17HeroPlaceholder'),caption=document.getElementById('v17HeroCaption');
  if(photo&&placeholder){
   const candidate=String(s.home_photo_url||'');
@@ -23,12 +125,21 @@ function applySettings(s){
  for(const key of ['--green','--green2','--forest'])document.documentElement.style.setProperty(key,'#075333');
  const about=$('aboutIntro');if(about)about.textContent=s.about||'Qur’an memorisation and Islamic learning.';
  const vision=$('aboutVision');if(vision)vision.textContent=s.vision||'Purposeful Qur’an learning.';
- const location=$('contactAddress');if(location)location.textContent=s.address;
+ const contactAddressNode=$('contactAddress');if(contactAddressNode)contactAddressNode.textContent=s.address;
  const bodyAddress=$('aboutAddress');if(bodyAddress)bodyAddress.textContent=s.address;
  const contactInfoAddress=$('contactInfoAddress');if(contactInfoAddress)contactInfoAddress.textContent=s.address;
  const aboutAffiliation=$('aboutAffiliation');if(aboutAffiliation)aboutAffiliation.textContent=[s.affiliation,s.affiliation_place].filter(Boolean).join(' — ');
  const footerAffiliationPlace=$('footerAffiliationPlace');if(footerAffiliationPlace)footerAffiliationPlace.textContent=s.affiliation_place||'';
- const topline=$('academyTopline');if(topline)topline.textContent=[s.academy_name,s.address].filter(Boolean).join(' · ');
+ const topline=$('academyTopline');
+ if(topline){
+   const enabled=s.topbar_enabled!==false;
+   topline.hidden=!enabled;
+   const announcement=$('academyToplineMessage'),cta=$('academyToplineLink');
+   if(announcement)announcement.textContent=String(s.topbar_message||'Qur’an Memorisation • Islamic & Academic Education').slice(0,120);
+   const allowed=['/','/about','/college-features','/programmes','/gallery','/admission','/contact'];
+   const path=String(s.topbar_link_path||'').trim(),label=String(s.topbar_link_label||'').trim();
+   if(cta){cta.hidden=!(label&&allowed.includes(path));if(!cta.hidden){cta.textContent=label.slice(0,32);cta.href=path;}}
+ }
  const map=$('academyMapLink'),aboutMap=$('aboutMapLink');
  for(const el of [map,aboutMap])if(el&&s.maps_url)setLink(el,s.maps_url,'Open Academy Location on Google Maps ↗');
  const footer=document.querySelector('footer');if(footer){
@@ -36,6 +147,9 @@ function applySettings(s){
  if(group){const ps=group.querySelectorAll('p');for(const p of ps){if(p.textContent.trim().startsWith('⌖'))p.textContent='⌖ '+s.address;if(p.textContent.trim().startsWith('◷'))p.textContent='◷ '+s.office_hours;}}
  const affiliationLink=footer.querySelector('.affiliation-link');if(affiliationLink){affiliationLink.textContent=s.affiliation;affiliationLink.href=s.affiliation_url;}
  }
+ const addrFooter=$('footerAcademyAddress'),hoursFooter=$('footerAcademyHours');
+ if(addrFooter&&s.address)addrFooter.textContent=s.address;
+ if(hoursFooter&&s.office_hours)hoursFooter.textContent=s.office_hours;
  const numbers=[s.phone1,s.phone2].filter(Boolean);
  for(const a of document.querySelectorAll('a[href^="tel:"]')){
   const old=a.getAttribute('href'),idx=old.includes('9496845773')?0:old.includes('9562962762')?1:-1;
@@ -57,7 +171,7 @@ function applySettings(s){
   const address=String(s.address||'Perighala, Ernakulam, Kerala, India').trim();
   if(address){
    const frame=document.createElement('iframe');
-   frame.src='https://maps.google.com/maps?q='+encodeURIComponent(address)+'&output=embed';
+   frame.src='https://maps.google.com/maps?q=10.0051171%2C76.4025429&z=17&output=embed';
    frame.title='Map search for Shamsul Ulama Islamic Academy location';
    frame.loading='lazy';frame.referrerPolicy='no-referrer-when-downgrade';frame.style.width='100%';frame.style.height='280px';frame.style.border='0';frame.style.borderRadius='11px';mapFrame.append(frame);
   }
@@ -69,9 +183,10 @@ async function gallery(){
   const r=await fetch('/api/academy/gallery',{credentials:'same-origin',cache:'no-store'});
   if(!r.ok)throw Error('Gallery unavailable.');
   const data=await r.json();root.replaceChildren();
-  if(!data.gallery?.length){notice.hidden=false;notice.textContent='Approved academy photos and videos will appear here when published by the Usthad.';return;}
+  const chosen=(data.gallery||[]).filter(media=>media.show_on_public_gallery===true);
+  if(!chosen.length){notice.hidden=false;notice.textContent='The Usthad has not selected any photos or videos for this public Gallery yet.';return;}
   notice.hidden=true;
-  for(const media of data.gallery){
+  for(const media of chosen){
    const fig=document.createElement('figure');let element;
    if(media.media_type==='video'){
     if(media.image_url.startsWith('https://www.youtube-nocookie.com/embed/')||media.image_url.startsWith('https://player.vimeo.com/video/')){
@@ -106,68 +221,87 @@ function admission(){
   }catch(error){message.textContent=error.message||'Application was not saved; please try again.';}finally{button.disabled=false;}
  });
 }
-function setPublicPhotoVisible(img,visible){
- if(!img.isConnected)return;
- const slot=img.dataset.academyPhoto;
- img.hidden=!visible;
- if(slot==='hero'){
-  const visual=img.closest('[data-academy-hero-visual]');
-  const layout=img.closest('.academy-v23-layout');
-  if(visual)visual.hidden=!visible;
-  if(layout)layout.classList.toggle('has-real-hero-photo',visible);
- }else{
-  const frame=img.parentElement;
-  if(frame){
-   frame.hidden=!visible;
-   frame.classList.toggle('has-real-programme-photo',visible);
-  }
-  const detail=img.closest('.academy-v21-detail');
-  if(detail)detail.classList.toggle('has-academy-detail-photo',visible);
- }
-}
 async function applySitePhotos(){
- const images=[...document.querySelectorAll('[data-academy-photo]')];
- if(!images.length)return;
- // Keep every empty frame hidden while the remote photo manifest is loading.
- for(const img of images)setPublicPhotoVisible(img,false);
+ const imgs=[...document.querySelectorAll('img[data-academy-photo]')];
+ if(!imgs.length)return;
  try{
-  const r=await fetch('/api/academy/site-photos',{credentials:'same-origin',cache:'no-store'});
-  if(!r.ok)throw Error('Official photo list unavailable.');
-  const {photos={}}=await r.json();
-  for(const img of images){
+  const r=await fetch('/api/academy/site-photos',{cache:'no-store',credentials:'same-origin'});
+  if(!r.ok)return;
+  const photos=(await r.json()).photos||{};
+  for(const img of imgs){
    if(!img.isConnected)continue;
-   const photo=photos[img.dataset.academyPhoto];
-   if(!photo?.url){img.removeAttribute('src');continue;}
-   let valid=false;
-   try{
-    const u=new URL(photo.url,location.origin);
-    valid=(u.protocol==='https:'||u.origin===location.origin&&u.protocol==='http:')&&!u.username&&!u.password;
-   }catch(e){}
-   if(!valid){img.removeAttribute('src');continue;}
-   // Load the signed image independently first. A hidden lazy <img> can otherwise
-   // remain unfetched forever, leaving a saved school photo invisible.
-   const preloader=new Image();
-   preloader.onload=()=>{
-    if(!img.isConnected)return;
-    img.loading='eager';
-    img.alt=photo.alt_text||img.alt;
-    img.onload=()=>{if(img.isConnected)setPublicPhotoVisible(img,true);};
-    img.onerror=()=>{if(img.isConnected)setPublicPhotoVisible(img,false);};
-    img.src=photo.url;
-    if(img.complete&&img.naturalWidth>0)setPublicPhotoVisible(img,true);
+   const entry=photos[img.dataset.academyPhoto];
+   if(!entry?.url||!safeMedia(entry.url))continue;
+   const image=new Image();
+   image.onload=()=>{
+     if(!img.isConnected)return;
+     img.src=entry.url;img.alt=entry.alt_text||img.alt;
+     img.hidden=false;
+     const wrap=img.closest('.academy-learning-real-photo,.academy-v21-programme-photo,.academy-v21-detail-photo');
+     if(wrap){wrap.hidden=false;wrap.classList.add('has-real-programme-photo');}
    };
-   preloader.onerror=()=>{if(img.isConnected)setPublicPhotoVisible(img,false);};
-   preloader.src=photo.url;
+   image.onerror=()=>{};
+   image.src=entry.url;
   }
- }catch(e){console.warn('Official Academy photos could not load',e.message);}
+ }catch(err){console.warn('Official Academy photo loading unavailable',err);}
+}
+async function applyMediaPlacements(){
+ try{
+  const [placementsRes,galleryRes]=await Promise.all([
+   fetch('/api/academy/media-placements',{cache:'no-store'}),
+   fetch('/api/academy/gallery',{cache:'no-store'})
+  ]);
+  if(!placementsRes.ok||!galleryRes.ok)return;
+  const placements=(await placementsRes.json()).placements||{};
+  const items=(await galleryRes.json()).gallery||[];
+  const getImage=slot=>{
+   const item=items.find(x=>Number(x.id)===Number(placements[slot])&&x.media_type==='image');
+   return item&&safeMedia(item.media_url||item.image_url)?(item.media_url||item.image_url):null;
+  };
+  const sourceSlots={
+   '/assets/academy-owner-official-logo.png':'brand_logo',
+   '/assets/shamsul-ulama-portrait-main.jpg':'scholar_home',
+   '/assets/shamsul-ulama-portrait-legacy.jpg':'scholar_profile',
+   '/assets/quran-photo.jpg':'about_quran',
+   '/assets/hifz-boy-academy.webp':'learner_illustration'
+  };
+  for(const img of document.querySelectorAll('img[src]')){
+   const slot=sourceSlots[img.getAttribute('src')];
+   const replacement=slot&&getImage(slot);
+   if(replacement)img.src=replacement;
+  }
+  for(const img of document.querySelectorAll('img[data-media-slot]')){
+   const replacement=getImage(img.dataset.mediaSlot);
+   if(!replacement)continue;
+   img.onload=()=>{img.hidden=false;if(img.parentElement?.classList.contains('academy-learning-real-photo'))img.parentElement.hidden=false;};
+   img.onerror=()=>{img.hidden=true;if(img.parentElement?.classList.contains('academy-learning-real-photo'))img.parentElement.hidden=true;};
+   img.src=replacement;
+   if(img.complete&&img.naturalWidth>0)img.onload();
+  }
+  const hero=getImage('home_fallback');
+  if(hero){
+   const el=$('academyHomeFallback');if(el)el.src=hero;
+  }
+  const welcome=getImage('home_section');
+  if(welcome){
+   const img=$('v17HeroApproved'),placeholder=$('v17HeroPlaceholder'),caption=$('v17HeroCaption');
+   if(img){img.src=welcome;img.hidden=false;}
+   if(placeholder)placeholder.hidden=true;
+   if(caption)caption.textContent='Academy photo';
+  }
+ }catch(err){console.warn('Optional website image placements unavailable',err);}
 }
 async function render(){
  const path=location.pathname;
  try{applySettings(await getSettings());}catch(e){}
  await applySitePhotos();
+ await applyMediaPlacements();
  if(path==='/gallery')await gallery();
  if(path==='/admission')admission();
 }
 window.addEventListener('academy:render',render);
+// Switch desktop/mobile videos when the viewport changes (including phone rotation).
+const academyPhoneQuery=window.matchMedia('(max-width: 1150px), (hover: none) and (pointer: coarse)');
+academyPhoneQuery.addEventListener('change',()=>{if(location.pathname==='/')render().catch(e=>console.warn('Academy video display refresh',e));});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
 })();

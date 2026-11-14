@@ -1,0 +1,532 @@
+{
+  "project_id": "proj_28yiZzMLRLsx",
+  "source_file_count": 105,
+  "backup_date": "2026-11-14",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": null,
+      "virtual": true
+    },
+    {
+      "path": "api/academy/accounts.js",
+      "sha256": "4ad2fdbd6dbce8ff6b0ef623a13ac77a3e568930b823e7fea570c357919f6c75",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/application-print.js",
+      "sha256": "29b5705765e357065caa15afd2c24846e98c50797f73d1074d6276396dddef3b",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/applications.js",
+      "sha256": "196543dbe75625e1a079cf664a64e2516ff6cee56fb0281aa8e1f5c7ff994119",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/enquiries.js",
+      "sha256": "d96c2c043bee1b3474baa9f287d876403d7dd75286373c6335cf1d4b29489a19",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/gallery.js",
+      "sha256": "ddd95f0b652f4d77de5590e3597364433b23f0c2e2cab0dffa28a49b68328502",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/home-video.js",
+      "sha256": "0ca34795c622e2f2d0ccbe1f00aca2513a643074bb7cff3650a1d73f763535e7",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/juz-bulk.js",
+      "sha256": "05e4cce718adff484b4011109f16de032fea7e0ffd0a482648579bf7c44f27b2",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/juz.js",
+      "sha256": "e18fceafaaaea0e82e3dac73eb2fdfdb6b28628348fb6f463480815180be8fe8",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/media-file.js",
+      "sha256": "524a43427f327bc1da5fc7132ceda46ed332c61b8797f00606e5f0254e6ab982",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/media-placements.js",
+      "sha256": "b19bcd019c4af20f59b1a778b6bfcb48a1a3c726af97c93afd688aa70173f169",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/monthly.js",
+      "sha256": "1905c1569487464e7cc3da72410184a9d4d961a650e7c086df3638b1075821b2",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/overview.js",
+      "sha256": "f8f7eb8f5d35fa77553b2a677b45b6eda65657e3615d2c1270ee260d4becb426",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/revision.js",
+      "sha256": "a3bc74da9f0ace539ae7e9f1fc39d1ad813ad4429b68bc04bcde8a8e70242de5",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/settings.js",
+      "sha256": "0c834305bfb0a9072f8775194903bafbd1a70841168d05b7b6bac40855f6ed7e",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/site-photos.js",
+      "sha256": "6159710da27c11a40403ee8da3dec4ea07d87989211842c4bf7061edafa7f7cc",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/students-bulk-delete.js",
+      "sha256": "177f35881a2bcdfec6afb8ed970a62f4a5a9dcdbe6c705da81b35ab098e74a04",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/students.js",
+      "sha256": "aa14111e9c855ac5aa49ae2737340dfb2a843353189fe223a6c713f485f3b223",
+      "virtual": false
+    },
+    {
+      "path": "api/academy/target.js",
+      "sha256": "79cbdbbcbe5ebfc4b3dd8e2f4e73e98d897e38d39900dba6ab79de22ea36feff",
+      "virtual": false
+    },
+    {
+      "path": "api/identity/bootstrap.js",
+      "sha256": "c522316ade6e6429bce982db79d270e7bbbb91b75f3a99079c386cc3904dee04",
+      "virtual": false
+    },
+    {
+      "path": "api/identity/change-password.js",
+      "sha256": "93ca276ff6c34bfea21668f57fc4fc33d44c857a3bcbaf7f739eef6fc6417d98",
+      "virtual": false
+    },
+    {
+      "path": "api/identity/login.js",
+      "sha256": "0fada46a66c0c1f60c71a32152545774b515b61e45f598af32c0ed1b050cdde3",
+      "virtual": false
+    },
+    {
+      "path": "api/identity/logout.js",
+      "sha256": "08b00881db7edd9911f5270bf4d5337f787e1e45a56cdcbde31049fa59e5433c",
+      "virtual": false
+    },
+    {
+      "path": "api/identity/me.js",
+      "sha256": "a967025592ef9bf30ac13a7a63e1cc6fbe0f838b14a888d36c95957a7e8f828a",
+      "virtual": false
+    },
+    {
+      "path": "api/identity/recover-admin.js",
+      "sha256": "fdfe11602b8d83297113cc66be4b0fe47eb308d934227b569e79c32440590197",
+      "virtual": false
+    },
+    {
+      "path": "hatchable.toml",
+      "sha256": "a0e97592387ce0f8ce80db2ffa2d70a2d0709963f6458a7cb768d2c1b9d40051",
+      "virtual": false
+    },
+    {
+      "path": "lib/academy-auth.js",
+      "sha256": "eb0ca376cd4e3a92f78ec19560882b02e8754eee8051d707f2ef3ca6d7522b07",
+      "virtual": false
+    },
+    {
+      "path": "lib/academy-dashboard-document.js",
+      "sha256": "48d7f8f81a7383b6687385bb5ce428cc2913d7467521e065c640b80347729468",
+      "virtual": false
+    },
+    {
+      "path": "lib/academy-home-document.js",
+      "sha256": "9f9c5c037b3aa9d6ccc3bbd407ee5541495d06550399832da043d45de747ed13",
+      "virtual": false
+    },
+    {
+      "path": "lib/academy-staff-document.js",
+      "sha256": "04a48b31b41bd1ec7d141289381ce77a200c3c7c726d0dc2556cc56f48b879f7",
+      "virtual": false
+    },
+    {
+      "path": "lib/college-features-outline.md",
+      "sha256": "d11039177ebf5bd73dbc594f82c3bf90353a098d5a29fe7d207567e9bedeaca9",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0001_students.sql",
+      "sha256": "99b1f56240052cf2c4054851b7c6693850497ec53c14bd3824b3556a40ee141b",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0002_student_access.sql",
+      "sha256": "9c88a1fa88b6a192968b26565fc54cb076e8cbd891d37e22c6b818719fb2b1ab",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0003_usthad_access.sql",
+      "sha256": "c5f122fe5954403d11b3784024f418c7492786e6e87d1d7af6f4f05c6728de5e",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0004_hifz_monthly.sql",
+      "sha256": "2c7e37ed79bf0c8af15d4c618f84baee08016103906a1be6e39b2a735547e9b4",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0005_access_requests.sql",
+      "sha256": "00aa73d0e338f8f5a2b02593dcd22e998d0978d875e770a8c2de5295da378111",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0006_juz_verifications.sql",
+      "sha256": "78b0a659c4a959bb732e6ef159b0f8ff45bba5b31aec7feb58966588a6b1b7a1",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0007_academy_production.sql",
+      "sha256": "87318c4f7f459e3d6afc8a9999644b3de5699eb5e663ca02261e1b2f870c58bf",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0008_settings_gallery.sql",
+      "sha256": "4bc4f962029a69eadca2d334171b29a7baf47ba85532fe746116daca1a782449",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0009_complete_admissions.sql",
+      "sha256": "6d7685b1b96e49eb1ea0e28eeb6137a106a7b0e4ce6f316f6c1559bc33c89df0",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0010_optional_student_profile.sql",
+      "sha256": "4442a0ff6274707137b96ccbea81ba5dba4e4afdc560cbfa511e7109fc5f287a",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0011_account_optional_details.sql",
+      "sha256": "635f15759ad8f7f1f1d3cfc7ea9a6906963aead1d8c62a934fdb69104721ee42",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0012_gallery_video_and_publish.sql",
+      "sha256": "f8f94e3fe42d2f09cff387e81d7880e843c36a4303dd042e7f9703ba7b31e15a",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0013_atomic_admission_approval.sql",
+      "sha256": "6857945f210d22838efa3bf923b694fe01d3df08398deeec9715c66007f60a3a",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0014_admin_bulk_student_delete.sql",
+      "sha256": "c6e6b85caf82bf6afb7780ec02e23261b826d26fb7afa4f2fe7cd19658d5ecb3",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0015_home_and_personal_plan.sql",
+      "sha256": "fa58f9eb316a3c2a4dba009a54078121d3549ecd14019d3bb57a6ec3826e41b6",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0019_admin_recovery.sql",
+      "sha256": "9ef5a76c66db128bd0eaa72a9972ee0648a1b1d63950064e8fce5b91899ba073",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0019_fix_admission_decision_transitions.sql",
+      "sha256": "1c92fa9850589f7d42583a60e0fead6b5b9682c0d0f2e1aede59b846985b28c2",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0020_student_revision_repair.sql",
+      "sha256": "74a45ee79d9f9c73e1469f2895dbcc59121ee5b51f15ad17969de090d07e44f6",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0021_planner_mode_and_partial_pages.sql",
+      "sha256": "9382ee008d93e0df6830b353fd5829f80005d8d4e39087d7aac1c0eb1669a247",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0022_academy_site_photo_uploads.sql",
+      "sha256": "6ec5d3adbc542deb2bc34d16b686b76ede019be58f0f2c79c5710350a181f4a8",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0022_official_site_programme_photos.sql",
+      "sha256": "3e542415ca7ff9f953b9bec4813b9b1febb884c2cdbb53742c25336fe0bf1e88",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0023_reconcile_site_photos.sql",
+      "sha256": "c1c296ed18bbadefd5cf45569d8c6dfa38172fd2cabf5c755787a34fad5b2880",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0024_public_media_controls.sql",
+      "sha256": "03bcfb7a5beb69061fcd82024b2c8552c11762390a3e647bfc0948a80f2aea73",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0025_home_mobile_video.sql",
+      "sha256": "4e93d3e6eb0c37b52802e5734a6e081603372857218e9c547397673ac306c888",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0025_optional_mobile_home_video.sql",
+      "sha256": "ee5d38800720be707858fd71d56a2efe12c5ea79bfa6a4e0b28791748007cc21",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0026_gallery_curated_visibility.sql",
+      "sha256": "e4d41ffb77262700a80af9b53965d70b5106d62617197cb1de5d8229d1034b99",
+      "virtual": false
+    },
+    {
+      "path": "migrations/0027_public_announcement_bar.sql",
+      "sha256": "9e70fc7f42fb241e0147485a264e4990281c8959bc19d2bd6ecbd0d399926574",
+      "virtual": false
+    },
+    {
+      "path": "pages/dashboard.js",
+      "sha256": "7814116aa9774425940ba6cfc13082296851052526713b747ecb4cda5780ecde",
+      "virtual": false
+    },
+    {
+      "path": "pages/journey.js",
+      "sha256": "2dbe448737a92e1e96cba7b934ab565c761fcbeacae781673e71e0612538c274",
+      "virtual": false
+    },
+    {
+      "path": "pages/staff.js",
+      "sha256": "843552563cfa8721d69aaa76d1cf66a032dbc0869249625478ee5e8a9e411ab9",
+      "virtual": false
+    },
+    {
+      "path": "public/admin-recovery.html",
+      "sha256": "ba4092323bc31be622fdeee0fb445a4aa60b5ad359849e955855ac18a7f5c7b7",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-brand-private.css",
+      "sha256": "88611f4d09f654219c9485522fa8f14476130e3b0e1e400cd906c20361be06fb",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-colour-lock.css",
+      "sha256": "08c65b5798909247ed9fce4b2a6410970f27fddd932c05eaf5a0277746120eb9",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-learning.css",
+      "sha256": "9158ca67675f5099362260bedf93cc0276da9ed46c889332bb191d1083c5ab4f",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-learning.js",
+      "sha256": "2acc56b51aae4be508256353cb5d2e153a625d30e57f122cf8d7c291ea0cad5d",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-mobile-responsive.css",
+      "sha256": "ae82fdb70674d40158793eb6d7ea8f07647acc6d58577a3169e51433b9ca3709",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-official-logo.svg",
+      "sha256": "21d2d4240bd6febc302f07d00e7f4910177e1b43700732e5a9207131bcb6d3c8",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-owner-official-logo.png",
+      "sha256": "3771249aad124732ea3aa4974cd65973844a9b2eb373d098fc9c78a3ae8a704e",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-portal-home.css",
+      "sha256": "9e72f640002d4d7432d367690fa5268f2769b0babf65ce0af26bd69e356e5021",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-portal-home.js",
+      "sha256": "98bd6fc6659feed75b5ed5cb4a786c85e2492d39f4b4ad959fc29cb79bcd27d9",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-public-finish.css",
+      "sha256": "bb276e114ec011c5c554e31671027bf06d651ef2b044782cbabe8a2129f8f0ca",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-staff-mobile.css",
+      "sha256": "8dfcc4cd64fdd97d00d9434b4fff4b3cf5309565ba6b3be7a722d64b4d02c320",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-topbar-editor.css",
+      "sha256": "285b2bd985ebbeb8dc4711862d7d579c8fac0ad42de4aca30db4bb4cc43a0a91",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/academy-topbar.css",
+      "sha256": "8516bc3a93e9a8425f404fd6fddcbb89a609370c476bb12d8449afc5b06fd75d",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/college-features.css",
+      "sha256": "ab89f31572c3d38385e7a711ea4ac5a2805fb2b9a32d44e5feb0caf34c36b30e",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/college-features.js",
+      "sha256": "575fd3cfaf9fd3d58626d56353b3ad407315b45ce88d1ea140a0ec9458582b91",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/courtyard-photo.jpg",
+      "sha256": "ab17f8db4ee24d3b7be4d1c129a21385cb914ff60906ab383943f84ee6ab7339",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/hifz-boy-academy.webp",
+      "sha256": "d11df0ca4af9598fc01b89ab1795a93566b5ca6e14a6da3f7dca620da224d08a",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/hifz-learner-animated.svg",
+      "sha256": "be0417dc6d21bcb9b35a2f914716a261a7e267461a5c51f2eb5009e0b7de60ae",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/hifz-math.js",
+      "sha256": "33f00249d4d8a64e158f19752368632bc2ac2768e553ac9a2ac36be1e106c1b9",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/learner-media-portal.js",
+      "sha256": "b076e316e2b6b0003e8dda20dbab757082962ce289a25775ca0635ec0c0bc129",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/password-visibility.js",
+      "sha256": "b15d70e2923dc7b0b9b857f30caba98d5f16aae3dbbd9efe501c8a4668738598",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/private-journey.js",
+      "sha256": "34eb2dd08b9c428d1c6435eb5cb379e7da30b723fbc361378d6bda22591ccb33",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/public-cms.js",
+      "sha256": "f63ccdedc54c0b3254ece232c0deced90d751ebdc937f086fabaa683ea8963f3",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/quran-photo.jpg",
+      "sha256": "d42a3d20e8b1eac8fdef6af5cd7779fbbad546044620014344d1202d0cd18365",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/shamsul-ulama-portrait-legacy.jpg",
+      "sha256": "f974582b3102423ff96343c3bc84f6492915ef6be5c01ab1a8e2cdc4d05c7b82",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/shamsul-ulama-portrait-main.jpg",
+      "sha256": "24ba6f0ef9eddd270107ba4c53e4ffdcf80b13dbe4859073128f3a47122b6fdf",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/site-photos-editor.css",
+      "sha256": "484bc686bab066c487cd919a82833e129e533256fd98f774ab89daa3bfd6d79e",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/site-photos-editor.js",
+      "sha256": "7aea1f5001dfd9af45cd070be61817b23f39a552a89277c8ec295c62b2c29821",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/site.css",
+      "sha256": "90da56059596eb584a9a82cbec0f2b2603a4d77ea5a527a326fd0f9cee3f841d",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/site.js",
+      "sha256": "bbbfdaad88ae55c08e9f71c9caa5c16d9b5b896f4302eb1ce0b652fd332f50be",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/staff-editor.css",
+      "sha256": "675b84de182b664df69ba319766cfaf11458ca37829ab97d8e5e97031437c7e3",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/staff.css",
+      "sha256": "b4849291f0a92547babb8e6ec0552d21a8d109bd70eb5e0558dae2efe138f455",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/staff.js",
+      "sha256": "574ba78bd64628f5a5f733ed1cf722815623bbb3591e9df2789f9ee4ec53e36d",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/v17-public.css",
+      "sha256": "fa4013ff1f3e177f1b40d10e704906ebacd9dd0b4eb41a970c33d2ba890a5626",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/v20-home.css",
+      "sha256": "50030c498b299ce7fd2c61de6693c9fcda3f05709b3083a5867dd9ea1268bac7",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/v21-academy.css",
+      "sha256": "d44076e5b2b043e5303e6833ff2b6f41b2bb0de53e5e83b56806e0da2ddf7feb",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/v23-editorial-hero.css",
+      "sha256": "253b52ecf4252717c2919f11363b064adad001c35e7a6201e1c0745f1668b8dc",
+      "virtual": false
+    },
+    {
+      "path": "public/assets/website-media-manager.css",
+      "sha256": "c590d5eb8551c39a19ce2a2e4269753048d3197076a19005bc15c5c2bdc69153",
+      "virtual": false
+    },
+    {
+      "path": "public/change-password.html",
+      "sha256": "f0fa060863a5fe052d785386f7c7e80eff3bcc623ca93787a85e6f57c7524526",
+      "virtual": false
+    },
+    {
+      "path": "public/index.html",
+      "sha256": "f82401ca28c5c19b68754fbd81ab9c87f6baed0582ea70e41aa8ed24217a9bd6",
+      "virtual": false
+    },
+    {
+      "path": "public/login.html",
+      "sha256": "0b25e6b8199128bafb0b5314d03222a8af72a4f068900a41436b642c48c7c6f0",
+      "virtual": false
+    },
+    {
+      "path": "public/setup.html",
+      "sha256": "bb4e2e67c822c3bcd0b04476abb1bc21ba18f1100f12f9c4e75a475d3032264a",
+      "virtual": false
+    },
+    {
+      "path": "README.md",
+      "sha256": "c14cf1aad37c91e072be5d3c64a2ec263509c8a2f206d829741594b322e4f7a0",
+      "virtual": false
+    }
+  ]
+}

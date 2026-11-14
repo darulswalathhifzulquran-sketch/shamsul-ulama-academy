@@ -39,13 +39,13 @@ export default async function(req,res){
   const manage=req.query?.manage==='1';
   if(manage){const a=await guard(req,res,['admin','usthad']);if(!a)return;}
   const r=await db.query(manage?
-   "SELECT id,image_url,storage_key,media_type,caption,alt_text,display_order,is_published,created_at FROM academy_gallery ORDER BY display_order,id":
-   "SELECT id,image_url,storage_key,media_type,caption,alt_text,display_order FROM academy_gallery WHERE is_published=true ORDER BY display_order,id");
+   "SELECT id,image_url,storage_key,media_type,caption,alt_text,display_order,is_published,show_on_public_gallery,created_at FROM academy_gallery ORDER BY display_order,id":
+   "SELECT id,image_url,storage_key,media_type,caption,alt_text,display_order,show_on_public_gallery FROM academy_gallery WHERE is_published=true ORDER BY display_order,id");
   const gallery=await Promise.all(r.rows.map(async row=>{
    let url=row.image_url;
    if(row.storage_key){try{url=await storage.url(row.storage_key);}catch(e){console.warn('Gallery signed URL unavailable',row.id);}}
    const {storage_key,...safe}=row;
-   return {...safe,image_url:url};
+   return {...safe,image_url:url,media_url:row.storage_key?'/api/academy/media-file?id='+Number(row.id):url};
   }));
   res.setHeader('Cache-Control','no-store');
   return res.json({gallery});
@@ -53,6 +53,14 @@ export default async function(req,res){
  const a=await guard(req,res,['admin','usthad'],true);if(!a)return;
  if(req.method==='PUT'){
   const id=validId(req.body?.id),published=req.body?.is_published;
+  if(id&&typeof req.body?.show_on_public_gallery==='boolean'){
+    const visible=req.body.show_on_public_gallery;
+    if(visible){const approved=await db.query('SELECT id FROM academy_gallery WHERE id=$1 AND is_published=true',[id]);if(!approved.rows.length)return res.status(400).json({error:'Publish/approve this file before choosing Show in Public Gallery.'});}
+    const updated=await db.query('UPDATE academy_gallery SET show_on_public_gallery=$2 WHERE id=$1 RETURNING id,show_on_public_gallery',[id,visible]);
+    if(!updated.rows.length)return res.status(404).json({error:'Media file not found.'});
+    await audit(a.user.id,visible?'gallery.show':'gallery.hide','gallery',id);
+    return res.json({ok:true,id,show_on_public_gallery:visible});
+  }
   if(!id||typeof published!=='boolean')return res.status(400).json({error:'Choose a valid gallery item and publication status.'});
   const r=await db.query('UPDATE academy_gallery SET is_published=$2 WHERE id=$1 RETURNING id,is_published',[id,published]);
   if(!r.rows.length)return res.status(404).json({error:'Media not found.'});
@@ -90,7 +98,8 @@ export default async function(req,res){
   catch(e){console.error('Gallery delete audit error',e?.message||e);}
   return res.json({ok:true,deleted_id:id,verified:true,storage_removed:!!key,permanently_deleted:true});
  }
- const caption=String(req.body?.caption||'').trim(),alt=String(req.body?.alt_text||'').trim(),published=String(req.body?.is_published||'')==='true',order=Number(req.body?.display_order||0);
+ const caption=String(req.body?.caption||'').trim(),alt=String(req.body?.alt_text||'').trim(),published=String(req.body?.is_published||'')==='true',visible=String(req.body?.show_on_public_gallery||'')==='true',order=Number(req.body?.display_order||0);
+ if(visible&&!published)return res.status(400).json({error:'Approve/publish the media before making it visible in the public Gallery.'});
  if(!['on','true'].includes(String(req.body?.rights_confirmed||'')))return res.status(400).json({error:'Confirm you own the media or have permission to publish it.'});
  if(caption.length>250||alt.length>250||!Number.isSafeInteger(order)||order<0||order>100000)return res.status(400).json({error:'Check caption, description and order.'});
  const file=(req.files||[]).find(f=>f.field==='file'&&f.buffer?.length>0&&f.filename);
@@ -123,7 +132,7 @@ export default async function(req,res){
   catch(e){console.error('Gallery storage upload failed',e?.message||e);return res.status(503).json({error:'Media storage failed. Try an optimized photo or a video link.'});}
  }
  try{
-  const r=await db.query('INSERT INTO academy_gallery(image_url,storage_key,media_type,caption,alt_text,display_order,is_published) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id',[url,storageKey,type,caption,alt||caption,order,published]);
+  const r=await db.query('INSERT INTO academy_gallery(image_url,storage_key,media_type,caption,alt_text,display_order,is_published,show_on_public_gallery) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id',[url,storageKey,type,caption,alt||caption,order,published,visible]);
   await audit(a.user.id,'gallery.upload','gallery',r.rows[0].id);
   return res.status(201).json({ok:true,id:r.rows[0].id,media_type:type,is_published:published});
  }catch(e){
