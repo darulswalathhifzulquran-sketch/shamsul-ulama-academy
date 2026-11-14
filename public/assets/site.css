@@ -225,5 +225,11 @@ h2{font-size:clamp(1.8rem,3.1vw,3rem);line-height:1.25}
 .learning-home-art img{width:min(210px,100%);height:auto;display:block}
 .learning-home-art figcaption{font-family:Georgia,serif;font-style:italic;color:#43654b;font-size:14px;text-align:center}
 @media(max-width:750px){.learning-home-grid{grid-template-columns:1fr}.learning-home-art{max-width:400px;width:100%;margin:0 auto}.learning-home-copy p{font-size:14px}}
-/* Home About the Academy: section-only background accent */
-.section.white:has(> .container.about-grid){background:#EAF3ED}
+/* Home About the Academy: reference-image steel-blue gradient, scoped to this section only */
+.section.white:has(> .container.about-grid){background:linear-gradient(105deg,#6B9DAF 0%,#50889B 23%,#427789 45%,#356879 65%,#2F5E6E 82%,#254F60 100%);color:#fff}
+.section.white:has(> .container.about-grid) .about-grid p,
+.section.white:has(> .container.about-grid) .subtle-caption{color:#EDF5F7}
+.section.white:has(> .container.about-grid) .eyebrow,
+.section.white:has(> .container.about-grid) h2{color:#fff}
+.section.white:has(> .container.about-grid) .pill{color:#fff;border-color:#fff}
+.section.white:has(> .container.about-grid) .pill:hover{background:#fff;color:#254F60}
