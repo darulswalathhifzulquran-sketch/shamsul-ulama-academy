@@ -3,7 +3,7 @@ import {db,storage} from 'hatchable';
 export const access='public';
 export const methods=['GET','PUT','DELETE'];
 const sections=new Set(['gallery']);
-const validSlot=value=>Number.isInteger(Number(value))&&Number(value)>=1&&Number(value)<=5?Number(value):null;
+const validSlot=value=>{const n=Number(value);return Number.isSafeInteger(n)&&n>=1&&n<=2147483647?n:null;};
 
 export default async function(req,res){
  res.setHeader('Cache-Control','no-store, max-age=0');
@@ -18,14 +18,14 @@ export default async function(req,res){
     const {storage_key,image_url,...safe}=row;
     return {...safe,media_url:src};
   }));
-  return res.json({cards,limit_per_section:5});
+  return res.json({cards});
  }
 
  const a=await guard(req,res,['admin','usthad'],true);
  if(!a)return;
  const section=String(req.body?.section||'');
  const position=validSlot(req.body?.position);
- if(!sections.has(section)||!position)return res.status(400).json({error:'Choose Homepage Gallery and a card position from 1 to 5.'});
+ if(!sections.has(section)||!position)return res.status(400).json({error:'Choose Homepage Gallery and a valid positive card position.'});
 
  if(req.method==='DELETE'||req.body?.gallery_id===null){
   const del=await db.query('DELETE FROM academy_home_showcase WHERE section=$1 AND position=$2 RETURNING position',[section,position]);

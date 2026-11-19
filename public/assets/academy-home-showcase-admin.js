@@ -1,5 +1,4 @@
 (()=>{'use strict';
-const MAX_CARDS=5;
 let assigned=[];
 const $=id=>document.getElementById(id);
 const node=(tag,value,cls='')=>{const n=document.createElement(tag);if(value!==null&&value!==undefined)n.textContent=String(value);if(cls)n.className=cls;return n;};
@@ -42,10 +41,15 @@ function namedField(labelText,input){
 function mediaLabel(item){
  return '#'+item.id+' · '+(typeLabels[item.media_type]||item.media_type)+' · '+String(item.caption||item.alt_text||'Untitled Academy media').slice(0,70);
 }
+function nextOpenPosition(used){
+ let pos=1;
+ while(used.has(pos))pos++;
+ if(pos>2147483647)throw Error('No available gallery position.');
+ return pos;
+}
 function firstAvailable(section){
  const used=new Set(assigned.filter(x=>x.section===section).map(x=>Number(x.position)));
- for(let pos=1;pos<=MAX_CARDS;pos++)if(!used.has(pos))return pos;
- return null;
+ return nextOpenPosition(used);
 }
 function renderCard({section,item,approved,api,status,confirmAction,refresh,optimisePhoto}){
  const isNew=!item;
@@ -133,15 +137,13 @@ function renderCard({section,item,approved,api,status,confirmAction,refresh,opti
   if(!files.length&&!select.value){message('Choose an approved file or select photos/videos to upload.',true);return;}
   if(!isNew&&files.length>1){message('Replace a card with ONE file only.',true);return;}
   if(files.length&&!rights.checked){message('Tick the publication permission checkbox.',true);return;}
-  const plannedCount=assigned.filter(x=>x.section===section).length+ (isNew?Math.max(1,files.length):0);
-  if(plannedCount>MAX_CARDS){message('Homepage Gallery has five photo/video positions. Remove or replace an existing card first.',true);return;}
   busy(true);let uploaded=[],savedCount=0;
   try{
    if(files.length){
     const selectedPositions=new Set(assigned.filter(x=>x.section===section).map(x=>Number(x.position)));
     let currentPos=isNew?null:Number(item.position);
     for(let i=0;i<files.length;i++){
-     if(isNew){currentPos=Array.from({length:MAX_CARDS},(_,j)=>j+1).find(x=>!selectedPositions.has(x));if(!currentPos)throw Error('No remaining card positions.');selectedPositions.add(currentPos);}
+     if(isNew){currentPos=nextOpenPosition(selectedPositions);selectedPositions.add(currentPos);}
      const name=(title.value.trim()&&(files.length===1||i===0))?title.value.trim():files[i].name.replace(/\.[^.]+$/,'').slice(0,100);
      const id=await addUpload(files[i],name);uploaded.push(id);
      await saveOne(currentPos,id,name,description.value.trim());
@@ -220,8 +222,8 @@ async function render({api,gallery,status,confirmAction,refresh,optimisePhoto}){
   const area=node('div',null,'showcase-admin-heading');
   const rows=cards.filter(x=>x.section===section).sort((x,y)=>Number(x.sort_order)-Number(y.sort_order)||Number(x.position)-Number(y.position));
   area.append(node('h4',label(section)+' · '+rows.length+' selected'));
-  area.append(node('p','Exactly five positions: an asymmetric two-column editorial photo/video gallery. Upload, replace, preview, move or remove each selected card.'));
-  const add=node('button','+ Add Photo / Video','showcase-admin-add');add.type='button';add.disabled=rows.length>=MAX_CARDS;
+  area.append(node('p','Add as many Academy photos/videos as you need. Upload, preview, replace, reorder or remove cards. Each selected item appears on the Homepage.'));
+  const add=node('button','+ Add Photo / Video','showcase-admin-add');add.type='button';
   area.append(add);panel.append(area);
   const list=node('div',null,'showcase-admin-list');
   if(!rows.length)list.append(node('p','Nothing selected yet. Click + Add Photo / Video above to upload or choose a saved file.','showcase-admin-status'));
