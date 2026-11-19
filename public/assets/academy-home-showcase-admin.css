@@ -1,0 +1,74 @@
+/* Usthad's curated Homepage Gallery and Highlights editor. */
+.showcase-admin-outer{background:#fff!important;border:1px solid #075333!important;padding:clamp(16px,2vw,27px)!important}
+.showcase-admin-outer>h3{color:#075333;font-size:22px}
+.showcase-admin-outer>.hint{line-height:1.6}
+#academyHomepageShowcaseManager{display:grid;gap:22px;min-width:0}
+.showcase-admin-section{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;min-width:0}
+.showcase-admin-heading{grid-column:1/-1;background:#075333;color:#fff;padding:16px 20px;border-radius:9px}
+.showcase-admin-heading h4{color:#fff;margin:0 0 7px;font-size:17px}
+.showcase-admin-heading p{margin:0;font-size:12px;line-height:1.6;color:#fff}
+.showcase-admin-card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid #ccdfd4;border-radius:10px;background:#fff;min-width:0;box-sizing:border-box}
+.showcase-admin-card>strong{color:#075333;font-size:15px}
+.showcase-admin-card label{display:flex;flex-direction:column;gap:5px;font-size:12px;font-weight:700;color:#075333;margin:0}
+.showcase-admin-card select,.showcase-admin-card input[type=text],.showcase-admin-card input[type=file],.showcase-admin-card textarea{
+ width:100%;max-width:100%;min-width:0;box-sizing:border-box;background:#fff!important;color:#075333!important;
+ padding:9px 10px;border:1px solid #abc9b7;border-radius:7px;font:500 13px/1.35 system-ui,sans-serif;
+}
+.showcase-admin-card input[type=file]{padding:9px 5px}
+.showcase-admin-card textarea{resize:vertical;min-height:66px}
+.showcase-admin-preview-wrapper{min-width:0}
+.showcase-admin-preview{min-height:105px;max-height:200px;border:1px solid #bcd3c5;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.showcase-admin-preview>img,.showcase-admin-preview>video,.showcase-admin-preview>iframe{width:100%;max-height:200px;object-fit:contain;border:0}
+.showcase-admin-preview>span{color:#075333;font-size:12px;text-align:center;padding:18px}
+.showcase-admin-fields{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.showcase-admin-card .showcase-admin-check{flex-direction:row!important;align-items:flex-start!important;gap:9px!important;font-weight:500!important;line-height:1.6}
+.showcase-admin-check input[type=checkbox]{width:17px;height:17px;flex:none;accent-color:#075333;margin:2px 0 0}
+.showcase-admin-check[hidden]{display:none!important}
+.showcase-admin-actions{display:flex;flex-wrap:wrap;gap:8px}
+.showcase-admin-actions button{padding:10px 14px;min-height:42px;flex:1 1 130px;color:#fff;background:#075333;border:1px solid #075333;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer}
+.showcase-admin-actions button.outline{background:#fff;color:#075333}
+.showcase-admin-actions button:disabled{opacity:.58;cursor:not-allowed}
+.showcase-admin-status{margin:0;font-size:12px;line-height:1.6;color:#075333;overflow-wrap:anywhere}
+@media(max-width:1050px){.showcase-admin-section{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:500px){.showcase-admin-outer{padding:13px!important}.showcase-admin-card{padding:13px}.showcase-admin-actions button{flex-basis:100%}}
+/* Visible, dedicated Homepage Gallery & Highlights editor. */
+#tabs button[data-tab="homegallery"]{
+  border-left:4px solid #39D859!important;
+  font-weight:800!important;
+  background:#f5fbf6!important;
+  color:#075333!important;
+  text-align:left!important;
+}
+#tabs button[data-tab="homegallery"].active{background:#075333!important;color:#fff!important}
+.academy-home-manager-header{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:22px}
+.academy-home-manager-header h2{font-size:clamp(22px,2.5vw,31px);margin:8px 0;color:#075333}
+.academy-home-manager-header p{font-size:14px;line-height:1.65;margin:0;max-width:700px}
+.academy-home-open{border:1px solid #075333;border-radius:8px;padding:12px 15px;text-decoration:none;color:#075333;font-size:12px;font-weight:750;white-space:nowrap}
+.academy-home-open:hover{color:#fff;background:#075333}
+.showcase-admin-section{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+.showcase-admin-list{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;min-width:0}
+.showcase-admin-list>.showcase-admin-status{grid-column:1/-1;min-height:80px;display:flex;align-items:center;padding:16px;background:#fff;border:1px dashed #075333;border-radius:10px}
+.showcase-admin-heading{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.showcase-admin-heading h4{margin:0!important;flex:1 1 200px}
+.showcase-admin-heading p{flex-basis:100%;order:3}
+.showcase-admin-add{background:#fff!important;border:1px solid #075333!important;color:#075333!important;cursor:pointer;font-weight:800!important;min-height:44px;padding:12px 16px;border-radius:8px}
+.showcase-admin-add:hover{background:#39D859!important;color:#075333!important}
+.showcase-admin-add:disabled{opacity:.5;cursor:not-allowed}
+.showcase-admin-card{min-width:0;align-self:start;box-sizing:border-box}
+.showcase-admin-card h4{color:#075333;margin:0 0 5px!important;font-size:16px!important}
+.showcase-admin-card button:not(:disabled):focus-visible,.showcase-admin-add:focus-visible{outline:3px solid #39D859;outline-offset:3px}
+.showcase-admin-card .showcase-admin-preview{height:150px!important;min-height:120px;max-height:200px}
+.showcase-admin-card .showcase-admin-preview img,.showcase-admin-card .showcase-admin-preview video{width:100%;height:100%;object-fit:contain}
+.showcase-admin-card button[hidden]{display:none!important}
+@media(max-width:960px){
+ .showcase-admin-list{grid-template-columns:minmax(0,1fr)!important}
+ .academy-home-manager-header{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:560px){
+ #tab-homegallery{min-width:0;max-width:100%;overflow-x:clip}
+ .showcase-admin-list{grid-template-columns:minmax(0,1fr)!important}
+ .showcase-admin-heading{padding:14px!important}
+ .showcase-admin-heading button{width:100%}
+ .showcase-admin-card{padding:12px!important}
+ .academy-home-manager-header p{font-size:13px}
+}

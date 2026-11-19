@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="900" viewBox="0 0 720 900" aria-hidden="true">
+<defs>
+ <pattern id="academy-geometric" width="112" height="112" patternUnits="userSpaceOnUse">
+  <g fill="none" stroke="#B69E76" stroke-width="1.4" opacity=".50" stroke-linejoin="round">
+   <path d="M56 0 112 56 56 112 0 56Z"/>
+   <path d="M0 0 112 112M112 0 0 112" opacity=".43"/>
+   <path d="M56 12 68.5 39.2 100 56 68.5 72.8 56 100 43.5 72.8 12 56 43.5 39.2Z"/>
+   <path d="M56 22 67 44 90 56 67 68 56 90 45 68 22 56 45 44Z"/>
+   <path d="M56 35 77 56 56 77 35 56Z" stroke-width="1.7"/>
+   <path d="M0 28 28 0M84 0 112 28M112 84 84 112M28 112 0 84"/>
+  </g>
+  <g fill="#F8F4ED" stroke="#C9B794" stroke-width=".8" opacity=".62">
+   <circle cx="56" cy="56" r="5"/><circle cx="0" cy="0" r="4.5"/><circle cx="112" cy="0" r="4.5"/><circle cx="0" cy="112" r="4.5"/><circle cx="112" cy="112" r="4.5"/>
+  </g>
+ </pattern>
+ <linearGradient id="fade" x1="0" x2="1">
+  <stop stop-color="#F2EDE3" stop-opacity="0"/>
+  <stop offset=".77" stop-color="#F2EDE3" stop-opacity=".12"/>
+  <stop offset="1" stop-color="#F2EDE3" stop-opacity="1"/>
+ </linearGradient>
+</defs>
+<rect width="720" height="900" fill="url(#academy-geometric)"/>
+<rect width="720" height="900" fill="url(#fade)"/>
+</svg>

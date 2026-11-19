@@ -1,0 +1,174 @@
+/* v59 — simplified learning cards. Keep the existing photo media slots and complete article links. */
+#app .academy-learning-home {
+  padding:clamp(55px,6vw,86px) 0!important;
+}
+#app .academy-learning-home .academy-learning-heading {
+  margin-bottom:27px!important;
+  align-items:end;
+}
+#app .academy-learning-home .academy-learning-heading h2 {
+  font-family:'Times New Roman',Georgia,serif!important;
+  font-size:clamp(36px,3.65vw,53px)!important;
+  font-weight:700!important;
+  line-height:1.12!important;
+  margin:10px 0 0!important;
+  color:#075333!important;
+  letter-spacing:-.02em;
+}
+#app .academy-learning-home-grid,
+#app .academy-learning-list-grid {gap:22px!important}
+#app .academy-learning-card {
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0;
+  min-height:0!important;
+  padding:0!important;
+  background:#075333!important;
+  border:1px solid #075333!important;
+  border-radius:16px!important;
+  overflow:hidden!important;
+  cursor:pointer!important;
+  text-decoration:none!important;
+  box-shadow:0 10px 25px rgba(7,83,51,.1)!important;
+  transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease!important;
+}
+#app .academy-learning-card[hidden] {display:none!important}
+#app .academy-learning-card .academy-learning-visual {
+  position:relative!important;
+  height:225px!important;
+  min-height:225px!important;
+  background:#075333!important;
+  border:0!important;
+  border-bottom:0!important;
+}
+#app .academy-learning-card .academy-learning-real-photo {
+  background:#075333!important;
+}
+#app .academy-learning-card .academy-learning-real-photo::after{
+  content:""!important;position:absolute!important;inset:0!important;
+  background:#001c12!important;opacity:0!important;
+  transition:opacity .26s ease!important;
+  pointer-events:none!important;
+}
+#app .academy-learning-card .academy-learning-real-photo img{
+  display:block!important;
+  width:100%!important;height:100%!important;
+  object-fit:cover!important;
+  transition:transform .36s ease,filter .36s ease!important;
+}
+#app .academy-learning-card .academy-learning-image-tag,
+#app .academy-learning-card .academy-learning-image-credit {
+  display:none!important;
+}
+#app .academy-learning-card .academy-learning-card-body {
+  display:flex!important;flex-direction:column!important;
+  justify-content:center!important;gap:9px!important;
+  min-height:110px!important;
+  flex:1!important;
+  padding:21px 25px 23px!important;
+  background:#075333!important;
+  transition:background-color .24s ease!important;
+}
+#app .academy-learning-card .academy-learning-overline{
+  color:#d6e7dc!important;
+  font:750 10px/1.4 Inter,system-ui,sans-serif!important;
+  letter-spacing:.17em!important;
+  margin:0!important;
+}
+#app .academy-learning-card-title-row{
+  display:flex!important;gap:12px;align-items:center!important;
+  justify-content:space-between!important;
+}
+#app .academy-learning-card .academy-learning-card-title-row h3 {
+  display:block!important;
+  color:#fff!important;
+  font-family:'Times New Roman',Georgia,serif!important;
+  font-size:clamp(25px,2.2vw,32px)!important;
+  font-weight:700!important;
+  line-height:1.15!important;
+  letter-spacing:-.01em!important;
+  margin:0!important;
+}
+#app .academy-learning-card-arrow{
+  width:35px;height:35px;flex:0 0 35px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.4);
+  border-radius:50%;color:#fff;
+  font:650 19px/1 Inter,system-ui,sans-serif;
+  transition:transform .24s ease,background-color .24s ease;
+}
+#app .academy-learning-card:hover,
+#app .academy-learning-card:focus-visible{
+  transform:translateY(-6px)!important;
+  border-color:#043821!important;
+  box-shadow:0 18px 38px rgba(2,48,28,.23)!important;
+}
+#app .academy-learning-card:hover .academy-learning-card-body,
+#app .academy-learning-card:focus-visible .academy-learning-card-body {
+  background:#043821!important;
+}
+#app .academy-learning-card:hover .academy-learning-real-photo img,
+#app .academy-learning-card:focus-visible .academy-learning-real-photo img{
+  transform:scale(1.055)!important;
+}
+#app .academy-learning-card:hover .academy-learning-real-photo::after,
+#app .academy-learning-card:focus-visible .academy-learning-real-photo::after{
+  opacity:.14!important;
+}
+#app .academy-learning-card:hover .academy-learning-card-arrow,
+#app .academy-learning-card:focus-visible .academy-learning-card-arrow{
+  transform:translate(3px,-3px);
+  background:rgba(255,255,255,.12);
+}
+#app .academy-learning-card:focus-visible{outline:3px solid #3f8d99!important;outline-offset:4px!important}
+/* The article's body retains all detail, with a consistent, readable serif font. */
+#app .academy-learning-essay-hero h1 {
+  font-family:'Times New Roman',Georgia,serif!important;
+  font-size:clamp(36px,4.5vw,62px)!important;
+  font-weight:700!important;
+  line-height:1.15!important;
+}
+#app .academy-learning-essay-hero p{
+  font-family:'Times New Roman',Georgia,serif!important;
+  font-size:clamp(19px,1.7vw,23px)!important;
+  line-height:1.6!important;
+  color:#486452!important;
+}
+#app .academy-learning-essay-section h2{
+  font-family:'Times New Roman',Georgia,serif!important;
+  font-size:clamp(28px,2.7vw,36px)!important;
+  font-weight:700!important;
+  line-height:1.24!important;
+  margin-bottom:14px!important;
+}
+#app .academy-learning-essay-section p{
+  font-family:'Times New Roman',Georgia,serif!important;
+  font-size:clamp(18px,1.5vw,20px)!important;
+  font-weight:400!important;
+  line-height:1.88!important;
+  color:#304c3a!important;
+}
+#app .academy-learning-related>a>strong,
+#app .academy-learning-essay-note p{
+  font-family:'Times New Roman',Georgia,serif!important;
+  line-height:1.5!important;
+}
+#app .academy-learning-essay-note p{font-size:18px!important}
+@media(min-width:691px) and (max-width:1020px){
+  #app .academy-learning-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #app .academy-learning-home-grid .academy-learning-card:last-child{grid-column:1/-1!important}
+}
+@media(max-width:690px){
+  #app .academy-learning-home{padding:49px 0 59px!important}
+  #app .academy-learning-home-grid{grid-template-columns:1fr!important;gap:17px!important}
+  #app .academy-learning-card .academy-learning-visual{height:210px!important;min-height:210px!important}
+  #app .academy-learning-card .academy-learning-card-body{min-height:102px!important;padding:19px 21px 21px!important}
+  #app .academy-learning-card .academy-learning-card-title-row h3{font-size:28px!important}
+  #app .academy-learning-essay-section p{font-size:18px!important;line-height:1.82!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #app .academy-learning-card,
+  #app .academy-learning-card *{transition:none!important}
+  #app .academy-learning-card:hover,
+  #app .academy-learning-card:focus-visible{transform:none!important}
+}

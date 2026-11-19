@@ -1,0 +1,151 @@
+/* Shamsul Ulama Islamic Academy · editorial design v60.
+   Calm colour contrast between the white College Features section and green footer.
+   Intentionally no ornamental patterns, gradients, badges or AI-style glossy effects. */
+#app .academy-learning-home {
+  background:#F1F4F2!important;
+  border-top:1px solid #DBE5E0!important;
+  border-bottom:1px solid #D5E0DB!important;
+  padding:clamp(58px,6vw,90px) 0!important;
+  color:#173840!important;
+}
+#app .academy-learning-home .academy-learning-heading{align-items:end!important;margin-bottom:29px!important;gap:22px!important}
+#app .academy-learning-home .academy-learning-eyebrow {
+  color:#4A7077!important;
+  font:700 11px/1.5 Inter,Arial,sans-serif!important;
+  letter-spacing:.13em!important;
+}
+#app .academy-learning-home .academy-learning-heading h2 {
+  margin:11px 0 0!important;
+  color:#173C44!important;
+  font-family:'Libre Baskerville',Georgia,serif!important;
+  font-weight:400!important;
+  font-size:clamp(29px,3vw,43px)!important;
+  letter-spacing:-.035em!important;
+  line-height:1.25!important;
+}
+#app .academy-learning-home .academy-learning-all{
+  background:transparent!important;color:#235561!important;
+  border:0!important;border-bottom:1px solid #235561!important;
+  border-radius:0!important;box-shadow:none!important;
+  padding:6px 0!important;min-height:0!important;
+  font:650 13px/1.4 Inter,Arial,sans-serif!important;
+  transition:color .2s ease,border-color .2s ease!important;
+}
+#app .academy-learning-home .academy-learning-all:hover,
+#app .academy-learning-home .academy-learning-all:focus-visible{color:#102F38!important;border-bottom-color:#102F38!important;background:transparent!important}
+#app .academy-learning-home-grid,#app .academy-learning-list-grid {gap:23px!important}
+#app .academy-learning-card{
+  display:flex!important;flex-direction:column!important;
+  padding:0!important;min-width:0!important;min-height:0!important;
+  border:1px solid #D7E0DC!important;border-radius:11px!important;
+  overflow:hidden!important;background:#FFFEFA!important;
+  text-decoration:none!important;color:#183E44!important;cursor:pointer!important;
+  box-shadow:0 6px 23px rgba(28,62,64,.055)!important;
+  transition:translate .28s ease,box-shadow .28s ease,border-color .28s ease!important;
+}
+#app .academy-learning-card[hidden]{display:none!important}
+#app .academy-learning-card .academy-learning-visual{
+  position:relative!important;
+  background:#F1F4F2!important;
+  border:0!important;
+  height:220px!important;min-height:220px!important;
+}
+#app .academy-learning-card .academy-learning-real-photo{background:#F1F4F2!important}
+#app .academy-learning-card .academy-learning-real-photo img{
+  display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;
+  transition:transform .45s ease,filter .45s ease!important;
+}
+#app .academy-learning-card .academy-learning-real-photo::after{
+  content:""!important;position:absolute!important;inset:0!important;
+  background:#244F5B!important;opacity:0!important;pointer-events:none!important;
+  transition:opacity .3s ease!important;
+}
+#app .academy-learning-card .academy-learning-image-tag,
+#app .academy-learning-card .academy-learning-image-credit{display:none!important}
+#app .academy-learning-card .academy-learning-card-body{
+  min-height:107px!important;
+  display:flex!important;flex-direction:column!important;justify-content:center!important;
+  padding:23px 23px 24px!important;gap:10px!important;
+  flex:1!important;background:#FFFEFA!important;
+  transition:background-color .26s ease!important;
+}
+#app .academy-learning-card .academy-learning-overline{
+  font:650 11px/1.3 Inter,Arial,sans-serif!important;
+  letter-spacing:.13em!important;
+  color:#50757A!important;
+  margin:0!important;
+  text-transform:uppercase!important;
+  transition:color .26s ease!important;
+}
+#app .academy-learning-card .academy-learning-card-title-row{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;
+}
+#app .academy-learning-card .academy-learning-card-title-row h3{
+  color:#173C44!important;
+  font-family:'Libre Baskerville',Georgia,serif!important;
+  font-size:clamp(20px,1.75vw,25px)!important;
+  font-weight:400!important;
+  line-height:1.35!important;letter-spacing:-.022em!important;
+  margin:0!important;transition:color .26s ease!important;
+}
+#app .academy-learning-card .academy-learning-card-arrow{
+  display:inline-block!important;width:auto!important;height:auto!important;
+  flex:0 0 auto!important;color:#356773!important;
+  font:500 22px/1 Inter,Arial,sans-serif!important;
+  border:0!important;border-radius:0!important;background:none!important;
+  transition:color .26s ease,transform .26s ease!important;
+}
+@media(hover:hover){
+  #app .academy-learning-card:hover{
+    translate:0 -5px!important;
+    transform:none!important;
+    box-shadow:0 17px 35px rgba(28,62,64,.16)!important;
+    border-color:#315F6B!important;
+  }
+  #app .academy-learning-card:hover .academy-learning-card-body{background:#315F6B!important}
+  #app .academy-learning-card:hover .academy-learning-overline{color:#D3E3E5!important}
+  #app .academy-learning-card:hover .academy-learning-card-title-row h3{color:#fff!important}
+  #app .academy-learning-card:hover .academy-learning-card-arrow{color:#fff!important;transform:translate(4px,-4px)!important}
+  #app .academy-learning-card:hover .academy-learning-real-photo img{transform:scale(1.035)!important}
+  #app .academy-learning-card:hover .academy-learning-real-photo::after{opacity:.07!important}
+}
+#app .academy-learning-card:focus-visible{
+  outline:3px solid #356773!important;outline-offset:4px!important;
+  border-color:#315F6B!important;
+  box-shadow:0 17px 35px rgba(28,62,64,.16)!important;
+}
+#app .academy-learning-card:focus-visible .academy-learning-card-body{background:#315F6B!important}
+#app .academy-learning-card:focus-visible .academy-learning-overline{color:#D3E3E5!important}
+#app .academy-learning-card:focus-visible .academy-learning-card-title-row h3,
+#app .academy-learning-card:focus-visible .academy-learning-card-arrow{color:#fff!important}
+#app .academy-learning-card:active{translate:0 -1px!important}
+#app .academy-learning-hero h1,#app .academy-learning-essay-hero h1,
+#app .academy-learning-essay-section h2{
+  font-family:'Libre Baskerville',Georgia,serif!important;
+  font-weight:400!important;
+  letter-spacing:-.02em!important;
+}
+#app .academy-learning-essay-section p{
+  font-family:Georgia,'Times New Roman',serif!important;
+  font-size:clamp(18px,1.45vw,20px)!important;
+  line-height:1.85!important;
+  color:#324F47!important;
+}
+@media(min-width:691px) and (max-width:1020px){
+  #app .academy-learning-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #app .academy-learning-home-grid .academy-learning-card:last-child{grid-column:1/-1!important}
+}
+@media(max-width:690px){
+  #app .academy-learning-home{padding:54px 0 62px!important}
+  #app .academy-learning-home .academy-learning-heading{align-items:flex-start!important;gap:18px!important}
+  #app .academy-learning-home-grid{grid-template-columns:1fr!important;gap:17px!important}
+  #app .academy-learning-card .academy-learning-visual{height:205px!important;min-height:205px!important}
+  #app .academy-learning-card .academy-learning-card-body{padding:20px 21px 23px!important;min-height:102px!important}
+  #app .academy-learning-card .academy-learning-card-title-row h3{font-size:23px!important}
+  #app .academy-learning-home .academy-learning-heading h2{font-size:31px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #app .academy-learning-card,#app .academy-learning-card *,
+ #app .academy-learning-home .academy-learning-all{transition:none!important}
+ #app .academy-learning-card:hover,#app .academy-learning-card:active{translate:none!important;transform:none!important}
+}

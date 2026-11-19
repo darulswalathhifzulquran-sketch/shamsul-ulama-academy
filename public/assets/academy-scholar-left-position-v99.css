@@ -1,0 +1,104 @@
+/* v99 - Scholar portrait position correction, based on user's annotated
+   reference. Authentic portrait remains untouched. The portrait starts close
+   to the LEFT viewport margin, not centered in a constrained content column.
+   Biography moves beside it. Existing ivory/gold visual identity stays. */
+@media(min-width:901px){
+ #app main .scholar-section.scholar-section-home.scholar-editorial-v97>.container,
+ #app main .academy-home-intro.academy-heritage-continuation-v98>.hero-grid{
+   width:min(1710px,calc(100% - 80px))!important;
+   max-width:1710px!important;
+   margin-inline:auto!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-spotlight.scholar-editorial-layout-v97{
+   display:grid!important;
+   grid-template-columns:minmax(0,.74fr) minmax(0,1.26fr)!important;
+   gap:clamp(46px,4.1vw,74px)!important;
+   justify-items:stretch!important;
+   align-items:center!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-visual{
+   justify-self:start!important;
+   align-self:center!important;
+   align-items:flex-start!important;
+   justify-content:flex-start!important;
+   margin:0!important;
+   padding:0!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97{
+   display:block!important;
+   width:min(100%,475px)!important;
+   max-width:475px!important;
+   margin:0!important;
+   transform:none!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-visual::before{
+   left:16px!important;
+   width:min(92%,475px)!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-label{
+   width:min(100%,475px)!important;
+   max-width:475px!important;
+   margin-left:0!important;
+   text-align:left!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-copy{
+   justify-self:start!important;
+   align-self:center!important;
+   width:100%!important;
+   max-width:750px!important;
+   padding:0!important;
+   margin:0!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-curve-v97{
+   left:25%!important;
+   width:23%!important;
+   top:48%!important;
+   height:115px!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-layout-v98{
+   grid-template-columns:minmax(0,1fr) minmax(0,.84fr)!important;
+   gap:clamp(45px,5.5vw,95px)!important;
+ }
+}
+@media(min-width:691px) and (max-width:900px){
+ #app main .scholar-section.scholar-section-home.scholar-editorial-v97>.container,
+ #app main .academy-home-intro.academy-heritage-continuation-v98>.hero-grid{
+   width:calc(100% - 48px)!important;
+   max-width:none!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-spotlight.scholar-editorial-layout-v97{
+   grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr)!important;
+   gap:28px!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97{
+   width:100%!important;
+   max-width:370px!important;
+   margin:0!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-visual{
+   align-items:flex-start!important;
+   padding:0!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-copy{
+   padding:0!important;
+   justify-self:start!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-curve-v97{
+   display:none!important;
+ }
+}
+@media(max-width:690px){
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-visual{
+   padding:0!important;
+   align-items:flex-start!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97{
+   width:min(88%,330px)!important;
+   margin-left:0!important;
+   margin-right:auto!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-label{
+   margin-left:0!important;
+   text-align:left!important;
+ }
+}

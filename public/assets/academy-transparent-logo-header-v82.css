@@ -1,0 +1,71 @@
+/* Version 82: source-accurate transparent logo, heritage ivory/forest/antique gold public header.
+   The emblem is an alpha-matte of the original site's logo PNG: no artwork redrawn. */
+#app .header.academy-header-v80{
+  background:#F7F3E9!important;
+  border-bottom:2px solid #B39341!important;
+  box-shadow:0 2px 7px rgba(12,48,37,.09)!important;
+}
+#app .academy-header-v80 .academy-utility-v80{
+  background:#103D2E!important;
+  border-bottom:1px solid rgba(199,173,94,.48)!important;
+}
+#app .academy-header-v80 .academy-utility-label-v80{color:#F5EBCF!important}
+#app .academy-header-v80 .academy-portal-link-v80{
+  border-color:#BFA45F!important;
+  color:#F9F4E9!important;
+}
+#app .academy-header-v80 .academy-portal-link-v80:hover{background:#28664C!important}
+#app .academy-header-v80 .academy-head-v80{background:#F7F3E9!important}
+#app .academy-header-v80 .academy-identity-v80{color:#0A4F3C!important}
+#app .academy-header-v80 .academy-emblem-v80{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:0!important;
+  box-shadow:none!important;
+}
+#app .academy-header-v80 .academy-logo-v80{
+  background:transparent!important;
+  object-fit:contain!important;
+  filter:none!important;
+}
+#app .academy-header-v80 .academy-calligraphy-v80{
+  background:transparent!important;
+  /* Dark antique gold on ivory, using the unchanged glyph art. */
+  filter:brightness(0) saturate(100%) invert(35%) sepia(54%) saturate(513%) hue-rotate(10deg) brightness(91%) contrast(86%)!important;
+}
+#app .academy-header-v80 .academy-title-v80{color:#124D38!important}
+#app .academy-header-v80 .academy-place-v80{color:#9B7928!important}
+#app .academy-header-v80 .academy-nav-v80>a{
+  color:#124D38!important;
+  border-left-color:rgba(9,77,54,.20)!important;
+  background:transparent!important;
+}
+#app .academy-header-v80 .academy-nav-v80>a:hover,
+#app .academy-header-v80 .academy-nav-v80>a.active{
+  color:#0D402F!important;
+  background:#ECE2CA!important;
+  box-shadow:inset 0 -2px 0 #A88C41!important;
+}
+#app .academy-header-v80 .academy-mobile-menu-v80{
+  border:1px solid #AB9047!important;
+  background:transparent!important;
+  color:#0A4F3C!important;
+}
+#app .academy-header-v80 .academy-mobile-menu-v80:hover{background:#EEE3C9!important}
+@media(max-width:1220px),(hover:none) and (pointer:coarse){
+  #app .academy-header-v80 #nav.academy-nav-v80.open{
+    background:#F7F3E9!important;
+    border-color:#B39341!important;
+  }
+  #app .academy-header-v80 #nav.academy-nav-v80.open>a{
+    color:#124D38!important;
+    border-bottom-color:rgba(9,77,54,.19)!important;
+    background:transparent!important;
+  }
+  #app .academy-header-v80 #nav.academy-nav-v80.open>a:hover,
+  #app .academy-header-v80 #nav.academy-nav-v80.open>a.active{
+    background:#ECE2CA!important;
+    color:#0D402F!important;
+  }
+}

@@ -1,0 +1,31 @@
+/* College Features: approved article 01, future article outlines remain separate */
+.college-features{padding:clamp(58px,7vw,94px) 0;background:#f8fbf8;border-top:1px solid #e1ebe3;color:#173c27}
+.college-features-hub{min-height:70vh;padding-top:55px}
+.college-features-intro{max-width:800px;margin-bottom:31px}
+.college-features-kicker{display:block;color:#075333;font:800 11px/1.5 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.college-features-intro h2,.college-features-intro h1{font:600 clamp(33px,4vw,54px)/1.13 'Cormorant Garamond',Georgia,serif!important;color:#123b27;letter-spacing:-.02em;margin:11px 0 14px}
+.college-features-intro p{color:#516a59;max-width:730px;font:400 15px/1.8 Inter,system-ui,sans-serif;margin:0}
+.college-features-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.college-feature-card{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid #d7e7dc;border-radius:13px;padding:25px 22px 23px;box-shadow:0 8px 27px rgba(18,66,34,.035)}
+.college-feature-label{display:flex;justify-content:space-between;align-items:center;gap:6px;padding-bottom:20px;border-bottom:1px solid #e6eee8}
+.college-feature-label span{font:600 36px/1 'Cormorant Garamond',Georgia,serif;color:#075333}
+.college-feature-label small{font:800 9px/1.4 Inter,system-ui,sans-serif;color:#78907d;letter-spacing:.1em}
+.college-feature-card h3{font:600 clamp(23px,2.1vw,29px)/1.18 'Cormorant Garamond',Georgia,serif!important;color:#113d26;margin:20px 0 11px}
+.college-feature-card p{font:400 12.5px/1.8 Inter,system-ui,sans-serif;color:#566f5b;margin:0 0 22px;flex:1}
+.college-feature-link{display:inline-flex;align-items:center;gap:12px;align-self:start;padding:10px 15px;border-radius:8px;background:#075333;color:#fff!important;font:750 12px Inter,system-ui,sans-serif}
+.college-feature-link:hover{background:#0a3f28}
+.college-feature-pending{font:650 11px/1.55 Inter,system-ui,sans-serif;color:#687c6b;padding-top:12px;border-top:1px solid #e5eee7}
+.college-features-back{display:inline-block;margin-bottom:24px;font:700 12px Inter,system-ui,sans-serif;color:#075333;text-decoration:underline;text-underline-offset:3px}
+.college-feature-essay{background:#fff;padding:clamp(38px,6vw,76px) 0 104px;color:#203f2a}
+.college-feature-essay>.container{max-width:965px}
+.college-feature-crumb{display:flex;flex-wrap:wrap;gap:10px;align-items:center;color:#647c67;font:600 12px Inter,system-ui,sans-serif;margin-bottom:45px}
+.college-feature-crumb a{color:#075333;text-decoration:underline;text-underline-offset:3px}
+.college-feature-essay-header{padding:0 0 33px;border-bottom:1px solid #dce9df}
+.college-feature-essay-header h1{font:700 clamp(27px,4vw,46px)/1.5 'Noto Sans Malayalam',sans-serif!important;letter-spacing:normal;color:#0e482c;margin:22px 0 5px;max-width:100%}
+.college-feature-essay-header p{font:500 clamp(18px,2vw,23px)/1.5 'Cormorant Garamond',Georgia,serif;color:#69826d;margin:0}
+.college-feature-essay-body{padding:33px 0 14px}
+.college-feature-essay-body p{font:400 clamp(15px,1.4vw,17px)/2.22 'Noto Sans Malayalam',sans-serif;color:#294334;margin:0 0 25px;letter-spacing:0;overflow-wrap:break-word}
+.college-feature-essay-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:23px;border-top:1px solid #dce9df}
+.college-feature-essay-footer a{display:inline-block;color:#075333;font:750 13px Inter,system-ui,sans-serif;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:1050px){.college-features-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:610px){.college-features{padding:48px 0}.college-features-grid{grid-template-columns:1fr;gap:14px}.college-feature-card{padding:22px}.college-feature-essay-header h1{line-height:1.6}.college-feature-essay-body p{line-height:2.1}.college-feature-crumb{margin-bottom:29px}}

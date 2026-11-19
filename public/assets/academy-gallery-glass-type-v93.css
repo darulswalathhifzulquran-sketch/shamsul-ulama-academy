@@ -1,0 +1,323 @@
+/* Version 93 - clear type, glass-overlay centred gallery, phone readability.
+   Based on the Academy's supplied reference images; no generated imagery.
+   Retains original logo, calligraphy, academy pictures, video and data. */
+
+/* Typography: bold geometric headings, ordinary sans text.
+   Do not restyle original Arabic calligraphy or institutional logo. */
+#app .home-gallery-section .home-gallery-heading h2,
+#app .academy-learning-home .academy-learning-heading h2,
+#app .academy-home-intro .purpose-heading,
+#app .heading h1,
+#app .academy-learning-essay-hero h1,
+#app .about-grid h2,
+#app .contact-section h2,
+#app .academy-footer h3{
+  font-family:'Montserrat',Arial,Helvetica,sans-serif!important;
+  font-weight:800!important;
+  letter-spacing:-.026em!important;
+  line-height:1.2!important;
+}
+#app .home-gallery-section .home-gallery-heading h2,
+#app .about-grid h2{
+  text-transform:uppercase!important;
+  font-size:clamp(28px,3.2vw,44px)!important;
+}
+#app .academy-home-intro .purpose-heading em{
+  font-style:normal!important;
+  font-family:inherit!important;
+  font-weight:inherit!important;
+}
+#app .home-gallery-section .home-gallery-heading p,
+#app .academy-home-intro .hero-copy p,
+#app .about-grid p,
+#app .academy-learning-essay-section p,
+#app .academy-learning-home .academy-learning-card-body,
+#app .contact-section .section-lead{
+  font-family:Inter,Arial,Helvetica,sans-serif!important;
+  font-size:clamp(15px,1.1vw,17px)!important;
+  font-weight:400!important;
+  line-height:1.7!important;
+}
+#app .about-grid h2{
+  color:#FFF!important;
+}
+#app .about-grid .status{
+  font-family:Inter,Arial,Helvetica,sans-serif!important;
+  font-size:15px!important;
+  font-weight:500!important;
+  line-height:1.6!important;
+  color:#194838!important;
+  -webkit-text-fill-color:#194838!important;
+}
+#app .academy-learning-home .academy-learning-heading h2{
+  font-size:clamp(29px,3.25vw,45px)!important;
+}
+#app .academy-learning-home-grid .academy-learning-card .academy-learning-card-title-row h3{
+  font-family:'Montserrat',Arial,Helvetica,sans-serif!important;
+  font-size:clamp(18px,1.65vw,23px)!important;
+  font-weight:700!important;
+}
+
+/* Gallery section: preserve the Academy's teal identity but fix contrast. */
+#app main .home-gallery-section:has(#academyHomeGallery.academy-carousel-v91){
+  background:linear-gradient(128deg,#07545A 0%,#0F6265 58%,#0A5357 100%)!important;
+  color:#FFF!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.academy-carousel-v91) .home-gallery-heading .eyebrow{
+  color:#D5D9C7!important;
+  -webkit-text-fill-color:#D5D9C7!important;
+  font-size:12px!important;
+  letter-spacing:.12em!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.academy-carousel-v91) .home-gallery-heading h2{
+  color:#FFFFFF!important;
+  -webkit-text-fill-color:#FFFFFF!important;
+  font-size:clamp(28px,3.1vw,45px)!important;
+  text-shadow:none!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.academy-carousel-v91) .home-gallery-heading p{
+  color:#F0FAF8!important;
+  -webkit-text-fill-color:#F0FAF8!important;
+  font-size:clamp(15px,1.05vw,17px)!important;
+  line-height:1.6!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.academy-carousel-v91) .home-gallery-more{
+  display:inline-flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  color:#0E4A4E!important;
+  -webkit-text-fill-color:#0E4A4E!important;
+  background:#FFFFFF!important;
+  border:1px solid #FFFFFF!important;
+  border-radius:6px!important;
+  min-height:44px!important;
+  padding:11px 18px!important;
+  font:700 14px/1.3 Inter,Arial,sans-serif!important;
+  text-decoration:none!important;
+  box-shadow:none!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.academy-carousel-v91) .home-gallery-more:hover{
+  background:#E9E0C8!important;
+  border-color:#E9E0C8!important;
+}
+
+/* The big centre picture fills its curved frame.
+   Caption is now inside the photo on a readable fading dark overlay. */
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="center"],
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="next"],
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="prev"]{
+  border-radius:28px!important;
+  border:1px solid rgba(255,255,255,.45)!important;
+  background:#124C47!important;
+  overflow:hidden!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-media{
+  position:relative!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
+  flex:1 1 auto!important;
+  background:#164C47!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-media img,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-media video,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-media iframe{
+  width:100%!important;height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  filter:none!important;
+  transition:filter .6s ease!important;
+}
+/* Hide the next and previous images' details without revealing their identity. */
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="next"] .showcase-media img,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="prev"] .showcase-media img,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="next"] .showcase-media video,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="prev"] .showcase-media video{
+  filter:blur(13px) brightness(.52) saturate(.66)!important;
+  transform:scale(1.09)!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="next"],
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="prev"]{
+  opacity:.77!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="next"]:hover,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="prev"]:hover{
+  opacity:.9!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-card-text,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="center"] .showcase-card-text{
+  box-sizing:border-box!important;
+  position:absolute!important;
+  left:0!important;right:0!important;bottom:0!important;top:auto!important;
+  z-index:8!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:flex-end!important;
+  flex-direction:column!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:142px!important;
+  max-height:74%!important;
+  padding:62px clamp(22px,3.2vw,42px) 27px!important;
+  background:linear-gradient(0deg,rgba(0,22,21,.89) 0%,rgba(0,24,21,.55) 51%,transparent 100%)!important;
+  border:0!important;
+  border-radius:0!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-card-text strong{
+  display:block!important;
+  color:#FFF!important;
+  -webkit-text-fill-color:#FFF!important;
+  font:800 clamp(20px,2.0vw,29px)/1.25 'Montserrat',Arial,sans-serif!important;
+  letter-spacing:.01em!important;
+  text-shadow:0 1px 4px rgba(0,0,0,.45)!important;
+  white-space:normal!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-card-text p{
+  color:#F5FAF8!important;
+  -webkit-text-fill-color:#F5FAF8!important;
+  font:400 clamp(13px,1.0vw,16px)/1.45 Inter,Arial,sans-serif!important;
+  white-space:normal!important;
+  max-height:3em!important;
+  overflow:hidden!important;
+  margin-top:5px!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.6)!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="next"] .showcase-card-text,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="prev"] .showcase-card-text{
+  opacity:0!important;
+}
+
+/* Only two modern floating nav buttons, on the main photo's edges. */
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v91.academy-carousel-controls-v93{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:12!important;
+  margin:0!important;
+  padding:0!important;
+  width:100%!important;
+  max-width:none!important;
+  height:100%!important;
+  background:transparent!important;
+  border:0!important;
+  pointer-events:none!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-v91{
+  position:absolute!important;
+  top:50%!important;
+  left:auto!important;right:auto!important;
+  display:flex!important;
+  align-items:center!important;justify-content:center!important;
+  width:52px!important;height:52px!important;
+  padding:0!important;margin:0!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.84)!important;
+  color:#0C4944!important;
+  box-shadow:0 6px 24px rgba(0,0,0,.23)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  backdrop-filter:blur(10px)!important;
+  transform:translateY(-50%)!important;
+  transition:background .18s ease,box-shadow .18s ease!important;
+  pointer-events:auto!important;
+  cursor:pointer!important;
+  z-index:13!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-prev-v93{
+  left:calc(50% - clamp(175px,31%,450px) + 16px)!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-next-v93{
+  right:calc(50% - clamp(175px,31%,450px) + 16px)!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-v91 svg{
+  display:block!important;width:25px!important;height:25px!important;
+  pointer-events:none!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-v91:hover{
+  background:#FFF!important;color:#075333!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.29)!important;
+}
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-v91:focus-visible{
+  outline:3px solid #EBD394!important;outline-offset:3px!important;
+}
+/* All carousel photos rotate automatically while visible.
+   The old dots/counter/pause bar is no longer rendered. */
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-dots-v91,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-count-v91,
+#app #academyHomeGallery.academy-carousel-v91 .academy-carousel-pause-v91{
+  display:none!important;
+}
+@media(max-width:840px){
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-prev-v93{
+    left:calc(50% - 32.5% + 12px)!important;
+  }
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-next-v93{
+    right:calc(50% - 32.5% + 12px)!important;
+  }
+}
+@media(max-width:600px){
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-v91{
+    width:41px!important;height:41px!important;
+  }
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-prev-v93{
+    left:calc(50% - 41% + 8px)!important;
+  }
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-controls-v93 .academy-carousel-arrow-next-v93{
+    right:calc(50% - 41% + 8px)!important;
+  }
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-card-text,
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91[data-position="center"] .showcase-card-text{
+    min-height:112px!important;
+    padding:48px 16px 17px!important;
+  }
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91 .showcase-card-text strong{
+    font-size:17px!important;
+  }
+}
+/* Accessible reduced motion: no autoplay, but manual arrows still work. */
+@media(prefers-reduced-motion:reduce){
+  #app #academyHomeGallery.academy-carousel-v91 .academy-carousel-slide-v91,
+  #app #academyHomeGallery.academy-carousel-v91 .showcase-media img{
+    transition:none!important;
+  }
+}
+
+/* Contact digits in the Academy's 4-3-3 layout: +91 9496 845 773.
+   Slightly larger on desktop and preserved clickable tel URLs. */
+#app .academy-header-v83 .academy-header-phone-v84{
+  font:700 15px/1.3 Inter,Arial,sans-serif!important;
+  letter-spacing:.015em!important;
+}
+#app .academy-header-v83 .academy-header-phone-v84 .academy-phone-text-v93{
+  font-weight:700!important;
+  font-variant-numeric:tabular-nums!important;
+}
+#app .academy-header-v83 .academy-admissions-phone-v85{
+  font:700 17px/1.4 Inter,Arial,sans-serif!important;
+  letter-spacing:.015em!important;
+}
+#app .academy-header-v83 .academy-admissions-phone-v85 .academy-admissions-tel-label-v85{
+  font:600 12px/1.4 Inter,Arial,sans-serif!important;
+}
+#app .academy-footer .academy-footer-phones a,
+#app .contact-card .phone-pair a{
+  font:700 17px/1.5 Inter,Arial,sans-serif!important;
+  font-variant-numeric:tabular-nums!important;
+  white-space:nowrap!important;
+}
+@media(max-width:600px){
+  #app .academy-header-v83 .academy-header-phone-v84{
+    font-size:11px!important;
+  }
+  #app .academy-header-v83 .academy-admissions-phone-v85{
+    font-size:13px!important;
+  }
+  #app .academy-footer .academy-footer-phones a{
+    font-size:16px!important;
+  }
+}

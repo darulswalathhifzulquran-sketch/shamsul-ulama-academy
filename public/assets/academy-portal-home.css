@@ -9,3 +9,6 @@
 .photo-frame{background:#FFFFFF;box-shadow:none}
 .photo-frame img[src$='academy-owner-official-logo.png']{background:#FFFFFF!important}
 .quran-verse blockquote{color:#075333!important;font-family:'Amiri Quran','Amiri',serif}
+/* Hifz welcome animation for Student and Parent home */
+.hero-media .academy-portal-mascot{display:block;width:clamp(108px,14vw,145px);height:auto;max-height:185px;object-fit:contain;margin:0 auto 10px;filter:drop-shadow(0 8px 14px rgba(7,83,51,.16));}
+@media(max-width:740px){.hero-media .academy-portal-mascot{max-height:150px}}

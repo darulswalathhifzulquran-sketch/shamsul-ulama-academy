@@ -1,0 +1,72 @@
+/* v88 | Crafted campus-location link, refined like a university masthead.
+   Only the location link changes. The same verified Google Maps URL is retained.
+   Original logo, typography, colours, phone, login and nav remain untouched. */
+#app .academy-header-v83 .academy-utility-v80 .academy-utility-inner-v80{
+  min-height:46px!important;
+}
+#app .academy-header-v83 a.academy-campus-link-v88{
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  min-height:35px!important;
+  padding:3px 10px 3px 6px!important;
+  color:#F7F2E7!important;
+  background:#183A3B!important;
+  border:1px solid rgba(208,176,102,.48)!important;
+  border-radius:6px!important;
+  text-decoration:none!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07)!important;
+  transform:none!important;
+  transition:background .16s ease,border-color .16s ease!important;
+  font-family:Inter,Arial,sans-serif!important;
+}
+#app .academy-header-v83 a.academy-campus-link-v88:hover{
+  background:#215451!important;
+  border-color:#EAC578!important;
+  color:#FFFFFF!important;
+  text-decoration:none!important;
+}
+#app .academy-header-v83 a.academy-campus-link-v88:focus-visible{
+  outline:2px solid #EDD296!important;
+  outline-offset:2px!important;
+}
+#app .academy-header-v83 .academy-campus-pin-v88{
+  display:block!important;
+  flex:0 0 24px!important;
+  width:24px!important;
+  height:28px!important;
+  overflow:visible!important;
+}
+#app .academy-header-v83 .academy-campus-copy-v88{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  gap:1px!important;
+  text-align:left!important;
+  min-width:0!important;
+}
+#app .academy-header-v83 .academy-campus-eyebrow-v88{
+  font:700 8px/1.2 Inter,Arial,sans-serif!important;
+  letter-spacing:.14em!important;
+  color:#DBC795!important;
+  white-space:nowrap!important;
+}
+#app .academy-header-v83 .academy-campus-name-v88{
+  font:650 11px/1.25 Inter,Arial,sans-serif!important;
+  letter-spacing:0!important;
+  color:#F9F9F4!important;
+  white-space:nowrap!important;
+}
+#app .academy-header-v83 .academy-campus-arrow-v88{
+  font:700 13px/1 Inter,Arial,sans-serif!important;
+  color:#DCC583!important;
+  margin-left:2px!important;
+}
+@media(max-width:900px){
+  #app .academy-header-v83 a.academy-campus-link-v88{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #app .academy-header-v83 a.academy-campus-link-v88{transition:none!important}
+}

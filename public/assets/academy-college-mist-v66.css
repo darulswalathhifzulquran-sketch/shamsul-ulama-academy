@@ -1,0 +1,19 @@
+/* Academy College Features v66 — restrained Soft Mist Blue.
+   Home section ONLY. Keep existing white cards, photos, headings and links.
+   A calm bridge between Deep Teal Gallery and Warm Sandstone Learning. */
+#app .college-features:not(.college-features-hub) {
+  background:#E4EDF0!important;
+  background-image:none!important;
+  border-top:1px solid #D1E0E5!important;
+  border-bottom:1px solid #D1E0E5!important;
+}
+#app .college-features:not(.college-features-hub) .college-features-intro h2 {
+  color:#153F44!important;
+}
+#app .college-features:not(.college-features-hub) .college-features-intro p {
+  color:#435C63!important;
+}
+#app .college-features:not(.college-features-hub) .college-feature-card{
+  background:#FFFFFF!important;
+  border-color:#CEDDDF!important;
+}

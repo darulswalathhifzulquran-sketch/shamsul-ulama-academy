@@ -1,0 +1,39 @@
+/* Version 89 — Restore readable About section CTA only.
+   Keep the exact existing blue gradient, spacing, and all other buttons unchanged. */
+#app #academyAboutKnowMore.pill.ghost{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  width:auto!important;
+  min-width:185px!important;
+  min-height:43px!important;
+  padding:10px 22px!important;
+  border:1px solid #FFFFFF!important;
+  border-radius:999px!important;
+  background:#FFFFFF!important;
+  color:#153E49!important;
+  -webkit-text-fill-color:#153E49!important;
+  font:700 14px/1.35 Arial,Helvetica,system-ui,sans-serif!important;
+  text-align:center!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  opacity:1!important;
+  visibility:visible!important;
+  text-shadow:none!important;
+}
+#app #academyAboutKnowMore.pill.ghost span{
+  display:inline!important;
+  color:inherit!important;
+  -webkit-text-fill-color:inherit!important;
+}
+#app #academyAboutKnowMore.pill.ghost:hover{
+  background:#F5EEDC!important;
+  border-color:#F5EEDC!important;
+  color:#153E49!important;
+  -webkit-text-fill-color:#153E49!important;
+}
+#app #academyAboutKnowMore.pill.ghost:focus-visible{
+  outline:3px solid #E9C978!important;
+  outline-offset:3px!important;
+}

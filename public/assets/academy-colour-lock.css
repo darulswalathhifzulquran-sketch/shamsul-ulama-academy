@@ -1,0 +1,157 @@
+/* Approved colour policy: backgrounds are ONLY Academy green #075333 or pure white #fff.
+   Deliberately keep photographs, video and logos unaltered. */
+:root{
+ --forest:#075333!important;--green:#075333!important;--green2:#075333!important;
+ --teal:#075333!important;--sage:#fff!important;--pale:#fff!important;
+ --cream:#fff!important;--white:#fff!important;
+ --border:#075333!important;--ink:#075333;--muted:#075333;
+}
+html,body,#app,main,#main{background:#fff!important;background-image:none!important}
+.topline,.academy-topline{background:#075333!important;color:#fff!important}
+.header,.head,.links,.menu,.nav,.site-nav{background-color:#fff!important}
+.hero:not(.academy-video-hero),.scholar-section,.section.soft,.section.white,
+.verse,.journey,.journey-art,.roadmap,.roadmap .road,.contact-section,
+.notice,.result,.status,.academy-v20-hero,.academy-v21-hero,
+.academy-v21-programmes,.academy-v21-programme-page,
+.academy-v21-programme-card,.academy-v21-hero-photo,.academy-v20-arch,
+.academy-v23-hero,.academy-v23-photo,
+.academy-learning-home,.academy-learning-hub,.academy-learning-essay,
+.academy-learning-hero,.academy-learning-essay-hero,
+.academy-learning-sidebar,.academy-learning-essay-note,.academy-learning-card,
+.academy-learning-real-photo,.college-features,.college-features-hub,
+.college-feature-essay,.college-feature-card,
+.photo-frame,.quick-features,.contact-card,.contact-card .circle,
+.v17-awaiting-photo,.academy-v21-programme-photo,.academy-v21-detail-photo,
+.academy-home-section,.admission-receipt,.calc-panel,.planner-shell,
+.card,.office,.gallery-card,.roadmap-card,.milestone,.milestone.c,
+.roadmap .road,.journey .mini-stats span,
+.academy-v21-detail,.academy-portal-box{
+ background-color:#fff!important;background-image:none!important;
+}
+.scholar-spotlight,.scholar-spotlight .scholar-copy,
+.footer,.academy-footer,.bottom-banner,.academy-learning-visual,
+.college-feature-art,.academy-video-hero,.brand-icon,
+.academy-learning-filter.is-current,
+.academy-learning-card-footer>a,.college-feature-link,
+.academy-learning-all,.academy-learning-read,
+.pill:not(.ghost),.feature-hero,.academy-footer .brand-logo-wrap{
+ background-color:#075333!important;
+}
+.scholar-spotlight{background-image:none!important;color:#fff!important}
+.footer,.academy-footer{background-image:none!important}
+.academy-footer-map-frame{background:#fff!important}
+.academy-learning-visual{background-image:none!important}
+.academy-learning-visual-decoration span,.academy-learning-visual-decoration small{color:#fff!important}
+.academy-learning-filter:hover{background:#fff!important;color:#075333!important}
+.academy-learning-filter.is-current{background:#075333!important;color:#fff!important}
+.academy-learning-sidebar,#academyLearningEmpty,.academy-learning-essay-note{border-color:#075333!important}
+.academy-video-hero{background:#075333!important}
+.academy-video-hero>#academyHomeFallback,.academy-video-hero>#academyHomeVideo,.academy-video-hero>#academyHomeEmbed{background:#075333!important}
+.academy-video-hero-shade{background:transparent!important}
+.academy-video-play-action{
+ position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);
+ display:inline-flex;align-items:center;justify-content:center;
+ padding:15px 24px;min-height:48px;max-width:min(90vw,300px);
+ border-radius:50px;background:#075333!important;color:#fff!important;
+ border:2px solid #fff;font:750 13px/1.35 Inter,system-ui,sans-serif;
+ box-shadow:0 6px 25px rgba(0,0,0,.22);cursor:pointer
+}
+.academy-video-play-action[hidden],.academy-video-hero>[hidden]{display:none!important}
+.academy-video-play-action:hover,.academy-video-play-action:focus-visible{background:#075333!important;color:#fff!important}
+.academy-hero-scroll{background:#075333!important}
+.scholar-section .scholar-spotlight .scholar-copy{color:#fff!important}
+.academy-v20-kicker-line,.academy-v20-arch:after,
+.academy-v20-micro i,.academy-v21-actions .academy-v20-secondary.pill:hover{
+ background:#fff!important;
+}
+.academy-v21-typedline,.academy-v21-heading{color:#075333!important}
+.academy-learning-card-footer>a:hover,.college-feature-link:hover,
+.academy-learning-read:hover,.academy-learning-all:hover{background:#075333!important}
+/* Prevent leftover pastel blocks inside editorial and school sections. */
+.academy-learning-visual-decoration,.college-feature-essay-body,
+.academy-learning-real-photo:has(img[hidden]){background:transparent!important}
+#academyWelcomeType{color:#075333!important}
+@media(max-width:740px){
+ .academy-video-play-action{padding:13px 19px}
+ .academy-video-hero{min-height:360px}
+}
+/* Final visual verification: these three specific sections were still pastel. */
+.learning-home,.learning-home-art,.scholar-visual{
+ background:#fff!important;background-color:#fff!important;background-image:none!important;
+}
+.learning-home{border-top:2px solid #075333!important;border-bottom:2px solid #075333!important}
+.learning-home-art figcaption{color:#075333!important}
+.learning-home-art::before,.learning-home-art::after{background:#fff!important}
+.photo-caption{background:#075333!important;background-image:none!important;color:#fff!important}
+/* Video while awaiting the first decodable frame: do not display a black player rectangle. */
+.academy-video-hero #academyHomeVideo{background:transparent!important}
+.academy-video-hero #academyHomeVideo[hidden]{display:none!important}
+.academy-video-play-action{background:#075333!important;color:#fff!important}
+.academy-home-playback-status{position:absolute;z-index:5;bottom:90px;left:50%;transform:translateX(-50%);
+ max-width:min(580px,90%);background:#075333!important;color:#fff!important;padding:10px 14px;
+ font:600 12px/1.5 Inter,system-ui,sans-serif;text-align:center;border:1px solid #fff;border-radius:8px}
+.academy-home-playback-status[hidden]{display:none!important}
+/* Final homepage section audit: the Hifz Journey is .learning-home, not .journey. */
+.learning-home,.learning-home-art,.learning-home-grid,.learning-home-copy,
+.learning-home .learning-home-art,.learning-home .learning-home-art figcaption,
+.learning-home .learning-home-actions,.learning-home .learning-home-note,
+.learning-home .learning-home-art::before,.learning-home .learning-home-art::after{
+ background:#fff!important;background-image:none!important;
+}
+.learning-home{border-top:1px solid #075333!important;border-bottom:1px solid #075333!important}
+.learning-home-art{border:1px solid #075333!important}
+.learning-home-art img{background:transparent!important}
+.learning-home-copy h2,.learning-home-copy p,.learning-home-copy .learning-home-note{color:#075333!important}
+.learning-home .pill:not(.ghost){background:#075333!important;color:#fff!important}
+.learning-home .pill.ghost{background:#fff!important;color:#075333!important}
+/* Remaining green-tinted media and learning panels */
+.media-slot-card,.media-slot-card .hint,.media-slot-card label,.media-slot-card input,
+.media-slot-card select,.media-slot-card figure,.media-slot-card img,
+.media-slot-card video,.media-slot-card .galleryList{background-color:#fff!important;background-image:none!important}
+.media-slot-card button:not(.outline){background:#075333!important;color:#fff!important}
+.media-slot-card button.outline{background:#fff!important;color:#075333!important}
+.academy-home-playback-status{position:absolute;bottom:20px;left:20px;z-index:8;padding:9px 13px;border:1px solid #fff;border-radius:8px;background:#075333!important;color:#fff!important;font:600 12px/1.5 Inter,system-ui,sans-serif;max-width:min(85vw,440px)}
+.academy-home-playback-status[hidden]{display:none!important}
+/* Mobile fullscreen welcome video — keep exact Academy green/white theme. */
+@media (max-width: 767px){
+  .academy-video-hero{
+    display:block!important;
+    width:100%!important;
+    height:calc(100svh - 105px)!important;
+    height:calc(100dvh - 105px)!important;
+    min-height:380px!important;
+    max-height:none!important;
+    overflow:hidden!important;
+    background:#075333!important;
+  }
+  .academy-video-hero > #academyHomeVideo,
+  .academy-video-hero > #academyHomeFallback{
+    position:absolute!important;
+    inset:0!important;
+    display:block;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    object-fit:contain!important;
+    object-position:50% 50%!important;
+  }
+  .academy-video-hero > #academyHomeEmbed{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    border:0!important;
+  }
+  .academy-video-hero > #academyHomeVideo[hidden],
+  .academy-video-hero > #academyHomeFallback[hidden],
+  .academy-video-hero > #academyHomeEmbed[hidden]{
+    display:none!important;
+  }
+  .academy-video-hero .academy-hero-scroll{bottom:24px!important}
+  .academy-video-hero .academy-video-play-action{z-index:10}
+}
+@media (min-width: 768px) and (max-width: 1024px){
+  .academy-video-hero{height:calc(100svh - 116px)!important;min-height:460px!important}
+  .academy-video-hero > #academyHomeVideo,
+  .academy-video-hero > #academyHomeFallback{object-fit:cover!important}
+}

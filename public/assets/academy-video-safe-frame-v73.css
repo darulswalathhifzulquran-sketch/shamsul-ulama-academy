@@ -1,0 +1,141 @@
+/* Academy Welcome Video v73 — show the ENTIRE approved frame on desktop, tablet and mobile.
+   "SHAMSUL ULAMA ISLAMIC ACADEMY" is baked into the approved MP4;
+   it must not be cropped or obstructed by a scroll button.
+   Pure presentation fix: do not alter autoplay, mobile-specific media selection,
+   playback retry, pause/play controls, source URL, or page sections.
+ */
+#app main .academy-video-hero{
+  --hero-control-rail:64px;
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  position:relative!important;
+  isolation:isolate!important;
+  box-sizing:border-box!important;
+  height:clamp(400px,calc(100svh - 127px),880px)!important;
+  min-height:400px!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0 0 var(--hero-control-rail)!important;
+  border:0!important;
+  overflow:hidden!important;
+  background:#075333!important;
+}
+#app main .academy-video-hero > video#academyHomeVideo,
+#app main .academy-video-hero > img#academyHomeFallback,
+#app main .academy-video-hero > iframe#academyHomeEmbed{
+  position:absolute!important;
+  display:block!important;
+  left:0!important;
+  top:0!important;
+  right:auto!important;
+  bottom:auto!important;
+  inset:0 auto auto 0!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:calc(100% - var(--hero-control-rail))!important;
+  min-height:0!important;
+  max-height:calc(100% - var(--hero-control-rail))!important;
+  border:0!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  filter:none!important;
+  background:#075333!important;
+}
+#app main .academy-video-hero > #academyHomeVideo[hidden],
+#app main .academy-video-hero > #academyHomeFallback[hidden],
+#app main .academy-video-hero > #academyHomeEmbed[hidden]{
+  display:none!important;
+}
+#app main .academy-video-hero .academy-video-hero-shade{
+  position:absolute!important;
+  inset:0 0 var(--hero-control-rail) 0!important;
+  width:100%!important;
+  height:calc(100% - var(--hero-control-rail))!important;
+  background:transparent!important;
+  pointer-events:none!important;
+}
+#app main .academy-video-hero .academy-hero-scroll{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  position:absolute!important;
+  top:auto!important;
+  bottom:9px!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  height:45px!important;
+  width:45px!important;
+  border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  background:#075333!important;
+  color:#FFFFFF!important;
+  z-index:8!important;
+  padding:0!important;
+  margin:0!important;
+  font-size:23px!important;
+  line-height:1!important;
+  text-decoration:none!important;
+  box-shadow:none!important;
+}
+#app main .academy-video-hero .academy-hero-scroll:hover{
+  background:#0B7778!important;
+  transform:translateX(-50%)!important;
+}
+#app main .academy-video-hero .academy-hero-scroll:focus-visible{
+  outline:3px solid #FFFFFF!important;
+  outline-offset:3px!important;
+}
+#app main .academy-video-hero .academy-video-play-action{
+  z-index:12!important;
+  max-width:calc(100% - 24px)!important;
+  white-space:normal!important;
+}
+#app main .academy-video-hero .academy-home-playback-status{
+  bottom:calc(var(--hero-control-rail) + 10px)!important;
+  max-width:calc(100% - 32px)!important;
+}
+#app #academyProfile{scroll-margin-top:90px!important}
+/* Tablets retain a full video frame even when the other old styles use cover. */
+@media(max-width:1150px),(hover:none) and (pointer:coarse){
+  #app main .academy-video-hero{
+    --hero-control-rail:58px;
+    height:calc(100svh - 73px)!important;
+    height:calc(100dvh - 73px)!important;
+    min-height:380px!important;
+    max-height:none!important;
+  }
+  #app main .academy-video-hero .academy-hero-scroll{
+    bottom:7px!important;
+    height:43px!important;
+    width:43px!important;
+  }
+}
+@media(max-width:600px){
+  #app main .academy-video-hero{
+    --hero-control-rail:52px;
+    height:calc(100svh - 70px)!important;
+    height:calc(100dvh - 70px)!important;
+    min-height:320px!important;
+  }
+  #app main .academy-video-hero .academy-hero-scroll{
+    height:40px!important;
+    width:40px!important;
+    bottom:6px!important;
+  }
+}
+@media(max-height:520px) and (orientation:landscape){
+  #app main .academy-video-hero{
+    height:max(315px,calc(100svh - 62px))!important;
+    min-height:315px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #app main .academy-video-hero .academy-hero-scroll{
+    transition:none!important;
+  }
+}

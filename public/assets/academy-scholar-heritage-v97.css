@@ -1,0 +1,426 @@
+/* SHAMSUL ULAMA | v97
+   Editorial Heritage: authentic portrait, warm ivory and antique gold.
+   The original scholar photo and biography source are unchanged.
+   Does not affect homepage video, Academy logo, private accounts, or admissions. */
+#app main .scholar-section.scholar-editorial-v97{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  margin:0!important;
+  padding:clamp(48px,6.2vw,94px) 0 clamp(52px,6.6vw,100px)!important;
+  border:0!important;
+  border-top:1px solid #E8DDC6!important;
+  border-bottom:1px solid #DAD0BC!important;
+  border-radius:0!important;
+  background:#F7F3E9!important;
+  background-image:none!important;
+  color:#263D34!important;
+}
+#app main .scholar-section.scholar-editorial-v97>.container{
+  position:relative!important;
+  box-sizing:border-box!important;
+  width:min(1260px,calc(100% - 82px))!important;
+  max-width:1260px!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:0!important;
+}
+#app main .scholar-editorial-v97 .scholar-spotlight.scholar-editorial-layout-v97{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr)!important;
+  gap:clamp(44px,6.3vw,112px)!important;
+  align-items:center!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  color:#263D34!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  outline:none!important;
+  overflow:visible!important;
+  cursor:default!important;
+  transform:none!important;
+  translate:0!important;
+}
+#app main .scholar-editorial-v97 .scholar-spotlight:hover,
+#app main .scholar-editorial-v97 .scholar-spotlight:focus-within{
+  background:transparent!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+#app main .scholar-editorial-v97 .scholar-visual{
+  position:relative!important;
+  z-index:2!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:16px 18px 5px!important;
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  overflow:visible!important;
+}
+#app main .scholar-editorial-v97 .scholar-visual::after{display:none!important}
+#app main .scholar-editorial-v97 .scholar-visual::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:0!important;
+  width:min(87%,390px)!important;
+  height:86%!important;
+  top:7%!important;
+  left:3%!important;
+  border:1px solid #BBA26D!important;
+  border-radius:49% 49% 18px 18px / 29% 29% 18px 18px!important;
+  background:transparent!important;
+  pointer-events:none!important;
+}
+#app main .scholar-editorial-v97 .scholar-photo-shell-v97{
+  position:relative!important;
+  z-index:2!important;
+  display:block!important;
+  width:min(100%,390px)!important;
+  max-width:390px!important;
+  aspect-ratio:366 / 546!important;
+  margin:0 auto!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#E9E2D2!important;
+  border:2px solid #E9DFC5!important;
+  border-radius:49% 49% 18px 18px / 29% 29% 18px 18px!important;
+  box-shadow:0 18px 39px rgba(47,48,33,.16),0 2px 7px rgba(64,47,23,.08)!important;
+  transform:none!important;
+}
+#app main .scholar-editorial-v97 .scholar-photo-shell-v97 img{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:100%!important;
+  max-height:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:50% 50%!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:inherit!important;
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+  transition:filter 1.35s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)!important;
+}
+#app main .scholar-editorial-v97 .scholar-spotlight:hover .scholar-photo-shell-v97 img{
+  transform:none!important;
+}
+#app main .scholar-editorial-v97 .scholar-white-lines-v97{
+  display:block!important;
+  position:absolute!important;
+  z-index:4!important;
+  inset:0!important;
+  pointer-events:none!important;
+}
+#app main .scholar-editorial-v97 .scholar-white-lines-v97::before,
+#app main .scholar-editorial-v97 .scholar-white-lines-v97::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  top:24%!important;
+  height:43%!important;
+  width:2px!important;
+  background:linear-gradient(to bottom,transparent,rgba(255,255,255,.97) 21%,#FFF 78%,transparent)!important;
+  box-shadow:0 0 5px rgba(34,40,35,.2)!important;
+  transform-origin:center top!important;
+  transform:scaleY(1)!important;
+  opacity:.88!important;
+  transition:transform .85s ease .28s,opacity .85s ease .28s!important;
+}
+#app main .scholar-editorial-v97 .scholar-white-lines-v97::before{left:13px!important}
+#app main .scholar-editorial-v97 .scholar-white-lines-v97::after{right:13px!important}
+#app main .scholar-editorial-v97 .scholar-photo-label{
+  position:static!important;
+  z-index:4!important;
+  display:block!important;
+  width:100%!important;
+  max-width:390px!important;
+  margin:0 auto!important;
+  padding:17px 0 0!important;
+  border:0!important;
+  background:transparent!important;
+  text-align:center!important;
+  text-shadow:none!important;
+  font:700 10px/1.6 Inter,Arial,sans-serif!important;
+  letter-spacing:.15em!important;
+  color:#876B38!important;
+}
+#app main .scholar-editorial-v97 .scholar-curve-v97{
+  position:absolute!important;
+  z-index:0!important;
+  top:39%!important;
+  left:32%!important;
+  width:33%!important;
+  height:125px!important;
+  display:block!important;
+  opacity:.55!important;
+  border:0!important;
+  border-top:2px solid #BDA46F!important;
+  border-radius:50% 47% 0 0!important;
+  background:transparent!important;
+  transform:rotate(-15deg)!important;
+  pointer-events:none!important;
+}
+#app main .scholar-editorial-v97 .scholar-copy{
+  position:relative!important;
+  z-index:3!important;
+  display:flex!important;
+  box-sizing:border-box!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  gap:0!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:680px!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:6px 0 6px clamp(0px,1vw,16px)!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  color:#263D34!important;
+}
+#app main .scholar-editorial-v97 .scholar-eyebrow{
+  display:block!important;
+  margin:0 0 9px!important;
+  color:#886F45!important;
+  font:750 12px/1.5 Inter,Arial,sans-serif!important;
+  letter-spacing:.19em!important;
+}
+#app main .scholar-editorial-v97 .scholar-dates-v97{
+  display:block!important;
+  margin:0 0 11px!important;
+  font:650 16px/1.5 Inter,Arial,sans-serif!important;
+  font-variant-numeric:tabular-nums!important;
+  letter-spacing:.09em!important;
+  color:#907044!important;
+}
+#app main .scholar-editorial-v97 .scholar-dates-v97 span{
+  color:#A58A58!important;
+  margin:0 7px!important;
+}
+#app main .scholar-editorial-v97 .scholar-copy h2{
+  display:block!important;
+  max-width:680px!important;
+  margin:5px 0 16px!important;
+  padding:0!important;
+  font:700 clamp(30px,3.15vw,48px)/1.25 'Libre Baskerville',Georgia,serif!important;
+  letter-spacing:-.035em!important;
+  color:#223D34!important;
+  text-transform:none!important;
+}
+#app main .scholar-editorial-v97 .scholar-copy h2 em{
+  font-style:normal!important;
+  color:#93743C!important;
+}
+#app main .scholar-editorial-v97 .scholar-copy h2 .scholar-rahma{
+  display:inline!important;
+  font:400 .72em/1.2 Amiri,serif!important;
+  color:#526A5A!important;
+  white-space:nowrap!important;
+}
+#app main .scholar-editorial-v97 .scholar-descriptor{
+  display:block!important;
+  margin:0!important;
+  color:#59685F!important;
+  font:italic 400 clamp(16px,1.35vw,19px)/1.6 Georgia,serif!important;
+}
+#app main .scholar-editorial-v97 .scholar-rule{
+  display:block!important;
+  width:108px!important;
+  height:2px!important;
+  background:#BFA46B!important;
+  margin:24px 0!important;
+  border:0!important;
+}
+#app main .scholar-editorial-v97 .scholar-excerpt{
+  display:block!important;
+  max-width:560px!important;
+  margin:0 0 28px!important;
+  font:400 clamp(15px,1.12vw,17px)/1.85 Inter,Arial,sans-serif!important;
+  letter-spacing:0!important;
+  color:#46534B!important;
+}
+#app main .scholar-editorial-v97 .scholar-more-v97{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:26px!important;
+  min-width:131px!important;
+  min-height:49px!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:12px 23px!important;
+  border:1px solid #A58A57!important;
+  border-radius:8px!important;
+  background:#263F37!important;
+  color:#FFFDF8!important;
+  -webkit-text-fill-color:#FFFDF8!important;
+  font:700 15px/1.4 Inter,Arial,sans-serif!important;
+  letter-spacing:.03em!important;
+  text-decoration:none!important;
+  box-shadow:0 5px 11px rgba(45,48,35,.07)!important;
+  cursor:pointer!important;
+  transition:background .22s ease,border-color .22s ease,translate .22s ease!important;
+}
+#app main .scholar-editorial-v97 .scholar-more-v97 span{
+  font:600 21px/1 Inter,Arial,sans-serif!important;
+  -webkit-text-fill-color:inherit!important;
+  transition:translate .22s ease!important;
+}
+#app main .scholar-editorial-v97 .scholar-more-v97:hover{
+  color:#FFF!important;
+  background:#456050!important;
+  border-color:#977744!important;
+  translate:0 -2px!important;
+}
+#app main .scholar-editorial-v97 .scholar-more-v97:hover span{
+  translate:3px -2px!important;
+}
+#app main .scholar-editorial-v97 .scholar-more-v97:focus-visible{
+  outline:3px solid #BCA06C!important;
+  outline-offset:4px!important;
+}
+/* This state is set only after IntersectionObserver successfully registers. */
+@media(prefers-reduced-motion:no-preference){
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97:not(.is-illuminated-v97) .scholar-photo-shell-v97 img{
+   filter:brightness(.70) saturate(.84) contrast(.93)!important;
+   transform:translateY(10px)!important;
+ }
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97.is-illuminated-v97 .scholar-photo-shell-v97 img{
+   filter:brightness(1) saturate(1) contrast(1)!important;
+   transform:translateY(0)!important;
+ }
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97:not(.is-illuminated-v97) .scholar-white-lines-v97::before,
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97:not(.is-illuminated-v97) .scholar-white-lines-v97::after{
+   opacity:0!important;
+   transform:scaleY(0)!important;
+ }
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97:not(.is-illuminated-v97) .scholar-curve-v97{
+   opacity:0!important;
+   transform:translateX(-25px) rotate(-15deg)!important;
+ }
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-curve-v97{
+   transition:opacity 1.1s ease .3s,transform 1.1s ease .3s!important;
+ }
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-copy>*{
+   opacity:1!important;
+   transform:translateY(0)!important;
+   transition:opacity .75s ease,transform .85s cubic-bezier(.21,.83,.22,1)!important;
+ }
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97:not(.is-illuminated-v97) .scholar-copy>*{
+   opacity:0!important;
+   transform:translateY(19px)!important;
+ }
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-eyebrow{transition-delay:.17s!important}
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-dates-v97{transition-delay:.28s!important}
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-copy h2{transition-delay:.39s!important}
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-descriptor{transition-delay:.50s!important}
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-rule{transition-delay:.60s!important}
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-excerpt{transition-delay:.68s!important}
+ #app main .scholar-editorial-v97.scholar-reveal-ready-v97 .scholar-more-v97{transition-delay:.77s!important}
+}
+@media(max-width:900px){
+ #app main .scholar-section.scholar-editorial-v97>.container{
+   width:calc(100% - 44px)!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-spotlight.scholar-editorial-layout-v97{
+   gap:clamp(27px,5vw,50px)!important;
+   grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-copy h2{
+   font-size:clamp(25px,3.5vw,36px)!important;
+ }
+}
+@media(max-width:690px){
+ #app main .scholar-section.scholar-editorial-v97{
+   padding:47px 0 55px!important;
+ }
+ #app main .scholar-section.scholar-editorial-v97>.container{
+   width:calc(100% - 36px)!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-spotlight.scholar-editorial-layout-v97{
+   grid-template-columns:minmax(0,1fr)!important;
+   gap:27px!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-visual{
+   width:100%!important;
+   height:auto!important;
+   min-height:0!important;
+   padding:10px 18px 0!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-visual::before{
+   width:min(87%,330px)!important;
+   left:max(0px,calc(50% - 175px))!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-photo-shell-v97{
+   width:min(100%,318px)!important;
+   max-width:318px!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-photo-label{
+   padding-top:15px!important;
+   font-size:9px!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-curve-v97{display:none!important}
+ #app main .scholar-editorial-v97 .scholar-copy{
+   padding:0 4px!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-eyebrow{font-size:11px!important}
+ #app main .scholar-editorial-v97 .scholar-dates-v97{font-size:15px!important}
+ #app main .scholar-editorial-v97 .scholar-copy h2{
+   font-size:clamp(27px,7.1vw,37px)!important;
+   line-height:1.28!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-descriptor{font-size:16px!important}
+ #app main .scholar-editorial-v97 .scholar-excerpt{font-size:15px!important}
+ #app main .scholar-editorial-v97 .scholar-more-v97{
+   min-height:48px!important;
+   min-width:142px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #app main .scholar-editorial-v97 .scholar-photo-shell-v97 img{
+   filter:none!important;
+   transform:none!important;
+   transition:none!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-white-lines-v97::before,
+ #app main .scholar-editorial-v97 .scholar-white-lines-v97::after,
+ #app main .scholar-editorial-v97 .scholar-copy>*{
+   opacity:1!important;
+   transform:none!important;
+   transition:none!important;
+ }
+ #app main .scholar-editorial-v97 .scholar-curve-v97{opacity:.55!important;transition:none!important}
+}

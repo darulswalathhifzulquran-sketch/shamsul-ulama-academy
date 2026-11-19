@@ -1,0 +1,27 @@
+/* College Features number typography only — modern, legible, tabular Inter digits. */
+#app .college-feature-art > span {
+  font-family: 'Inter',system-ui,-apple-system,sans-serif !important;
+  font-size: clamp(54px,5vw,67px) !important;
+  font-weight: 780 !important;
+  font-style: normal !important;
+  line-height: 1 !important;
+  letter-spacing: -.065em !important;
+  font-variant-numeric: lining-nums tabular-nums !important;
+  font-feature-settings: "lnum" 1, "tnum" 1 !important;
+  opacity: .96 !important;
+  color: #fff !important;
+}
+#app .college-feature-label > span {
+  font-family: 'Inter',system-ui,-apple-system,sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 750 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -.065em !important;
+  font-variant-numeric: lining-nums tabular-nums !important;
+  font-feature-settings: "lnum" 1, "tnum" 1 !important;
+  color: #075333 !important;
+}
+@media (max-width: 620px) {
+  #app .college-feature-art > span {font-size: 59px !important;}
+  #app .college-feature-label > span {font-size: 21px !important;}
+}

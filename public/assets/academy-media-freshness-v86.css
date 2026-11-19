@@ -1,0 +1,23 @@
+/* v86 | Never expose deleted/illustrative photos during CMS network loading.
+   Keep selected-video preview accurate and prioritize actual video playback. */
+#app main .academy-video-hero{
+  background:#102B31!important;
+}
+#app main .academy-video-hero>img#academyHomeFallback[hidden],
+#app main .academy-video-hero>img#academyHomeFallback:not([src]),
+#app main .academy-video-hero>video#academyHomeVideo[hidden]{
+  display:none!important;
+}
+#app .academy-learning-real-photo[hidden],
+#app .academy-approved-about-photo[hidden],
+#app .academy-learning-real-photo img[hidden],
+#app .academy-approved-about-photo img[hidden]{
+  display:none!important;
+}
+#app .about-grid:has(>.academy-approved-about-photo[hidden]){
+  grid-template-columns:minmax(0,1fr)!important;
+}
+#app .academy-learning-real-photo,
+#app .academy-approved-about-photo{
+  background:transparent!important;
+}

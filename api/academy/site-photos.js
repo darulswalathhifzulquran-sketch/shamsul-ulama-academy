@@ -4,6 +4,10 @@ export const access='public';
 export const methods=['GET','POST','DELETE'];
 
 const SLOTS=['hero','school','tuition'];
+// Production DB reserves the original homepage slot as "academy" (not "hero").
+// Keep the public editor's friendly "hero" name; translate only at the database boundary.
+const databaseSlot=slot=>slot==='hero'?'academy':slot;
+const publicSlot=slot=>slot==='academy'?'hero':slot;
 const MAX_BYTES=16*1024*1024;
 function mediaType(file){
  const b=file.buffer||[],mime=String(file.contentType||'').toLowerCase();
@@ -18,8 +22,10 @@ export default async function(req,res){
   const results=await db.query('SELECT slot,storage_key,alt_text,updated_at FROM academy_site_photos ORDER BY slot');
   const photos={hero:null,school:null,tuition:null};
   for(const row of results.rows){
-   try{photos[row.slot]={url:await storage.url(row.storage_key),alt_text:row.alt_text||'',updated_at:row.updated_at};}
-   catch(e){console.warn('Site photo unavailable',row.slot);photos[row.slot]=null;}
+   const slot=publicSlot(row.slot);
+   if(!SLOTS.includes(slot))continue;
+   try{photos[slot]={url:await storage.url(row.storage_key),alt_text:row.alt_text||'',updated_at:row.updated_at};}
+   catch(e){console.warn('Site photo unavailable',slot);photos[slot]=null;}
   }
   return res.json({photos});
  }
@@ -27,9 +33,10 @@ export default async function(req,res){
  if(!a)return;
  const slot=String(req.body?.slot||'');
  if(!SLOTS.includes(slot))return res.status(400).json({error:'Choose an available website photo position.'});
+ const dbSlot=databaseSlot(slot);
  if(req.method==='DELETE'){
   if(req.body?.confirmed!==true)return res.status(400).json({error:'Confirm removal of the website photo.'});
-  const old=await db.query('DELETE FROM academy_site_photos WHERE slot=$1 RETURNING storage_key',[slot]);
+  const old=await db.query('DELETE FROM academy_site_photos WHERE slot=$1 RETURNING storage_key',[dbSlot]);
   if(old.rows[0]?.storage_key){try{await storage.del(old.rows[0].storage_key);}catch(e){console.warn('Previous photo cleanup pending',slot);}}
   await audit(a.user.id,'site_photo.remove','site_photo',slot);
   return res.json({ok:true,removed:!!old.rows.length,slot});
@@ -46,13 +53,13 @@ export default async function(req,res){
  try{url=await storage.put(key,file.buffer,file.contentType);}
  catch(e){console.error('Photo storage failed',e?.message||e);return res.status(503).json({error:'Photo storage is unavailable. The old website photo was not changed.'});}
  try{
-  const previous=await db.query('SELECT storage_key FROM academy_site_photos WHERE slot=$1',[slot]);
+  const previous=await db.query('SELECT storage_key FROM academy_site_photos WHERE slot=$1',[dbSlot]);
   await db.query(`INSERT INTO academy_site_photos(slot,storage_key,photo_url,content_type,original_filename,file_bytes,updated_by,alt_text,updated_at)
     VALUES($1,$2,$3,$4,$5,$6,$7,$8,now()) ON CONFLICT(slot) DO UPDATE SET
     storage_key=EXCLUDED.storage_key,photo_url=EXCLUDED.photo_url,
     content_type=EXCLUDED.content_type,original_filename=EXCLUDED.original_filename,
     file_bytes=EXCLUDED.file_bytes,updated_by=EXCLUDED.updated_by,
-    alt_text=EXCLUDED.alt_text,updated_at=now()`,[slot,key,url,file.contentType,String(file.filename||'academy-photo').slice(0,180),file.buffer.length,a.user.id,alt]);
+    alt_text=EXCLUDED.alt_text,updated_at=now()`,[dbSlot,key,url,file.contentType,String(file.filename||'academy-photo').slice(0,180),file.buffer.length,a.user.id,alt]);
   await audit(a.user.id,'site_photo.upload','site_photo',slot);
   const oldKey=previous.rows[0]?.storage_key;
   if(oldKey&&oldKey!==key){try{await storage.del(oldKey);}catch(e){console.warn('Old site photo cleanup pending',slot);}}

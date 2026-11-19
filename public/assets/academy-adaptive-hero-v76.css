@@ -1,0 +1,110 @@
+/* Shamsul Ulama Islamic Academy — source-verified adaptive hero v76
+   Both selected hero clips are the SAME 1280x720 16:9 landscape footage.
+   Never crop or stretch the embedded Academy name.
+   One consistent composition for phone, tablet, desktop, TV and projector.
+   The section itself follows the screen width; no letterbox background,
+   no viewport-height green side bars, no new ornamentation.
+   Other site sections and animations remain unchanged.
+ */
+#app main .academy-video-hero{
+  box-sizing:border-box!important;
+  display:block!important;
+  position:relative!important;
+  isolation:isolate!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  aspect-ratio:16 / 9!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  overflow:hidden!important;
+  background:transparent!important;
+}
+#app main .academy-video-hero>video#academyHomeVideo,
+#app main .academy-video-hero>img#academyHomeFallback,
+#app main .academy-video-hero>iframe#academyHomeEmbed{
+  box-sizing:border-box!important;
+  position:absolute!important;
+  display:block!important;
+  inset:0!important;
+  top:0!important;left:0!important;bottom:0!important;right:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  min-height:0!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  transform:none!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  background:transparent!important;
+}
+#app main .academy-video-hero>#academyHomeVideo[hidden],
+#app main .academy-video-hero>#academyHomeFallback[hidden],
+#app main .academy-video-hero>#academyHomeEmbed[hidden]{
+  display:none!important;
+}
+#app main .academy-video-hero .academy-video-hero-shade{
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  background:transparent!important;
+  pointer-events:none!important;
+}
+#app main .academy-video-hero .academy-hero-scroll{
+  right:clamp(12px,2vw,30px)!important;
+  bottom:clamp(10px,1.5vw,24px)!important;
+  left:auto!important;
+  top:auto!important;
+  transform:none!important;
+  z-index:8!important;
+}
+#app main .academy-video-hero .academy-hero-scroll:hover{
+  transform:none!important;
+}
+#app main .academy-video-hero .academy-home-playback-status{
+  bottom:8px!important;
+}
+@media(max-width:1150px),(hover:none) and (pointer:coarse){
+  #app main .academy-video-hero{
+    aspect-ratio:16 / 9!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    padding:0!important;
+  }
+  #app main .academy-video-hero>video#academyHomeVideo,
+  #app main .academy-video-hero>img#academyHomeFallback{
+    object-fit:contain!important;
+    object-position:center center!important;
+    width:100%!important;height:100%!important;
+    background:transparent!important;
+  }
+}
+@media(max-width:600px){
+  #app main .academy-video-hero{
+    aspect-ratio:16 / 9!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+  #app main .academy-video-hero .academy-hero-scroll{
+    right:10px!important;
+    bottom:8px!important;
+  }
+}
+@media(max-height:520px) and (orientation:landscape){
+  #app main .academy-video-hero{
+    aspect-ratio:16 / 9!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+  }
+}

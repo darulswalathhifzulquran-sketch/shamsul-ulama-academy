@@ -1,0 +1,128 @@
+/* Academy Gallery v64 — light editorial ivory, not muted gold.
+   The full-section colour deliberately recedes so authentic event photos lead.
+   Preserve original photo ratios, sequence, working media and captions. */
+#app main > .home-gallery-section,
+#app .home-gallery-section {
+  background:#F4F3EE!important;
+  background-image:none!important;
+  color:#1A1A1A!important;
+  border-top:1px solid #E1E5DB!important;
+  border-bottom:1px solid #E1E5DB!important;
+  padding-top:clamp(58px,5.4vw,88px)!important;
+  padding-bottom:clamp(45px,4.6vw,74px)!important;
+}
+#app .home-gallery-section>.container {
+  width:min(1540px,calc(100% - 64px))!important;
+  max-width:1540px!important;
+  margin-inline:auto!important;
+}
+#app .home-gallery-section .home-gallery-heading {
+  margin-bottom:clamp(28px,3vw,42px)!important;
+}
+#app .home-gallery-section .home-gallery-heading h2,
+#app .home-gallery-section .home-gallery-heading .eyebrow {
+  color:#0D5029!important;
+}
+#app .home-gallery-section .home-gallery-heading p{
+  color:#4D594F!important;
+}
+#app .home-gallery-section .home-gallery-more {
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  padding:12px 18px!important;
+  border:1px solid #0D5029!important;
+  border-radius:8px!important;
+  background:#0D5029!important;
+  color:#FFFFFF!important;
+  font:700 13px/1.35 Inter,Arial,sans-serif!important;
+  text-decoration:none!important;
+  box-shadow:none!important;
+  transition:background-color .2s ease!important;
+}
+#app .home-gallery-section .home-gallery-more:hover,
+#app .home-gallery-section .home-gallery-more:focus-visible {
+  background:#073C1F!important;
+  border-color:#073C1F!important;
+  color:#FFFFFF!important;
+  box-shadow:none!important;
+}
+#app .home-gallery-section .home-gallery-more:focus-visible {
+  outline:3px solid #356F63!important;
+  outline-offset:3px!important;
+}
+#app .home-gallery-section .home-gallery-grid {
+  width:100%!important;
+  max-width:none!important;
+  gap:clamp(17px,2vw,28px)!important;
+}
+#app .home-gallery-section .home-gallery-mosaic-column {
+  gap:clamp(19px,2vw,30px)!important;
+}
+#app .home-gallery-section .home-gallery-card,
+#app .home-gallery-section .home-gallery-card-large,
+#app .home-gallery-section .home-gallery-card-compact {
+  background:#FFFFFF!important;
+  border:1px solid #E2E6DE!important;
+  border-radius:9px!important;
+  box-shadow:0 8px 22px rgba(25,51,40,.08)!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-media,
+#app .home-gallery-section .home-gallery-card-compact .showcase-media {
+  background:#F4F3EE!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-media>img,
+#app .home-gallery-section .home-gallery-card-compact .showcase-media>img {
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+  aspect-ratio:auto!important;
+  max-height:none!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-card-text,
+#app .home-gallery-section .home-gallery-card-compact .showcase-card-text {
+  background:#FFFFFF!important;
+  padding:15px 19px 18px!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-card-text strong,
+#app .home-gallery-section .home-gallery-card-compact .showcase-card-text strong {
+  color:#193B32!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-card-text p {
+  color:#4F5B52!important;
+}
+#app .home-gallery-section .showcase-loading {
+  color:#394B40!important;
+}
+#app .home-gallery-section .showcase-empty {
+  background:#FFFFFF!important;
+  border-color:#DDE3DA!important;
+  color:#1A1A1A!important;
+}
+@media(hover:hover) {
+  #app .home-gallery-section .home-gallery-card:hover {
+    border-color:#A3B8A5!important;
+    box-shadow:0 14px 29px rgba(25,51,40,.13)!important;
+  }
+}
+@media(max-width:850px) {
+  #app .home-gallery-section>.container {
+    width:calc(100% - 38px)!important;
+    max-width:none!important;
+  }
+}
+@media(max-width:580px) {
+  #app .home-gallery-section {
+    padding-top:46px!important;
+    padding-bottom:54px!important;
+  }
+  #app .home-gallery-section>.container {
+    width:calc(100% - 24px)!important;
+  }
+  #app .home-gallery-section .home-gallery-grid {
+    gap:17px!important;
+  }
+}

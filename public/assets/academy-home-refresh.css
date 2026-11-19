@@ -1,0 +1,144 @@
+/* Academy Homepage — user-reference editorial sections.
+   Colours only from user-approved palette: forest #075333, teal #297D7D, white.
+   No changes to public account, admissions or other page layouts. */
+
+/* 1–2: Wide, edge-to-edge scholar profile like the supplied school references. */
+.scholar-section-home{
+ padding:0!important;border:0!important;background:#297D7D!important;overflow:hidden;
+}
+.scholar-section-home>.container{width:100%!important;max-width:none!important;padding:0!important;margin:0!important}
+.scholar-section-home .scholar-spotlight{
+ width:100%!important;max-width:none!important;
+ display:grid!important;grid-template-columns:1fr 1fr!important;
+ min-height:clamp(410px,35vw,570px)!important;
+ border:0!important;border-radius:0!important;
+ box-shadow:none!important;background:#075333!important;
+ transform:none!important;
+}
+.scholar-section-home .scholar-spotlight:hover{box-shadow:none!important;transform:none!important}
+.scholar-section-home .scholar-visual{
+ min-height:clamp(410px,35vw,570px)!important;height:100%!important;
+ background:#297D7D!important;
+}
+.scholar-section-home .scholar-visual img{
+ object-fit:cover!important;object-position:center 28%!important;
+ width:100%!important;height:100%!important;
+}
+.scholar-section-home .scholar-copy{
+ min-width:0;max-width:none!important;align-items:flex-start!important;
+ padding:clamp(36px,5.2vw,92px)!important;
+ background:#075333!important;color:#fff!important;
+}
+.scholar-section-home .scholar-copy h2{font-size:clamp(29px,2.8vw,46px)!important;max-width:680px}
+.scholar-section-home .scholar-excerpt{max-width:590px}
+.scholar-section-home .scholar-visual::after{pointer-events:none}
+.scholar-section-home .scholar-photo-label{z-index:2}
+
+/* 5: Separate, beautiful academy introduction — no 'waiting for photo' overlay. */
+.academy-home-intro.hero{
+ background:linear-gradient(90deg,#075333 0 50%,#297D7D 50% 100%)!important;
+ border:0!important;padding:0!important;
+}
+.academy-home-intro.hero::before{display:none!important}
+.academy-home-intro .hero-grid{
+ width:100%!important;max-width:none!important;display:grid!important;
+ grid-template-columns:1fr 1fr!important;gap:0!important;
+ min-height:480px!important;
+}
+.academy-home-intro .hero-copy{
+ min-width:0;padding:clamp(36px,5.2vw,90px) clamp(26px,6.1vw,116px)!important;
+ background:#075333!important;color:#fff!important;
+ display:flex;flex-direction:column;justify-content:center;
+}
+.academy-home-intro .hero-copy .eyebrow,
+.academy-home-intro .hero-copy .location-line,
+.academy-home-intro .hero-copy h2,
+.academy-home-intro .hero-copy h2 em,
+.academy-home-intro .hero-copy>p{color:#fff!important}
+.academy-home-intro .hero-copy h2{font-size:clamp(33px,3.7vw,61px)!important;line-height:1.14!important}
+.academy-home-intro .hero-copy .actions{margin:24px 0 15px!important}
+.academy-home-intro .hero-copy .pill{background:#fff!important;border-color:#fff!important;color:#075333!important}
+.academy-home-intro .hero-copy .pill.ghost{background:transparent!important;color:#fff!important;border-color:#fff!important}
+.academy-home-intro .photo-frame{
+ min-width:0!important;width:100%!important;display:flex!important;
+ justify-content:center!important;align-items:center!important;
+ background:#297D7D!important;
+ padding:clamp(24px,3.6vw,62px)!important;
+ border-radius:0!important;box-shadow:none!important;
+}
+.academy-home-intro .v17-awaiting-photo{
+ width:min(100%,470px)!important;height:100%!important;min-height:350px!important;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ background:#fff!important;border:0!important;border-radius:16px!important;
+ overflow:hidden!important;padding:clamp(12px,2.1vw,28px)!important;
+}
+.academy-home-intro .v17-awaiting-photo img{
+ position:static!important;width:100%!important;height:100%!important;
+ max-height:390px!important;object-fit:contain!important;display:block!important;
+}
+.academy-home-intro .v17-awaiting-photo strong,
+.academy-home-intro .v17-awaiting-photo small,
+.academy-home-intro .photo-caption{display:none!important}
+.academy-home-intro #v17HeroApproved:not([hidden]){width:100%!important;height:auto!important;max-height:480px!important;object-fit:contain!important;border-radius:12px!important}
+.academy-home-intro #v17HeroApproved[hidden]{display:none!important}
+
+/* 3: UWC-inspired four-up photo/video Gallery with bright white cards and green underline. */
+.home-gallery-section{background:#fff!important;color:#075333!important;padding:clamp(62px,7vw,112px) 0!important;overflow:hidden}
+.home-gallery-section>.container{width:min(1410px,calc(100% - 48px))!important;max-width:1410px!important;margin-inline:auto!important}
+.home-gallery-heading{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:38px}
+.home-gallery-heading h2{font-size:clamp(30px,3vw,48px);line-height:1.19;margin:0 0 10px;color:#075333}
+.home-gallery-heading p{max-width:660px;margin:0;color:#375e4b}
+.home-gallery-more{font-weight:750;text-decoration:none;white-space:nowrap;padding:12px 2px;border-bottom:2px solid #075333;color:#075333}
+.home-gallery-more:focus-visible,.home-gallery-more:hover{text-decoration:underline;text-underline-offset:5px}
+.home-gallery-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.home-gallery-card{position:relative;min-width:0;display:flex;flex-direction:column;background:#fff!important;overflow:hidden;border-radius:12px;box-shadow:0 5px 22px rgba(7,83,51,.08);outline:1px solid rgba(7,83,51,.09)}
+.home-gallery-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:4px;background:#075333;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.home-gallery-card:hover::after,.home-gallery-card:focus-within::after{transform:scaleX(1)}
+.showcase-media{position:relative;display:block;overflow:hidden;background:#075333}
+.home-gallery-card .showcase-media{aspect-ratio:4/3}
+.showcase-media img,.showcase-media video,.showcase-media iframe{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.showcase-media video{object-fit:contain}
+.home-gallery-card:hover .showcase-media img{transform:scale(1.055)}
+.home-gallery-card .showcase-card-text{padding:17px 15px 23px;min-height:93px;display:flex;flex-direction:column;gap:7px}
+.home-gallery-card .showcase-card-text strong{font-size:16px;line-height:1.3;color:#075333;overflow-wrap:anywhere}
+.home-gallery-card .showcase-card-text p{font-size:13px;line-height:1.5;margin:0;color:#315d49;overflow-wrap:anywhere}
+.showcase-card-media-tag{position:absolute;top:12px;left:12px;z-index:1;background:#075333;color:#fff;font:700 11px/1.4 system-ui,sans-serif;padding:5px 10px;border-radius:40px}
+.showcase-media video:focus-visible{outline:3px solid #fff;outline-offset:-4px}
+.showcase-empty{grid-column:1/-1;padding:48px 22px;text-align:center;color:#075333;background:#fff;border:1px solid #075333;border-radius:12px}
+.showcase-empty strong{display:block;font-size:20px;margin-bottom:8px}
+.showcase-empty p{margin:0 auto;max-width:560px}
+.showcase-loading{grid-column:1/-1;text-align:center;color:#075333}
+
+/* Respect scrolling in both directions: reveal on enter, reverse on exit.
+   JS adds .academy-motion-ready only when IntersectionObserver is available. */
+.academy-motion-ready .reveal-on-scroll{opacity:0;transform:translate3d(0,26px,0) scale(.987);transition:opacity .68s ease,transform .82s cubic-bezier(.22,1,.36,1);transition-delay:var(--reveal-delay,0ms)}
+.academy-motion-ready .reveal-on-scroll.is-visible{opacity:1;transform:translate3d(0,0,0) scale(1)}
+.academy-motion-ready .home-gallery-card.reveal-on-scroll.is-visible:hover{transform:translate3d(0,-7px,0) scale(1.008)}
+@media(max-width:1050px){
+ .home-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .scholar-section-home .scholar-spotlight{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:780px){
+ .scholar-section-home .scholar-spotlight{grid-template-columns:minmax(0,1fr)!important}
+ .scholar-section-home .scholar-visual{height:min(72vw,440px)!important;min-height:310px!important}
+ .scholar-section-home .scholar-copy{padding:clamp(29px,6vw,50px)!important}
+ .academy-home-intro.hero{background:#075333!important}
+ .academy-home-intro .hero-grid{grid-template-columns:minmax(0,1fr)!important}
+ .academy-home-intro .hero-copy{padding:46px 28px!important}
+ .academy-home-intro .photo-frame{padding:24px!important}
+ .academy-home-intro .v17-awaiting-photo{min-height:300px!important}
+ .home-gallery-heading{align-items:start;flex-direction:column}
+ .home-gallery-section>.container{width:calc(100% - 32px)!important}
+}
+@media(max-width:550px){
+ .home-gallery-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .home-gallery-section{padding:55px 0!important}
+ .showcase-empty{padding:28px 15px}
+ .scholar-section-home .scholar-visual{min-height:265px!important}
+ .scholar-section-home .scholar-spotlight{min-height:0!important}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important}
+ .academy-motion-ready .reveal-on-scroll{opacity:1!important;transform:none!important;transition:none!important}
+ .home-gallery-card:hover,.showcase-media img{transform:none!important;transition:none!important}
+}

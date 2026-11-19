@@ -1,0 +1,74 @@
+/* Owner-approved Gallery palette v63.
+ * Muted Gold #B89336; Dark Forest Green #0D5029;
+ * Deep Charcoal #1A1A1A; White #FFFFFF.
+ * Scope: homepage Academy Gallery only. Preserve full-width, uncut image sizing.
+ */
+#app main > .home-gallery-section,
+#app .home-gallery-section {
+  background:#B89336!important;
+  background-image:none!important;
+  color:#1A1A1A!important;
+}
+#app .home-gallery-section .home-gallery-heading h2 {
+  color:#0D5029!important;
+}
+#app .home-gallery-section .home-gallery-heading .eyebrow {
+  color:#0D5029!important;
+}
+#app .home-gallery-section .home-gallery-heading p {
+  color:#1A1A1A!important;
+}
+#app .home-gallery-section .home-gallery-more {
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  padding:13px 19px!important;
+  border:1px solid #0D5029!important;
+  border-radius:8px!important;
+  background:#0D5029!important;
+  color:#FFFFFF!important;
+  font:700 13px/1.35 Inter,Arial,sans-serif!important;
+  text-decoration:none!important;
+  box-shadow:0 3px 9px rgba(26,26,26,.10)!important;
+  transition:background-color .2s ease,box-shadow .2s ease!important;
+}
+#app .home-gallery-section .home-gallery-more:hover,
+#app .home-gallery-section .home-gallery-more:focus-visible {
+  background:#08391E!important;
+  border-color:#08391E!important;
+  color:#FFFFFF!important;
+  box-shadow:0 7px 17px rgba(26,26,26,.16)!important;
+}
+#app .home-gallery-section .home-gallery-more:focus-visible {
+  outline:3px solid #FFFFFF!important;
+  outline-offset:3px!important;
+}
+#app .home-gallery-section .home-gallery-card,
+#app .home-gallery-section .home-gallery-card-compact,
+#app .home-gallery-section .home-gallery-card-large {
+  border-color:rgba(13,80,41,.23)!important;
+  background:#FFFFFF!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-card-text,
+#app .home-gallery-section .home-gallery-card-compact .showcase-card-text {
+  background:#FFFFFF!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-card-text strong,
+#app .home-gallery-section .home-gallery-card-compact .showcase-card-text strong,
+#app .home-gallery-section .home-gallery-card .showcase-card-text p {
+  color:#1A1A1A!important;
+}
+#app .home-gallery-section .showcase-empty,
+#app .home-gallery-section .showcase-loading {
+  color:#1A1A1A!important;
+}
+#app .home-gallery-section .showcase-empty {
+  background:#FFFFFF!important;
+  border-color:#0D5029!important;
+}
+@media(hover:hover){
+  #app .home-gallery-section .home-gallery-card:hover {
+    border-color:#0D5029!important;
+  }
+}

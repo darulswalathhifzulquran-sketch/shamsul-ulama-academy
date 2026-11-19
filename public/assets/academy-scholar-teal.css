@@ -1,0 +1,44 @@
+/* Shamsul Ulama Profile — only user-approved colours:
+   full section: teal #297D7D; inner card: Academy green #075333;
+   white framing is the site's existing white.
+   Keep all other sections unchanged. */
+.scholar-section{
+  background-color:#297D7D!important;
+  background-image:none!important;
+  border-block-color:#297D7D!important;
+  padding:clamp(22px,2.8vw,40px) 0!important;
+}
+.scholar-section > .container{
+  width:min(1180px,calc(100% - 52px))!important;
+  max-width:1180px!important;
+  margin-inline:auto!important;
+}
+.scholar-section .scholar-spotlight{
+  display:grid;
+  width:100%!important;
+  max-width:none!important;
+  grid-template-columns:minmax(290px,0.88fr) minmax(0,1.12fr);
+  min-height:385px;
+  background-color:#075333!important;
+  background-image:none!important;
+  border:2px solid #fff;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 14px 36px rgba(0,0,0,.17);
+}
+.scholar-section .scholar-spotlight .scholar-copy{
+  background-color:#075333!important;
+  background-image:none!important;
+  padding:clamp(26px,3.1vw,48px)!important;
+}
+.scholar-section .scholar-visual{min-height:385px}
+@media(max-width:780px){
+  .scholar-section{padding:20px 0!important}
+  .scholar-section > .container{width:calc(100% - 28px)!important}
+  .scholar-section .scholar-spotlight{grid-template-columns:minmax(0,1fr);border-width:2px;border-radius:16px}
+  .scholar-section .scholar-visual{height:320px;min-height:320px}
+}
+@media(max-width:470px){
+  .scholar-section .scholar-visual{height:290px;min-height:290px}
+  .scholar-section .scholar-spotlight .scholar-copy{padding:24px 20px 29px!important}
+}

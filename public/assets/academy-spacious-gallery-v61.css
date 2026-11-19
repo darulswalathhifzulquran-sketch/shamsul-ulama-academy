@@ -1,0 +1,282 @@
+/* Academy visual direction v61 — crafted editorial contrast.
+   Learning = full-bleed sandstone. Gallery = midnight blue.
+   Full natural photo dimensions, absolutely no hard cropping.
+   No artificial patterns, ribbons, neon effects, or fake illustration. */
+
+/* LEARNING: the colour fills the ENTIRE SECTION, not just cards. */
+#app main > .academy-learning-home,
+#app .academy-learning-home {
+  background:#D7C3A7!important;
+  background-image:none!important;
+  color:#203D46!important;
+  border-top:0!important;
+  border-bottom:0!important;
+  padding:clamp(65px,6.3vw,102px) 0 clamp(74px,7vw,112px)!important;
+}
+#app .academy-learning-home .academy-learning-eyebrow {
+  color:#315665!important;
+}
+#app .academy-learning-home .academy-learning-heading h2 {
+  color:#203D46!important;
+  font-family:'Libre Baskerville',Georgia,serif!important;
+  font-size:clamp(31px,3.1vw,46px)!important;
+  font-weight:400!important;
+}
+#app .academy-learning-home .academy-learning-all {
+  color:#244D58!important;
+  border-bottom-color:#244D58!important;
+}
+#app .academy-learning-home .academy-learning-all:hover,
+#app .academy-learning-home .academy-learning-all:focus-visible {
+  color:#102F3B!important;
+  border-bottom-color:#102F3B!important;
+}
+#app .academy-learning-home-grid{gap:clamp(18px,1.8vw,30px)!important}
+#app .academy-learning-home .academy-learning-card {
+  background:#FFFDF8!important;
+  border:1px solid rgba(40,69,71,.19)!important;
+  box-shadow:0 10px 30px rgba(33,48,44,.10)!important;
+}
+#app .academy-learning-home .academy-learning-card .academy-learning-card-body {
+  background:#FFFDF8!important;
+}
+#app .academy-learning-home .academy-learning-card .academy-learning-overline{
+  color:#456A71!important;
+}
+#app .academy-learning-home .academy-learning-card .academy-learning-card-title-row h3{
+  color:#25424B!important;
+}
+#app .academy-learning-home .academy-learning-card .academy-learning-card-arrow{
+  color:#2D6069!important;
+}
+@media(hover:hover){
+  #app .academy-learning-home .academy-learning-card:hover{
+    border-color:#244D58!important;
+    box-shadow:0 20px 45px rgba(28,56,56,.19)!important;
+  }
+  #app .academy-learning-home .academy-learning-card:hover .academy-learning-card-body {
+    background:#315F6B!important;
+  }
+  #app .academy-learning-home .academy-learning-card:hover .academy-learning-overline{
+    color:#DBEBEA!important;
+  }
+  #app .academy-learning-home .academy-learning-card:hover .academy-learning-card-title-row h3,
+  #app .academy-learning-home .academy-learning-card:hover .academy-learning-card-arrow{
+    color:#fff!important;
+  }
+}
+
+/* GALLERY: a full-width, unbroken dark-blue exhibition wall. */
+#app main > .home-gallery-section,
+#app .home-gallery-section{
+  background:#1D3943!important;
+  background-image:none!important;
+  color:#F8F4EA!important;
+  border:0!important;
+  padding:clamp(72px,7vw,112px) 0 clamp(78px,8vw,130px)!important;
+}
+#app .home-gallery-section > .container{
+  width:min(1640px,calc(100% - 76px))!important;
+  max-width:1640px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+#app .home-gallery-section .home-gallery-heading{
+  display:flex!important;
+  gap:28px!important;
+  margin-bottom:clamp(30px,3.1vw,48px)!important;
+  align-items:end!important;
+}
+#app .home-gallery-section .home-gallery-heading .eyebrow{
+  color:#B8D5D3!important;
+  font:700 12px/1.4 Inter,Arial,sans-serif!important;
+  letter-spacing:.13em!important;
+}
+#app .home-gallery-section .home-gallery-heading h2{
+  font-family:'Libre Baskerville',Georgia,serif!important;
+  font-size:clamp(32px,3.6vw,52px)!important;
+  line-height:1.17!important;
+  font-weight:400!important;
+  color:#F9F5EC!important;
+  letter-spacing:-.035em!important;
+}
+#app .home-gallery-section .home-gallery-heading p{
+  color:#D4E2DE!important;
+  font:400 15px/1.7 Inter,Arial,sans-serif!important;
+  max-width:675px;
+}
+#app .home-gallery-section .home-gallery-more{
+  color:#FCF8EC!important;
+  border-bottom:1px solid #C3D6D4!important;
+  font:650 13px/1.5 Inter,Arial,sans-serif!important;
+  padding:7px 0!important;
+}
+#app .home-gallery-section .home-gallery-more:hover{
+  color:#D3EBE6!important;
+  border-bottom-color:#D3EBE6!important;
+}
+
+/* Huge natural images: 2 generous columns with restrained gutters. */
+#app .home-gallery-section .home-gallery-grid{
+  display:grid!important;
+  width:100%!important;
+  max-width:none!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;
+  gap:clamp(20px,2.2vw,34px)!important;
+  margin:0!important;
+}
+#app .home-gallery-section .home-gallery-mosaic-column{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  min-width:0!important;
+  gap:clamp(22px,2.35vw,38px)!important;
+}
+#app .home-gallery-section .home-gallery-mosaic-right,
+#app .home-gallery-section .gallery-few-items .home-gallery-mosaic-right{
+  padding:0!important;
+}
+#app .home-gallery-section .home-gallery-card,
+#app .home-gallery-section .home-gallery-card-compact,
+#app .home-gallery-section .home-gallery-card-large{
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  grid-template-columns:none!important;
+  align-items:stretch!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:none!important;
+  border:1px solid rgba(251,252,249,.20)!important;
+  border-radius:10px!important;
+  background:#FAF9F5!important;
+  box-shadow:0 12px 32px rgba(3,20,24,.20)!important;
+  overflow:hidden!important;
+  transform:none;
+  transition:box-shadow .28s ease,border-color .28s ease!important;
+}
+#app .home-gallery-section .home-gallery-card::after {
+  content:none!important;
+  display:none!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-media,
+#app .home-gallery-section .home-gallery-card-compact .showcase-media{
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  overflow:hidden!important;
+  background:#EAE7E1!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-media>img,
+#app .home-gallery-section .home-gallery-card-compact .showcase-media>img{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:none!important;
+  min-height:0!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  transition:none!important;
+  border:0!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-media>video,
+#app .home-gallery-section .home-gallery-card .showcase-media>iframe{
+  width:100%!important;
+  height:auto!important;
+  min-height:240px!important;
+  aspect-ratio:16/9!important;
+  object-fit:contain!important;
+  background:#101F25!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-card-text,
+#app .home-gallery-section .home-gallery-card-compact .showcase-card-text{
+  display:block!important;
+  min-height:0!important;
+  align-self:stretch!important;
+  padding:19px 22px 22px!important;
+  background:#FAF9F5!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-card-text strong,
+#app .home-gallery-section .home-gallery-card-compact .showcase-card-text strong{
+  display:block!important;
+  color:#234C55!important;
+  font:700 clamp(15px,1.15vw,18px)/1.35 Inter,Arial,sans-serif!important;
+  letter-spacing:.025em!important;
+}
+#app .home-gallery-section .home-gallery-card .showcase-card-text p{
+  color:#587077!important;
+  margin:7px 0 0!important;
+  font-size:13px!important;
+  line-height:1.5!important;
+}
+@media(hover:hover){
+  #app .home-gallery-section .home-gallery-card:hover{
+    border-color:rgba(255,255,255,.65)!important;
+    box-shadow:0 19px 52px rgba(3,20,24,.32)!important;
+  }
+  #app .home-gallery-section .home-gallery-card:hover .showcase-media>img{
+    transform:none!important; /* Entire photo remains visible on hover. */
+  }
+}
+#app .home-gallery-grid.gallery-one-item{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  max-width:min(940px,100%)!important;
+  margin-inline:auto!important;
+}
+#app .home-gallery-grid.gallery-one-item .home-gallery-mosaic-right{display:none!important}
+#app .home-gallery-grid>.showcase-empty{grid-column:1/-1!important}
+
+/* On phone/tablet, each image gets the full available width.
+   The existing original gallery order is kept. */
+@media(max-width:850px){
+  #app .home-gallery-section>.container{
+    width:calc(100% - 38px)!important;
+    max-width:none!important;
+  }
+  #app .home-gallery-section .home-gallery-heading{
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    gap:15px!important;
+  }
+  #app .home-gallery-section .home-gallery-grid{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:22px!important;
+  }
+  #app .home-gallery-section .home-gallery-mosaic-column{
+    display:contents!important;
+  }
+  #app .home-gallery-section .home-gallery-card{
+    order:var(--slot-order,0)!important;
+  }
+  #app .home-gallery-section .home-gallery-card .showcase-card-text{
+    padding:16px 18px 19px!important;
+  }
+}
+@media(max-width:580px){
+  #app .home-gallery-section{padding:54px 0 70px!important}
+  #app .home-gallery-section>.container{
+    width:calc(100% - 24px)!important;
+  }
+  #app .home-gallery-section .home-gallery-heading h2{font-size:30px!important}
+  #app .home-gallery-section .home-gallery-grid{gap:17px!important}
+  #app .academy-learning-home{padding:56px 0 68px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #app .home-gallery-section .home-gallery-card,
+  #app .home-gallery-section .showcase-media>img{transition:none!important}
+}

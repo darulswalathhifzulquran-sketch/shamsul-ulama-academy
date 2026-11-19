@@ -1,0 +1,21 @@
+/* Academy v102: once-only scroll reveal AFTER the Gallery and in footer.
+   No scroll-snap, no animations on portraits or actual gallery pictures.
+   Scoped to homepage and protected for reduced-motion users. */
+@media(prefers-reduced-motion:no-preference){
+ #app .academy-reveal-v102{
+   opacity:0;
+   transform:translate3d(0,24px,0);
+   transition:opacity .83s cubic-bezier(.2,.7,.2,1),
+              transform .88s cubic-bezier(.18,.78,.2,1);
+   transition-delay:var(--v102-delay,0ms);
+ }
+ #app .academy-reveal-v102.is-in-view-v102{
+   opacity:1;
+   transform:translate3d(0,0,0);
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #app .academy-reveal-v102{
+   opacity:1!important;transform:none!important;transition:none!important;
+ }
+}

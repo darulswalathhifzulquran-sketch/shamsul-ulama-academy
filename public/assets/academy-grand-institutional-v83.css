@@ -1,0 +1,174 @@
+/* Version 83 — approved Grand Institutional (Style 5).
+   Flat, traditional 3-row academic header. Exactly the existing original assets.
+   Top-right login options stay side by side. No changes to content or Hifz APIs. */
+#app .header.academy-header-v83{
+  position:relative!important; top:auto!important; z-index:80!important;
+  width:100%!important; overflow:visible!important; border-bottom:0!important;
+  background:#F7F3E9!important; box-shadow:none!important;
+}
+#app .academy-header-v83 .academy-utility-v80{
+  min-height:38px!important; background:#102B31!important;
+  border-bottom:1px solid rgba(195,164,86,.62)!important;
+}
+#app .academy-header-v83 .academy-utility-inner-v80{
+  min-height:38px!important; width:min(1340px,calc(100% - 42px))!important;
+  padding:4px 0!important; align-items:center!important;
+}
+#app .academy-header-v83 .academy-utility-label-v80{
+  color:#F7F0DB!important; font-size:10px!important;
+  font-weight:700!important; letter-spacing:.12em!important;
+}
+#app .academy-header-v83 .academy-portals-v80{
+  margin-left:auto!important; display:flex!important; flex-wrap:nowrap!important;
+  flex-shrink:0!important; width:auto!important; justify-content:flex-end!important;
+  align-items:center!important; gap:8px!important;
+}
+#app .academy-header-v83 .academy-portal-link-v80{
+  display:inline-flex!important; flex:0 0 auto!important;
+  border:1px solid #C3A75F!important; border-radius:4px!important;
+  background:transparent!important; color:#FFF!important;
+  padding:6px 13px!important; font:700 11px/1.2 Inter,Arial,sans-serif!important;
+  white-space:nowrap!important; text-decoration:none!important; min-height:28px!important;
+}
+#app .academy-header-v83 .academy-portal-link-v80:hover,
+#app .academy-header-v83 .academy-portal-link-v80:focus-visible{
+  background:#1D5960!important; color:#FFF!important;
+}
+#app .academy-header-v83 .academy-head-v80{
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  background:#F7F3E9!important; width:min(1340px,calc(100% - 42px))!important;
+  min-height:144px!important; height:auto!important; padding:14px 0!important;
+  margin:0 auto!important; gap:0!important; max-width:1340px!important;
+}
+#app .academy-header-v83 .academy-identity-v80{
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  flex:0 1 auto!important; min-width:0!important; max-width:min(900px,100%)!important;
+  gap:18px!important; text-decoration:none!important; color:#0B4C3B!important;
+}
+#app .academy-header-v83 .academy-emblem-v80{
+  flex:0 0 110px!important; width:110px!important; height:112px!important;
+  padding:0!important; margin:0!important; background:transparent!important;
+  border:0!important; box-shadow:none!important;
+}
+#app .academy-header-v83 .academy-logo-v80{
+  width:100%!important; height:100%!important; max-width:none!important;
+  object-fit:contain!important; filter:none!important; background:transparent!important;
+}
+#app .academy-header-v83 .academy-heading-v80{
+  flex:1 1 auto!important; min-width:0!important; gap:4px!important;
+  display:flex!important; flex-direction:column!important; align-items:flex-start!important;
+}
+#app .academy-header-v83 .academy-calligraphy-v80{
+  display:block!important; width:min(100%,545px)!important; max-height:85px!important;
+  height:auto!important; object-fit:contain!important; object-position:left center!important;
+  background:transparent!important;
+}
+#app .academy-header-v83 .academy-title-v80{
+  display:block!important; color:#075333!important; font:700 clamp(16px,1.65vw,22px)/1.21 Georgia,'Times New Roman',serif!important;
+  letter-spacing:.015em!important; white-space:normal!important;
+}
+#app .academy-header-v83 .academy-place-v80{
+  display:block!important; color:#98742A!important; font:700 10px/1.3 Inter,Arial,sans-serif!important;
+  letter-spacing:.26em!important;
+}
+#app .academy-header-v83 .academy-navigation-strip-v83{
+  display:block!important; width:100%!important; min-height:53px!important;
+  background:#194D49!important; border-top:2px solid #B49A59!important;
+  border-bottom:0!important;
+}
+#app .academy-header-v83 .academy-navigation-inner-v83{
+  box-sizing:border-box!important; width:min(1340px,calc(100% - 42px))!important;
+  max-width:1340px!important; margin:0 auto!important;
+  min-height:53px!important; display:flex!important; align-items:center!important;
+  justify-content:center!important; position:relative!important; background:transparent!important;
+}
+#app .academy-header-v83 #nav.academy-nav-v80{
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  position:static!important; width:auto!important; flex:0 1 auto!important;
+  gap:0!important; margin:0!important; padding:0!important; background:transparent!important;
+  box-shadow:none!important; border:0!important;
+}
+#app .academy-header-v83 #nav.academy-nav-v80>a{
+  display:inline-flex!important; align-items:center!important; justify-content:center!important;
+  min-height:53px!important; padding:12px clamp(15px,2vw,25px)!important;
+  border:0!important; border-left:1px solid rgba(255,255,255,.22)!important;
+  border-radius:0!important; background:transparent!important; color:#FFF!important;
+  box-shadow:none!important; white-space:nowrap!important;
+  font:600 13px/1.25 Inter,Arial,sans-serif!important;
+}
+#app .academy-header-v83 #nav.academy-nav-v80>a:first-child{border-left:0!important}
+#app .academy-header-v83 #nav.academy-nav-v80>a:hover,
+#app .academy-header-v83 #nav.academy-nav-v80>a.active{
+  color:#F9E4B6!important; background:rgba(0,0,0,.12)!important;
+  box-shadow:inset 0 -3px 0 #C3A55D!important;
+}
+#app .academy-header-v83 .academy-mobile-menu-v80{display:none!important}
+@media(max-width:850px),(hover:none) and (pointer:coarse){
+  #app .header.academy-header-v83{position:relative!important;top:auto!important}
+  #app .academy-header-v83 .academy-head-v80{
+    width:calc(100% - 28px)!important; max-width:100%!important;
+    min-height:100px!important; padding:11px 0!important;
+    justify-content:center!important;
+  }
+  #app .academy-header-v83 .academy-identity-v80{
+    max-width:100%!important; gap:9px!important; justify-content:center!important;
+  }
+  #app .academy-header-v83 .academy-emblem-v80{
+    flex:0 0 74px!important; width:74px!important; height:78px!important;
+  }
+  #app .academy-header-v83 .academy-calligraphy-v80{
+    width:min(100%,390px)!important; max-height:60px!important;
+  }
+  #app .academy-header-v83 .academy-title-v80{
+    font-size:clamp(12px,2.4vw,16px)!important;
+  }
+  #app .academy-header-v83 .academy-place-v80{font-size:9px!important}
+  #app .academy-header-v83 .academy-navigation-inner-v83{
+    width:calc(100% - 28px)!important; min-height:48px!important;
+    justify-content:flex-end!important;
+  }
+  #app .academy-header-v83 .academy-mobile-menu-v80{
+    display:flex!important; flex:0 0 44px!important; width:44px!important; height:40px!important;
+    margin:0!important; padding:0!important; justify-content:center!important; align-items:center!important;
+    background:transparent!important; color:#FFF!important; border:1px solid #E3CEA1!important;
+    border-radius:4px!important; font-size:23px!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80:not(.open){display:none!important}
+  #app .academy-header-v83 #nav.academy-nav-v80.open{
+    display:flex!important; flex-direction:column!important; align-items:stretch!important;
+    position:absolute!important; top:100%!important; left:-14px!important; right:-14px!important;
+    width:auto!important; padding:7px 14px 15px!important;
+    max-height:calc(100dvh - 220px)!important; overflow-y:auto!important;
+    background:#194D49!important; border:1px solid #B49A59!important; border-top:0!important;
+    box-shadow:0 13px 28px rgba(0,0,0,.2)!important; z-index:101!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a{
+    display:flex!important; justify-content:flex-start!important; min-height:45px!important;
+    color:#FFF!important; background:transparent!important; font-size:14px!important;
+    border:0!important; border-bottom:1px solid rgba(255,255,255,.19)!important;
+    padding:11px 12px!important;
+  }
+}
+@media(max-width:600px){
+  #app .academy-header-v83 .academy-utility-inner-v80{
+    width:calc(100% - 22px)!important; justify-content:flex-end!important;
+    padding:5px 0!important; min-height:39px!important;
+  }
+  #app .academy-header-v83 .academy-utility-label-v80{display:none!important}
+  #app .academy-header-v83 .academy-portals-v80{
+    width:auto!important; margin-left:auto!important; flex-wrap:nowrap!important;
+    justify-content:flex-end!important; gap:6px!important;
+  }
+  #app .academy-header-v83 .academy-portal-link-v80{
+    padding:6px 8px!important; font-size:10px!important;
+  }
+  #app .academy-header-v83 .academy-head-v80{min-height:90px!important;padding:10px 0!important}
+  #app .academy-header-v83 .academy-emblem-v80{
+    flex:0 0 60px!important; width:60px!important; height:63px!important;
+  }
+  #app .academy-header-v83 .academy-calligraphy-v80{max-height:43px!important}
+  #app .academy-header-v83 .academy-title-v80{font-size:clamp(10px,2.7vw,13px)!important}
+  #app .academy-header-v83 .academy-place-v80{font-size:8px!important}
+  #app .academy-header-v83 .academy-navigation-strip-v83{min-height:47px!important}
+  #app .academy-header-v83 .academy-navigation-inner-v83{min-height:47px!important}
+}

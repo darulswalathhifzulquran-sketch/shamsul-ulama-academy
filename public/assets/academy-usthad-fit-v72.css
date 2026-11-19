@@ -1,0 +1,325 @@
+/* USTHAD DASHBOARD v72 — FULL-WIDTH FIT + MEANINGFUL STATUS COLOURS
+   Extends v71 glass design across every tab.
+   Main palette: Academy Green / White / Teal.
+   Red: actual destructive actions, errors and warnings. Black: critical text.
+   No changes to student data, routes, control actions, admissions or uploads. */
+:root{
+  --staff-ink:#18252B;
+  --staff-red:#B42332;
+  --staff-red-deep:#861927;
+  --staff-red-soft:rgba(255,244,245,.97);
+  --staff-red-line:rgba(180,35,50,.45);
+}
+/* FIX: staff.css had max-width:1300px, leaving huge side gutters.
+   Use nearly the entire monitor, with consistent deliberate breathing room. */
+html,body{width:100%!important;min-width:0!important}
+body>main{
+  width:calc(100% - clamp(24px,3.2vw,70px))!important;
+  max-width:none!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  grid-template-columns:clamp(245px,18vw,292px) minmax(0,1fr)!important;
+  gap:clamp(20px,1.7vw,31px)!important;
+  padding-top:clamp(18px,2vw,30px)!important;
+}
+body>main>aside{
+  width:100%!important;
+  max-width:100%!important;
+  padding:22px 16px 21px!important;
+}
+body>main>.content{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+}
+body>main>.content>.panel{
+  width:100%!important;
+  max-width:none!important;
+}
+body>header{
+  padding-left:clamp(14px,2.7vw,42px)!important;
+  padding-right:clamp(14px,2.7vw,42px)!important;
+  justify-content:space-between!important;
+}
+body>header .brand{
+  gap:12px!important;
+}
+body>header .brand span{
+  max-width:280px!important;
+  font-size:13px!important;
+  line-height:1.5!important;
+}
+body>header>div{
+  gap:clamp(10px,1.5vw,22px)!important;
+}
+#tabs>button{
+  font-size:14px!important;
+  min-height:46px!important;
+  padding:12px 13px!important;
+  letter-spacing:-.007em;
+}
+body>main>aside .eyebrow{
+  font-size:12px!important;
+  letter-spacing:.11em!important;
+}
+body>main>aside .hint{
+  font-size:12px!important;
+}
+body>main>.content>h1{
+  font-size:clamp(34px,2.7vw,46px)!important;
+  margin:6px 0 17px!important;
+}
+.panel>h2{
+  font-size:clamp(26px,2vw,35px)!important;
+}
+.panel>p,.content .panel>p{
+  font-size:14px!important;
+  max-width:1000px;
+}
+#status{
+  font-size:14px!important;
+  min-height:54px!important;
+  padding:15px 18px!important;
+}
+.panel:not([hidden]){
+  padding:clamp(25px,2.4vw,42px)!important;
+  min-height:220px;
+}
+.card{
+  padding:clamp(22px,2vw,31px)!important;
+}
+.content .card>p,.content .hint,.panel .hint{
+  font-size:13px!important;
+  line-height:1.7!important;
+}
+label,
+.showcase-admin-card label{
+  font-size:13.5px!important;
+  line-height:1.55!important;
+}
+input:not([type=checkbox]):not([type=radio]):not([type=hidden]),
+textarea,select{
+  font-size:14px!important;
+  min-height:46px!important;
+  padding:12px 13px!important;
+}
+input[type=checkbox],input[type=radio]{
+  min-height:initial!important;
+}
+button:not([data-tab]),
+.button-link,
+.showcase-admin-actions button,
+.galleryActions button{
+  font-size:13px!important;
+  line-height:1.35!important;
+  min-height:43px;
+}
+.stats article{
+  min-height:140px!important;
+  padding:26px!important;
+}
+.stats small{font-size:12px!important}
+.stats strong{font-size:clamp(36px,3vw,48px)!important}
+.entry{
+  font-size:14px!important;
+  gap:16px!important;
+}
+.entry .actions{
+  gap:8px!important;
+}
+.entry small,.entry .hint{font-size:12px!important}
+.application-detail strong{font-size:14px!important}
+.application-detail small{font-size:11px!important}
+/* Black appears only where readability benefits from a neutral tone. */
+.panel .entry strong,
+.application-detail strong,
+#accountEditHeading,
+#studentEditHeading{
+  color:var(--staff-ink)!important;
+}
+.panel .entry small,.panel .entry .hint{
+  color:#304A4B!important;
+}
+#tab-overview .stats article strong{color:#075333!important}
+/* The editable image/photo managers must fill their parent glass card. */
+#tab-sitephotos .academy-learning-photo-editor,
+#tab-homegallery .showcase-admin-outer,
+#tab-gallery .card,
+#tab-settings .academy-topbar-editor{
+  width:100%!important;
+  max-width:none!important;
+}
+#tab-sitephotos #learningPhotoManager,
+#tab-gallery #mediaPlacementManager{
+  width:100%!important;
+}
+#tab-sitephotos #learningPhotoManager>.media-slot-card,
+#tab-gallery #mediaPlacementManager>.media-slot-card{
+  width:100%!important;
+}
+#tab-gallery .galleryGrid{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))!important;
+}
+#tab-sitephotos .site-photo-grid{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr))!important;
+}
+#tab-homegallery .showcase-admin-section{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+/* RED ONLY for destructive, risky, or failed actions. */
+button.danger,
+button[class~="danger"],
+#deleteAllStudents,
+#confirmActionYes.is-destructive,
+.bulk-students-zone button,
+#tab-accounts .entry .actions button.danger,
+#tab-students .entry .actions button.danger{
+  color:#FFFFFF!important;
+  background:#B42332!important;
+  border:1px solid #8E1B29!important;
+  box-shadow:0 4px 13px rgba(180,35,50,.14)!important;
+  text-decoration:none!important;
+  font-weight:750!important;
+}
+button.danger:hover:not(:disabled),
+#deleteAllStudents:hover:not(:disabled),
+#confirmActionYes.is-destructive:hover:not(:disabled){
+  background:#861927!important;
+  border-color:#861927!important;
+  color:#FFFFFF!important;
+}
+button.danger:disabled,#deleteAllStudents:disabled{
+  opacity:.48!important;
+}
+.bulk-students-zone{
+  background:rgba(255,244,245,.94)!important;
+  border:1.5px solid var(--staff-red-line)!important;
+  box-shadow:0 8px 23px rgba(180,35,50,.055)!important;
+}
+.bulk-students-zone .bulk-warning,
+.bulk-students-zone #studentBulkCount{
+  color:var(--staff-red-deep)!important;
+  text-decoration:none!important;
+}
+.bulk-students-zone .hint{
+  color:#64323B!important;
+}
+.confirm-dialog-icon{
+  border:2px solid var(--staff-red)!important;
+  background:#FFF0F1!important;
+  color:var(--staff-red-deep)!important;
+}
+.confirm-dialog .eyebrow{
+  color:var(--staff-red-deep)!important;
+}
+.confirm-dialog-notice{
+  background:#FFF1F2!important;
+  border:1px solid var(--staff-red-line)!important;
+  border-left:4px solid var(--staff-red)!important;
+  color:var(--staff-red-deep)!important;
+}
+#confirmActionDialog:not(:has(#confirmActionYes.is-destructive)) .confirm-dialog-icon{
+  color:#075333!important;
+  background:#E9F9F5!important;
+  border-color:#0B7778!important;
+}
+#confirmActionDialog:not(:has(#confirmActionYes.is-destructive)) .confirm-dialog-notice{
+  color:#075333!important;
+  background:#EBF9F6!important;
+  border-color:rgba(11,119,120,.4)!important;
+  border-left-color:#0B7778!important;
+}
+#confirmActionYes:not(.is-destructive){
+  color:#FFFFFF!important;
+  background:#075333!important;
+  border-color:#075333!important;
+}
+#confirmActionYes:not(.is-destructive):hover:not(:disabled){
+  background:#07585C!important;
+}
+#status.error,
+.form-feedback.error,
+.error:not(button),
+#applicationFeedback.error,
+.site-photo-message.error,
+#bulkJuzStatus.error{
+  color:var(--staff-red-deep)!important;
+  text-decoration:none!important;
+}
+#status.error{
+  background:rgba(255,244,245,.94)!important;
+  border-color:var(--staff-red-line)!important;
+  border-left-color:var(--staff-red)!important;
+}
+#status.error::before{background:var(--staff-red)!important;box-shadow:0 0 0 4px rgba(180,35,50,.10)!important}
+.form-feedback.error{
+  background:rgba(255,244,245,.8)!important;
+  border-left:3px solid var(--staff-red)!important;
+  padding:10px 12px!important;
+  border-radius:6px!important;
+}
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"]{
+  border-color:#B42332!important;
+}
+/* Safe controls remain Green/White/Teal, with Black for neutral operations. */
+#signout,button.outline,#confirmActionCancel{
+  color:#172E30!important;
+  border-color:rgba(11,119,120,.5)!important;
+  background:rgba(255,255,255,.90)!important;
+}
+#signout:hover,#confirmActionCancel:hover{
+  color:#075333!important;
+  background:#DFF5F0!important;
+}
+@media(max-width:1180px){
+  body>main{
+    width:calc(100% - 34px)!important;
+    grid-template-columns:225px minmax(0,1fr)!important;
+    gap:18px!important;
+  }
+  body>main>aside{padding:16px 10px!important}
+  #tabs>button{font-size:13px!important}
+}
+@media(max-width:900px){
+  body>main{
+    display:block!important;
+    width:calc(100% - 28px)!important;
+    max-width:none!important;
+    padding:14px 0 35px!important;
+  }
+  body>main>aside{
+    width:100%!important;
+    max-width:none!important;
+    padding:14px!important;
+    margin-bottom:16px!important;
+  }
+  #tabs>button{
+    width:auto!important;
+    flex:0 0 auto!important;
+    font-size:13px!important;
+  }
+  .panel:not([hidden]){
+    min-height:0;
+    padding:23px!important;
+  }
+  #tab-homegallery .showcase-admin-section{
+    grid-template-columns:1fr!important;
+  }
+}
+@media(max-width:600px){
+  body>main{width:calc(100% - 20px)!important}
+  body>header{padding-inline:12px!important}
+  body>main>.content>h1{font-size:30px!important}
+  .panel:not([hidden]){padding:18px 14px!important}
+  .stats article{min-height:105px!important}
+  .entry{gap:10px!important}
+  #tab-sitephotos #learningPhotoManager,
+  #tab-gallery #mediaPlacementManager,
+  #tab-gallery .galleryGrid,
+  #tab-sitephotos .site-photo-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  button:not([data-tab]){transition:none!important}
+}

@@ -1,0 +1,158 @@
+/* Public two-tier academy header. Image assets are never rewritten:
+   original official logo + original source-derived Arabic glyph art only. */
+#app .header.academy-header-v80{
+  position:relative!important;z-index:80!important;width:100%!important;
+  margin:0!important;padding:0!important;background:#075333!important;
+  box-shadow:0 1px 0 rgba(216,181,99,.48);
+}
+#app .academy-header-v80 .academy-utility-v80{
+  display:block!important;background:#101818!important;color:#fff!important;
+  border:0!important;min-height:37px!important;
+}
+#app .academy-header-v80 .academy-utility-inner-v80{
+  box-sizing:border-box!important;display:flex!important;align-items:center!important;
+  justify-content:space-between!important;gap:12px!important;
+  width:min(1600px,calc(100% - 56px))!important;max-width:1600px!important;
+  margin:0 auto!important;padding:4px 0!important;min-height:37px!important;
+  background:transparent!important;
+}
+#app .academy-header-v80 .academy-utility-label-v80{
+  color:#d9e8df!important;font:600 10px/1.3 Inter,system-ui,sans-serif!important;
+  letter-spacing:.125em!important;
+}
+#app .academy-header-v80 .academy-portals-v80{
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  flex-wrap:wrap!important;gap:8px!important;margin-left:auto!important;
+}
+#app .academy-header-v80 .academy-portal-link-v80{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:27px!important;padding:5px 12px!important;
+  border:1px solid rgba(255,255,255,.62)!important;border-radius:4px!important;
+  background:transparent!important;color:#fff!important;text-decoration:none!important;
+  font:600 11px/1.25 Inter,system-ui,sans-serif!important;white-space:nowrap!important;
+  transition:background .15s ease!important;
+}
+#app .academy-header-v80 .academy-portal-link-v80:hover{background:#2a433a!important}
+#app .academy-header-v80 .academy-portal-link-v80:focus-visible,
+#app .academy-header-v80 a:focus-visible,
+#app .academy-header-v80 button:focus-visible{outline:2px solid #f2dca2!important;outline-offset:3px!important}
+#app .academy-header-v80 .academy-head-v80{
+  box-sizing:border-box!important;display:flex!important;align-items:center!important;
+  justify-content:space-between!important;
+  width:min(1600px,calc(100% - 56px))!important;max-width:1600px!important;
+  min-height:111px!important;height:auto!important;margin:auto!important;
+  padding:12px 0!important;gap:clamp(20px,3vw,68px)!important;background:#075333!important;
+}
+#app .academy-header-v80 .academy-identity-v80{
+  display:flex!important;align-items:center!important;gap:16px!important;min-width:0!important;
+  max-width:620px!important;flex:0 1 555px!important;color:#fff!important;
+  text-decoration:none!important;text-align:left!important;
+}
+#app .academy-header-v80 .academy-emblem-v80{
+  box-sizing:border-box!important;display:flex!important;align-items:center!important;
+  justify-content:center!important;flex:0 0 104px!important;width:104px!important;height:104px!important;
+  border-radius:5px!important;background:#fff!important;padding:5px!important;
+}
+#app .academy-header-v80 .academy-logo-v80{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center!important;max-width:none!important;
+}
+#app .academy-header-v80 .academy-heading-v80{
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+  justify-content:center!important;min-width:0!important;flex:1 1 auto!important;
+  padding-top:2px!important;gap:2px!important;
+}
+#app .academy-header-v80 .academy-calligraphy-v80{
+  display:block!important;width:min(100%,405px)!important;height:auto!important;
+  max-height:66px!important;object-fit:contain!important;object-position:left center!important;
+  background:transparent!important;mix-blend-mode:normal!important;
+}
+#app .academy-header-v80 .academy-title-v80{
+  display:block!important;margin:0!important;color:#fff!important;
+  font:700 clamp(14px,1.22vw,19px)/1.3 Georgia,"Times New Roman",serif!important;
+  letter-spacing:.035em!important;white-space:normal!important;word-break:normal!important;
+}
+#app .academy-header-v80 .academy-place-v80{
+  display:block!important;color:#edddae!important;
+  font:700 10px/1.5 Inter,system-ui,sans-serif!important;letter-spacing:.24em!important;
+}
+#app .academy-header-v80 .academy-nav-v80{
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  flex-wrap:nowrap!important;gap:0!important;min-width:0!important;
+  margin-left:auto!important;background:transparent!important;position:static!important;
+}
+#app .academy-header-v80 .academy-nav-v80>a{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:38px!important;padding:9px clamp(9px,.9vw,16px)!important;
+  border:0!important;border-left:1px solid rgba(255,255,255,.23)!important;
+  border-radius:0!important;background:transparent!important;color:#fff!important;
+  text-decoration:none!important;white-space:nowrap!important;
+  font:600 clamp(11px,.9vw,13px)/1.3 Inter,system-ui,sans-serif!important;
+  box-shadow:none!important;
+}
+#app .academy-header-v80 .academy-nav-v80>a:first-child{border-left:0!important}
+#app .academy-header-v80 .academy-nav-v80>a:hover,
+#app .academy-header-v80 .academy-nav-v80>a.active{color:#ffe4a3!important;background:rgba(255,255,255,.07)!important}
+#app .academy-header-v80 .academy-mobile-menu-v80{display:none!important}
+#app .academy-header-v80 + .academy-announcement{position:relative;z-index:1}
+@media(max-width:1220px),(hover:none) and (pointer:coarse){
+  #app .header.academy-header-v80{position:relative!important;top:auto!important}
+  #app .academy-header-v80 .academy-head-v80{
+    width:calc(100% - 28px)!important;max-width:100%!important;
+    min-height:92px!important;padding:10px 0!important;gap:12px!important;
+  }
+  #app .academy-header-v80 .academy-identity-v80{
+    flex:1 1 auto!important;max-width:calc(100% - 58px)!important;gap:10px!important;
+  }
+  #app .academy-header-v80 .academy-emblem-v80{
+    flex:0 0 75px!important;width:75px!important;height:75px!important;padding:4px!important;
+  }
+  #app .academy-header-v80 .academy-heading-v80{min-width:0!important}
+  #app .academy-header-v80 .academy-calligraphy-v80{max-height:53px!important;width:min(100%,330px)!important}
+  #app .academy-header-v80 .academy-title-v80{font-size:clamp(11px,2vw,16px)!important}
+  #app .academy-header-v80 .academy-place-v80{font-size:9px!important}
+  #app .academy-header-v80 .academy-mobile-menu-v80{
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    flex:0 0 44px!important;width:44px!important;height:43px!important;margin-left:auto!important;
+    padding:0!important;border:1px solid #e4cf96!important;border-radius:5px!important;
+    background:transparent!important;color:#fff!important;font-size:24px!important;cursor:pointer!important;
+  }
+  #app .academy-header-v80 .academy-nav-v80:not(.open){display:none!important}
+  #app .academy-header-v80 #nav.academy-nav-v80.open{
+    display:flex!important;position:absolute!important;top:100%!important;left:0!important;right:0!important;
+    flex-direction:column!important;align-items:stretch!important;gap:0!important;
+    max-height:calc(100dvh - 110px)!important;overflow:auto!important;
+    margin:0!important;padding:9px 18px 18px!important;
+    border:1px solid #e4cf96!important;border-top:0!important;border-radius:0!important;
+    background:#075333!important;box-shadow:0 16px 30px rgba(0,0,0,.2)!important;z-index:100!important;
+  }
+  #app .academy-header-v80 #nav.academy-nav-v80.open>a{
+    display:flex!important;justify-content:flex-start!important;min-height:46px!important;
+    padding:12px 9px!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.2)!important;
+    color:#fff!important;font-size:14px!important;background:transparent!important;
+  }
+}
+@media(max-width:600px){
+  #app .academy-header-v80 .academy-utility-inner-v80{
+    width:calc(100% - 24px)!important;justify-content:center!important;
+    gap:0!important;padding:6px 0!important;
+  }
+  #app .academy-header-v80 .academy-utility-label-v80{display:none!important}
+  #app .academy-header-v80 .academy-portals-v80{
+    justify-content:center!important;width:100%!important;margin:0!important;gap:8px!important;
+  }
+  #app .academy-header-v80 .academy-portal-link-v80{font-size:11px!important;padding:7px 11px!important}
+  #app .academy-header-v80 .academy-head-v80{
+    width:calc(100% - 24px)!important;min-height:78px!important;padding:8px 0!important;gap:8px!important;
+  }
+  #app .academy-header-v80 .academy-emblem-v80{
+    flex:0 0 56px!important;width:56px!important;height:59px!important;padding:3px!important;
+  }
+  #app .academy-header-v80 .academy-identity-v80{gap:7px!important;max-width:calc(100% - 46px)!important}
+  #app .academy-header-v80 .academy-calligraphy-v80{max-height:37px!important;width:min(100%,260px)!important}
+  #app .academy-header-v80 .academy-title-v80{font-size:clamp(9px,2.7vw,12px)!important;line-height:1.2!important;letter-spacing:0!important}
+  #app .academy-header-v80 .academy-place-v80{font-size:8px!important;letter-spacing:.16em!important}
+  #app .academy-header-v80 .academy-mobile-menu-v80{
+    width:39px!important;height:38px!important;flex-basis:39px!important;font-size:21px!important;
+  }
+}

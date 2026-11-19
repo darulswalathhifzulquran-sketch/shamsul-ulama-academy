@@ -1,0 +1,54 @@
+/* v94 - requested return to one featured photo + four photo cards.
+   Keep the current teal Academy Moments background and typography.
+   No carousel, no autoplay, no blur, no arrows, no gallery overlays. */
+#app main .home-gallery-section:has(#academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91)){
+  background:linear-gradient(128deg,#07545A 0%,#0F6265 58%,#0A5357 100%)!important;
+  color:#FFF!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91)) .home-gallery-heading .eyebrow{
+  color:#D5D9C7!important;-webkit-text-fill-color:#D5D9C7!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91)) .home-gallery-heading h2{
+  color:#FFF!important;-webkit-text-fill-color:#FFF!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91)) .home-gallery-heading p{
+  color:#F0FAF8!important;-webkit-text-fill-color:#F0FAF8!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91)) .home-gallery-more{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  background:#FFF!important;color:#0E4A4E!important;-webkit-text-fill-color:#0E4A4E!important;
+  border:1px solid #FFF!important;border-radius:6px!important;
+  padding:11px 18px!important;text-decoration:none!important;
+  min-height:44px!important;
+}
+#app #academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91){
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:24px!important;
+  max-width:none!important;
+}
+#app #academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91)>.home-gallery-card:first-child{
+  grid-column:1 / -1!important;
+}
+#app #academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91) .home-gallery-card{
+  position:relative!important;
+  transform:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  filter:none!important;
+}
+#app #academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91) .home-gallery-card .showcase-card-text{
+  position:static!important;
+}
+#app #academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91) img{
+  filter:none!important;
+}
+@media(max-width:690px){
+  #app #academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91){
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+  }
+  #app #academyHomeGallery.home-gallery-grid:not(.academy-carousel-v91)>.home-gallery-card:first-child{
+    grid-column:1!important;
+  }
+}

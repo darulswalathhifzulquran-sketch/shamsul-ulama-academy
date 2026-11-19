@@ -1,0 +1,299 @@
+/* SHAMSUL ULAMA | v95
+   Fixed 1+4 Academy Gallery with rotating featured photo, no solid green
+   letterboxing. Spacious editorial widths, restrained curves, mobile-safe. */
+
+/* 1. Keep one large featured photo above a 2 x 2 image grid. */
+#app main .home-gallery-section:has(#academyHomeGallery.academy-feature-rotate-v95)>.container{
+  width:min(1580px,calc(100% - 64px))!important;
+  max-width:1580px!important;
+}
+#app main .home-gallery-section:has(#academyHomeGallery.academy-feature-rotate-v95) .home-gallery-heading{
+  max-width:none!important;
+  width:100%!important;
+}
+#app #academyHomeGallery.home-gallery-grid.academy-feature-rotate-v95{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;
+  gap:clamp(15px,1.75vw,26px)!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+  isolation:auto!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card{
+  display:flex!important;
+  flex-direction:column!important;
+  position:relative!important;
+  width:100%!important;
+  height:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  filter:none!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  border-radius:22px!important;
+  background:#FFFFFF!important;
+  box-shadow:0 6px 19px rgba(0,27,27,.08)!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card-featured-v90{
+  grid-column:1 / -1!important;
+  border-radius:30px!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card:not(.home-gallery-card-featured-v90){
+  cursor:pointer!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card:not(.home-gallery-card-featured-v90):hover{
+  border-color:#E9D5A3!important;
+  box-shadow:0 13px 23px rgba(0,24,24,.13)!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card:not(.home-gallery-card-featured-v90):focus-visible{
+  outline:3px solid #EED69D!important;
+  outline-offset:3px!important;
+}
+
+/* 2. Image always covers its media box. Green was the exposed media background
+      because the child image's intrinsic height did not fill the fixed frame. */
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-media,
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card-featured-v90 .showcase-media{
+  display:block!important;
+  position:relative!important;
+  box-sizing:border-box!important;
+  flex:none!important;
+  aspect-ratio:16 / 9!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  padding:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  background:#F4F2EA!important;
+  border:0!important;
+  border-radius:0!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-media>img,
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-media>video,
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-media>iframe{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  border:0!important;
+  border-radius:0!important;
+  transform:none!important;
+  opacity:1!important;
+  filter:none!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-media>video,
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-media>iframe{
+  object-fit:contain!important;
+  background:#101714!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-card-text{
+  position:static!important;
+  display:flex!important;
+  flex:0 0 auto!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  min-height:75px!important;
+  max-height:none!important;
+  height:auto!important;
+  width:100%!important;
+  padding:16px 23px!important;
+  margin:0!important;
+  overflow:hidden!important;
+  background:#FFF!important;
+  border:0!important;
+  color:#133F3A!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card-featured-v90 .showcase-card-text{
+  min-height:82px!important;
+  padding:18px 27px!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-card-text strong{
+  font:700 clamp(16px,1.45vw,20px)/1.35 'Montserrat',Arial,sans-serif!important;
+  letter-spacing:0!important;
+  color:#133F3A!important;
+  -webkit-text-fill-color:#133F3A!important;
+  white-space:normal!important;
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-card-text p{
+  margin-top:5px!important;
+  font:400 clamp(13px,1.05vw,15px)/1.5 Inter,Arial,sans-serif!important;
+  color:#526E63!important;
+  -webkit-text-fill-color:#526E63!important;
+  white-space:normal!important;
+}
+
+/* 3. Each new selected featured image arrives with a subtle, non-AI movement. */
+@keyframes academyFeatureSwapV95{
+  from{opacity:.76;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .academy-feature-arrive-v95 .showcase-media>img{
+  animation:academyFeatureSwapV95 .55s ease-out both!important;
+}
+@media(prefers-reduced-motion:reduce){
+  #app #academyHomeGallery.academy-feature-rotate-v95 .academy-feature-arrive-v95 .showcase-media>img{
+    animation:none!important;
+  }
+}
+
+/* 4. Wider readable sections and a larger footer on desktop. */
+#app main .college-features>.container,
+#app main .college-features-hub>.container{
+  width:min(1580px,calc(100% - 70px))!important;
+  max-width:1580px!important;
+}
+#app main .college-features .college-features-grid{
+  gap:clamp(16px,1.8vw,28px)!important;
+}
+#app main .college-features .college-feature-card{
+  border-radius:24px!important;
+  overflow:hidden!important;
+}
+#app main .college-features{
+  border-radius:36px 36px 0 0!important;
+}
+#app .academy-footer{
+  border-radius:48px 48px 0 0!important;
+}
+#app .academy-footer>.container{
+  width:min(1620px,calc(100% - 76px))!important;
+  max-width:1620px!important;
+}
+#app .academy-footer-grid{
+  gap:clamp(28px,3vw,55px)!important;
+}
+#app .academy-footer .academy-footer-map-frame{
+  height:clamp(200px,15vw,260px)!important;
+  min-height:200px!important;
+  border-radius:20px!important;
+}
+#app .academy-footer h3{
+  font-size:clamp(21px,1.5vw,26px)!important;
+}
+#app .academy-footer .academy-footer-links a,
+#app .academy-footer .academy-footer-contact p,
+#app .academy-footer .academy-footer-contact a{
+  font-size:clamp(15px,1.04vw,17px)!important;
+}
+#app .academy-footer .academy-footer-bottom{
+  font-size:14px!important;
+}
+#app main .scholar-section-home{
+  border-radius:36px 36px 0 0!important;
+  overflow:hidden!important;
+}
+#app main .academy-home-intro .photo-frame,
+#app main .academy-home-intro .hero-copy,
+#app main .academy-learning-home .academy-learning-card{
+  border-radius:25px!important;
+}
+#app main .academy-learning-home{
+  border-radius:42px 42px 0 0!important;
+}
+#app main .about-grid figure:not([hidden]),
+#app main .about-grid img:not([hidden]){
+  border-radius:22px!important;
+}
+#app main .gallery figure,
+#app main .gallery article,
+#app main .contact-card,
+#app main .admission-wrapper .card{
+  border-radius:20px!important;
+}
+
+/* 5. Phone: 1 big feature, four small cards in two columns, not five long cards. */
+@media(max-width:900px){
+  #app .academy-footer-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:36px 24px!important;
+  }
+  #app .academy-footer>.container{
+    width:calc(100% - 40px)!important;
+  }
+  #app main .college-features>.container{
+    width:calc(100% - 34px)!important;
+  }
+}
+@media(max-width:690px){
+  #app main .home-gallery-section:has(#academyHomeGallery.academy-feature-rotate-v95)>.container{
+    width:calc(100% - 24px)!important;
+  }
+  #app #academyHomeGallery.home-gallery-grid.academy-feature-rotate-v95{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:11px!important;
+  }
+  /* Override older v94 :first-child mobile rule: featured must span BOTH tracks. */
+  #app #academyHomeGallery.home-gallery-grid.academy-feature-rotate-v95 > .home-gallery-card.home-gallery-card-featured-v90:first-child{
+    grid-column:1 / -1!important;
+    width:100%!important;
+    border-radius:21px!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card:not(.home-gallery-card-featured-v90){
+    grid-column:auto!important;
+    border-radius:14px!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-card-text{
+    min-height:57px!important;
+    padding:11px 10px!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card-featured-v90 .showcase-card-text{
+    min-height:67px!important;
+    padding:13px 16px!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-card-text strong{
+    font-size:clamp(11px,2.9vw,14px)!important;
+    line-height:1.32!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card-featured-v90 .showcase-card-text strong{
+    font-size:17px!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-card-text p{
+    display:none!important;
+  }
+  #app main .college-features>.container{
+    width:calc(100% - 26px)!important;
+  }
+  #app main .college-features .college-feature-card{
+    border-radius:18px!important;
+  }
+  #app .academy-footer{
+    border-radius:30px 30px 0 0!important;
+  }
+  #app .academy-footer>.container{
+    width:calc(100% - 32px)!important;
+  }
+  #app .academy-footer-grid{
+    grid-template-columns:1fr!important;
+    gap:32px!important;
+  }
+  #app .academy-footer .academy-footer-map-frame{
+    height:210px!important;
+    min-height:210px!important;
+  }
+  #app main .scholar-section-home{
+    border-radius:24px 24px 0 0!important;
+  }
+  #app main .academy-learning-home{
+    border-radius:25px 25px 0 0!important;
+  }
+}

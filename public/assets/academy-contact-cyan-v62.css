@@ -1,0 +1,235 @@
+/* Academy Contact — cyan, white and Academy green | curated editorial v62.
+ * True #00FFFF is a strong accent, not a large saturated field.
+ * All styles are scoped to /contact. No changes to Gallery, Learning, dashboards or admissions.
+ */
+#app .academy-contact-page{
+  --contact-cyan:#00FFFF;
+  --contact-green:#075333;
+  --contact-ink:#173E38;
+  --contact-soft:#E9FCFA;
+  --contact-border:#B6E6DF;
+  background:#FFFFFF!important;
+  color:var(--contact-ink);
+  overflow:clip;
+}
+#app .academy-contact-page>.contact-section{
+  position:relative;
+  background:#FFFFFF!important;
+  border:0!important;
+  padding:clamp(68px,7vw,112px) 0 clamp(65px,6.5vw,105px)!important;
+}
+#app .academy-contact-page>.contact-section::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;height:7px;
+  background:#00FFFF;
+}
+#app .academy-contact-page .contact-section>.container,
+#app .academy-contact-page .academy-contact-visit>.container{
+  width:min(1400px,calc(100% - 72px))!important;
+  max-width:1400px!important;
+}
+#app .academy-contact-page .contact-section .eyebrow,
+#app .academy-contact-page .academy-contact-visit .eyebrow{
+  display:inline-block;
+  font:750 11px/1.4 Inter,Arial,sans-serif!important;
+  letter-spacing:.16em!important;
+  color:#075333!important;
+  margin-bottom:18px!important;
+}
+#app .academy-contact-page .contact-section h2,
+#app .academy-contact-page .academy-contact-visit h2{
+  font-family:'Libre Baskerville',Georgia,serif!important;
+  font-size:clamp(33px,3.4vw,53px)!important;
+  font-weight:400!important;
+  letter-spacing:-.035em!important;
+  line-height:1.22!important;
+  color:#075333!important;
+  margin:0 0 16px!important;
+}
+#app .academy-contact-page .contact-section .section-lead{
+  font:400 clamp(15px,1.25vw,17px)/1.7 Inter,Arial,sans-serif!important;
+  max-width:590px;color:#4B6E62!important;margin:0 0 35px!important;
+}
+#app .academy-contact-page .contact-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:clamp(15px,1.8vw,25px)!important;
+  align-items:stretch!important;
+}
+#app .academy-contact-page .contact-card{
+  min-height:250px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  border:1px solid var(--contact-border)!important;
+  border-radius:12px!important;
+  background:#FFFFFF!important;
+  padding:clamp(22px,2vw,30px)!important;
+  box-shadow:0 10px 32px rgba(6,75,56,.045)!important;
+  transition:border-color .24s ease,translate .24s ease,box-shadow .24s ease!important;
+}
+#app .academy-contact-page .contact-card .circle{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  flex:0 0 64px!important;
+  width:64px!important;height:64px!important;
+  border-radius:14px!important;
+  background:#00FFFF!important;
+  color:#075333!important;
+  border:1px solid #00D7D7!important;
+  margin:0 0 20px!important;
+  font-size:inherit!important;
+  transition:background-color .25s ease,color .25s ease!important;
+}
+#app .academy-contact-page .contact-card .circle svg{
+  width:30px!important;height:30px!important;
+  flex:none!important;stroke:currentColor!important;
+}
+#app .academy-contact-page .contact-card h3{
+  font:500 clamp(18px,1.55vw,22px)/1.34 'Libre Baskerville',Georgia,serif!important;
+  color:#075333!important;margin:0 0 10px!important;
+}
+#app .academy-contact-page .contact-card p{
+  font:400 14px/1.6 Inter,Arial,sans-serif!important;
+  color:#547166!important;margin:0 0 12px!important;
+}
+#app .academy-contact-page .contact-card .contact-card-detail{
+  color:#075333!important;
+  font:650 clamp(14px,1.18vw,16px)/1.65 Inter,Arial,sans-serif!important;
+  overflow-wrap:anywhere!important;
+  margin:0 0 12px!important;
+}
+#app .academy-contact-page .contact-card .phone-pair{
+  display:flex!important;flex-direction:column!important;gap:4px!important;
+}
+#app .academy-contact-page .contact-card .phone-pair br,
+#app .academy-contact-page .contact-number-divider{display:none!important}
+#app .academy-contact-page .contact-card .phone-pair a{
+  font:650 clamp(14px,1.18vw,16px)/1.55 Inter,Arial,sans-serif!important;
+  color:#075333!important;
+  text-decoration:none!important;
+}
+#app .academy-contact-page .contact-card .phone-pair a:hover{text-decoration:underline!important;text-underline-offset:4px}
+#app .academy-contact-page .contact-card .contact-card-action{
+  margin-top:auto!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  width:fit-content!important;
+  padding:5px 0!important;
+  border-bottom:1px solid #075333!important;
+  color:#075333!important;
+  font:700 13px/1.5 Inter,Arial,sans-serif!important;
+  text-decoration:none!important;
+}
+#app .academy-contact-page .contact-card .contact-card-action:hover{border-color:#118A80!important;color:#118A80!important}
+@media(hover:hover){
+  #app .academy-contact-page .contact-card:hover{
+    translate:0 -4px!important;
+    border-color:#00CFCF!important;
+    box-shadow:0 17px 36px rgba(6,75,56,.10)!important;
+  }
+  #app .academy-contact-page .contact-card:hover .circle{
+    background:#075333!important;color:#00FFFF!important;border-color:#075333!important;
+  }
+}
+/* The visit section is subtly cool, leaving white cards and map as focal points. */
+#app .academy-contact-page .academy-contact-visit{
+  padding:clamp(58px,6vw,89px) 0 clamp(74px,7vw,105px)!important;
+  background:#ECFBF9!important;
+  border-top:1px solid #D6EEEA!important;
+}
+#app .academy-contact-page .academy-contact-visit-head{
+  margin-bottom:27px!important;
+}
+#app .academy-contact-page .academy-contact-visit-head h2{
+  margin-bottom:14px!important;
+}
+#app .academy-contact-page .academy-contact-visit-head p{
+  font:450 16px/1.6 Inter,Arial,sans-serif!important;
+  color:#52766B!important;margin:0!important;
+}
+#app .academy-contact-page .academy-contact-map-card{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.55fr) minmax(280px,.8fr)!important;
+  gap:0!important;
+  min-height:340px!important;
+  background:#FFFFFF!important;
+  border:1px solid #AEE4DC!important;
+  border-radius:13px!important;
+  overflow:hidden!important;
+  box-shadow:0 14px 35px rgba(4,63,51,.09)!important;
+}
+#app .academy-contact-page .academy-contact-map-window{
+  display:block!important;min-width:0!important;min-height:340px!important;
+}
+#app .academy-contact-page #academyMap{
+  width:100%!important;
+  height:100%!important;
+  min-height:340px!important;
+  display:block!important;
+}
+#app .academy-contact-page #academyMap iframe{
+  width:100%!important;
+  height:100%!important;
+  min-height:340px!important;
+  border:0!important;
+  display:block!important;
+}
+#app .academy-contact-page .academy-contact-map-aside{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  padding:clamp(26px,3vw,46px)!important;
+  background:#FFFFFF!important;
+  border-left:1px solid #D9EFEB!important;
+}
+#app .academy-contact-page .academy-contact-map-label{
+  color:#358778!important;
+  font:800 11px/1.5 Inter,Arial,sans-serif!important;
+  letter-spacing:.17em!important;
+  margin-bottom:17px!important;
+}
+#app .academy-contact-page .academy-contact-map-aside h3{
+  font:400 clamp(24px,2.2vw,31px)/1.22 'Libre Baskerville',Georgia,serif!important;
+  color:#075333!important;margin:0 0 14px!important;
+}
+#app .academy-contact-page .academy-contact-map-aside p{
+  font:400 15px/1.75 Inter,Arial,sans-serif!important;
+  color:#527165!important;
+}
+#app .academy-contact-page .academy-contact-directions{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:12px!important;
+  background:#075333!important;color:#FFFFFF!important;
+  padding:13px 18px!important;border-radius:8px!important;
+  font:700 13px/1.4 Inter,Arial,sans-serif!important;
+  margin-top:15px!important;
+  text-decoration:none!important;
+  transition:background-color .2s ease!important;
+}
+#app .academy-contact-page .academy-contact-directions:hover{
+  background:#004A3B!important;
+}
+@media(max-width:1050px){
+ #app .academy-contact-page .contact-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #app .academy-contact-page .contact-card{min-height:220px!important}
+}
+@media(max-width:760px){
+ #app .academy-contact-page .contact-section>.container,
+ #app .academy-contact-page .academy-contact-visit>.container{
+   width:calc(100% - 36px)!important;
+ }
+ #app .academy-contact-page .academy-contact-map-card{grid-template-columns:1fr!important}
+ #app .academy-contact-page .academy-contact-map-aside{border-left:0!important;border-top:1px solid #D9EFEB!important;padding:25px!important}
+ #app .academy-contact-page .academy-contact-map-window,
+ #app .academy-contact-page #academyMap,
+ #app .academy-contact-page #academyMap iframe{min-height:280px!important}
+}
+@media(max-width:520px){
+ #app .academy-contact-page .contact-grid{grid-template-columns:1fr!important}
+ #app .academy-contact-page .contact-card{min-height:0!important;padding:23px!important}
+ #app .academy-contact-page .contact-section{padding:55px 0!important}
+ #app .academy-contact-page .academy-contact-visit{padding:54px 0 70px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #app .academy-contact-page .contact-card,#app .academy-contact-page .contact-card .circle{transition:none!important;translate:none!important}
+}

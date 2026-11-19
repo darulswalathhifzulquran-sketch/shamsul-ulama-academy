@@ -1,0 +1,168 @@
+/* Usthad Control Centre — spacious independent-scroll menu v73.
+ * Preserve all existing data, role permissions, login, 12 tab click handlers.
+ * Academy Green/White/Teal lead. Red only for danger/error; Black for legibility.
+ */
+@media(min-width:901px){
+  body>main{
+    grid-template-columns:clamp(290px,21.5vw,360px) minmax(0,1fr)!important;
+    gap:clamp(22px,2vw,36px)!important;
+    align-items:start!important;
+  }
+  body>main>aside{
+    position:sticky!important;
+    top:104px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    width:100%!important;
+    height:calc(100dvh - 122px)!important;
+    max-height:calc(100dvh - 122px)!important;
+    min-height:360px!important;
+    padding:25px 18px 16px!important;
+    overflow:hidden!important;
+    border-radius:20px!important;
+  }
+  body>main>aside .eyebrow{
+    flex:none!important;
+    padding:0 11px!important;
+    margin:0 0 16px!important;
+    font-size:13px!important;
+    line-height:1.5!important;
+  }
+  body>main>aside #tabs{
+    flex:1 1 auto!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    min-height:0!important;
+    max-height:none!important;
+    width:100%!important;
+    margin:0!important;
+    padding:1px 9px 13px 0!important;
+    gap:7px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    overscroll-behavior-y:contain;
+    scrollbar-width:auto;
+    scrollbar-color:#0B7778 rgba(11,119,120,.09);
+  }
+  body>main>aside #tabs::-webkit-scrollbar{
+    width:9px!important;
+  }
+  body>main>aside #tabs::-webkit-scrollbar-track{
+    background:rgba(11,119,120,.08);
+    border-radius:10px;
+  }
+  body>main>aside #tabs::-webkit-scrollbar-thumb{
+    background:#0B7778;
+    border-radius:10px;
+    border:2px solid rgba(255,255,255,.92);
+  }
+  body>main>aside #tabs>button{
+    flex:0 0 auto!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:55px!important;
+    padding:15px 14px!important;
+    font-size:15px!important;
+    font-weight:750!important;
+    line-height:1.4!important;
+    letter-spacing:0!important;
+    border-radius:11px!important;
+    white-space:normal!important;
+    overflow-wrap:normal!important;
+    text-align:left!important;
+  }
+  body>main>aside #tabs>button::before{
+    flex:0 0 6px!important;
+    width:6px!important;
+    height:6px!important;
+  }
+  body>main>aside .hint{
+    flex:0 0 auto!important;
+    margin:11px 0 0!important;
+    padding:13px 10px 0!important;
+    font-size:12px!important;
+    line-height:1.55!important;
+    max-height:100px!important;
+    overflow-y:auto!important;
+  }
+}
+/* Tablet: stack a clear scrollable tab strip above the data workspace. */
+@media(min-width:601px) and (max-width:900px){
+  body>main>aside{
+    position:relative!important;
+    display:block!important;
+    top:auto!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding:16px!important;
+  }
+  body>main>aside #tabs{
+    display:flex!important;
+    flex-direction:row!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    overscroll-behavior-x:contain;
+    touch-action:pan-x;
+    gap:9px!important;
+    padding:7px 3px 12px!important;
+    scroll-padding-inline:14px;
+  }
+  body>main>aside #tabs>button{
+    width:auto!important;
+    min-width:max-content!important;
+    min-height:50px!important;
+    flex:0 0 auto!important;
+    font-size:14px!important;
+    padding:12px 17px!important;
+  }
+}
+@media(max-width:600px){
+  body>main>aside{
+    top:auto!important;
+    position:relative!important;
+    display:block!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding:15px 12px!important;
+  }
+  body>main>aside .eyebrow{
+    font-size:12px!important;
+    margin:0 0 8px!important;
+    padding:0 5px!important;
+  }
+  body>main>aside #tabs{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    touch-action:pan-x;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    gap:8px!important;
+    padding:6px 4px 13px!important;
+    scroll-padding-inline:12px;
+    scrollbar-width:thin;
+    scrollbar-color:#0B7778 rgba(11,119,120,.10);
+  }
+  body>main>aside #tabs>button{
+    flex:0 0 auto!important;
+    width:auto!important;
+    min-width:max-content!important;
+    min-height:49px!important;
+    white-space:nowrap!important;
+    padding:12px 17px!important;
+    font-size:13.5px!important;
+  }
+}
+/* Ensure both dark green and alert-coloured buttons remain legible on a glass
+   surface. No changes to the underlying click actions. */
+body>main>aside #tabs>button:focus-visible{
+  outline:3px solid #0B7778!important;
+  outline-offset:2px!important;
+}

@@ -1,0 +1,92 @@
+/* School–Tuition–Hifz editorial refresh and footer legibility. No patterns. */
+#app .academy-learning-home{padding:clamp(70px,7vw,110px) 0}
+#app .academy-learning-home>.container,
+#app .academy-learning-hub>.container{width:min(1260px,calc(100% - 48px))}
+#app .academy-learning-heading{margin-bottom:34px}
+#app .academy-learning-heading h2{max-width:790px;font-size:clamp(36px,3.5vw,54px)!important;line-height:1.12!important}
+#app .academy-learning-heading p{max-width:740px;font-size:16px!important;line-height:1.75!important;color:#506a5b!important}
+#app .academy-learning-home-grid{gap:24px}
+#app .academy-learning-card{
+  display:flex!important;flex-direction:column;min-width:0;color:inherit!important;
+  border:1px solid #d8e5df!important;border-radius:16px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(16,60,41,.07)!important;
+  text-decoration:none!important;transition:transform .23s ease,box-shadow .23s ease
+}
+#app .academy-learning-card[hidden]{display:none!important}
+#app .academy-learning-card:hover{transform:translateY(-4px);box-shadow:0 20px 42px rgba(16,60,41,.14)!important}
+#app .academy-learning-card:focus-visible{outline:3px solid #397f8f;outline-offset:4px}
+#app .academy-learning-visual{height:230px!important;min-height:230px!important}
+#app .academy-learning-real-photo{display:block!important;position:absolute;inset:0;background:#e9efea;overflow:hidden}
+#app .academy-learning-real-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 44%;transition:transform .55s ease}
+#app .academy-learning-card:hover .academy-learning-real-photo img{transform:scale(1.035)}
+#app .academy-learning-real-photo::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(5,29,30,.58));pointer-events:none}
+#app .academy-learning-image-tag,
+#app .academy-learning-image-credit{position:absolute;z-index:3;color:#fff;font:650 11px/1.4 Inter,system-ui,sans-serif;text-shadow:0 1px 6px rgba(0,0,0,.32);letter-spacing:.02em}
+#app .academy-learning-image-tag{left:17px;bottom:14px}
+#app .academy-learning-image-credit{right:15px;bottom:15px;font-size:10px;text-align:right;max-width:62%;opacity:.88}
+#app .academy-learning-card-body{padding:26px 26px 25px!important;min-height:265px}
+#app .academy-learning-overline{font-size:11px!important;letter-spacing:.13em}
+#app .academy-learning-card h3{font-size:clamp(25px,2.15vw,30px)!important;line-height:1.18!important;margin:10px 0 14px!important}
+#app .academy-learning-card-body>p{font-size:15px!important;line-height:1.75!important;color:#52685a!important;margin-bottom:23px!important}
+#app .academy-learning-card-footer{padding-top:18px!important;margin-top:auto}
+#app .academy-learning-card-footer>span:first-child{font-size:12px!important}
+#app .academy-learning-card-open{
+  display:inline-flex;align-items:center;gap:7px;background:#075333;color:#fff;
+  padding:11px 16px;border-radius:8px;font:750 13px/1.3 Inter,system-ui,sans-serif
+}
+#app .academy-learning-essay-section{margin-bottom:37px}
+#app .academy-learning-essay-section p{font-size:16.5px!important;line-height:1.9!important;color:#405d4c!important}
+#app .academy-learning-essay-section h2{font-size:clamp(29px,2.8vw,37px)!important}
+#app .academy-learning-essay-body>.academy-learning-visual{height:330px!important}
+#app .academy-learning-photo-attribution{font:500 12px/1.6 Inter,system-ui,sans-serif;color:#60776b;margin:-24px 0 34px}
+#app .academy-learning-photo-attribution a{color:#075333;text-decoration:underline;text-underline-offset:3px}
+#app .academy-learning-related>a>strong{font-size:22px!important}
+#app .academy-learning-related>a>span{font-size:13px!important}
+/* Use the full footer width; preserve the Academy's solid green identity. */
+#app .academy-footer{padding-top:66px!important}
+#app .academy-footer>.container{width:min(1420px,calc(100% - 62px))!important;max-width:1420px!important}
+@media(min-width:1071px){
+  #app .academy-footer-grid{grid-template-columns:minmax(0,1.38fr) minmax(0,.87fr) minmax(0,1.12fr) minmax(0,1.28fr)!important;gap:clamp(26px,3vw,50px)!important}
+}
+#app .academy-footer h3{font-size:25px!important;line-height:1.22!important;margin-bottom:20px!important}
+#app .academy-footer .brand{gap:15px!important;margin-bottom:23px!important}
+#app .academy-footer .brand-logo-wrap{width:76px!important;height:80px!important;flex-basis:76px!important}
+#app .academy-footer .brand-logo{width:100%!important;height:100%!important;object-fit:contain}
+#app .academy-footer .brand b{font-size:19px!important;line-height:1.12!important;letter-spacing:.035em!important}
+#app .academy-footer .brand small{font-size:11.5px!important;letter-spacing:.11em!important}
+#app .academy-footer-about>p,
+#app .academy-footer .academy-footer-about>p{font-size:14.5px!important;line-height:1.85!important;color:#e9f4ec!important;max-width:375px}
+#app .academy-footer-links .footer-links{gap:11px!important}
+#app .academy-footer-links a{font-size:14px!important;line-height:1.6!important}
+#app .academy-footer-contact p,#app .academy-footer-contact a,
+#app .academy-footer-affiliation>a{font-size:14px!important;line-height:1.7!important}
+#app .academy-footer-affiliation>small{font-size:12.5px!important;line-height:1.65!important}
+#app .academy-footer-affiliation>span,#app .academy-footer-contact-label{font-size:11px!important;letter-spacing:.10em!important}
+#app .academy-footer-contact p{margin-bottom:17px!important}
+#app .academy-footer-map-frame{min-height:215px!important;border-radius:14px!important;border:1px solid #a7caba!important;box-shadow:0 10px 24px rgba(0,0,0,.12)}
+#app .academy-footer-map-link{font-size:13.5px!important;margin-top:15px!important;line-height:1.55!important}
+#app .academy-footer-bottom{margin-top:52px!important;font-size:12.5px!important;padding:23px 0 27px!important}
+@media(max-width:1070px){
+  #app .academy-footer>.container{width:calc(100% - 42px)!important}
+  #app .academy-footer-grid{gap:36px!important}
+}
+@media(min-width:691px) and (max-width:1020px){
+  #app .academy-learning-home-grid .academy-learning-card:last-child{display:flex!important;grid-column:1/-1}
+  #app .academy-learning-home-grid .academy-learning-card:last-child .academy-learning-visual{height:255px!important}
+}
+@media(max-width:690px){
+  #app .academy-learning-home>.container,#app .academy-learning-hub>.container{width:calc(100% - 34px)!important}
+  #app .academy-learning-home-grid{grid-template-columns:1fr!important}
+  #app .academy-learning-card-body{min-height:0!important;padding:23px!important}
+  #app .academy-learning-visual{height:210px!important;min-height:210px!important}
+  #app .academy-learning-essay-body>.academy-learning-visual{height:235px!important}
+  #app .academy-learning-essay-section p{font-size:15.5px!important}
+  #app .academy-footer{padding-top:45px!important}
+  #app .academy-footer>.container{width:calc(100% - 32px)!important}
+  #app .academy-footer .brand b{font-size:18px!important}
+  #app .academy-footer-map-frame{min-height:190px!important}
+  #app .academy-footer-bottom{font-size:12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #app .academy-learning-card,#app .academy-learning-real-photo img{transition:none!important}
+}

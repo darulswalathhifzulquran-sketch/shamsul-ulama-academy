@@ -1,0 +1,382 @@
+/* v98 - ONE CONTINUOUS HERITAGE EDITORIAL COMPOSITION.
+   User requested: move the authentic portrait toward LEFT, avoid centered
+   narrow portrait and all stacked 4-quadrant colour boxes, eliminate logo
+   tile beneath scholar; preserve real photo, heading, dates, reveal & link. */
+
+/* Wide art-directed portrait / biography, instead of a small middle card. */
+#app main .scholar-section.scholar-section-home.scholar-editorial-v97{
+  padding:clamp(42px,5.3vw,79px) 0 clamp(30px,3.6vw,55px)!important;
+  background:#F7F3E9!important;
+  border-bottom:0!important;
+  overflow:hidden!important;
+  border-radius:0!important;
+}
+#app main .scholar-section.scholar-section-home.scholar-editorial-v97>.container{
+  width:min(1450px,calc(100% - 104px))!important;
+  max-width:1450px!important;
+  padding:0!important;
+  margin:0 auto!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-spotlight.scholar-editorial-layout-v97{
+  display:grid!important;
+  grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr)!important;
+  align-items:center!important;
+  gap:clamp(48px,7.4vw,116px)!important;
+  padding:0!important;
+  min-height:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-visual{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  padding:0!important;
+  margin:0!important;
+  min-height:0!important;
+  height:auto!important;
+  text-align:left!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97{
+  width:min(100%,455px)!important;
+  max-width:455px!important;
+  margin:0!important;
+  aspect-ratio:366 / 546!important;
+  border-radius:47% 47% 10px 10px / 28% 28% 10px 10px!important;
+  border:1px solid #D9C7A3!important;
+  box-shadow:0 20px 42px rgba(54,45,32,.13),0 0 0 7px rgba(187,159,105,.06)!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97 img{
+  object-fit:cover!important;
+  object-position:center center!important;
+  border-radius:inherit!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-visual::before{
+  left:16px!important;
+  top:19px!important;
+  width:min(89%,456px)!important;
+  height:calc(100% - 64px)!important;
+  border-radius:47% 47% 10px 10px / 28% 28% 10px 10px!important;
+  border-color:#B89E69!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-label{
+  width:min(100%,455px)!important;
+  max-width:455px!important;
+  text-align:left!important;
+  margin:0!important;
+  padding:16px 2px 0!important;
+  font-size:10px!important;
+  letter-spacing:.18em!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-copy{
+  max-width:700px!important;
+  padding:0!important;
+  margin:0!important;
+  align-items:flex-start!important;
+  background:transparent!important;
+  color:#243A35!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-copy h2{
+  margin:3px 0 18px!important;
+  max-width:700px!important;
+  font:700 clamp(32px,3.1vw,50px)/1.25 'Libre Baskerville',Georgia,serif!important;
+  letter-spacing:-.037em!important;
+  color:#1F3B36!important;
+  text-wrap:balance!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-dates-v97{
+  font-size:17px!important;
+  letter-spacing:.11em!important;
+  margin-bottom:12px!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-descriptor{
+  font-size:clamp(16px,1.2vw,18px)!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-excerpt{
+  max-width:620px!important;
+  font-size:clamp(16px,1.12vw,18px)!important;
+  line-height:1.85!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-more-v97{
+  min-width:155px!important;
+  min-height:51px!important;
+  background:#263C39!important;
+  color:#FFFFFF!important;
+  border:1px solid #A98E5D!important;
+  border-radius:8px!important;
+  font-size:16px!important;
+}
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-curve-v97{
+  left:33%!important;
+  top:43%!important;
+  width:30%!important;
+  height:150px!important;
+  border-top:1.5px solid #BEA36A!important;
+  opacity:.48!important;
+  z-index:1!important;
+  transform:rotate(-9deg)!important;
+  pointer-events:none!important;
+}
+/* The curve line never crosses headings; text has the solid cream base. */
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-copy::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  inset:-8px -3px!important;
+  background:#F7F3E9!important;
+  border:0!important;
+  border-radius:0!important;
+  pointer-events:none!important;
+}
+
+/* Continuation: same paper/background. No green and teal quadrants, no
+   unnecessary second Academy-logo image, no empty photo/waiting box. */
+#app main .academy-home-intro.academy-heritage-continuation-v98{
+  position:relative!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:clamp(26px,3.6vw,55px) 0 clamp(58px,6.1vw,88px)!important;
+  background:#F7F3E9!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:#263C39!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98::before,
+#app main .academy-home-intro.academy-heritage-continuation-v98::after{
+  display:none!important;
+  content:none!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98>.hero-grid{
+  display:block!important;
+  box-sizing:border-box!important;
+  width:min(1450px,calc(100% - 104px))!important;
+  max-width:1450px!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:0!important;
+  margin:0 auto!important;
+  background:transparent!important;
+  grid-template-columns:none!important;
+  gap:0!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .hero-copy{
+  position:relative!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:clamp(26px,3.1vw,45px) 0 0!important;
+  background:transparent!important;
+  background-image:none!important;
+  color:#263C39!important;
+  border:0!important;
+  border-top:1px solid #D5C5A7!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .hero-copy::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:0!important;
+  top:-2px!important;
+  width:120px!important;
+  height:3px!important;
+  background:#B3965D!important;
+  border-radius:3px!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .hero-copy>.eyebrow{
+  display:block!important;
+  font:750 12px/1.5 Inter,Arial,sans-serif!important;
+  color:#8B7041!important;
+  letter-spacing:.16em!important;
+  margin:0 0 19px!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-layout-v98{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;
+  gap:clamp(44px,7vw,118px)!important;
+  align-items:center!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .purpose-heading{
+  display:block!important;
+  max-width:720px!important;
+  margin:0!important;
+  color:#213B37!important;
+  font:750 clamp(36px,3.6vw,59px)/1.16 Montserrat,Arial,sans-serif!important;
+  letter-spacing:-.05em!important;
+  text-wrap:balance!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .purpose-heading em{
+  font:inherit!important;
+  color:#997B43!important;
+  font-style:normal!important;
+  -webkit-text-fill-color:#997B43!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-side-v98{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  gap:0!important;
+  max-width:580px!important;
+  padding:0!important;
+  background:transparent!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-side-v98>p{
+  margin:0 0 20px!important;
+  color:#475A51!important;
+  font:400 clamp(15px,1.15vw,18px)/1.8 Inter,Arial,sans-serif!important;
+  max-width:550px!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .actions{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  margin:0 0 15px!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .actions .pill{
+  display:inline-flex!important;
+  min-height:47px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:12px 21px!important;
+  border-radius:8px!important;
+  font:700 14px/1.4 Inter,Arial,sans-serif!important;
+  text-decoration:none!important;
+  white-space:normal!important;
+  background:#263C39!important;
+  color:#FFF!important;
+  border:1px solid #263C39!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .actions .pill.ghost{
+  background:transparent!important;
+  color:#263C39!important;
+  border-color:#B29865!important;
+}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-side-v98>.location-line{
+  font:550 13px/1.5 Inter,Arial,sans-serif!important;
+  letter-spacing:.02em!important;
+  color:#866B42!important;
+  margin:0!important;
+}
+/* Hide any optional legacy elements inadvertently emitted by older layouts. */
+#app main .academy-home-intro.academy-heritage-continuation-v98 .photo-frame,
+#app main .academy-home-intro.academy-heritage-continuation-v98 .v17-awaiting-photo{
+  display:none!important;
+}
+
+@media(max-width:900px){
+ #app main .scholar-section.scholar-section-home.scholar-editorial-v97>.container,
+ #app main .academy-home-intro.academy-heritage-continuation-v98>.hero-grid{
+   width:calc(100% - 56px)!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-spotlight.scholar-editorial-layout-v97{
+   gap:clamp(20px,4vw,55px)!important;
+   grid-template-columns:minmax(0,.93fr) minmax(0,1.07fr)!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97{
+   width:min(100%,375px)!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-copy h2{
+   font-size:clamp(26px,3.65vw,36px)!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-layout-v98{
+   gap:35px!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .purpose-heading{
+   font-size:clamp(30px,4vw,40px)!important;
+ }
+}
+@media(max-width:690px){
+ #app main .scholar-section.scholar-section-home.scholar-editorial-v97{
+   padding:30px 0 27px!important;
+ }
+ #app main .scholar-section.scholar-section-home.scholar-editorial-v97>.container,
+ #app main .academy-home-intro.academy-heritage-continuation-v98>.hero-grid{
+   width:calc(100% - 36px)!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-spotlight.scholar-editorial-layout-v97{
+   grid-template-columns:minmax(0,1fr)!important;
+   gap:28px!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-visual{
+   align-items:flex-start!important;
+   padding:0 0 0 5px!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97{
+   width:min(86%,318px)!important;
+   margin:0!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-visual::before{
+   width:min(80%,315px)!important;
+   left:17px!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-label{
+   max-width:318px!important;
+   text-align:left!important;
+   margin:0!important;
+   padding:12px 0 0!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-copy{
+   padding:0 0 0 5px!important;
+   margin:0!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-copy h2{
+   font-size:clamp(26px,7.15vw,35px)!important;
+   margin-bottom:13px!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-excerpt{
+   font-size:15px!important;
+   margin-bottom:20px!important;
+ }
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-curve-v97{
+   display:none!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98{
+   padding:22px 0 50px!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .hero-copy{
+   padding-top:28px!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .hero-copy>.eyebrow{
+   font-size:10px!important;
+   margin-bottom:14px!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-layout-v98{
+   grid-template-columns:minmax(0,1fr)!important;
+   gap:18px!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .purpose-heading{
+   font-size:clamp(31px,8.4vw,41px)!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-side-v98>p{
+   font-size:15px!important;
+   margin-bottom:17px!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .actions{
+   gap:9px!important;
+ }
+ #app main .academy-home-intro.academy-heritage-continuation-v98 .actions .pill{
+   padding:12px 14px!important;
+   font-size:13px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #app main .scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97 img{
+   animation:none!important;
+ }
+}

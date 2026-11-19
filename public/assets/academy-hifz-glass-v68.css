@@ -1,0 +1,217 @@
+/* Shamsul Ulama Academy / Hifz Journey signature glass pavilion — v68
+ * A single restrained architectural glass surface, not a collection of floating cards.
+ * Existing illustration, copy, secure sign-in and About link are unchanged.
+ */
+#app .learning-home{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:linear-gradient(128deg,#163648 0%,#264A58 57%,#285B61 100%)!important;
+  background-color:#163648!important;
+  border:0!important;
+  padding:clamp(56px,6vw,96px) 0!important;
+  color:#FFFFFF!important;
+}
+#app .learning-home::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:min(70vw,950px);
+  height:min(70vw,950px);
+  border-radius:50%;
+  top:-64%;right:-15%;
+  background:radial-gradient(circle,rgba(183,228,223,.23) 0%,rgba(183,228,223,.07) 35%,transparent 70%)!important;
+  pointer-events:none;
+}
+#app .learning-home::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:-18%;bottom:-155px;
+  width:min(60vw,700px);height:430px;
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(240,236,226,.10),transparent 72%);
+  pointer-events:none;
+}
+#app .learning-home>.container.learning-home-grid{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.22fr) minmax(270px,.78fr)!important;
+  align-items:center!important;
+  gap:clamp(28px,4vw,65px)!important;
+  width:min(1260px,calc(100% - 64px))!important;
+  max-width:1260px!important;
+  min-height:430px!important;
+  padding:clamp(30px,4.4vw,69px)!important;
+  background:linear-gradient(112deg,rgba(248,255,254,.16),rgba(248,255,254,.07))!important;
+  border:1px solid rgba(251,255,255,.36)!important;
+  border-radius:27px!important;
+  box-shadow:0 32px 70px rgba(5,22,35,.25),inset 0 1px rgba(255,255,255,.26)!important;
+  backdrop-filter:blur(20px) saturate(115%);
+  -webkit-backdrop-filter:blur(20px) saturate(115%);
+}
+#app .learning-home>.container.learning-home-grid::before{
+  content:"";
+  position:absolute;
+  top:20px;left:22px;right:22px;
+  height:1px;
+  background:linear-gradient(90deg,rgba(255,255,255,.44),rgba(255,255,255,.06) 90%);
+  pointer-events:none;
+}
+#app .learning-home .learning-home-copy,
+#app .learning-home .learning-home-actions,
+#app .learning-home .learning-home-note{
+  position:relative!important;
+  z-index:1!important;
+  background:transparent!important;
+  background-image:none!important;
+}
+#app .learning-home .learning-home-copy .eyebrow{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  color:#D7E9E7!important;
+  font:750 11px/1.4 Inter,Arial,sans-serif!important;
+  letter-spacing:.17em!important;
+  margin-bottom:12px!important;
+}
+#app .learning-home .learning-home-copy .eyebrow::before{
+  content:"";
+  width:22px;height:1px;background:#BCD7D3;display:block;
+}
+#app .learning-home .learning-home-copy h2{
+  color:#FFFFFF!important;
+  font-family:'Libre Baskerville',Georgia,serif!important;
+  font-weight:400!important;
+  font-size:clamp(32px,3.4vw,48px)!important;
+  letter-spacing:-.035em!important;
+  line-height:1.21!important;
+  max-width:650px!important;
+  margin:8px 0 23px!important;
+}
+#app .learning-home .learning-home-copy>p:not(.learning-home-note){
+  color:#E1ECEB!important;
+  font:400 clamp(15px,1.17vw,17px)/1.82 'DM Sans',Inter,Arial,sans-serif!important;
+  max-width:570px!important;
+  margin:0 0 26px!important;
+}
+#app .learning-home .learning-home-actions{
+  display:flex!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:12px!important;
+}
+#app .learning-home .learning-home-actions .pill{
+  display:inline-flex!important;
+  min-height:46px!important;
+  padding:12px 19px!important;
+  border-radius:9px!important;
+  font:750 13px/1.3 Inter,Arial,sans-serif!important;
+  box-shadow:none!important;
+  transition:transform .2s ease,background-color .2s ease,border-color .2s ease!important;
+}
+#app .learning-home .learning-home-actions .pill:not(.ghost){
+  background:#FCFDF8!important;
+  border:1px solid #FCFDF8!important;
+  color:#075333!important;
+}
+#app .learning-home .learning-home-actions .pill.ghost{
+  background:rgba(255,255,255,.07)!important;
+  color:#FFFFFF!important;
+  border:1px solid rgba(255,255,255,.68)!important;
+}
+@media(hover:hover){
+  #app .learning-home .learning-home-actions .pill:hover{transform:translateY(-2px)!important}
+  #app .learning-home .learning-home-actions .pill:not(.ghost):hover{
+    background:#DAECE5!important;
+    border-color:#DAECE5!important;
+  }
+  #app .learning-home .learning-home-actions .pill.ghost:hover{
+    background:rgba(255,255,255,.2)!important;
+    border-color:#FFFFFF!important;
+  }
+}
+#app .learning-home .learning-home-copy .learning-home-note{
+  color:#D2E3E1!important;
+  font:500 12px/1.65 Inter,Arial,sans-serif!important;
+  max-width:570px!important;
+  margin:22px 0 0!important;
+}
+#app .learning-home .learning-home-art{
+  position:relative!important;
+  z-index:1!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:355px!important;
+  padding:26px 22px 21px!important;
+  border:1px solid rgba(255,255,255,.85)!important;
+  border-radius:20px!important;
+  background:linear-gradient(160deg,rgba(252,255,255,.93),rgba(225,240,235,.78))!important;
+  color:#194A4A!important;
+  box-shadow:0 17px 39px rgba(8,27,36,.13),inset 0 1px rgba(255,255,255,.85)!important;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  margin:0!important;
+}
+#app .learning-home .learning-home-art::before,
+#app .learning-home .learning-home-art::after{
+  background:transparent!important;
+  display:none!important;
+}
+#app .learning-home .learning-home-art img{
+  display:block!important;
+  width:min(235px,100%)!important;
+  height:auto!important;
+  object-fit:contain!important;
+  background:transparent!important;
+  filter:drop-shadow(0 9px 12px rgba(30,61,68,.11));
+}
+#app .learning-home .learning-home-art figcaption{
+  color:#315F5D!important;
+  background:transparent!important;
+  background-image:none!important;
+  font:italic 15px/1.55 Georgia,serif!important;
+  text-align:center!important;
+  margin:10px 0 0!important;
+}
+@media(max-width:900px){
+  #app .learning-home>.container.learning-home-grid{
+    grid-template-columns:minmax(0,1fr) minmax(225px,.72fr)!important;
+    gap:25px!important;
+    padding:clamp(26px,4vw,42px)!important;
+    min-height:0!important;
+  }
+  #app .learning-home .learning-home-copy h2{font-size:clamp(29px,3.5vw,38px)!important}
+  #app .learning-home .learning-home-art{min-height:290px!important}
+}
+@media(max-width:750px){
+  #app .learning-home{padding:42px 0 48px!important}
+  #app .learning-home>.container.learning-home-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:27px!important;
+    width:calc(100% - 32px)!important;
+    padding:27px 22px 23px!important;
+    border-radius:19px!important;
+  }
+  #app .learning-home .learning-home-copy h2{font-size:clamp(29px,7vw,38px)!important}
+  #app .learning-home .learning-home-art{
+    max-width:100%!important;
+    min-height:285px!important;
+    padding:22px 16px 17px!important;
+    border-radius:15px!important;
+  }
+  #app .learning-home .learning-home-art img{width:min(200px,85%)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #app .learning-home .learning-home-actions .pill{transition:none!important}
+  #app .learning-home .learning-home-actions .pill:hover{transform:none!important}
+}
+@supports not ((backdrop-filter:blur(1px))){
+  #app .learning-home>.container.learning-home-grid{background:#355967!important}
+  #app .learning-home .learning-home-art{background:#ECF4F0!important}
+}

@@ -1,0 +1,90 @@
+/* Our Hifz Journey — calm, hand-selected Academy palette v67.
+ * Pearl Lavender #ECE9F1 + Deep Teal #204650 + Warm White #FFFDF9
+ * with existing Academy Forest Green #075333.
+ * Scoped to the homepage journey; no text, image or link changes. */
+#app .learning-home {
+  background:#ECE9F1!important;
+  background-color:#ECE9F1!important;
+  background-image:none!important;
+  border-top:1px solid #D9D4E1!important;
+  border-bottom:1px solid #D9D4E1!important;
+  color:#204650!important;
+  padding:clamp(62px,6.6vw,98px) 0!important;
+}
+#app .learning-home .learning-home-grid,
+#app .learning-home .learning-home-copy,
+#app .learning-home .learning-home-actions,
+#app .learning-home .learning-home-note {
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+#app .learning-home .learning-home-copy .eyebrow {
+  color:#365C65!important;
+  font:750 11px/1.5 Inter,Arial,sans-serif!important;
+  letter-spacing:.14em!important;
+}
+#app .learning-home .learning-home-copy h2 {
+  color:#204650!important;
+  font-family:'Libre Baskerville',Georgia,serif!important;
+  font-weight:400!important;
+  letter-spacing:-.03em!important;
+  line-height:1.24!important;
+}
+#app .learning-home .learning-home-copy>p {
+  color:#38525C!important;
+  font-size:clamp(14px,1.14vw,16px)!important;
+  line-height:1.8!important;
+}
+#app .learning-home .learning-home-copy .learning-home-note {
+  color:#48646A!important;
+  font-size:12px!important;
+}
+#app .learning-home .learning-home-actions .pill:not(.ghost) {
+  background:#075333!important;
+  border-color:#075333!important;
+  color:#FFFFFF!important;
+  box-shadow:none!important;
+}
+#app .learning-home .learning-home-actions .pill:not(.ghost):hover {
+  background:#043B25!important;
+  border-color:#043B25!important;
+}
+#app .learning-home .learning-home-actions .pill.ghost {
+  background:#FFFDF9!important;
+  border:1px solid #075333!important;
+  color:#075333!important;
+  box-shadow:none!important;
+}
+#app .learning-home .learning-home-actions .pill.ghost:hover {
+  background:#E4F1E9!important;
+}
+#app .learning-home .learning-home-art {
+  background:#FFFDF9!important;
+  background-color:#FFFDF9!important;
+  background-image:none!important;
+  border:1px solid #AFC6C8!important;
+  border-radius:18px!important;
+  padding:19px 18px 22px!important;
+  box-shadow:0 9px 27px rgba(37,59,66,.07)!important;
+}
+#app .learning-home .learning-home-art::before,
+#app .learning-home .learning-home-art::after {
+  background:transparent!important;
+  background-image:none!important;
+}
+#app .learning-home .learning-home-art figcaption {
+  background:transparent!important;
+  background-image:none!important;
+  color:#365A61!important;
+  font:italic 14px/1.55 Georgia,serif!important;
+  margin-top:8px!important;
+}
+@media(max-width:750px){
+  #app .learning-home {
+    padding:55px 0 65px!important;
+  }
+  #app .learning-home .learning-home-art{
+    max-width:min(430px,100%)!important;
+  }
+}
