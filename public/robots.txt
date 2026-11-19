@@ -1,0 +1,12 @@
+# Academy public pages may be indexed. Private portals are not search pages.
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /staff
+Disallow: /dashboard
+Disallow: /journey
+Disallow: /setup
+Disallow: /admin-recovery
+Disallow: /change-password
+
+Sitemap: https://shamsul-ulama-w2kv.hatchable.site/sitemap.xml
