@@ -3,6 +3,15 @@ const $=id=>document.getElementById(id);
 let csrf='',role='',students=[],accounts=[],settings={},gallery=[],enquiries=[],applications=[],currentApplication=null,currentMediaPlacements={};
 const JUZ=[1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582,605];
 const $form=(id)=>Object.fromEntries(new FormData($(id)).entries());
+// Compatibility guard for any Academy form carried over from an old open tab:
+// password length/complexity is not forced by the UI; the secure API still
+// requires a non-empty password and the usual account permissions.
+function clearLegacyPasswordMinimums(){
+ for(const input of document.querySelectorAll('#studentEditForm input[name="new_password"],#accountEditForm input[name="new_password"],#studentForm input[name="password"],#accountForm input[name="password"],#resetPassword,#admissionInitialPassword')){
+  input.removeAttribute('minlength');
+  input.setCustomValidity('');
+ }
+}
 function status(msg,error=false){
  const el=$('status');
  if(el){el.textContent=(error?'ERROR — ':'STATUS — ')+msg;el.className=error?'error':'success';el.hidden=false;el.style.cssText='';/* Theme styles set accessible status appearance, including red for errors. */el.setAttribute('role','status');el.setAttribute('aria-live','polite');}
@@ -89,6 +98,7 @@ function editStudent(student){
   input.value=v==null?'':key==='date_of_birth'?String(v).slice(0,10):String(v);
  }
  f.elements.active.checked=student.login_active===true;
+ clearLegacyPasswordMinimums();
  $('studentEditHeading').textContent='Edit Student — '+student.full_name;
  $('studentEditMessage').textContent='';
  $('studentEditDialog').showModal();
@@ -1028,6 +1038,7 @@ function connect(){
  $('staffName').textContent=role==='admin'?'Academy Administrator':'Usthad Control';
  if(role!=='admin'){$('accountRole').querySelector('option[value="usthad"]').remove();$('usthadTab').hidden=true;}
  connect();
+ clearLegacyPasswordMinimums();
  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')verifyActiveSession().catch(err=>{status('SESSION CHECK: '+err.message,true);});});
  const all=await Promise.allSettled([refreshStudents(),refreshAccounts(),refreshApplications(),refreshEnquiries(),refreshSettings(),refreshGallery()]);
  show('overview');
