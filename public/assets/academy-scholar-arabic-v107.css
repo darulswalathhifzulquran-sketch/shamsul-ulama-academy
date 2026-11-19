@@ -1,0 +1,31 @@
+/* Shaikhuna honorific, v107: readable classic Arabic calligraphy.
+   Preserve the existing main name, portrait and scholarly layout. */
+#app main .scholar-section-home.scholar-editorial-v97 .scholar-copy h2 .scholar-rahma{
+  display:block!important;
+  width:fit-content!important;
+  max-width:100%!important;
+  margin:14px 0 4px!important;
+  padding:1px 0 4px!important;
+  font-family:'Amiri','Scheherazade New','Noto Naskh Arabic',serif!important;
+  font-size:clamp(30px,2.5vw,42px)!important;
+  font-weight:400!important;
+  font-style:normal!important;
+  line-height:1.7!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  text-align:right!important;
+  direction:rtl!important;
+  unicode-bidi:isolate!important;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  color:#315B4F!important;
+  -webkit-text-fill-color:#315B4F!important;
+  text-shadow:none!important;
+}
+@media(max-width:690px){
+  #app main .scholar-section-home.scholar-editorial-v97 .scholar-copy h2 .scholar-rahma{
+    font-size:clamp(28px,7.3vw,36px)!important;
+    margin-top:12px!important;
+    line-height:1.75!important;
+  }
+}
