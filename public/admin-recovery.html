@@ -17,8 +17,8 @@ button:disabled{opacity:.5;cursor:default}a{color:#075333;text-underline-offset:
 <h1>Secure Administrator Recovery</h1>
 <p>This is the <strong>official public Academy website</strong>. If you received a secure one-time administrator recovery link from the Academy owner, enter your new password here. Otherwise contact the owner for account recovery.</p>
 <form id="recovery" hidden>
-<label>New administrator password<input id="newPassword" type="password" minlength="12" maxlength="128" autocomplete="new-password" required></label>
-<label>Confirm new password<input id="confirmPassword" type="password" minlength="12" maxlength="128" autocomplete="new-password" required></label>
+<label>New administrator password<input id="newPassword" type="password" maxlength="128" autocomplete="new-password" required></label>
+<label>Confirm new password<input id="confirmPassword" type="password" maxlength="128" autocomplete="new-password" required></label>
 <button id="save" type="submit">Set New Admin Password</button>
 </form><p id="notice" role="status" aria-live="polite"></p>
 <div id="result" hidden><p id="success"></p><a id="loginLink" href="/login">Sign in as Administrator</a></div>
@@ -34,7 +34,7 @@ form.hidden=false;notice.textContent='Recovery link format verified. This one-ti
 form.addEventListener('submit',async event=>{
  event.preventDefault();const password=document.getElementById('newPassword').value,confirmation=document.getElementById('confirmPassword').value;
  if(password!==confirmation){notice.textContent='The two passwords do not match.';return;}
- if(password.length<12||password.length>128||!/[a-z]/i.test(password)||!/[0-9]/.test(password)){notice.textContent='Use 12–128 characters with both letters and numbers.';return;}
+ if(!password.trim()||password.length>128){notice.textContent='Enter a new password (up to 128 characters).';return;}
  button.disabled=true;notice.textContent='Validating secure recovery link…';
  try{const response=await fetch('/api/identity/recover-admin',{method:'POST',credentials:'include',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({token,new_password:password})});
  const data=await response.json();if(!response.ok)throw Error(data.error||'Recovery failed.');

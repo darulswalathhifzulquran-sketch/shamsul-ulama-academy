@@ -55,7 +55,7 @@ export default async function(req,res){
   }
   const reset=body.new_password!==undefined&&body.new_password!=='';
   if(reset){
-    if(!validPassword(body.new_password))return res.status(400).json({error:'Password must have 12–128 characters, including letters and numbers.'});
+    if(!validPassword(body.new_password))return res.status(400).json({error:'Enter a new password (up to 128 characters).'});
     const h=await makePassword(body.new_password);
     set('password_salt',h.salt);set('password_hash',h.hash);set('password_iterations',h.iterations);
     set('must_change_password',true);set('failed_attempts',0);set('locked_until',null);
@@ -91,7 +91,7 @@ export default async function(req,res){
  if(role==='usthad'&&a.user.role!=='admin')
   return res.status(403).json({error:'Only the Main Administrator can add an Usthad.'});
  if(role==='parent'&&(!validUsername(username)||!validPassword(password)))
-  return res.status(400).json({error:'Parent login requires a unique username and a strong password (12+ characters with letters and numbers).'});
+  return res.status(400).json({error:'Parent login requires a unique username and a non-empty password.'});
  if(role==='parent'&&(!ids.length||ids.length>10||ids.some(v=>!Number.isSafeInteger(v)||v<1)))
   return res.status(400).json({error:'Choose the parent’s linked student.'});
  if(ids.length){const valid=await db.query("SELECT id FROM academy_students WHERE id=ANY($1::bigint[]) AND status='active'",[ids]);if(valid.rows.length!==ids.length)return res.status(400).json({error:'Invalid student link.'});}

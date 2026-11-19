@@ -870,9 +870,9 @@ function connect(){
   accountForm.elements.username.minLength=teacher?0:4;
   accountForm.elements.username.placeholder=teacher?'Auto-generated if left blank':'Username';
   accountForm.elements.password.required=!teacher;
-  accountForm.elements.password.minLength=teacher?0:12;
+  accountForm.elements.password.removeAttribute('minlength');
   accountForm.elements.password.disabled=teacher;
-  accountForm.elements.password.placeholder=teacher?'Password generated securely on save':'12+ characters, letters and numbers';
+  accountForm.elements.password.placeholder=teacher?'Password generated securely on save':'Choose a password you can remember';
   $('parentStudents').disabled=teacher;
  };
  $('accountRole').addEventListener('change',syncAccountRole);

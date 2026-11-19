@@ -4,7 +4,7 @@ export const methods=['POST'];
 export default async function(req,res){
  const s=await guard(req,res,[],true);if(!s)return;
  const before=String(req.body?.current_password||''),after=req.body?.new_password;
- if(!validPassword(after)||after===before)return res.status(400).json({error:'Choose a different password of 12–128 characters, with letters and numbers.'});
+ if(!validPassword(after)||after===before)return res.status(400).json({error:'Enter a new password different from your current password.'});
  const account=await db.query('SELECT password_salt,password_hash,password_iterations FROM academy_accounts_v2 WHERE id=$1',[s.user.id]);
  if(!account.rows.length||!await verifyPassword(before,account.rows[0]))return res.status(401).json({error:'Current password is incorrect.'});
  const {salt,hash,iterations}=await makePassword(after);

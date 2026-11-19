@@ -70,7 +70,7 @@ export default async function(req,res){
   // Administrator may set a memorable initial password, or accept a secure
   // auto-generated temporary passphrase. All new logins must change it.
   if(requested){
-   if(!validPassword(requested))return res.status(400).json({error:'Temporary password must be at least 12 characters and include letters and numbers. Try three memorable words with a few digits.'});
+   if(!validPassword(requested))return res.status(400).json({error:'Enter a memorable password (up to 128 characters), or leave it blank to generate one automatically.'});
    oneTimePassword=requested;
   }else{
    const words=['Amber','Apple','Bamboo','Beacon','Berry','Bloom','Blue','Breeze','Brook','Cedar','Cherry','Cloud','Coral','Crown','Dawn','Dove','Dream','Eagle','Elm','Field','Flame','Forest','Garden','Ginger','Golden','Grace','Green','Harbor','Hazel','Hill','Honey','Hope','Jade','Lake','Leaf','Lemon','Light','Lily','Linen','Lotus','Mango','Maple','Meadow','Melody','Misty','Moon','Morning','Olive','Orange','Palm','Pearl','Pine','Rain','River','Rose','Sage','Silver','Sky','Snow','Spring','Star','Sun','Valley'];

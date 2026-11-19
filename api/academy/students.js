@@ -49,7 +49,7 @@ export default async function(req,res){
   const username=body.username!==undefined?normalizeUsername(body.username):login.username;
   if(!validUsername(username))return res.status(400).json({error:'Username must be 4–32 valid characters.'});
   const reset=body.new_password!==undefined&&body.new_password!=='';
-  if(reset&&!validPassword(body.new_password))return res.status(400).json({error:'New password must be 12–128 characters, including letters and numbers.'});
+  if(reset&&!validPassword(body.new_password))return res.status(400).json({error:'Enter a new password (up to 128 characters).'});
   const col=['full_name',...Object.keys(d)],values=[name,...Object.values(d)];
   const studentSql='UPDATE academy_students SET '+col.map((key,i)=>key+'=$'+(i+1)).join(',')+',updated_at=now() WHERE id=$'+(col.length+1)+" AND status='active'";
   const accCols=['display_name','username'],accVals=[name,username];
@@ -68,7 +68,7 @@ export default async function(req,res){
   return res.json({ok:true,student_id:sid,password_reset:reset});
  }
  const givenAdmission=String(req.body?.admission_number||'').trim().toUpperCase(),name=String(req.body?.full_name||'').trim(),batch=String(req.body?.batch_name||'').trim(),username=normalizeUsername(req.body?.username),password=req.body?.password;
- if(name.length<2||name.length>140||batch.length>80||!validUsername(username)||!validPassword(password)||(givenAdmission&&!/^HIFZ-[0-9]{4}-[0-9]{3,5}$/.test(givenAdmission)))return res.status(400).json({error:'Student name (2+ letters), username (4+ characters), and password (12+ characters including letters and numbers) are required. Admission number and batch are optional.'});
+ if(name.length<2||name.length>140||batch.length>80||!validUsername(username)||!validPassword(password)||(givenAdmission&&!/^HIFZ-[0-9]{4}-[0-9]{3,5}$/.test(givenAdmission)))return res.status(400).json({error:'Student name (2+ letters), username (4+ characters), and a non-empty password are required. Admission number and batch are optional.'});
  let d;try{d=details(req.body);}catch(e){return res.status(400).json({error:e.message});}
  const h=await makePassword(password);
  // A dedicated sequence reservation prevents concurrent automatic admissions from receiving the same number.

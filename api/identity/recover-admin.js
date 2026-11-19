@@ -11,7 +11,7 @@ export default async function(req,res){
   const token=String(req.body?.token||''),password=req.body?.new_password;
   const invalid={error:'Recovery link is invalid or expired. Request a new owner-issued link.'};
   if(!/^[a-f0-9]{64}$/.test(token))return res.status(400).json(invalid);
-  if(!validPassword(password))return res.status(400).json({error:'Choose 12–128 characters with letters and numbers.'});
+  if(!validPassword(password))return res.status(400).json({error:'Enter a new password (up to 128 characters).'});
   const {salt,hash,iterations}=await makePassword(password);
   const digest=await shaHex(token);
   const result=await db.query(`
