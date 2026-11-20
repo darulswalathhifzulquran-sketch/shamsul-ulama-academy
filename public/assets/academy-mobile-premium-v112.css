@@ -1,0 +1,357 @@
+/* Shamsul Ulama Islamic Academy — Mobile-only visual refinement v112.
+   No desktop changes, HTML changes, photos, authentication or data changes.
+   Original logo, typography, heritage palette and content are preserved. */
+@media screen and (max-width:767px) {
+  /* One calm, readable institutional header, without duplicated office details. */
+  #app .academy-header-v83 {
+    position:relative!important;
+    background:#F7F3E9!important;
+    box-shadow:0 4px 18px rgba(22,62,49,.08)!important;
+    border-bottom:1px solid #E7DDC6!important;
+  }
+  #app .academy-header-v83 .academy-utility-v80 {
+    background:#163F35!important;
+  }
+  #app .academy-header-v83 .academy-utility-inner-v80 {
+    display:flex!important;justify-content:space-between!important;align-items:center!important;
+    flex-wrap:nowrap!important;min-height:39px!important;width:calc(100% - 28px)!important;
+    padding:4px 0!important;gap:6px!important;
+  }
+  #app .academy-header-v83 .academy-contact-meta-v84 {
+    flex:0 1 auto!important;min-width:0!important;
+  }
+  #app .academy-header-v83 .academy-portals-v80 {
+    flex:0 0 auto!important;width:auto!important;margin:0!important;
+    justify-content:flex-end!important;gap:5px!important;
+  }
+  #app .academy-header-v83 .academy-portal-link-v80 {
+    min-height:28px!important;display:inline-flex!important;align-items:center!important;
+    padding:5px 9px!important;font-size:10px!important;line-height:1.2!important;
+    border-radius:6px!important;white-space:nowrap!important;
+  }
+  #app .academy-header-v83 .academy-head-v80 {
+    display:flex!important;flex-direction:row!important;align-items:center!important;
+    justify-content:flex-start!important;gap:0!important;
+    width:calc(100% - 30px)!important;min-height:86px!important;
+    padding:10px 55px 10px 0!important;
+  }
+  #app .academy-header-v83 .academy-identity-v80 {
+    display:flex!important;flex-direction:row!important;align-items:center!important;
+    justify-content:flex-start!important;gap:10px!important;
+    min-width:0!important;width:100%!important;max-width:100%!important;
+  }
+  #app .academy-header-v83 .academy-emblem-v80 {
+    flex:0 0 55px!important;width:55px!important;height:59px!important;
+    padding:2px!important;margin:0!important;
+  }
+  #app .academy-header-v83 .academy-logo-v80 {
+    max-width:100%!important;max-height:100%!important;
+    width:100%!important;height:100%!important;object-fit:contain!important;
+  }
+  #app .academy-header-v83 .academy-heading-v80 {
+    display:flex!important;flex-direction:column!important;justify-content:center!important;
+    align-items:flex-start!important;min-width:0!important;flex:1 1 auto!important;
+    max-width:100%!important;padding:0!important;
+  }
+  #app .academy-header-v83 .academy-calligraphy-v80 {
+    display:block!important;width:100%!important;max-width:100%!important;
+    height:auto!important;max-height:33px!important;object-fit:contain!important;
+    object-position:left center!important;
+  }
+  #app .academy-header-v83 .academy-title-v80 {
+    font-size:clamp(9.5px,2.68vw,12px)!important;line-height:1.26!important;
+    letter-spacing:.035em!important;white-space:normal!important;
+    overflow-wrap:normal!important;text-wrap:pretty!important;
+  }
+  #app .academy-header-v83 .academy-place-v80 {
+    font-size:9px!important;line-height:1.35!important;letter-spacing:.18em!important;
+  }
+  #app .academy-header-v83 .academy-admissions-panel-v85 {
+    display:none!important;
+  }
+  #app .academy-header-v83 .academy-navigation-strip-v83 {
+    position:absolute!important;top:60px!important;right:15px!important;
+    left:auto!important;display:block!important;width:44px!important;height:44px!important;
+    min-height:0!important;margin:0!important;padding:0!important;z-index:110!important;
+    background:transparent!important;border:0!important;box-shadow:none!important;
+  }
+  #app .academy-header-v83 .academy-navigation-inner-v83 {
+    display:block!important;width:44px!important;height:44px!important;
+    min-height:0!important;margin:0!important;padding:0!important;
+    background:transparent!important;border:0!important;
+  }
+  #app .academy-header-v83 #mobileMenu.academy-mobile-menu-v80 {
+    display:grid!important;place-items:center!important;
+    width:44px!important;height:44px!important;min-height:44px!important;
+    margin:0!important;padding:0!important;border-radius:11px!important;
+    background:#194C3E!important;border:1px solid #2D6654!important;
+    color:#FFF!important;-webkit-text-fill-color:#FFF!important;
+    box-shadow:0 3px 9px rgba(0,37,24,.12)!important;font-size:23px!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open {
+    position:fixed!important;inset:132px 12px auto 12px!important;
+    width:calc(100vw - 24px)!important;max-width:none!important;
+    max-height:calc(100dvh - 148px)!important;overflow:auto!important;
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;padding:13px!important;margin:0!important;
+    border:1px solid rgba(227,205,160,.58)!important;border-radius:15px!important;
+    background:#16483B!important;box-shadow:0 16px 36px rgba(0,25,20,.25)!important;
+    z-index:130!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    text-align:center!important;min-height:47px!important;padding:10px 7px!important;
+    border:1px solid rgba(255,255,255,.13)!important;border-radius:9px!important;
+    background:rgba(255,255,255,.055)!important;color:#FFF!important;
+    font-size:13px!important;line-height:1.3!important;font-weight:700!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a.active {
+    color:#F7E6BA!important;background:rgba(255,255,255,.13)!important;
+    border-color:rgba(238,213,150,.52)!important;
+  }
+  /* Preserve the original academy video; refine only its framing. */
+  #app .academy-video-hero {
+    border-bottom:3px solid #C4A36B!important;
+  }
+  /* Heritage: a centered original portrait and more balanced name hierarchy. */
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 {
+    padding-top:35px!important;padding-bottom:43px!important;
+  }
+  #app main .scholar-section-home .scholar-spotlight.scholar-editorial-layout-v97 {
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:25px!important;align-items:start!important;
+  }
+  #app main .scholar-section-home .scholar-visual {
+    justify-self:center!important;align-items:center!important;
+    justify-content:center!important;text-align:center!important;
+  }
+  #app main .scholar-section-home .scholar-photo-shell-v97 {
+    width:min(73vw,280px)!important;max-width:280px!important;
+    margin-inline:auto!important;
+    box-shadow:0 13px 31px rgba(62,48,28,.16),0 0 0 5px rgba(255,255,255,.43)!important;
+  }
+  #app main .scholar-section-home .scholar-visual::before {
+    display:none!important;
+  }
+  #app main .scholar-section-home .scholar-photo-label {
+    display:block!important;text-align:center!important;
+    margin:8px auto 0!important;padding:9px 3px 0!important;
+    font-size:10px!important;letter-spacing:.12em!important;
+  }
+  #app main .scholar-section-home .scholar-copy {
+    width:100%!important;max-width:100%!important;
+    padding:0 4px 1px!important;margin:0!important;
+    align-items:flex-start!important;
+  }
+  #app main .scholar-section-home .scholar-copy .scholar-eyebrow {
+    font-size:11px!important;letter-spacing:.16em!important;
+    margin-bottom:10px!important;
+  }
+  #app main .scholar-section-home .scholar-copy .scholar-dates-v97 {
+    margin-bottom:12px!important;font-size:13px!important;
+  }
+  #app main .scholar-section-home .scholar-copy h2 {
+    font-size:clamp(28px,7.45vw,34px)!important;
+    line-height:1.12!important;letter-spacing:-.024em!important;
+    margin-bottom:13px!important;text-wrap:balance!important;
+  }
+  #app main .scholar-section-home.scholar-editorial-v97 .scholar-copy h2 .scholar-rahma {
+    margin:9px 0 2px!important;font-size:clamp(26px,7.1vw,32px)!important;
+    line-height:1.58!important;
+  }
+  #app main .scholar-section-home .scholar-descriptor {
+    font-size:13px!important;line-height:1.6!important;
+  }
+  #app main .scholar-section-home .scholar-excerpt {
+    font-size:14px!important;line-height:1.75!important;
+  }
+  #app main .scholar-section-home .scholar-more-v97 {
+    min-height:44px!important;padding:11px 21px!important;
+    border-radius:8px!important;
+  }
+  /* Crisp intro with full-width finger-friendly CTA pair. */
+  #app main > section.academy-home-intro.academy-heritage-continuation-v98 {
+    padding-top:43px!important;padding-bottom:48px!important;
+  }
+  #app main > section.academy-home-intro.academy-heritage-continuation-v98 .purpose-heading {
+    font-size:clamp(32px,8.5vw,40px)!important;
+    line-height:1.09!important;letter-spacing:-.035em!important;
+  }
+  #app main > section.academy-home-intro.academy-heritage-continuation-v98 .academy-intro-side-v98>p:not(.location-line) {
+    font-size:14.5px!important;line-height:1.7!important;
+  }
+  #app main > section.academy-home-intro.academy-heritage-continuation-v98 .actions {
+    display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important;
+    margin-top:20px!important;margin-bottom:13px!important;
+  }
+  #app main > section.academy-home-intro.academy-heritage-continuation-v98 .actions .pill {
+    display:flex!important;width:100%!important;max-width:none!important;
+    min-height:48px!important;padding:11px 15px!important;
+    text-align:center!important;font-size:13px!important;
+    border-radius:9px!important;
+  }
+  /* Consistent editorial margins, tactile gallery cards, readable headings. */
+  #app main .home-gallery-section:has(#academyHomeGallery.academy-feature-rotate-v95)>.container {
+    width:calc(100% - 36px)!important;
+  }
+  #app main .home-gallery-section .home-gallery-heading {
+    margin-bottom:24px!important;gap:12px!important;
+  }
+  #app main .home-gallery-section .home-gallery-heading h2 {
+    font-size:clamp(27px,7.8vw,34px)!important;line-height:1.15!important;
+    text-wrap:balance!important;
+  }
+  #app main .home-gallery-section .home-gallery-heading p {
+    font-size:13.5px!important;line-height:1.7!important;
+  }
+  #app #academyHomeGallery.home-gallery-grid.academy-feature-rotate-v95 {
+    gap:12px!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card {
+    border-radius:16px!important;box-shadow:0 6px 17px rgba(0,25,24,.12)!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card-featured-v90 {
+    border-radius:21px!important;
+  }
+  #app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card .showcase-card-text {
+    min-height:62px!important;padding:12px!important;
+  }
+  /* Secondary sections need a clear, calm reading rhythm. */
+  #app main .academy-home-about-v102 h2,
+  #app main .college-features-intro h2,
+  #app main .academy-learning-heading h2 {
+    font-size:clamp(29px,8.2vw,38px)!important;
+    line-height:1.15!important;text-wrap:balance!important;
+  }
+  #app main .college-features-intro {
+    margin-bottom:25px!important;padding-left:13px!important;
+  }
+  #app main .college-features-grid {
+    gap:16px!important;
+  }
+  #app main .college-feature-card {
+    border-radius:16px!important;overflow:hidden!important;
+  }
+  #app main .academy-learning-home-grid {
+    gap:15px!important;
+  }
+  #app main .academy-learning-card {
+    border-radius:16px!important;overflow:hidden!important;
+  }
+  #app main .academy-learning-card-body {
+    padding:18px 20px!important;
+  }
+  #app main .section:not(.academy-home-about-v102) .container {
+    min-width:0!important;
+  }
+  #app main .heading {
+    padding-top:47px!important;padding-bottom:50px!important;
+  }
+  #app main .heading h1 {
+    font-size:clamp(33px,8.7vw,42px)!important;line-height:1.11!important;
+    text-wrap:balance!important;
+  }
+  #app main .heading p {
+    font-size:14px!important;line-height:1.7!important;
+  }
+  #app main .admission-wrapper input,
+  #app main .admission-wrapper select,
+  #app main .admission-wrapper textarea {
+    max-width:100%!important;min-width:0!important;
+    border-radius:9px!important;
+  }
+  /* Give all footer information a hierarchy without removing details. */
+  #app footer.academy-footer {
+    padding-top:45px!important;
+    border-radius:22px 22px 0 0!important;
+  }
+  #app footer.academy-footer>.container {
+    width:calc(100% - 36px)!important;
+  }
+  #app footer.academy-footer .academy-footer-grid {
+    grid-template-columns:minmax(0,1fr)!important;gap:0!important;
+  }
+  #app footer.academy-footer .academy-footer-grid> * {
+    padding:22px 0!important;border-bottom:1px solid rgba(229,244,232,.17)!important;
+  }
+  #app footer.academy-footer .academy-footer-grid> :first-child {
+    padding-top:0!important;
+  }
+  #app footer.academy-footer .academy-footer-grid> :last-child {
+    border-bottom:0!important;padding-bottom:0!important;
+  }
+  #app footer.academy-footer .academy-footer-about>p {
+    font-size:13.5px!important;line-height:1.75!important;
+  }
+  #app footer.academy-footer .academy-footer-links .footer-links {
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px 15px!important;
+  }
+  #app footer.academy-footer .academy-footer-links .footer-links a {
+    min-width:0!important;white-space:normal!important;
+    font-size:13px!important;line-height:1.5!important;
+  }
+  #app footer.academy-footer .academy-footer-map-frame {
+    height:190px!important;min-height:190px!important;
+    border-radius:12px!important;
+  }
+  #app footer.academy-footer .academy-footer-bottom {
+    margin-top:18px!important;padding:17px 0 23px!important;
+    gap:8px!important;font-size:11px!important;line-height:1.65!important;
+  }
+}
+/* Fine specificity correction for legacy heritage styles on narrow phones. */
+@media screen and (max-width:767px) {
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-visual {
+    width:100%!important;justify-self:center!important;
+    display:flex!important;flex-direction:column!important;
+    align-items:center!important;justify-content:center!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97 {
+    width:min(66vw,250px)!important;max-width:250px!important;
+    height:auto!important;aspect-ratio:366 / 546!important;
+    margin:0 auto!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-photo-shell-v97 img {
+    width:100%!important;height:100%!important;max-width:100%!important;
+    max-height:none!important;object-fit:cover!important;object-position:center!important;
+    margin:0!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-visual::before {
+    display:none!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-photo-label {
+    width:100%!important;max-width:100%!important;
+    text-align:center!important;font-size:10px!important;
+    padding:10px 0 0!important;margin:0 auto!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-copy {
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    padding:0 3px!important;margin:0!important;gap:0!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-copy h2 {
+    font-size:clamp(28px,7.5vw,32px)!important;
+    line-height:1.14!important;letter-spacing:-.03em!important;
+    margin:0 0 14px!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-descriptor {
+    font-size:13px!important;line-height:1.55!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-excerpt {
+    font-size:14px!important;line-height:1.7!important;
+    margin-bottom:16px!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-more-v97 {
+    min-height:44px!important;font-size:14px!important;
+    padding:11px 20px!important;border-radius:8px!important;
+  }
+}
+@media screen and (max-width:359px) {
+  #app .academy-header-v83 .academy-head-v80 {padding-right:47px!important;}
+  #app .academy-header-v83 .academy-emblem-v80 {width:48px!important;height:54px!important;flex-basis:48px!important;}
+  #app .academy-header-v83 .academy-title-v80 {font-size:9px!important;}
+  #app .academy-header-v83 .academy-portal-link-v80 {font-size:9px!important;padding:5px 7px!important;}
+  #app .academy-header-v83 .academy-contact-meta-v84 {font-size:10px!important;}
+  #app main .scholar-section-home .scholar-photo-shell-v97 {width:min(76vw,260px)!important;}
+  #app main .scholar-section-home .scholar-copy h2 {font-size:27px!important;}
+}
