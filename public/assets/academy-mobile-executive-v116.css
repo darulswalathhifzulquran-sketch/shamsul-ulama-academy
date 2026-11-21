@@ -1,0 +1,147 @@
+/* Shamsul Ulama Islamic Academy — Executive icon navigation v116.
+   Mobile-only visual styling. Preserves all existing anchors, routes and behaviour.
+   Compact ivory floating surface with coherent stroke icons. */
+@media screen and (max-width:767px) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open {
+    position:fixed!important;
+    inset:calc(132px + env(safe-area-inset-top,0px)) 14px auto 14px!important;
+    width:calc(100vw - 28px)!important;
+    max-width:430px!important;
+    max-height:calc(100dvh - 154px - env(safe-area-inset-top,0px))!important;
+    margin:0 auto!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+    padding:13px!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    border-radius:19px!important;
+    border:1px solid rgba(222,225,214,.96)!important;
+    background:#fffdfa!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    box-shadow:0 19px 54px rgba(6,35,27,.23),0 2px 8px rgba(9,54,42,.06)!important;
+    z-index:135!important;
+    isolation:isolate;
+    animation:academyExecutiveEnter116 .19s cubic-bezier(.2,.78,.2,1) both!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open::before {
+    content:"EXPLORE THE ACADEMY";
+    grid-column:1 / -1;
+    display:block;
+    margin:1px 2px 4px;
+    padding:1px 1px 8px;
+    border-bottom:1px solid #e9ebe3;
+    color:#6c7b6e;
+    font-family:Inter,system-ui,sans-serif;
+    font-size:10px;
+    line-height:1.4;
+    font-weight:700;
+    letter-spacing:.15em;
+    text-align:left;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {
+    box-sizing:border-box!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:51px!important;
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:9px!important;
+    margin:0!important;
+    padding:10px 11px!important;
+    background:#f4f6f2!important;
+    border:1px solid #e5eae3!important;
+    border-radius:11px!important;
+    box-shadow:none!important;
+    color:#204b3c!important;
+    font-family:Inter,system-ui,sans-serif!important;
+    font-weight:650!important;
+    font-size:12.5px!important;
+    line-height:1.25!important;
+    letter-spacing:0!important;
+    text-shadow:none!important;
+    text-align:left!important;
+    white-space:nowrap!important;
+    text-decoration:none!important;
+    -webkit-tap-highlight-color:transparent;
+    transition:background-color .16s ease,border-color .16s ease,transform .16s ease!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a::before {
+    content:"";
+    display:inline-block!important;
+    flex:0 0 18px!important;
+    width:18px!important;
+    height:18px!important;
+    background-color:#2b5b49!important;
+    -webkit-mask-image:var(--academy-menu-icon);
+    mask-image:var(--academy-menu-icon);
+    -webkit-mask-repeat:no-repeat;
+    mask-repeat:no-repeat;
+    -webkit-mask-position:center;
+    mask-position:center;
+    -webkit-mask-size:contain;
+    mask-size:contain;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a.active,
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a[aria-current="page"] {
+    background:#194b3b!important;
+    border-color:#194b3b!important;
+    box-shadow:0 3px 9px rgba(12,75,49,.15)!important;
+    color:#fffaf0!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a.active::before,
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a[aria-current="page"]::before {
+    background-color:#efd4a2!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:active {
+    transform:scale(.974)!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:focus-visible {
+    outline:2px solid #ba9450!important;
+    outline-offset:2px!important;
+  }
+  #app .academy-header-v83 #mobileMenu.academy-mobile-menu-v80 {
+    border-radius:11px!important;
+    background:#194b3b!important;
+    border-color:#194b3b!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(1) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.85%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m3%2010%209-7%209%207v9a2%202%200%200%201-2%202h-4v-7H9v7H5a2%202%200%200%201-2-2z%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(2) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.85%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%229%22%2F%3E%3Cpath%20d%3D%22M12%2011v5%22%2F%3E%3Cpath%20d%3D%22M12%208h.01%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(3) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.85%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%207c-2.6-1.9-6-2.3-9-1v14c3-1.2%206.4-.8%209%201%202.6-1.8%206-2.2%209-1V6c-3-1.3-6.4-.9-9%201Z%22%2F%3E%3Cpath%20d%3D%22M12%207v14%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(4) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.85%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2218%22%20rx%3D%223%22%2F%3E%3Ccircle%20cx%3D%228.5%22%20cy%3D%228.5%22%20r%3D%221.5%22%2F%3E%3Cpath%20d%3D%22m3%2017%205-5%204%204%203-3%206%205%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(5) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.85%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m2%209%2010-5%2010%205-10%205-10-5Z%22%2F%3E%3Cpath%20d%3D%22M6%2011v5c4%203%208%203%2012%200v-5%22%2F%3E%3Cpath%20d%3D%22M22%209v6%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(6) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.85%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%203H5a2%202%200%200%200-2%202c0%208.8%207.2%2016%2016%2016a2%202%200%200%200%202-2v-2l-5-2-2%203a14%2014%200%200%201-8-8l3-2-2-5Z%22%2F%3E%3C%2Fsvg%3E");}
+}
+@media screen and (max-width:359px) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open {
+    inset-inline:9px!important;
+    width:calc(100vw - 18px)!important;
+    gap:6px!important;
+    padding:10px!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {
+    padding:9px 8px!important;
+    font-size:12px!important;
+    gap:6px!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a::before {
+    flex-basis:16px!important;width:16px!important;height:16px!important;
+  }
+}
+@media screen and (max-width:767px) and (hover:hover) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:not(.active):hover {
+    background:#edf2eb!important;
+    border-color:#cbdccf!important;
+  }
+}
+@media screen and (max-width:767px) and (prefers-reduced-motion:reduce) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open {animation:none!important;}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {transition:none!important;}
+}
+@keyframes academyExecutiveEnter116 {
+  from {opacity:0;transform:translateY(-5px) scale(.992);}
+  to {opacity:1;transform:translateY(0) scale(1);}
+}
