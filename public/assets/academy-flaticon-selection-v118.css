@@ -1,0 +1,64 @@
+/* V118. Screenshot-sourced Flaticon icon details, selected from academy owner's uploaded references.
+   Sprite cells: Home | About | Academics | Gallery | Admission | Contact | Menu.
+   Used as an alpha mask for consistent Academy Green / Gold tint. No downloaded third-party SVGs.
+   Screenshots represent Flaticon contributor artwork; see attribution in mobile footer. */
+@media screen and (max-width:767px) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open,
+  #app .academy-header-v83 #mobileMenu.academy-mobile-menu-v80 {
+    --academy-flaticon-sheet-v118:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAAoAgMAAABY7Q0GAAAADFBMVEUAAAAAAAAAAAAAAAA16TeWAAAABHRSTlMAUKD/XCobTgAABF5JREFUeNrdlkFsFFUYx39vtt2xOyS9IBjaMAlsDGjSNV40ou5DEzhoAhqtJBzsgROgJZw0RveJJl5MXJWbMfaACWwTQMGkGtmdoph4GwwQEo0ZYg1LaSKage6W7nwe3u52d5vVO+/0zfve/Ob7/u993xu4V4cfNw1HxHS7nO/qMHnSznptZyrRqzGFRtOoiCTdrodFimmRKgAPTbUxUltFUSKW7YqIhF2+cmk68uZLZQB19s32/PresMFtvZtLtKrUOhNVdZxazjCpAc+sZEVubpU0IlacyhyM2KycRsEATgwzY+Ab4CnULQBVROl0oxfTUsRJNKiKASgYpwE4kcV4Bpw5eB3AjUnN64K2eoiIBHZ77AZ5NYBcBHi3Ye8cpFqYADYYyBQBv0FKpkbCbownIhIBfkS6iBd3xNUZzWuAmgMKBa1eqbsRQKlUKpVKBsiJiNSAvMENcZZh8iiZKdbVOzFOBDAGlP0QVdleWyWNFacC6SIkODcgV4MDpiOpDRqlSRdxZGestB9+331ObXoGmievQiqyGC/owIyBinAiUn9dbKTm3PjpTghD1phoYwzy+25+Pc7gmUBa6wKWNVxmIICrm4+w4YmBv7uiydloajg1UBpyhpHbGnh1GVWzxy+ncULYyEZIzZ4rq1PhzLBeJY1IQioGNwQ/gMIlWJ+sgXJpOvbnS2VQM+BE30IqKNRwo3d8011QdujULfAiGA7gY9FKdozCpC3NOjBtUKUqpCI/QsUb3WCFMuC0LPNsBzt/350jF2fvh8+2cYhp7oC6udvI0VOQrK2uRX4E1EvN9TcH+rSg+qbLa1zgzjgwDkDmBKpwEGRoaQgG1ZM4pebqWadfK7u2pmdC+MRkQgGeyR/RBF3Ogf9pjJkpxslMjQNX72b92Q+fh3B211ePvMe1c2q8lRSplsRBh8QqBHCbEnNKisCY3n9seApIxW7c+7kOTGwxfoCypTlqN9xJpmPADT3ja4CGavTHODWLyRnU9USnKzdH7fHzYqcBcBbeBiCvC/psPwzLFpMHFe5NKn/uHLUV7gW2Xfna/dzeEKH/S3c8DsCVPSs2GJCtXx6cH9kCCiBrmNWQrk5sPq8BFrPVrY5eFY1WIhJQAS9CJcDkDThQH213P99ARn/zxja7z+eUfBH2RiOBBADGABbz6U/z0x99sIlWhS8AsH/PY/bxcN4cz/Y7N9GEuXuaoRqQvHhy147grfPdOj546FFr/HZh19fNBpM+BlzpxCw8wNIhsgsA8gLwuP6h6VoLoJ57v5nUYra6+bAOANTLvcWwmNagiu0bFq0FQBmGbVPYd8Zikp+Xhk6bHokTqIgEXdcdgPrDODHMeCFlIKNp65HXhYruh+m8fAEK9vJ1b6QbQGa7ZrD57nDoN/qW5lVVgYsrz+8iF0qqurTuxHUAdl/6p+mJtyws0i+aPj8mHEiKQEYV96VbmYgUe/qI1CAn8h+/SenjAIOqmG0lhZ9wz49/AZyzN10QJUYLAAAAAElFTkSuQmCC");
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {
+    font-family:Nunito,Inter,system-ui,sans-serif!important;
+    font-size:14px!important;font-weight:750!important;
+    gap:9px!important;min-height:55px!important;
+    border-radius:12px!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a::before {
+    content:""!important;display:block!important;
+    flex:0 0 25px!important;width:25px!important;height:25px!important;
+    background-color:#255943!important;
+    -webkit-mask-image:var(--academy-flaticon-sheet-v118)!important;
+    mask-image:var(--academy-flaticon-sheet-v118)!important;
+    -webkit-mask-size:700% 100%!important;
+    mask-size:700% 100%!important;
+    -webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;
+    -webkit-mask-position:0% center!important;mask-position:0% center!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(2)::before {
+    -webkit-mask-position:16.666667% center!important;mask-position:16.666667% center!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(3)::before {
+    -webkit-mask-position:33.333333% center!important;mask-position:33.333333% center!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(4)::before {
+    -webkit-mask-position:50% center!important;mask-position:50% center!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(5)::before {
+    -webkit-mask-position:66.666667% center!important;mask-position:66.666667% center!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(6)::before {
+    -webkit-mask-position:83.333333% center!important;mask-position:83.333333% center!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a.active::before,
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a[aria-current="page"]::before {
+    background-color:#ecd5a0!important;
+  }
+  #app .academy-header-v83 #mobileMenu.academy-mobile-menu-v80::before {
+    content:""!important;display:block!important;
+    width:26px!important;height:26px!important;background-color:#fff!important;
+    -webkit-mask-image:var(--academy-flaticon-sheet-v118)!important;
+    mask-image:var(--academy-flaticon-sheet-v118)!important;
+    -webkit-mask-size:700% 100%!important;mask-size:700% 100%!important;
+    -webkit-mask-position:100% center!important;mask-position:100% center!important;
+    -webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;
+  }
+  .academy-flaticon-credit-v118 {
+    display:inline-block;
+    color:inherit!important;opacity:.75;font-size:10px!important;
+    text-decoration:underline!important;text-underline-offset:2px;
+  }
+}
+@media screen and (max-width:359px) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {font-size:12.75px!important;gap:6px!important;padding-inline:8px!important;}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a::before {flex-basis:22px!important;width:22px!important;height:22px!important;}
+}
