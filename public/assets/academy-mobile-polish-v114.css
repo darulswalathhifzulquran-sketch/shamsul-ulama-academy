@@ -1,0 +1,54 @@
+/* Shamsul Ulama Islamic Academy — mobile polish v114.
+   Only visual improvements for phone-size viewports; no desktop, API or content edits. */
+@media screen and (max-width:767px) {
+  #app, #app main, #app main section { min-width:0; }
+  #app main img, #app main video, #app footer img { max-width:100%; }
+  #app main .container, #app footer .container { min-width:0; }
+  #app .academy-header-v83 .academy-head-v80 { padding-block:12px!important; }
+  #app .academy-header-v83 #mobileMenu.academy-mobile-menu-v80 {
+    touch-action:manipulation; transition:background-color .18s ease,box-shadow .18s ease,transform .18s ease;
+  }
+  #app .academy-header-v83 #mobileMenu.academy-mobile-menu-v80:active { transform:scale(.96); }
+  #app .academy-header-v83 #nav.academy-nav-v80.open {
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch;
+    box-shadow:0 22px 52px rgba(0,22,18,.28)!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {
+    min-width:0; min-height:48px!important;
+    transition:background-color .18s ease,border-color .18s ease;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:focus-visible,
+  #app .academy-header-v83 #mobileMenu:focus-visible,
+  #app main a:focus-visible, #app main button:focus-visible {
+    outline:3px solid #d5b678!important; outline-offset:3px!important;
+  }
+  #app main section .container { overflow-wrap:break-word; }
+  #app main .heading h1, #app main .home-gallery-heading h2,
+  #app main .college-features-intro h2 { hyphens:none; }
+  #app main .academy-learning-card, #app main .college-feature-card,
+  #app main #academyHomeGallery .home-gallery-card {
+    transition:box-shadow .2s ease,transform .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  #app main .academy-learning-card:active, #app main .college-feature-card:active,
+  #app main #academyHomeGallery .home-gallery-card:active { transform:scale(.992); }
+  #app main input, #app main select, #app main textarea { font-size:max(16px,1rem)!important; box-sizing:border-box; }
+  #app main button, #app main .pill, #app main input[type="submit"] { touch-action:manipulation; }
+  #app footer.academy-footer .academy-footer-links a {
+    min-height:38px; display:inline-flex; align-items:center;
+  }
+}
+@media screen and (max-width:390px) {
+  #app .academy-header-v83 .academy-head-v80 { width:calc(100% - 24px)!important; }
+  #app .academy-header-v83 .academy-identity-v80 { gap:7px!important; }
+  #app .academy-header-v83 .academy-emblem-v80 { flex-basis:49px!important; width:49px!important; height:54px!important; }
+  #app .academy-header-v83 .academy-navigation-strip-v83 { right:12px!important; }
+  #app main .home-gallery-section .home-gallery-heading h2 { font-size:clamp(26px,7.5vw,31px)!important; }
+}
+@media (prefers-reduced-motion:reduce) and (max-width:767px) {
+  #app .academy-header-v83 #mobileMenu,
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a,
+  #app main .academy-learning-card,#app main .college-feature-card,
+  #app main #academyHomeGallery .home-gallery-card { transition:none!important; }
+}
