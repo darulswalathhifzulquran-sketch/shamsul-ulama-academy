@@ -1,0 +1,50 @@
+/* Shamsul Ulama Islamic Academy | V119
+   Mobile-only scholar biography styling.
+   Removes the long antique-gold vertical divider.
+   Replaces it with a short, understated gold-accent eyebrow capsule.
+   No content, portrait, desktop, JS, dashboard or API changes. */
+@media screen and (max-width:767px) {
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-copy {
+    border-left:0!important;
+    border-inline-start:0!important;
+    border-right:0!important;
+    box-shadow:none!important;
+    padding-left:4px!important;
+    padding-inline-start:4px!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-copy::before {
+    content:none!important;
+    display:none!important;
+    border:0!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-eyebrow {
+    display:inline-flex!important;
+    width:max-content!important;
+    max-width:100%!important;
+    align-items:center!important;
+    gap:7px!important;
+    margin:0 0 11px!important;
+    padding:6px 10px!important;
+    border:1px solid rgba(175,144,82,.31)!important;
+    border-radius:999px!important;
+    background:rgba(189,157,97,.085)!important;
+    color:#886b39!important;
+    font-family:Nunito,Inter,system-ui,sans-serif!important;
+    font-weight:800!important;
+    font-size:10px!important;
+    line-height:1.25!important;
+    letter-spacing:.115em!important;
+    text-transform:uppercase!important;
+    text-align:left!important;
+  }
+  #app main section.scholar-section.scholar-section-home.scholar-editorial-v97 .scholar-eyebrow::before {
+    content:""!important;
+    display:inline-block!important;
+    width:6px!important;
+    height:6px!important;
+    flex:0 0 6px!important;
+    border-radius:50%!important;
+    background:#ae8d4f!important;
+    box-shadow:0 0 0 2px rgba(174,141,79,.11)!important;
+  }
+}
