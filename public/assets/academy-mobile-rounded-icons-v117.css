@@ -1,0 +1,105 @@
+/* Shamsul Ulama Islamic Academy — mobile-only premium rounded icon/font refinement v117.
+   Visual reference: user's curated Flaticon rounded-outline screenshots.
+   These are original, consistent inline SVG shapes: no copied or externally loaded proprietary icons.
+   Do not alter desktop navigation, content, routing, or backend. */
+@media screen and (max-width:767px) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open {
+    border-radius:20px!important;
+    border-color:#e6e9e0!important;
+    background:#fffefa!important;
+    padding:13px!important;
+    gap:8px!important;
+    box-shadow:0 19px 48px rgba(16,45,34,.19),0 4px 12px rgba(16,45,34,.05)!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open::before {
+    font-family:Nunito,Inter,system-ui,sans-serif!important;
+    font-weight:800!important;
+    font-size:10px!important;
+    letter-spacing:.13em!important;
+    color:#748476!important;
+    border-color:#ecede7!important;
+    padding-bottom:9px!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {
+    font-family:Nunito,Inter,system-ui,sans-serif!important;
+    font-size:13.5px!important;
+    font-weight:750!important;
+    letter-spacing:.005em!important;
+    line-height:1.3!important;
+    border-radius:13px!important;
+    gap:10px!important;
+    padding:10px 11px!important;
+    min-height:52px!important;
+    background:#f5f7f3!important;
+    border-color:#e5ebe3!important;
+    color:#244b3c!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a::before {
+    width:19px!important;
+    height:19px!important;
+    flex-basis:19px!important;
+    background-color:#376652!important;
+    -webkit-mask-image:var(--academy-menu-icon)!important;
+    mask-image:var(--academy-menu-icon)!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a.active,
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a[aria-current="page"] {
+    background:#194b3b!important;
+    color:#ffffff!important;
+    border-color:#194b3b!important;
+    box-shadow:0 3px 8px rgba(25,75,59,.13)!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a.active::before,
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a[aria-current="page"]::before {
+    background-color:#f1d49d!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(1) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.85%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22m3.25%2010.4%207.53-6.33a1.9%201.9%200%200%201%202.44%200l7.53%206.33%22%2F%3E%3Cpath%20d%3D%22M5.4%209.45V19a1.7%201.7%200%200%200%201.7%201.7h9.8a1.7%201.7%200%200%200%201.7-1.7V9.45%22%2F%3E%3Cpath%20d%3D%22M9.4%2020.7v-6.2h5.2v6.2%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(2) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.85%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%229%22%2F%3E%3Cpath%20d%3D%22M12%2010.8v5.5%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%227.6%22%20r%3D%22.75%22%20fill%3D%22black%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(3) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.85%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M12%206.8c-2.4-1.65-5.35-2.05-8.5-1.05V19c3.15-.95%206.1-.53%208.5%201.1%202.4-1.63%205.35-2.05%208.5-1.1V5.75c-3.15-1-6.1-.6-8.5%201.05Z%22%2F%3E%3Cpath%20d%3D%22M12%206.8v13.3%22%2F%3E%3Cpath%20d%3D%22m6.1%209%203.3.1M14.6%209.1l3.1-.1%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(4) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.85%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%3Crect%20x%3D%223.25%22%20y%3D%223.25%22%20width%3D%2217.5%22%20height%3D%2217.5%22%20rx%3D%223.25%22%2F%3E%3Ccircle%20cx%3D%228.4%22%20cy%3D%228.5%22%20r%3D%221.4%22%2F%3E%3Cpath%20d%3D%22m4.45%2017.5%204.4-4.5%203.25%203.25%202.65-2.75%204.8%205.05%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(5) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.85%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22m2.65%209.05%209.35-4.9%209.35%204.9-9.35%204.85-9.35-4.85Z%22%2F%3E%3Cpath%20d%3D%22M6.2%2011.25v4.1c3.45%203%208.15%203%2011.6%200v-4.1%22%2F%3E%3Cpath%20d%3D%22M21.35%209.15v6.15%22%2F%3E%3C%2Fsvg%3E");}
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a:nth-child(6) {--academy-menu-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.85%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M7.15%203.4H5.9a2.45%202.45%200%200%200-2.45%202.45A14.7%2014.7%200%200%200%2018.15%2020.55h.15a2.35%202.35%200%200%200%202.3-2.35v-1.25l-4.65-2.15-2.2%202.55a12.6%2012.6%200%200%201-7.1-7.1L9.2%208.05%207.15%203.4Z%22%2F%3E%3C%2Fsvg%3E");}
+  /* Replace the legacy text hamburger with the same rounded line icon family. */
+  #app .academy-header-v83 #mobileMenu.academy-mobile-menu-v80 {
+    font-size:0!important;
+    line-height:0!important;
+    display:grid!important;
+    place-items:center!important;
+    width:44px!important;
+    height:44px!important;
+    color:#ffffff!important;
+    background:#194b3b!important;
+    border:1px solid rgba(255,255,255,.12)!important;
+    border-radius:13px!important;
+    box-shadow:0 4px 13px rgba(15,65,45,.16)!important;
+  }
+  #app .academy-header-v83 #mobileMenu.academy-mobile-menu-v80::before {
+    content:"";
+    display:block;
+    width:23px;
+    height:23px;
+    background-color:#ffffff;
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M4.5%206.5h15M4.5%2012h15M4.5%2017.5h15%22%2F%3E%3C%2Fsvg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M4.5%206.5h15M4.5%2012h15M4.5%2017.5h15%22%2F%3E%3C%2Fsvg%3E");
+    -webkit-mask-repeat:no-repeat;
+    mask-repeat:no-repeat;
+    -webkit-mask-size:contain;
+    mask-size:contain;
+    -webkit-mask-position:center;
+    mask-position:center;
+  }
+}
+@media screen and (max-width:359px) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a {
+    font-size:12.5px!important;
+    padding-inline:8px!important;
+    gap:7px!important;
+    min-height:49px!important;
+  }
+  #app .academy-header-v83 #nav.academy-nav-v80.open>a::before {
+    width:17px!important;height:17px!important;flex-basis:17px!important;
+  }
+}
+@media screen and (max-width:767px) and (prefers-reduced-motion:reduce) {
+  #app .academy-header-v83 #nav.academy-nav-v80.open {animation:none!important;}
+}
