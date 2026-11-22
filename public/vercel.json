@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/login",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/dashboard",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard/:path*",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/dashboard/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/admission",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/admission",
+      "permanent": false
+    },
+    {
+      "source": "/staff/:path*",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/staff/:path*",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/api/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
