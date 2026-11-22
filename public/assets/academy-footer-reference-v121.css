@@ -1,0 +1,216 @@
+/* Version 121 — Institutional footer, inspired by the supplied University reference.
+   No third-party logos, fabricated awards, social profiles or empty legal links. */
+#app footer.academy-footer.academy-footer-v121{
+  margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+  background:#fff!important;background-image:none!important;color:#172f29!important;
+  overflow:visible!important;box-shadow:none!important
+}
+#app footer.academy-footer-v121 .academy-footer-dark-v121{
+  padding:clamp(42px,4.4vw,70px) 0 clamp(44px,4.5vw,72px)!important;
+  background:#343938!important;color:#f7f7f4!important
+}
+#app footer.academy-footer-v121 .academy-footer-layout-v121,
+#app footer.academy-footer-v121 .academy-footer-identity-v121,
+#app footer.academy-footer-v121 .academy-footer-bottom{
+  box-sizing:border-box;width:min(1390px,calc(100% - 72px))!important;
+  max-width:1390px!important;margin-left:auto!important;margin-right:auto!important
+}
+#app footer.academy-footer-v121 .academy-footer-grid{
+  display:grid!important;
+  grid-template-columns:minmax(225px,1.3fr) minmax(145px,.78fr) minmax(210px,1fr) minmax(255px,1.15fr)!important;
+  align-items:start!important;gap:clamp(26px,2.75vw,48px)!important
+}
+#app footer.academy-footer-v121 .academy-footer-about .brand{
+  display:flex!important;align-items:center!important;gap:11px!important;margin:0 0 20px!important
+}
+#app footer.academy-footer-v121 .academy-footer-about .brand-logo-wrap{
+  width:64px!important;height:70px!important;flex:0 0 64px!important
+}
+#app footer.academy-footer-v121 .academy-footer-about .brand b{
+  display:block!important;font:750 19px/1.17 'League Spartan',Arial,sans-serif!important;letter-spacing:.005em!important;
+  color:#fff!important
+}
+#app footer.academy-footer-v121 .academy-footer-about .brand small{
+  display:block!important;margin-top:5px;font:700 11px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.11em!important;color:#f0e0b8!important
+}
+#app footer.academy-footer-v121 .academy-footer-about>p{
+  max-width:310px!important;margin:0 0 22px!important;
+  font:400 14px/1.75 Inter,Arial,sans-serif!important;color:#e4e7e4!important
+}
+#app footer.academy-footer-v121 h3{
+  font:700 clamp(17px,1.27vw,20px)/1.25 Inter,Arial,sans-serif!important;
+  margin:0 0 19px!important;letter-spacing:0!important;color:#fff!important;-webkit-text-fill-color:#fff!important
+}
+#app footer.academy-footer-v121 .footer-links{
+  display:flex!important;flex-direction:column!important;gap:10px!important
+}
+#app footer.academy-footer-v121 .footer-links a,
+#app footer.academy-footer-v121 .academy-footer-about-cta-v121,
+#app footer.academy-footer-v121 .academy-footer-contact-link,
+#app footer.academy-footer-v121 .academy-footer-map-link{
+  font:500 14px/1.6 Inter,Arial,sans-serif!important;color:#f2f3f0!important;
+  text-decoration:none!important;transition:color .15s ease!important
+}
+#app footer.academy-footer-v121 .academy-footer-about-cta-v121,
+#app footer.academy-footer-v121 .academy-footer-contact-link,
+#app footer.academy-footer-v121 .academy-footer-map-link{
+  display:inline-flex!important;gap:7px!important;align-items:center!important;width:fit-content!important;
+  padding-bottom:3px!important;border-bottom:1px solid #aaa898!important
+}
+#app footer.academy-footer-v121 .footer-links a:hover,
+#app footer.academy-footer-v121 .academy-footer-about-cta-v121:hover,
+#app footer.academy-footer-v121 .academy-footer-contact-link:hover,
+#app footer.academy-footer-v121 .academy-footer-map-link:hover{
+  color:#eddbaf!important;text-decoration:underline!important;text-underline-offset:4px!important
+}
+#app footer.academy-footer-v121 .academy-footer-map-frame{
+  width:100%!important;height:175px!important;min-height:175px!important;max-height:175px!important;
+  overflow:hidden!important;box-shadow:none!important;border:1px solid #9b9e99!important;border-radius:3px!important;
+  background:#eee!important;aspect-ratio:auto!important;margin:0 0 13px!important
+}
+#app footer.academy-footer-v121 .academy-footer-map-frame iframe{display:block!important;width:100%!important;height:100%!important;border:0!important}
+#app footer.academy-footer-v121 .academy-footer-map-link{margin:0!important}
+#app footer.academy-footer-v121 .academy-footer-contact .academy-footer-call-v121{
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:6px!important;min-height:96px!important;margin-bottom:12px!important;padding:15px 12px!important;
+  border:1px solid #0e6156!important;border-radius:3px!important;
+  background:#086b62!important;color:#fff!important;text-align:center!important;text-decoration:none!important;
+  box-shadow:none!important;transition:background-color .15s ease,filter .15s ease!important
+}
+#app footer.academy-footer-v121 .academy-footer-contact .academy-footer-call-v121:hover{
+  background:#087d70!important;color:#fff!important
+}
+#app footer.academy-footer-v121 .academy-footer-call-v121 span{
+  font:500 15px/1.25 Inter,Arial,sans-serif!important;color:#fff!important
+}
+#app footer.academy-footer-v121 .academy-footer-call-v121 strong{
+  font:750 clamp(18px,1.48vw,23px)/1.2 Inter,Arial,sans-serif!important;
+  white-space:normal!important;color:#fff!important
+}
+#app footer.academy-footer-v121 .academy-footer-contact .academy-footer-call-alt-v121{
+  background:#0c625b!important;border-color:#15574f!important
+}
+#app footer.academy-footer-v121 .academy-footer-contact-label{
+  margin:17px 0 3px!important;font:750 10px/1.4 Inter,Arial,sans-serif!important;
+  letter-spacing:.12em!important;color:#f0d5a0!important
+}
+#app footer.academy-footer-v121 .academy-footer-contact p:not(.academy-footer-contact-label){
+  margin:0 0 4px!important;font:400 13px/1.6 Inter,Arial,sans-serif!important;
+  color:#e6e9e5!important
+}
+#app footer.academy-footer-v121 .academy-footer-contact-link{margin:14px 0 0!important}
+#app footer.academy-footer-v121 .academy-footer-identity-band-v121{
+  background:#fff!important;color:#193a31!important;border-bottom:1px solid #e3e7e2!important
+}
+#app footer.academy-footer-v121 .academy-footer-identity-v121{
+  display:grid!important;grid-template-columns:minmax(220px,1fr) minmax(290px,1.3fr) minmax(215px,1fr)!important;
+  gap:clamp(24px,3vw,48px)!important;align-items:center!important;
+  padding:clamp(37px,3.6vw,58px) 0!important
+}
+#app footer.academy-footer-v121 .academy-footer-signature-v121{
+  display:inline-flex!important;align-items:center!important;gap:14px!important;
+  color:#193a31!important;text-decoration:none!important;min-width:0!important
+}
+#app footer.academy-footer-v121 .academy-footer-signature-v121 img{
+  width:74px!important;height:78px!important;object-fit:contain!important;flex:0 0 74px!important
+}
+#app footer.academy-footer-v121 .academy-footer-signature-v121 strong{
+  display:block!important;font:750 20px/1.1 'League Spartan',Arial,sans-serif!important;
+  letter-spacing:.01em!important;color:#173e33!important
+}
+#app footer.academy-footer-v121 .academy-footer-signature-v121 small{
+  display:block!important;margin-top:5px!important;font:700 11px/1.3 Inter,Arial,sans-serif!important;
+  letter-spacing:.12em!important;color:#6e785f!important
+}
+#app footer.academy-footer-v121 .academy-footer-disciplines-v121{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  gap:clamp(12px,1.6vw,25px)!important;flex-wrap:wrap!important
+}
+#app footer.academy-footer-v121 .academy-footer-disciplines-v121 span{
+  font:650 13px/1.5 Inter,Arial,sans-serif!important;color:#335c4e!important;
+  white-space:normal!important;text-align:center!important
+}
+#app footer.academy-footer-v121 .academy-footer-disciplines-v121 span+span{
+  border-left:1px solid #c6d1c8!important;padding-left:clamp(12px,1.5vw,22px)!important
+}
+#app footer.academy-footer-v121 .academy-footer-affiliation{
+  display:flex!important;flex-direction:column!important;gap:3px!important;
+  align-items:flex-start!important;margin:0!important;padding:0 0 0 18px!important;
+  border:0!important;border-left:1px solid #cdd5cb!important
+}
+#app footer.academy-footer-v121 .academy-footer-affiliation>span{
+  font:750 10px/1.5 Inter,Arial,sans-serif!important;letter-spacing:.1em!important;color:#7b765e!important
+}
+#app footer.academy-footer-v121 .academy-footer-affiliation>a{
+  font:700 18px/1.35 Inter,Arial,sans-serif!important;color:#195446!important;
+  text-decoration:none!important
+}
+#app footer.academy-footer-v121 .academy-footer-affiliation>a:hover{text-decoration:underline!important}
+#app footer.academy-footer-v121 .academy-footer-affiliation>small{
+  font:450 12px/1.6 Inter,Arial,sans-serif!important;color:#5c6c64!important
+}
+#app footer.academy-footer-v121 .academy-footer-copyright-v121{
+  display:block!important;background:#fff!important;border:0!important;color:#25312c!important
+}
+#app footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom{
+  display:flex!important;justify-content:center!important;align-items:center!important;
+  gap:8px 18px!important;flex-wrap:wrap!important;text-align:center!important;
+  margin:0 auto!important;padding:19px 0 23px!important;border:0!important;
+  font:450 12px/1.6 Inter,Arial,sans-serif!important;color:#2c332f!important
+}
+#app footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-flaticon-credit-v118{
+  font:400 11px/1.5 Inter,Arial,sans-serif!important;color:#65746c!important;
+  text-decoration:underline!important;text-underline-offset:3px!important
+}
+@media(max-width:1130px){
+ #app footer.academy-footer-v121 .academy-footer-grid{
+   grid-template-columns:minmax(230px,1.15fr) minmax(150px,.7fr) minmax(245px,1fr)!important
+ }
+ #app footer.academy-footer-v121 .academy-footer-map{grid-column:2!important}
+ #app footer.academy-footer-v121 .academy-footer-contact{grid-column:3!important;grid-row:1 / span 2!important}
+ #app footer.academy-footer-v121 .academy-footer-identity-v121{
+   grid-template-columns:minmax(210px,1fr) minmax(230px,1fr)!important;row-gap:20px!important
+ }
+ #app footer.academy-footer-v121 .academy-footer-affiliation{grid-column:1 / -1!important;max-width:520px!important}
+}
+@media(max-width:767px){
+ #app footer.academy-footer-v121 .academy-footer-dark-v121{padding:37px 0 41px!important}
+ #app footer.academy-footer-v121 .academy-footer-layout-v121,
+ #app footer.academy-footer-v121 .academy-footer-identity-v121,
+ #app footer.academy-footer-v121 .academy-footer-bottom{
+   width:calc(100% - 40px)!important;max-width:100%!important
+ }
+ #app footer.academy-footer-v121 .academy-footer-grid{
+   grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:32px 20px!important
+ }
+ #app footer.academy-footer-v121 .academy-footer-about{grid-column:1 / -1!important}
+ #app footer.academy-footer-v121 .academy-footer-links{grid-column:1!important}
+ #app footer.academy-footer-v121 .academy-footer-map{grid-column:2!important;grid-row:auto!important}
+ #app footer.academy-footer-v121 .academy-footer-contact{grid-column:1 / -1!important;grid-row:auto!important}
+ #app footer.academy-footer-v121 .academy-footer-contact .academy-footer-call-v121{
+   min-height:79px!important;margin-bottom:11px!important
+ }
+ #app footer.academy-footer-v121 .academy-footer-identity-v121{
+   grid-template-columns:1fr!important;gap:23px!important;padding:34px 0!important
+ }
+ #app footer.academy-footer-v121 .academy-footer-affiliation{grid-column:1!important}
+ #app footer.academy-footer-v121 .academy-footer-disciplines-v121{justify-content:flex-start!important}
+ #app footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom{
+   padding:18px 0 24px!important;font-size:11px!important
+ }
+}
+@media(max-width:420px){
+ #app footer.academy-footer-v121 .academy-footer-grid{grid-template-columns:1fr!important;gap:29px!important}
+ #app footer.academy-footer-v121 .academy-footer-about,
+ #app footer.academy-footer-v121 .academy-footer-links,
+ #app footer.academy-footer-v121 .academy-footer-map,
+ #app footer.academy-footer-v121 .academy-footer-contact{
+   grid-column:1!important;grid-row:auto!important
+ }
+ #app footer.academy-footer-v121 .footer-links{
+   display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important
+ }
+ #app footer.academy-footer-v121 .academy-footer-map-frame{height:185px!important;min-height:185px!important}
+ #app footer.academy-footer-v121 .academy-footer-disciplines-v121{gap:9px 13px!important}
+ #app footer.academy-footer-v121 .academy-footer-disciplines-v121 span{font-size:12px!important}
+}
