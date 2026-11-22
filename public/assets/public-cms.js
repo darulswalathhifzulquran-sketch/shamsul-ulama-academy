@@ -15,24 +15,13 @@ function applySettings(s){
  document.documentElement.dataset.academyTheme=s.theme_style||'classic';
  const heroVideo=document.getElementById('academyHomeVideo'),heroPhoto=document.getElementById('academyHomeFallback'),heroEmbed=document.getElementById('academyHomeEmbed'),heroFrame=heroVideo?.closest('.academy-video-hero');
  if(heroPhoto){
-   // Never display an old or deleted Academy photo as the selected video's preview.
-   // Frame 31 is taken from the current video; 13/14 are the identical earlier clip.
-   const mobilePreview=window.matchMedia('(max-width: 1150px), (hover: none) and (pointer: coarse)').matches;
-   const previewId=(mobilePreview&&Number(s.home_mobile_video_gallery_id||0))?Number(s.home_mobile_video_gallery_id):Number(s.home_video_gallery_id||0);
-   const posters={13:'/assets/academy-video-poster-v78.jpg',14:'/assets/academy-video-poster-v78.jpg',31:'/assets/academy-video-poster-selected-31-v86.jpg'};
-   const poster=posters[previewId]||'';
-   const fallback=String(s.home_photo_url||'').trim();
-   // Unknown/new video: show a neutral background until its own first frame, not an unrelated image.
-   const next=previewId?poster:(fallback&&safeMedia(fallback)?fallback:'');
-   if(next){
-     if(heroPhoto.getAttribute('src')!==next)heroPhoto.src=next;
-     heroPhoto.alt=previewId?'Preview frame from the selected Academy video':'Approved Academy homepage photograph';
-     heroPhoto.hidden=!!(heroVideo&&heroVideo.readyState>=2&&!heroVideo.paused);
-   }else{
-     heroPhoto.hidden=true;
-     heroPhoto.removeAttribute('src');
-   }
-   heroPhoto.onerror=()=>{heroPhoto.hidden=true;heroPhoto.removeAttribute('src');};
+   // Permanent clean loading still: no slide lettering, native cast UI, or gold bars.
+   // The original video and Usthad's desktop/mobile selections remain unchanged.
+   const poster='https://shamsul-ulama-w2kv.hatchable.site/assets/academy-clean-video-loading-v128.webp';
+   if(heroPhoto.getAttribute('src')!==poster)heroPhoto.src=poster;
+   heroPhoto.alt='Academy students learning the Qur’an';
+   heroPhoto.hidden=!!(heroVideo&&heroVideo.readyState>=3&&!heroVideo.paused&&!heroFrame?.classList.contains('academy-hero-awaiting-v127'));
+   heroPhoto.onerror=()=>{if(heroPhoto.getAttribute('src')===poster){heroPhoto.src='/assets/learning-school-commons.jpg';}else heroPhoto.hidden=true;};
  }
  const mobileHero=window.matchMedia('(max-width: 1150px), (hover: none) and (pointer: coarse)').matches;
  const intendedId=mobileHero&&Number(s.home_mobile_video_gallery_id||0)?Number(s.home_mobile_video_gallery_id):Number(s.home_video_gallery_id||0);
