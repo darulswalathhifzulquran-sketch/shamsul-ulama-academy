@@ -28,8 +28,7 @@ const selectors=[
  '#app .contact-section > .container > h2',
  '#app .contact-card',
  '#app .gallery > *',
- '#app .academy-footer-grid > *',
- '#app .academy-footer-bottom'
+ '#app .academy-footer-grid > *'
 ];
 let direction='down',lastY=window.scrollY,queued=false;
 window.addEventListener('scroll',()=>{
