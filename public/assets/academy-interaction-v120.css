@@ -1,0 +1,59 @@
+/* V120: restrained interaction, campus link and office typography. */
+#app .college-feature-card{position:relative!important;cursor:pointer}
+#app .college-feature-card .college-feature-link{position:static!important}
+#app .college-feature-card .college-feature-link::after{content:"";position:absolute;inset:0;z-index:5;border-radius:inherit;cursor:pointer}
+#app .college-feature-card:focus-within{outline:2px solid #9c8044;outline-offset:3px}
+#app .academy-learning-card,#app .home-gallery-card[role="button"],#app #publicGallery img[role="button"]{cursor:pointer;touch-action:manipulation}
+#app a[href],#app button:not(:disabled),#app [role="button"]:not([aria-disabled="true"]){cursor:pointer;-webkit-tap-highlight-color:rgba(161,130,69,.24)}
+#app a[href]:focus-visible,#app button:focus-visible,#app [role="button"]:focus-visible{outline:2px solid #ad8c49!important;outline-offset:3px!important}
+#app a[href]:active,#app button:not(:disabled):active,#app [role="button"]:active,
+#app .college-feature-card.v120-pressed,#app .academy-learning-card.v120-pressed,#app .home-gallery-card.v120-pressed,#app #publicGallery img.v120-pressed{
+  filter:brightness(.88)!important;transition-duration:0ms!important
+}
+#app .college-feature-card:active,#app .college-feature-card.v120-pressed,
+#app .academy-learning-card:active,#app .academy-learning-card.v120-pressed,
+#app #academyHomeGallery .home-gallery-card[role="button"]:active,#app #academyHomeGallery .home-gallery-card.v120-pressed{
+  border-color:#a88748!important;box-shadow:inset 0 0 0 2px #a88748!important;filter:brightness(.92)!important
+}
+@media(hover:hover) and (pointer:fine){
+ #app .college-feature-card:hover,#app .academy-learning-card:hover{border-color:#a88748!important}
+ #app #academyHomeGallery .home-gallery-card[role="button"]:hover{border-color:#d1b476!important}
+ #app #publicGallery img[role="button"]:hover{filter:brightness(.95)}
+}
+#app #academyHomeGallery.academy-feature-rotate-v95 .academy-feature-arrive-v95 .showcase-media>img{animation:none!important}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card:hover,#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card:active{transform:none!important}
+#app #academyHomeGallery.academy-feature-rotate-v95 .home-gallery-card:hover .showcase-media>img{transform:none!important}
+#app main .academy-home-intro.academy-heritage-continuation-v98 .academy-intro-campus-v120{
+ display:inline-flex!important;align-items:center!important;gap:9px!important;
+ width:fit-content!important;max-width:100%!important;min-height:40px!important;
+ padding:3px 0!important;margin:0!important;background:transparent!important;
+ color:#285247!important;text-decoration:none!important;
+ font:600 14px/1.5 Inter,Arial,sans-serif!important;letter-spacing:0!important
+}
+#app .academy-intro-campus-v120 svg{width:26px;height:26px;flex:none;color:#846632}
+#app .academy-intro-campus-v120 .academy-campus-external-v120{font-size:15px;color:#846632;margin-left:2px}
+#app .academy-intro-campus-v120:hover span:not(.academy-campus-external-v120){text-decoration:underline;text-underline-offset:4px}
+@media(min-width:901px){
+ #app .academy-header-v83 .academy-admissions-inner-v85{gap:6px!important}
+ #app .academy-header-v83 .academy-admissions-eyebrow-v85{font-size:12px!important;letter-spacing:.13em!important}
+ #app .academy-header-v83 .academy-admissions-title-v85{font-size:clamp(23px,1.8vw,30px)!important;line-height:1.18!important}
+ #app .academy-header-v83 .academy-admissions-phone-v85{font-size:17px!important}
+ #app .academy-header-v83 .academy-admissions-phone-v85 .academy-phone-text-v93{font-size:17px!important}
+ #app .academy-header-v83 .academy-admissions-tel-label-v85,#app .academy-header-v83 .academy-admissions-hours-v85,#app .academy-header-v83 .academy-admissions-hours-v85 strong{font-size:13px!important}
+ #app .academy-header-v83 .academy-admissions-link-v85{font-size:13px!important}
+}
+@media(min-width:768px) and (max-width:900px){
+ #app .academy-header-v83 .academy-admissions-eyebrow-v85{display:block!important;font-size:11px!important}
+ #app .academy-header-v83 .academy-admissions-title-v85{font-size:20px!important}
+ #app .academy-header-v83 .academy-admissions-phone-v85{font-size:15px!important}
+ #app .academy-header-v83 .academy-admissions-hours-v85,#app .academy-header-v83 .academy-admissions-hours-v85 strong,#app .academy-header-v83 .academy-admissions-link-v85{font-size:12px!important}
+}
+.academy-photo-dialog-v120{box-sizing:border-box;position:fixed;inset:0;margin:auto;width:min(94vw,1020px);max-width:none;max-height:92dvh;padding:0;border:1px solid #cfc9b9;border-radius:9px;background:#f9f8f3;color:#193e34;overflow:auto;font:500 14px/1.5 Inter,system-ui,sans-serif;box-shadow:0 14px 45px #0004}
+.academy-photo-dialog-v120::backdrop{background:rgba(13,28,24,.80)}
+.academy-photo-dialog-v120 header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 16px;border-bottom:1px solid #ddd8ca}
+.academy-photo-dialog-v120 header h2{margin:0;font:600 16px/1.4 Inter,system-ui,sans-serif;color:#193e34}
+.academy-photo-dialog-v120 button{width:40px;height:40px;flex:none;background:transparent;color:#193e34;border:1px solid #cfc9b9;border-radius:5px;font:400 25px/1 system-ui;cursor:pointer}
+.academy-photo-dialog-v120 button:active{background:#e2dfd4}
+.academy-photo-dialog-v120 button:focus-visible{outline:2px solid #9c8044;outline-offset:2px}
+.academy-photo-dialog-v120 img{display:block;width:100%;height:auto;max-height:calc(92dvh - 74px);object-fit:contain;background:#192b25}
+@media(prefers-reduced-motion:reduce){#app .college-feature-card,#app .academy-learning-card,#app .home-gallery-card{transition:none!important;animation:none!important}}
