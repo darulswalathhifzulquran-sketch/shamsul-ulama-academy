@@ -337,8 +337,9 @@ async function applyMediaPlacements(){
    const source=item&&(item.image_url||item.media_url);
    return source&&safeMedia(source)?source:null;
   };
+  // Preserve the owner-supplied official Academy emblem pixel-for-pixel in public branding.
+  // The administrator's optional media placements still serve other content slots.
   const sourceSlots={
-   '/assets/academy-owner-official-logo.png':'brand_logo',
    '/assets/shamsul-ulama-portrait-main.jpg':'scholar_home',
    '/assets/shamsul-ulama-portrait-legacy.jpg':'scholar_profile',
    '/assets/quran-photo.jpg':'about_quran',
