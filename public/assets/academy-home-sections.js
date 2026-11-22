@@ -65,7 +65,7 @@ function featuredGrid(root,cards){
  const mod=i=>(i%nodes.length+nodes.length)%nodes.length;
  const movable=(node)=>{const v=node.querySelector('video');return !v||v.paused||v.ended;};
  function clear(){if(timer!==null){clearTimeout(timer);timer=null;}}
- function canRotate(){return !disposed&&root.isConnected&&nodes.length>1&&inViewport&&document.visibilityState==='visible'&&!reduced()&&nodes.every(movable);}
+ function canRotate(){return !disposed&&root.isConnected&&nodes.length>1&&inViewport&&document.visibilityState==='visible'&&!reduced()&&nodes.every(movable)&&!document.querySelector('dialog.academy-photo-dialog-v120[open]')&&!root.matches(':active')&&!root.querySelector(':focus-visible');}
  function arrange(animate){
   if(disposed)return;
   const order=[nodes[featured],...nodes.filter((_,i)=>i!==featured)];
@@ -78,8 +78,9 @@ function featuredGrid(root,cards){
      el.tabIndex=0;
      el.setAttribute('aria-label','Show '+(cards[i].title||cards[i].caption||'Academy photo')+' as the large photo');
     }else{
-     el.removeAttribute('role');el.removeAttribute('aria-label');el.tabIndex=-1;
-     const img=el.querySelector('img');if(img)img.loading='eager';
+     const img=el.querySelector('img');
+     if(img){img.loading='eager';el.setAttribute('role','button');el.tabIndex=0;el.setAttribute('aria-label','View full photo: '+(cards[i].title||cards[i].caption||'Academy photo'));}
+     else{el.removeAttribute('role');el.removeAttribute('aria-label');el.tabIndex=-1;}
     }
   });
   root.replaceChildren(...order);
@@ -105,9 +106,13 @@ function featuredGrid(root,cards){
   featured=mod(i);arrange(true);schedule();
  }
  nodes.forEach((el,i)=>{
-  el.addEventListener('click',e=>{if(i!==featured&&!e.target.closest('a,button,video,iframe'))choose(i);});
-  el.addEventListener('keydown',e=>{if(i!==featured&&(e.key==='Enter'||e.key===' ')){e.preventDefault();choose(i);}});
+  function activate(){if(i!==featured){choose(i);return;}const img=el.querySelector('.showcase-media img');if(img)window.AcademyPhotoPreview?.open(img,el);}
+  el.addEventListener('click',e=>{if(!e.target.closest('a,button,video,iframe'))activate();});
+  el.addEventListener('keydown',e=>{if(e.target===el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();activate();}});
  });
+ root.addEventListener('focusin',clear);root.addEventListener('focusout',()=>setTimeout(schedule,0));
+ root.addEventListener('pointerdown',clear,{passive:true});root.addEventListener('pointerup',()=>setTimeout(schedule,0),{passive:true});root.addEventListener('pointercancel',schedule,{passive:true});
+ window.addEventListener('academy:photo-preview-closed',schedule);
  root.addEventListener('play',clear,true);
  root.addEventListener('pause',schedule,true);
  root.addEventListener('ended',schedule,true);
@@ -124,7 +129,7 @@ function featuredGrid(root,cards){
  function cleanup(){
   if(disposed)return;
   disposed=true;clear();inViewObserver?.disconnect();
-  document.removeEventListener('visibilitychange',onVisibility);
+  document.removeEventListener('visibilitychange',onVisibility);window.removeEventListener('academy:photo-preview-closed',schedule);
  }
  carouselCleanup=cleanup;
  arrange(false);schedule();
