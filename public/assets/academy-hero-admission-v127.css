@@ -1,0 +1,108 @@
+/* V127 — Intentional clean hero loading and one admission CTA.
+   Retains approved video and existing CMS, without additional homepage sections. */
+#app main>.academy-video-hero.academy-hero-awaiting-v127{background:#123b2f!important}
+#app main>.academy-video-hero.academy-hero-awaiting-v127>#academyHomeFallback{
+  display:block!important;
+  width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center center!important;
+  filter:none!important;opacity:1!important;
+  transform:scale(1.48)!important;
+  transform-origin:center center!important;
+  background:#123b2f!important;
+}
+#app main>.academy-video-hero.academy-hero-awaiting-v127>#academyHomeFallback[hidden]{display:none!important}
+#app main>.academy-video-hero.academy-hero-awaiting-v127>#academyHomeVideo{
+  opacity:0!important;pointer-events:none!important
+}
+#app main>.academy-video-hero.academy-hero-awaiting-v127>
+  :is(.academy-video-hero-shade,.academy-hero-scroll,.academy-video-play-action,.academy-home-playback-status){
+  display:none!important
+}
+@media(max-width:767px){
+ #app main>.academy-video-hero.academy-hero-awaiting-v127>#academyHomeFallback{
+   object-position:center center!important;transform:scale(1.08)!important
+ }
+}
+#app main>section.academy-admission-cta-v127{
+  --cta-dark:#034c33;--cta-bright:#00833f;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  margin:0!important;padding:clamp(55px,6.5vw,115px) 0!important;
+  background:var(--cta-dark)!important;color:#fff!important;
+  border:0!important;border-radius:0!important;
+  isolation:isolate;position:relative;overflow:hidden;
+}
+#app main>section.academy-admission-cta-v127::before{
+  content:"";position:absolute;inset:0;
+  background:var(--cta-bright);clip-path:polygon(0 0,40% 0,24% 100%,0 100%);
+  pointer-events:none;z-index:-1
+}
+#app main .academy-admission-cta-inner-v127{
+  width:var(--academy-wide-content-v126,min(1800px,calc(100% - 48px)))!important;
+  max-width:var(--academy-wide-max-v126,2280px)!important;
+  margin-inline:auto!important;display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(0,.85fr);
+  gap:clamp(26px,6vw,100px);
+  align-items:center;box-sizing:border-box
+}
+#app main .academy-admission-cta-inner-v127>*{min-width:0}
+#app main .academy-admission-cta-kicker-v127{
+  display:block;font:750 clamp(11px,.85vw,14px)/1.4 Inter,Arial,sans-serif;
+  letter-spacing:.15em;text-transform:uppercase;color:#ddf2e5;margin-bottom:15px
+}
+#app main .academy-admission-cta-inner-v127 h2{
+  font:800 clamp(36px,4vw,72px)/1.07 'League Spartan',Inter,Arial,sans-serif!important;
+  letter-spacing:-.04em;max-width:14ch;margin:0 0 18px;color:#fff!important;
+  overflow-wrap:normal
+}
+#app main .academy-admission-cta-inner-v127 p{
+  font:450 clamp(16px,1.15vw,21px)/1.65 Inter,Arial,sans-serif!important;
+  color:#e5f0e8!important;margin:0;max-width:60ch
+}
+#app main .academy-admission-cta-actions-v127{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:stretch;justify-content:flex-start
+}
+#app main .academy-admission-cta-actions-v127 a{
+  min-width:0;min-height:56px;max-width:100%;
+  padding:14px clamp(18px,2vw,28px);
+  display:inline-flex;justify-content:center;align-items:center;gap:12px;
+  font:750 clamp(14px,1vw,17px)/1.25 Inter,Arial,sans-serif;
+  text-decoration:none!important;border-radius:6px;box-sizing:border-box;
+  transition:background-color .17s ease,transform .15s ease;
+  text-align:center
+}
+#app main .academy-admission-cta-actions-v127 .academy-admission-cta-primary-v127{
+  background:#fff;color:#034c33;border:1px solid #fff
+}
+#app main .academy-admission-cta-actions-v127 .academy-admission-cta-secondary-v127{
+  background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)
+}
+@media(hover:hover){
+ #app main .academy-admission-cta-primary-v127:hover{background:#e6f0e9!important}
+ #app main .academy-admission-cta-secondary-v127:hover{background:rgba(255,255,255,.13)!important}
+}
+#app main .academy-admission-cta-actions-v127 a:active{transform:translateY(2px)!important}
+#app main .academy-admission-cta-actions-v127 a:focus-visible{
+  outline:3px solid #fff;outline-offset:4px
+}
+@media(max-width:900px){
+ #app main .academy-admission-cta-inner-v127{
+   grid-template-columns:minmax(0,1fr)!important;gap:28px!important
+ }
+}
+@media(max-width:600px){
+ #app main>section.academy-admission-cta-v127{
+   padding:60px 0!important
+ }
+ #app main>section.academy-admission-cta-v127::before{
+   clip-path:polygon(0 0,48% 0,12% 100%,0 100%)
+ }
+ #app main .academy-admission-cta-inner-v127{
+   width:calc(100% - 36px)!important;max-width:100%!important;
+   grid-template-columns:minmax(0,1fr)!important
+ }
+ #app main .academy-admission-cta-inner-v127 h2{font-size:clamp(35px,9vw,49px)!important}
+ #app main .academy-admission-cta-actions-v127{
+   display:grid;grid-template-columns:minmax(0,1fr);width:100%
+ }
+ #app main .academy-admission-cta-actions-v127 a{width:100%;min-height:50px}
+}
