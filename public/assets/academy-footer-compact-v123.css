@@ -1,0 +1,37 @@
+/* V123 — compact white identity band and copyright strip, without removing content */
+#app footer.academy-footer.academy-footer-v121 .academy-footer-identity-band-v121{
+  margin:0!important;padding:0!important;min-height:0!important;height:auto!important;
+}
+#app footer.academy-footer.academy-footer-v121 .academy-footer-identity-band-v121 .academy-footer-identity-v121{
+  padding:7px 0!important;
+  min-height:0!important;height:auto!important;
+  align-items:center!important;
+  row-gap:10px!important;
+}
+#app footer.academy-footer.academy-footer-v121 .academy-footer-identity-v121 .academy-footer-signature-v121{
+  margin:0!important;padding:0!important;min-height:0!important;
+}
+#app footer.academy-footer.academy-footer-v121 .academy-footer-identity-v121 .academy-footer-signature-v121 img{
+  margin:0!important;padding:0!important;
+}
+#app footer.academy-footer.academy-footer-v121 .academy-footer-copyright-v121,
+#app footer.academy-footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom{
+  min-height:0!important;
+}
+#app footer.academy-footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom{
+  padding:8px 0 10px!important;
+  margin-top:0!important;margin-bottom:0!important;
+}
+@media(max-width:1130px) and (min-width:768px){
+  #app footer.academy-footer.academy-footer-v121 .academy-footer-identity-band-v121 .academy-footer-identity-v121{
+    padding:11px 0!important;row-gap:10px!important;
+  }
+}
+@media(max-width:767px){
+  #app footer.academy-footer.academy-footer-v121 .academy-footer-identity-band-v121 .academy-footer-identity-v121{
+    padding:15px 0!important;row-gap:14px!important;
+  }
+  #app footer.academy-footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom{
+    padding:9px 0 11px!important;
+  }
+}
