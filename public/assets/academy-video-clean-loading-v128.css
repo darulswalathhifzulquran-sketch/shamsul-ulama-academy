@@ -1,0 +1,31 @@
+/* V128 — fixed original-photo loading screen.
+   This file deliberately overrides the v127 1.48x zoom which cropped the old text.
+   No artificial decorations, cast button or embedded overlay is shown while loading. */
+#app main > section.academy-video-hero.academy-hero-awaiting-v127 > img#academyHomeFallback:not([hidden]){
+  display:block!important;
+  position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  max-width:none!important;
+  opacity:1!important;visibility:visible!important;
+  transform:none!important;
+  scale:1!important;
+  filter:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  background:#123b2f!important
+}
+#app main > section.academy-video-hero.academy-hero-awaiting-v127 > img#academyHomeFallback[hidden]{
+  display:none!important
+}
+#app main > section.academy-video-hero.academy-hero-awaiting-v127 :is(.academy-video-hero-shade,.academy-hero-scroll,.academy-home-playback-status,.academy-video-play-action){
+  display:none!important
+}
+@media(max-width:767px){
+ #app main > section.academy-video-hero.academy-hero-awaiting-v127 > img#academyHomeFallback:not([hidden]){
+   object-fit:cover!important;
+   object-position:center center!important;
+   transform:none!important
+ }
+}
