@@ -270,7 +270,9 @@ async function gallery(){
      element=document.createElement('video');element.src=media.image_url;element.controls=true;element.preload='metadata';element.playsInline=true;
     }
    }else{
-    element=document.createElement('img');element.src=media.image_url;element.alt=media.alt_text||media.caption||'Academy photo';element.loading='lazy';
+    element=document.createElement('img');element.src=media.image_url;element.alt=media.alt_text||media.caption||'Academy photo';element.loading='lazy';element.tabIndex=0;element.setAttribute('role','button');element.setAttribute('aria-label','View full photo: '+element.alt);
+    const open=()=>window.AcademyPhotoPreview?.open(element,element);
+    element.addEventListener('click',open);element.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
    }
    const caption=document.createElement('figcaption');caption.textContent=media.caption||'Shamsul Ulama Islamic Academy';
    fig.append(element,caption);root.append(fig);
