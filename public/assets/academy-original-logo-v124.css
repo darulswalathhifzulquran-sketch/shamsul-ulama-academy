@@ -1,0 +1,87 @@
+/* V124 — original academy emblem everywhere, no duplicate white-footer logo.
+   The image source is the untouched owner-provided PNG, not a recreated icon. */
+#app .academy-header-v83 .academy-identity-v80 .academy-emblem-v80{
+  background:#fff!important;
+  border:0!important;
+  overflow:visible!important;
+  box-shadow:none!important;
+}
+#app .academy-header-v83 .academy-identity-v80 img.academy-logo-v80{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+  transform:none!important;
+  background:#fff!important;
+}
+#app footer.academy-footer-v121 .academy-footer-about .brand-logo-wrap{
+  display:grid!important;
+  place-items:center!important;
+  width:88px!important;
+  height:94px!important;
+  flex:0 0 88px!important;
+  border-radius:3px!important;
+  background:#fff!important;
+  padding:1px!important;
+  overflow:hidden!important;
+  border:0!important;
+}
+#app footer.academy-footer-v121 .academy-footer-about .brand-logo{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#fff!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+#app footer.academy-footer-v121 .academy-footer-identity-single-v124{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.2fr) minmax(235px,.8fr)!important;
+  gap:clamp(24px,4vw,66px)!important;
+  width:min(880px,calc(100% - 60px))!important;
+  max-width:880px!important;
+  margin:0 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:11px 0!important;
+}
+#app footer.academy-footer-v121 .academy-footer-identity-single-v124 .academy-footer-disciplines-v121{
+  justify-content:flex-end!important;
+  gap:clamp(10px,1.45vw,20px)!important;
+  width:100%!important;
+}
+#app footer.academy-footer-v121 .academy-footer-identity-single-v124 .academy-footer-disciplines-v121 span{
+  font-size:12px!important;
+}
+#app footer.academy-footer-v121 .academy-footer-identity-single-v124 .academy-footer-affiliation{
+  grid-column:auto!important;
+  max-width:100%!important;
+  margin:0!important;
+}
+@media(max-width:767px){
+  #app footer.academy-footer-v121 .academy-footer-identity-single-v124{
+    grid-template-columns:1fr!important;
+    gap:13px!important;
+    padding:15px 0!important;
+    width:calc(100% - 40px)!important;
+  }
+  #app footer.academy-footer-v121 .academy-footer-identity-single-v124 .academy-footer-disciplines-v121{
+    justify-content:flex-start!important;
+  }
+  #app footer.academy-footer-v121 .academy-footer-about .brand-logo-wrap{
+    width:78px!important;height:83px!important;flex-basis:78px!important;
+  }
+}
+@media(max-width:420px){
+  #app footer.academy-footer-v121 .academy-footer-identity-single-v124 .academy-footer-disciplines-v121{
+    gap:8px 12px!important;
+  }
+  #app footer.academy-footer-v121 .academy-footer-identity-single-v124 .academy-footer-disciplines-v121 span{
+    font-size:11px!important;
+  }
+}
