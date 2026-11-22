@@ -13,8 +13,7 @@
   'main > section.college-features:not(.college-features-hub) .college-feature-card',
   'main > section.academy-learning-home .academy-learning-heading',
   'main > section.academy-learning-home .academy-learning-card',
-  'footer.academy-footer .academy-footer-grid > *',
-  'footer.academy-footer .academy-footer-bottom'
+  'footer.academy-footer .academy-footer-grid > *'
  ];
  function stop(){if(observer){observer.disconnect();observer=null;}}
  function setup(){
