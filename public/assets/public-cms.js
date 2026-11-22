@@ -13,7 +13,7 @@ function setLink(el,href,text){if(!el)return;el.href=href;if(text)el.textContent
 function applySettings(s){
  if(!s)return;
  document.documentElement.dataset.academyTheme=s.theme_style||'classic';
- const heroVideo=document.getElementById('academyHomeVideo'),heroPhoto=document.getElementById('academyHomeFallback'),heroEmbed=document.getElementById('academyHomeEmbed');
+ const heroVideo=document.getElementById('academyHomeVideo'),heroPhoto=document.getElementById('academyHomeFallback'),heroEmbed=document.getElementById('academyHomeEmbed'),heroFrame=heroVideo?.closest('.academy-video-hero');
  if(heroPhoto){
    // Never display an old or deleted Academy photo as the selected video's preview.
    // Frame 31 is taken from the current video; 13/14 are the identical earlier clip.
@@ -65,9 +65,10 @@ function applySettings(s){
      }else fallback(reason);
    };
    const hideControl=()=>{if(playButton)playButton.hidden=true;};
-   const showControl=()=>{if(playButton)playButton.hidden=false;};
+   const showControl=()=>{heroFrame?.classList.remove('academy-hero-awaiting-v127');if(playButton)playButton.hidden=false;};
    const fallback=(reason='')=>{
      if(!isCurrent())return;
+     heroFrame?.classList.add('academy-hero-awaiting-v127');
      heroVideo.style.opacity='0';heroVideo.hidden=true;heroEmbed.hidden=true;
      if(heroPhoto)heroPhoto.hidden=!heroPhoto.getAttribute('src');
      hideControl();
@@ -77,6 +78,7 @@ function applySettings(s){
      if(!isCurrent())return;
      heroVideo.hidden=false;heroVideo.style.opacity='1';heroEmbed.hidden=true;
      if(heroPhoto)heroPhoto.hidden=true;
+     heroFrame?.classList.remove('academy-hero-awaiting-v127');
      hideControl();report('playing');
    };
    function play(){
@@ -98,10 +100,10 @@ function applySettings(s){
    heroVideo.onloadeddata=()=>{
       if(!isCurrent())return;
       if(stallTimer){clearTimeout(stallTimer);stallTimer=null;}
-      // The first decoded video frame replaces the preview immediately.
-      // Playback has already been requested when src was assigned.
-      heroVideo.hidden=false;heroVideo.style.opacity='1';
-      if(heroPhoto)heroPhoto.hidden=true;
+      // Keep the clean preview image until playback actually starts.
+      // A decoded first frame alone may still stall on weak connections.
+      heroVideo.hidden=false;heroVideo.style.opacity='0';
+      if(heroPhoto)heroPhoto.hidden=!heroPhoto.getAttribute('src');
     };
    heroVideo.onerror=()=>{
      if(!isCurrent())return;
@@ -406,13 +408,14 @@ function primeHomepageVideo(){
   video.muted=true;video.defaultMuted=true;video.setAttribute('muted','');
   video.playsInline=true;video.preload='auto';
   video.hidden=false;video.style.opacity='0';
-  video.addEventListener('loadeddata',()=>{if(video.isConnected&&video.readyState>=2){video.style.opacity='1';if(photo)photo.hidden=true;}},{once:true});
-  video.addEventListener('playing',()=>{if(video.isConnected){video.style.opacity='1';if(photo)photo.hidden=true;window.__academyHeroState={state:'playing',selectedId:Number(data.id)};}},{once:true});
+  video.addEventListener('loadeddata',()=>{if(video.isConnected&&video.readyState>=2){video.style.opacity='0';if(photo)photo.hidden=!photo.getAttribute('src');}},{once:true});
+  video.addEventListener('playing',()=>{if(video.isConnected){video.style.opacity='1';if(photo)photo.hidden=true;video.closest('.academy-video-hero')?.classList.remove('academy-hero-awaiting-v127');window.__academyHeroState={state:'playing',selectedId:Number(data.id)};}},{once:true});
   video.src=data.url;video.load();
   video.play().catch(()=>{
     const button=$('academyHeroPlayButton');
     if(button){
       button.hidden=false;
+      video.closest('.academy-video-hero')?.classList.remove('academy-hero-awaiting-v127');
       button.onclick=()=>{video.muted=true;video.play().catch(()=>{});};
     }
   });
