@@ -1,0 +1,55 @@
+/* V122 | Footer copyright visibility and compact, deliberate bottom spacing.
+   Copyright is never a scroll-reveal target: it must remain visible at page bottom. */
+#app footer.academy-footer-v121 .academy-footer-copyright-v121{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;min-height:0!important;
+  margin:0!important;padding:0!important;
+  background:#fff!important;
+  border:0!important;
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;translate:none!important;
+}
+#app footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom,
+html.academy-motion-on #app footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom[data-academy-enter]{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  align-items:center!important;
+  width:min(1390px,calc(100% - 48px))!important;
+  max-width:1390px!important;
+  height:auto!important;min-height:0!important;
+  margin:0 auto!important;
+  padding:12px 0 15px!important;
+  border:0!important;
+  gap:5px 16px!important;
+  background:transparent!important;
+  color:#26352e!important;
+  font:500 13px/1.5 Inter,Arial,sans-serif!important;
+  text-align:center!important;
+  letter-spacing:0!important;
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;translate:none!important;
+  animation:none!important;
+  transition:none!important;
+  filter:none!important
+}
+#app footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom span{
+  display:inline!important;position:static!important;
+  margin:0!important;padding:0!important;
+  color:#26352e!important;
+  opacity:1!important;visibility:visible!important;
+  font:inherit!important;text-align:center!important
+}
+#app footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-flaticon-credit-v118{
+  display:inline-flex!important;align-items:center!important;
+  margin:0!important;padding:0!important;
+  color:#566960!important;opacity:1!important;visibility:visible!important
+}
+@media(max-width:767px){
+ #app footer.academy-footer-v121 .academy-footer-copyright-v121 .academy-footer-bottom{
+   padding:12px 0 15px!important;font-size:11.5px!important;line-height:1.5!important
+ }
+}
