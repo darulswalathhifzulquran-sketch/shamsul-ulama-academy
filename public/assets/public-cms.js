@@ -17,7 +17,7 @@ function applySettings(s){
  if(heroPhoto){
    // Permanent clean loading still: no slide lettering, native cast UI, or gold bars.
    // The original video and Usthad's desktop/mobile selections remain unchanged.
-   const poster='https://shamsul-ulama-w2kv.hatchable.site/assets/academy-clean-video-loading-v128.webp';
+   const poster='/assets/academy-clean-video-loading-v128.webp';
    if(heroPhoto.getAttribute('src')!==poster)heroPhoto.src=poster;
    heroPhoto.alt='Academy students learning the Qur’an';
    heroPhoto.hidden=!!(heroVideo&&heroVideo.readyState>=3&&!heroVideo.paused&&!heroFrame?.classList.contains('academy-hero-awaiting-v127'));
