@@ -1,25 +1,29 @@
 # Vercel Full-Platform Migration — Shamsul Ulama Islamic Academy
 
-**Prepared:** 2026-11-22  
+**Updated:** 2026-11-23  
 **Production source of truth:** `https://shamsul-ulama-w2kv.hatchable.site` / Hatchable project `proj_28yiZzMLRLsx`  
 **GitHub source:** `darulswalathhifzulquran-sketch/shamsul-ulama-academy` (`main`)  
 **Vercel team:** `team_ZkDS6gjAqrnFwms9qQtBLjHh`  
 **Migration branch:** `migration/vercel-full-platform`
 
-## Status and access
+## Current verified rollout (2026-11-23)
 
-- GitHub repository is accessible to the connected Vercel account, and its default branch is `main`.
-- Latest source includes live Hatchable v128 homepage loading-image fix, including `public/assets/academy-clean-video-loading-v128.webp`.
-- Vercel project does **not** yet exist. A Git-connected project creation was attempted and Vercel returned `403 forbidden: You don't have permission to create the project`.
-- An independent preview deployment attempt also returned the same `403 project create` restriction.
-- Vercel returned a one-time team authorization/consent link. The grant must be accepted by the account owner; its short-lived URL must never be placed in a public repository. Do **not** claim deployment has succeeded.
-- No production DNS, database records, sessions, credentials, or services have been changed.
+- **Vercel production static site LIVE:** https://shamsul-ulama-academy.vercel.app/ (GitHub main, latest V132 hybrid navigation safeguard).
+- **Hobby 12-function limit resolved:** Root `vercel.json` builds only `public/**` using `@vercel/static`; no Hatchable API files are bundled as Vercel Functions.
+- **Verified HTTP:** root HTML 200; CSS and official logo image 200; V128 WebP hero poster 200; public settings/gallery/home-showcase APIs 200 through external Hatchable proxy; anonymous /api/identity/me 401; direct /login, /dashboard, /staff, /admission paths 307 to Hatchable.
+- **Video seek support verified:** published MP4 video range request via Vercel redirects to original media and returns `206 Partial Content` with `Content-Range`; this is a transport check, not full browser playback validation.
+- **Git auto-deploy active:** Vercel GitHub commit check returned `success` for `4bad6798ebd0f4485b28379e81e4268a111decfc` (V132).
+- **Source-of-truth backend remains Hatchable:** Database, application accounts, password hashes, CSRF-checked sessions, 22 gallery entries and uploaded object storage have NOT migrated.
+- **Media inventory:** 14 published stored images, 4 published stored videos, 3 unpublished stored videos, 1 additional publicly linked video. Keep unpublished files private during any transfer.
+- **Accounts:** Existing 4 accounts and 2 students remain in Hatchable. No private records or credentials have been copied or committed to public GitHub.
+- **Connector limitation:** Connected Vercel management API did not discover this newly created project (404), though GitHub checks and direct HTTP responses prove its deployed existence. A standalone Neon connector request was unavailable. Existing Supabase projects belong to different apps and MUST NOT be overwritten or reused for this academy.
+- **No domain/DNS cutover** and no deletions from Hatchable. The original production site remains https://shamsul-ulama-w2kv.hatchable.site/.
 
 ## Why a Git import alone is insufficient
 
 This repository has static site assets in `public/` plus real production functionality in `api/`, `pages/`, and `lib/`. The backend imports Hatchable's runtime from `hatchable`, including the `db` and `storage` APIs. There is no portable root `package.json` / Vercel-native runtime adapter yet.
 
-`public/vercel.json` is a **transitional static frontend config**: it redirects login/dashboard/admission to Hatchable and rewrites API requests there. It is **not** a full backend migration or an independent production environment. Treat any frontend-only Vercel deployment as a preview rather than the final production cutover.
+The **root-level** `vercel.json` is the active transitional production frontend configuration. It redirects login/dashboard/admission to Hatchable and rewrites public API requests to Hatchable; the `public/vercel.json` file is only a legacy reference when the project root is `./`. This is **not** a full backend migration or an independent production system. Treat Vercel as a public-site hosting phase, not an authorization or data cutover.
 
 ## Production-safe, complete migration requirements
 
@@ -34,13 +38,15 @@ This repository has static site assets in `public/` plus real production functio
 
 ## Operator-safe sequence
 
-- [x] Verify identity of GitHub source and Vercel team, production Hatchable project, and existing runtime architecture.
-- [x] Preserve a dedicated migration Git branch without changing main.
-- [x] Identify the Vercel project-creation permission blocker; request the specific account grant.
-- [ ] Receive account/team write authorization for the Vercel connection.
-- [ ] Create the intended Vercel project and initial preview.
-- [ ] Port APIs/database/storage; verify schema and transfer production data privately.
-- [ ] Conduct role-based/visual acceptance tests and launch production Vercel URL.
-- [ ] Move domain traffic only after explicit verification.
+- [x] Identify the original Hobby 12-function error and Vercel frontend configuration.
+- [x] Deploy static site on the Git-connected Vercel Hobby production URL without changing Hatchable.
+- [x] Verify homepage, static files, public API, video byte-range, login/admission redirects and anonymous identity response.
+- [x] Protect SPA admission navigation from crossing between incompatible session domains.
+- [x] Preserve a migration branch and explicitly inventory original gallery and account counts.
+- [ ] Obtain an **Academy-specific** database/storage target with approved cost and connection permissions; do not reuse other institutions' projects.
+- [ ] Stage a tested import of schema, student/account data and media; preserve all role, published/private and audit constraints. Never commit data to public GitHub.
+- [ ] Port/replace Hatchable SDK `db`, `storage`, authentication, pages and all APIs to Vercel-compatible services.
+- [ ] Perform write-path, video upload, login/logout, student, parent, admissions and cross-device browser tests on an independently backed preview.
+- [ ] Attach a user-owned custom domain after tests, DNS and SSL verification; then plan decommissioning Hatchable only after verified rollback and backups.
 
-**Do not mark this migration complete on the strength of a Git import, preview link, or HTTP 200 from a static page.**
+**Important:** Live Vercel public pages do not mean full independence from Hatchable. Its authenticated sessions and gallery uploads are not migrated.
