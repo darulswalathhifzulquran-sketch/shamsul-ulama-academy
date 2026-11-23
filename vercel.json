@@ -1,0 +1,60 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "builds": [
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/login",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/dashboard",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard/:path*",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/dashboard/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/staff",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/staff",
+      "permanent": false
+    },
+    {
+      "source": "/staff/:path*",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/staff/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/admission",
+      "destination": "https://shamsul-ulama-w2kv.hatchable.site/admission",
+      "permanent": false
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://shamsul-ulama-w2kv.hatchable.site/api/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/public/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(?:html|svg|png|jpg|jpeg|webp|avif|gif|ico|pdf|txt|xml|webmanifest))",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/.*",
+      "dest": "/public/index.html"
+    }
+  ]
+}
