@@ -7,39 +7,14 @@
       "use": "@vercel/static"
     }
   ],
-  "redirects": [
-    {
-      "source": "/login",
-      "destination": "https://shamsul-ulama-w2kv.hatchable.site/login",
-      "permanent": false
-    },
-    {
-      "source": "/dashboard",
-      "destination": "https://shamsul-ulama-w2kv.hatchable.site/dashboard",
-      "permanent": false
-    },
-    {
-      "source": "/dashboard/:path*",
-      "destination": "https://shamsul-ulama-w2kv.hatchable.site/dashboard/:path*",
-      "permanent": false
-    },
-    {
-      "source": "/staff",
-      "destination": "https://shamsul-ulama-w2kv.hatchable.site/staff",
-      "permanent": false
-    },
-    {
-      "source": "/staff/:path*",
-      "destination": "https://shamsul-ulama-w2kv.hatchable.site/staff/:path*",
-      "permanent": false
-    },
-    {
-      "source": "/admission",
-      "destination": "https://shamsul-ulama-w2kv.hatchable.site/admission",
-      "permanent": false
-    }
-  ],
   "routes": [
+    {
+      "src": "/(login|dashboard(?:/.*)?|staff(?:/.*)?|admission(?:/.*)?)",
+      "headers": {
+        "Location": "https://shamsul-ulama-w2kv.hatchable.site/$1"
+      },
+      "status": 307
+    },
     {
       "src": "/api/(.*)",
       "dest": "https://shamsul-ulama-w2kv.hatchable.site/api/$1"
