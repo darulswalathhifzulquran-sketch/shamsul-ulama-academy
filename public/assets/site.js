@@ -179,6 +179,15 @@ document.addEventListener('click',e=>{
  if(!link||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
  const u=new URL(link.href);
  if(u.origin!==location.origin)return;
+ // During the Vercel/Hatchable transition, keep authenticated and
+ // admission form workflows on their original secure origin.
+ // Static Vercel pages do not own the Hatchable session cookie.
+ if(location.hostname!=='shamsul-ulama-w2kv.hatchable.site' &&
+    /^\/(?:login|dashboard|staff|admission)(?:\/|$)/.test(u.pathname)){
+  e.preventDefault();
+  location.assign('https://shamsul-ulama-w2kv.hatchable.site'+u.pathname+u.search+u.hash);
+  return;
+ }
  e.preventDefault();
  const destination=u.pathname+u.search+u.hash;
  if(destination!==location.pathname+location.search+location.hash){
